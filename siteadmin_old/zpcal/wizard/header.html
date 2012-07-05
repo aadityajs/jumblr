@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<title>Javascript Date Picker Wizard</title>
+
+ <meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <META Name="Robots" Content="index,follow">
+ <META Name="Googlebot" Content="index,follow">
+ <META http-equiv="Pragma" content="no-cache">
+
+<link href="./css/zpcal.css" rel="stylesheet" type="text/css">
+<link href="./css/template.css" rel="stylesheet" type="text/css">
+
+
+<link rel="SHORTCUT ICON" href="./favicon.ico">
+
+
+
+
+
+
+<style type="text/css">
+/*
+override the definition in template.css
+*/
+body { width:100%;}
+</style>
+
+
+<!--
+Header with javascript and CSS specific  to the calendar
+-->
+<link rel="alternate stylesheet" type="text/css" media="all" href="../themes/wood.css" title="wood" id='theme-wood' >
+<link rel="alternate stylesheet" type="text/css" media="all" href="../themes/fancyblue.css" title="fancyblue" id='theme-fancyblue' >
+<link rel="alternate stylesheet" type="text/css" media="all" href="../themes/forest.css" title="forest"  id='theme-forest'>
+<link rel="alternate stylesheet" type="text/css" media="all" href="../themes/aqua.css" title="aqua"  id='theme-aqua'>
+<link rel="alternate stylesheet" type="text/css" media="all" href="../themes/winxp.css" title="winxp"  id='theme-winxp'>
+<link rel="alternate stylesheet" type="text/css" media="all" href="../themes/green.css" title="green" id='theme-green'>
+<link rel="alternate stylesheet" type="text/css" media="all" href="../themes/maroon.css" title="maroon" id='theme-maroon'>
+<link rel="alternate stylesheet" type="text/css" media="all" href="../themes/yellow.css" title="yellow" id='theme-yellow'>
+<link rel="alternate stylesheet" type="text/css" media="all" href="../themes/greengrass.css" title="greengrass" id='theme-greengrass'>
+<link rel="alternate stylesheet" type="text/css" media="all" href="../themes/win2k.css" title="win2k" id='theme-win2k'>
+<link rel="alternate stylesheet" type="text/css" media="all" href="../themes/bluexp.css" title="bluexp" id='theme-bluexp'>
+<link rel="stylesheet" type="text/css" media="all" href="../themes/winter.css" title="winter" id='theme-winter'>
+<link rel="alternate stylesheet" type="text/css" media="all" href="../themes/system.css" title="system" id='theme-system'>
+
+<!-- Import the different sizes -->
+<link id="theme-size-1" rel="stylesheet" type="text/css" media="all" href="../themes/layouts/tiny.css" >
+<link id="theme-size-2" rel="stylesheet" type="text/css" media="all" href="../themes/layouts/small.css" >
+<link id="theme-size-3" rel="stylesheet" type="text/css" media="all" href="../themes/layouts/big.css" >
+<link id="theme-size-4" rel="stylesheet" type="text/css" media="all" href="../themes/layouts/huge.css" >
+
+<!-- import the calendar script -->
+<script type="text/javascript" src="../../utils/zapatec.js"></script>
+<script type="text/javascript" src="../../zptooltip/src/zptooltip.js"></script>
+<script type="text/javascript" src="../src/calendar.js"></script>
+
+
+<!-- import the language module -->
+<script type="text/javascript" src="../lang/calendar-en.js"></script>
+
+<!-- import the language module -->
+<script type="text/javascript" src="../lang/calendar-ro.js"></script>
+<script type="text/javascript" src="../lang/calendar-it.js"></script>
+<script type="text/javascript" src="../lang/calendar-de.js"></script>
+<script type="text/javascript" src="../lang/calendar-fr.js"></script>
+<script type="text/javascript" src="../lang/calendar-da.js"></script>
+<script type="text/javascript" src="../lang/calendar-du.js"></script>
+<script type="text/javascript" src="../lang/calendar-no.js"></script>
+<script type="text/javascript" src="../lang/calendar-ru.js"></script>
+<script type="text/javascript" src="../lang/calendar-sp.js"></script>
+<script type="text/javascript" src="../lang/calendar-el.js"></script>
+<script type="text/javascript" src="../lang/calendar-cs.js"></script>
+<script type="text/javascript" src="../lang/calendar-hr.js"></script>
+<script type="text/javascript" src="../lang/calendar-big5.js"></script>
+<script type="text/javascript" src="../lang/calendar-jp.js"></script>
+<script type="text/javascript" src="../lang/calendar-ko.js"></script>
+<script type="text/javascript" src="../lang/calendar-tr.js"></script>
+<script type="text/javascript" src="../lang/calendar-he.js"></script>
+<script type="text/javascript" src="../lang/calendar-ua.js"></script>
+
+	<!-- initial lang. is EN -->
+	<script type="text/javascript" src="../lang/calendar-en.js"></script>
+
+
+<!-- import the calendar setup script -->
+<script type="text/javascript" src="../src/calendar-setup.js"></script>
+
+
+
+
+
+<!-- other languages might be available in the lang directory; please check
+your distribution archive. -->
+<script type="text/javascript">
+<!--
+
+var oldLink = null;
+// code to change the active stylesheet
+function setActiveStyleSheet(link, title) {
+	var i, a, main;
+	for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+		if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
+			a.disabled = true;
+			if(a.getAttribute("title") == title) a.disabled = false;
+		}
+	}
+	if (oldLink) oldLink.style.fontWeight = 'normal';
+	oldLink = link;
+	link.style.fontWeight = 'bold';
+	return false;
+}
+
+
+-->
+</script>
+
+
+
+<!--
+end of header with javascript and CSS specific  to the calendar
+-->
+
+
+
+<script type="text/javascript" src="../wizard/wizard.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="../wizard/wizard.css">
+</head>
+<body>
+

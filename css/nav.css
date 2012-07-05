@@ -1,0 +1,215 @@
+#nav_container {
+  padding-top: 32px;
+  height: 69px;
+  /* 101px - 32px */
+  position: relative;
+  z-index: 2; }
+
+#city_logo {
+  background-image: url(/adaeaf84f1/images/nav/logo_with_rule.png);
+  display: block;
+  text-indent: -9999px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 101px;
+  width: 261px; }
+
+#city_home {
+  display: block;
+  width: 261px;
+  height: 101px;
+  position: absolute;
+  z-index: 2;
+  margin: -32px -25px 0 -50px; }
+
+.nav_silhouette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 101px;
+  background: no-repeat bottom left; }
+
+#nav_container .current_city {
+  background: url(/adaeaf84f1/images/nav/title_city_names.png) no-repeat 0 0;
+  height: 25px;
+  width: 200px; }
+
+.national #nav_container .current_city {
+  background-position: 7px 0px; }
+.national .nav_silhouette {
+  background-image: url(/adaeaf84f1/images/nav/silhouette/national.png); }
+
+.dc #nav_container .current_city {
+  background-position: 7px -25px; }
+.dc .nav_silhouette {
+  background-image: url(/adaeaf84f1/images/nav/silhouette/dc.png); }
+
+.newyork #nav_container .current_city {
+  background-position: 7px -50px; }
+.newyork .nav_silhouette {
+  background-image: url(/adaeaf84f1/images/nav/silhouette/newyork.png); }
+
+.boston #nav_container .current_city {
+  background-position: 7px -75px; }
+.boston .nav_silhouette {
+  background-image: url(/adaeaf84f1/images/nav/silhouette/boston.png); }
+
+.atlanta #nav_container .current_city {
+  background-position: 7px -100px; }
+.atlanta .nav_silhouette {
+  background-image: url(/adaeaf84f1/images/nav/silhouette/atlanta.png); }
+
+.dallas #nav_container .current_city {
+  background-position: 7px -125px; }
+.dallas .nav_silhouette {
+  background-image: url(/adaeaf84f1/images/nav/silhouette/dallas.png); }
+
+.seattle #nav_container .current_city {
+  background-position: 7px -150px; }
+.seattle .nav_silhouette {
+  background-image: url(/adaeaf84f1/images/nav/silhouette/seattle.png); }
+
+.los-angeles #nav_container .current_city {
+  background-position: 7px -175px; }
+.los-angeles .nav_silhouette {
+  background-image: url(/adaeaf84f1/images/nav/silhouette/los-angeles.png); }
+
+.san-francisco #nav_container .current_city {
+  background-position: 7px -200px; }
+.san-francisco .nav_silhouette {
+  background-image: url(/adaeaf84f1/images/nav/silhouette/san-francisco.png); }
+
+.chicago #nav_container .current_city {
+  background-position: 7px -225px; }
+.chicago .nav_silhouette {
+  background-image: url(/adaeaf84f1/images/nav/silhouette/chicago.png); }
+
+.miami #nav_container .current_city {
+  background-position: 7px -250px; }
+.miami .nav_silhouette {
+  background-image: url(/adaeaf84f1/images/nav/silhouette/miami.png); }
+
+.austin #nav_container .current_city {
+  background-position: 7px -275px; }
+.austin .nav_silhouette {}
+
+.boulder #nav_container .current_city {
+  background-position: 7px -300px; }
+.boulder .nav_silhouette {}
+
+.denver #nav_container .current_city {
+  background-position: 7px -325px; }
+.denver .nav_silhouette {}
+
+.winter-park #nav_container .current_city {
+  background-position: 7px -350px; }
+.winter-park .nav_silhouette {}
+
+.englewood #nav_container .current_city {
+  background-position: 7px -375px; }
+.englewood .nav_silhouette {}
+
+.montclair #nav_container .current_city {
+  background-position: 7px -400px; }
+.montclair .nav_silhouette {}
+
+.plano #nav_container .current_city {
+  background-position: 7px -425px; }
+.plano .nav_silhouette {}
+
+.national .nav_silhouette {
+  background-image: none; }
+
+.national #nav_container .current_city {
+  width: 130px; }
+
+.dc #nav_container .current_city {
+  width: 217px; }
+
+.newyork #nav_container .current_city {
+  width: 135px; }
+
+.boston #nav_container .current_city {
+  width: 105px; }
+
+.atlanta #nav_container .current_city {
+  width: 115px; }
+
+.dallas #nav_container .current_city {
+  width: 98px; }
+
+.seattle #nav_container .current_city {
+  width: 108px; }
+
+.los-angeles #nav_container .current_city {
+  width: 175px; }
+
+.san-francisco #nav_container .current_city {
+  width: 202px; }
+
+.chicago #nav_container .current_city {
+  width: 115px; }
+
+.miami #nav_container .current_city {
+  width: 74px; }
+
+#nav_container .city_picker {
+  position: absolute;
+  left: 180px;
+  height: 69px;
+  padding-top: 3px; }
+  #nav_container .city_picker .city_selector {
+    padding: 0;
+    margin-top: -20px;
+    display: none;
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    background: url(../images/dropdown_bg.png) repeat-x top left; }
+  #nav_container .city_picker .cities {
+    padding: 25px 7px 0; }
+  #nav_container .city_picker .city:hover {
+    margin-left: -7px;
+    margin-right: -7px;
+    padding-left: 7px;
+    padding-right: 7px;
+    background: #575757; }
+    #nav_container .city_picker .city:hover a {
+      color: #fff; }
+  #nav_container .city_picker .city a {
+    padding: 6px 0;
+    color: #aaa;
+    font-size: 13px;
+    display: block;
+    width: 100%; }
+    #nav_container .city_picker .city a:hover {
+      text-decoration: none; }
+  #nav_container .city_picker .city:first-child {
+    border-top: 1px solid #000;
+    position: relative; }
+    #nav_container .city_picker .city:first-child:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 1px;
+      width: 100%;
+      background: #414141; }
+#nav_container .current_city {
+  padding: 0 35px 0 7px;
+  display: block; }
+  #nav_container .current_city img {
+    display: block; }
+#nav_container .city_picker_arrow {
+  display: none;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 3px;
+  right: 3px;
+  text-indent: -9999px;
+  overflow: hidden;
+  background: url(/adaeaf84f1/images/pulldown-arrow.png) no-repeat center center; }

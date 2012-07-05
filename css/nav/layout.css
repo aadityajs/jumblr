@@ -1,0 +1,93 @@
+#main { margin:0 auto; text-align:left; width:expression(((document.documentElement.clientWidth || document.body.clientWidth) < 765)? "765px" : "100%"); min-width:875px; max-width:1024px;}
+
+
+/*#footer { height:68px; background:url("../images/footer_bg.jpg") top center no-repeat;}*/
+
+.column1, .column2, .column3, .column4, .column23, .column33, .column43, .col1, .col2, .col3, .col4 {float:left;}
+.container {width:100%; padding:0 1px 0 0;}
+
+#header .column1 {width:265px; margin-left:-100%;}
+#header .column2 {width:100%;}
+#header .column2 .indetn_s { margin:0 0 0 265px;}
+
+.imgleft {
+float: left;
+padding: 6px 10px 6px 0px;
+}
+/* ============================= index ===========================*/
+
+#index .row1 .column1 {min-width:320px;max-width:320px;}
+#index .row1 .column2 {width:60%;padding-left:10px;}
+#index .row1 .column1and2 {width:900px;padding-left:10px;}
+#index .row1 .column2 .indent_200 {margin:0 0 0 200px;}
+
+#index .row2 .column1 {width:25%;}
+#index .row2 .column2 {width:25%;}
+#index .row2 .column3 {width:25%;}
+#index .row2 .column4 {width:25%;}
+#index .row2 .column23 {width:33%;}
+#index .row2 .column33 {width:33%;}
+#index .row2 .column43 {width:33%;}
+
+/* ============================= index-1 ===========================*/
+
+#index_1 #middle .column1 {width:61%;}
+#index_1 #middle .column2 {width:39%;}
+
+#index_1 #middle .row2 .column1 {width:51%;}
+#index_1 #middle .row2 .column2 {width:49%;}
+
+/* ============================= index-2 ===========================*/
+
+#index_2 #middle .column1 {width:265px; margin-left:-100%;}
+#index_2 #middle .column2 {width:100%;}
+#index_2 #middle .column2 .indent_s {margin:0 0 0 265px;}
+#index_2 #middle .column2 .indent_g {margin:0 0 0 25px;}
+#index_2 #middle .column2 .indent_r {margin:0 0 0 100px;}
+#index_2 #middle .column2 .indent_a {margin:0 0 0 75px;}
+
+/* ============================= index-3 ===========================*/
+
+#index_3 #middle .column1 {width:50%;}
+#index_3 #middle .column2 {width:50%;}
+
+#index_3 #middle .row2 .column1 {width:50%;}
+#index_3 #middle .row2 .column2 {width:50%;}
+
+/* ============================= index-4 ===========================*/
+
+#index_4 #middle .column1 {width:35%;}
+#index_4 #middle .column2 {width:34%;}
+#index_4 #middle .column3 {width:31%;}
+
+
+#index_4 #middle .row2 .column1 {width:51%;}
+#index_4 #middle .row2 .column2 {width:49%;}
+
+/* ============================= index-5 ===========================*/
+
+#index_5 #middle .column1 {width:100%;}
+#index_5 #middle .column1 .indent_s {margin-right:417px;}
+#index_5 #middle .column2 {width:417px; margin-left:-417px;}
+
+#index_5 #middle .row2 .column1 {width:194px;}
+#index_5 #middle .row2 .column2 {width:223px; margin:0;}
+
+/* ============================= index_7 ===========================*/
+
+#index_7 .row1 .column1 {min-width:320px;max-width:320px;}
+#index_7 .row1 .column2 {width:60%;padding-left:10px;}
+
+#index_7 .row2 .column1 {width:25%;}
+#index_7 .row2 .column2 {width:25%;}
+#index_7 .row2 .column3 {width:25%;}
+#index_7 .row2 .column4 {width:25%;}
+
+/* ============================= index-P ===========================*/
+#index_P #middle .column1 {width:50%;}
+#index_P #middle .column2 {width:50%;}
+
+/* ============================= Workshop ===========================*/
+#Workshop #middle .column1 {width:265px; margin-left:-100%; margin-right:20;}
+#Workshop #middle .column2 {width:100%;}
+#Workshop #middle .column2 .indent_s {margin:0 0 0 265px;}

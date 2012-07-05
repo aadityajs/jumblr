@@ -1,0 +1,75 @@
+
+/************** Skin 2 *********************/
+.dd2 .ddTitle {
+	position: absolute;
+	width: 169px;
+	height: 38px;
+	margin: 0;		
+	text-align: left;
+	padding: 0 0 0 10px;
+	vertical-align: top;
+	color: #8a8a8a;	
+	font: normal 24px/34px Arial, Helvetica, sans-serif;
+	background: url(../images/drop_bg.png) left top no-repeat;	
+	border: none;
+	text-transform: none;
+}
+.dd2 .ddTitle span.arrow {
+	background:transparent url(../images/icon-arrow.gif) 12px top no-repeat;
+	float:left; 
+	display:inline-block;
+	width:11px;
+	margin: 0 0 0 0px;
+	height:13px; 
+	cursor:pointer; 
+	top:6px; 
+	position:relative; 
+	right:0px;
+}
+.dd2 .ddTitle span.ddTitleText {
+	text-indent:1px; 
+	overflow:hidden;
+	color: #fff;
+	font: normal 16px/24px Arial, Helvetica, sans-serif;
+	position:relative; 
+	_top:4px;
+	text-transform: capitalize;
+	padding: 6px 0 0 0;
+}
+.dd2 .ddChild {
+	position:absolute;
+	border:1px solid #c7c7c7;
+	border-top: 0px;
+	display:none;
+	margin:0;
+	width:auto;
+	overflow:auto;
+	overflow-x:hidden !important;
+	background:#ffffff;
+	color: #323c35;
+	font: normal 11px/20px Arial, Helvetica, sans-serif;	
+}
+.dd2 .ddChild .opta a, .dd2 .ddChild .opta a:visited {
+	padding-left:10px;
+}
+.dd2 .ddChild a {
+	display:block;
+	padding:3px 0 3px 8px;
+	text-decoration:none;
+	color:#323c35;
+	overflow:hidden;
+	white-space:nowrap;
+	cursor:pointer;
+}
+.dd2 .ddChild a:hover {
+	background-color:#f8f8f8;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.dd2 .ddChild a.selected {
+	background-color:#f8f8f8;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+
+/************* use sprite *****************/

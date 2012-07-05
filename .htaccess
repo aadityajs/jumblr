@@ -1,0 +1,118 @@
+RewriteEngine On
+
+#Options +FollowSymlinks
+#RewriteEngine on
+#RewriteCond %{REQUEST_URI} !/getdeals/maintenance.html$
+#RewriteCond %{REMOTE_HOST} !^888\.888\.888\.888
+
+#RewriteRule $ /getdeals/maintenance.html [R=302,L]
+
+
+
+
+#Redirect http://www.unifiedinfotech.net/getdeals/siteadmin/ http://www.unifiedinfotech.net/getdeals/siteadmin/index.php
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?city=$2 [NC,L] # Handle city requests  /([0-9]+)
+RewriteRule ^merchant-host(.app)$ merchant_employee_login.php
+
+
+#RewriteRule ^home(.*)$ index.php
+#RewriteRule ^mupload(.*)$ upload.php
+#RewriteRule ^mupload-dealfile(.*)$ upload-dealfile.php
+
+RewriteRule ^national-deals(.*)$ national_deals.php
+#RewriteRule ^siteadmin(.*)$ siteadmin/index.php
+
+#RewriteRule ^merchant_home(.*)$ merchant_home.php
+RewriteRule ^merchant_signup(.*)$ merchant.php
+RewriteRule ^subscribe(.*)$ subscribe.php
+RewriteRule ^merchant_dailydealactive(.*)$ merchant_dailydealactive.php
+RewriteRule ^merchant_adddailydeal(.*)$ merchant_adddailydeal.php
+RewriteRule ^merchant_dailydealclosed(.*)$ merchant_dailydealclosed.php
+RewriteRule ^merchant_addnowdeal(.*)$ merchant_addnowdeal.php
+RewriteRule ^merchant_nowdealactive(.*)$ merchant_nowdealactive.php
+RewriteRule ^merchant_nowdealclosed(.*)$ merchant_nowdealclosed.php
+RewriteRule ^merchant_dailydealearning(.*)$ merchant_dailydealearning.php
+RewriteRule ^merchant_nowdealearning(.*)$ merchant_nowdealearning.php
+RewriteRule ^merchant_redeem_coupon(.*)$ merchant_redeem_coupon.php
+RewriteRule ^merchant_unredeem_coupon(.*)$ merchant_unredeem_coupon.php
+RewriteRule ^merchant_bulkredeem_coupon(.*)$ merchant_bulkredeem_coupon.php
+RewriteRule ^merchant_companyinfo(.*)$ merchant_companyinfo.php
+RewriteRule ^merchant_storelocation(.*)$ merchant_storelocation.php
+RewriteRule ^merchant_paymentinfo(.*)$ merchant_paymentinfo.php
+RewriteRule ^add_admin(.*)$ add_admin.php
+RewriteRule ^show_admin(.*)$ show_admin.php
+RewriteRule ^mlogout(.*)$ mlogout.php
+RewriteRule ^create_store(.*)$ create_store.php
+
+
+
+
+#RewriteRule ^host-app(.*)$ merchant_employee_login.php
+#RewriteRule ^product/([a-zA-Z0-9_-]+)/([0-9]+)\.html$ product.php?id=$2
+
+RewriteRule ^merchant_adddailydeal/(.*)$ merchant_adddailydeal.php?mode=$1&deal_id=$2 [QSA]
+RewriteRule ^merchant_addnowdeal/(.*)$ merchant_addnowdeal.php?mode=$1&deal_id=$2 [QSA]
+RewriteRule ^findsubcat/(.*)$ findsubcat.php?cat_id=$1 [QSA]
+#RewriteRule ^delete-dealfile/(.*)$ delete-dealfile.php?imgid=$1 [QSA]
+#RewriteRule ^get-dealfile/(.*)$ get-dealfile.php?imgid=$1 [QSA]
+RewriteRule ^ajax_eventdialog/(.*)$ ajax_eventdialog.php?deal=$1&sid=$2 [QSA]
+RewriteRule ^delete-file/(.*)$ delete-file.php?imgid=$1&sid=$2 [QSA]
+RewriteRule ^get-file/(.*)$ get-file.php?imgid=$1&sid=$2 [QSA]
+RewriteRule ^ajax_setprimiarylocation/(.*)$ ajax_setprimiarylocation.php?location_id=$1 [QSA]
+RewriteRule ^merchant_storelocation/(.*)$ merchant_storelocation.php?action=$1&location_id=$2 [QSA]
+RewriteRule ^add_admin/(.*)$ add_admin.php?mode=$1&id=$2 [QSA]
+
+#RewriteRule ^checkout(.*)$ checkout.php
+
+#RewriteRule ^city/(.*)$ deal.php?city=$1&page=$2 [QSA]
+
+#RewriteRule ^checkout(.*)$ checkout.php
+
+#RewriteRule ^category/(.*)/(.*)$ deal_pastmerchant.php?category_id=$1 [QSA]
+
+#RewriteRule ^category/(.*)$ deal_category.php?category_id=$1 [QSA]
+
+#RewriteRule ^perform(.*)$ perform.php
+#RewriteRule ^paypalcheckout(.*)$ paypalcheckout.php
+#RewriteRule ^completepayment(.*)$ CheckoutPayment.php
+#RewriteRule ^paypalerror(.*)$ APIError.php
+#RewriteRule ^my_account(.*)$ my_account.php
+#RewriteRule ^merchant_account(.*)$ merchant_account.php
+
+#RewriteRule ^login/(.*)$ login.php?login=$1
+#RewriteRule ^merchant_login/(.*)$ merchant_login.php?login=$1
+
+#RewriteRule ^aboutus(.*)$ about.php
+#RewriteRule ^contactus(.*)$ contactus.php
+#RewriteRule ^invite/offer/(.*)$ invitefriend.php?offer=$1
+#RewriteRule ^terms(.*)$ terms.php
+#RewriteRule ^privacy(.*)$ privacy.php
+#RewriteRule ^subscription(.*)$ set_subscription.php
+#RewriteRule ^merchant_premiumcity(.*)$ merchant_premiumcity.php
+#RewriteRule ^merchant_serve(.*)$ merchant_serve.php
+#RewriteRule ^benefits(.*)$ merchant_benefits.php
+#RewriteRule ^ourmembers(.*)$ merchant_ourmembers.php
+#RewriteRule ^permiumcitypartering(.*)$ merchant_partnering.php
+#RewriteRule ^presstestimonial(.*)$ merchant_presstestimonial.php
+#RewriteRule ^merchantcontact(.*)$ merchant_contact.php
+
+#RewriteRule ^articles/(.*)/query/(.*)$ faqdetail.php?faq_id=$1&query=$2 [QSA]
+
+#RewriteRule ^articles/(.*)$ faq.php?faq_id=$1&page=$2 [QSA]
+
+#RewriteRule ^merchant_offers/(.*)$ merchant_deals.php?page=$1 [QSA]
+
+#RewriteRule ^merchant_addoffers/(.*)$ merchant_add_deals.php?deal_id=$1&mode=$2 [QSA]
+
+#RewriteRule ^merchant_additems/(.*)$ merchant_add_items.php?item_id=$1&mode=$2 [QSA]
+
+#RewriteRule ^merchant_offerstatus/(.*)$ merchant_offerstatus.php?item_id=$1&mode=$2 [QSA]
+#RewriteRule ^thanks(.*)$ thanks.php
+
+#RewriteRule ^print/(.*)$ print_tran.php?deal_id=$1
+
+#RewriteRule ^print_transaction(.*)$ print_user_tran.php
+
+#RewriteRule ^logout(.*)$ logout.php
+
+AddDefaultCharset iso-8859-1
