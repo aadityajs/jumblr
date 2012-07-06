@@ -30,21 +30,19 @@ include_once "fbmain.php";
 
 				if($count_fb_user > 0)		//  Register & login via fb
 				{
-					echo 'hi';
 					// Update user if already registered
 					$db->query_update(TABLE_FB_USER, $fbUser, 'fb_id ='.$fbUser['fb_id']);
 					$_SESSION["user_id"] = $chk_fb_user_res['user_id'];
 					$_SESSION["fb_id"] = $chk_fb_user_res['fb_id'];
-					sleep(30);
+					//sleep(30);
 					header('location: '.SITE_URL.'my-profile.php');
 					//echo "fine";
 				}
 				else {
-					echo 'hiddd';
 					// Insert data to fb table
 					$last_user_id['user_id'] = $db->query_insert(TABLE_FB_USER, $fbUser);
 					$db->query_update(TABLE_FB_USER, $last_user_id, 'fb_id ='.$fbUser['fb_id']);
-					sleep(30);
+					//sleep(30);
 					header('location: '.SITE_URL.'my-profile.php');
 
 					/*

@@ -1,13 +1,28 @@
 <?php
 include 'include/header.php';
-isLogin();
+
+if ($_GET) {
+	$profileId = GetIdFromUrl('profile');
+} elseif (isset($_SESSION['fb_id'])) {
+	$profileId = $_SESSION[fb_id];
+} else {
+	isLogin();
+}
+
+/*$profileId = GetIdFromUrl('profile');
+if (!isset($profileId)) {
+	$profileId = $_SESSION[fb_id];
+} else {
+	$profileId = GetIdFromUrl('profile');
+}
+*/
 ?>
 
 
 <div class="todays_deal">
                 <div class="todays_deal_left1" style="width:200px;">
 				<?php
-					$sqlProfile = "SELECT * FROM ".TABLE_FB_USER." WHERE fb_id = $_SESSION[fb_id]";
+					$sqlProfile = "SELECT * FROM ".TABLE_FB_USER." WHERE fb_id = $profileId";
 					$profileUser = mysql_fetch_array(mysql_query($sqlProfile));
 					$profileUserCount = mysql_num_rows($db->query($sqlProfile));
 					//print_r($profileUser);

@@ -466,7 +466,7 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 					        		foreach ($circleUser as $fbUser) {
 						        			if ($fbUserCount <= 9) {
 							        			echo '<div id="img'.$fbUserCount.'" class="profile_img">
-							        					<a class="tips" href="'.$fbUser['profile_url'].'" title="'.$fbUser['name'].'" target="_blank">
+							        					<a class="tips" href="my-profile.php?profile-'.$fbUser['fb_id'].'" title="'.$fbUser['name'].'<br/> Compatibility : '.comp_user($fbUser['user_id']).'" target="_blank">
 							        						<img src="'.$fbUser['pic_square'].'" alt="" />
 							        					</a>
 							        				</div>';

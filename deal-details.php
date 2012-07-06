@@ -415,12 +415,12 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 						foreach ($circleUser as $fbUser) {
 		        				echo '<div class="ca-item ca-item-3">
 				                          <div class="jewellry_img_box">
-				                          	<a class="tips-right" href="'.$fbUser['profile_url'].'" title="'.$fbUser['name'].'" target="_blank">
+				                          	<a class="tips-right" href="'.$fbUser['profile_url'].'" title="'.$fbUser['name'].'<br/> Compatibility : '.comp_user($fbUser['user_id']).'" target="_blank">
 				                           		<img src="'.$fbUser['pic_square'].'" alt="" height="80" width="80">
 				                           	<div class="clear"></div>
 				                           	</a>
 				                           </div>
-				                           <div class="point">120</div>
+				                           <div class="point">'.comp_user($fbUser['user_id']).'</div>
 				                        </div>';
 
 			        			$fbUserCount++;

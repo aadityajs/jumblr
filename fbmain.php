@@ -2,8 +2,8 @@
     require("facebook_sdk/facebook.php");
 
     //facebook application
-    $fbconfig['appid' ]     = "149533141837717";
-    $fbconfig['secret']     = "4a71fe94b6dc627b80f0b1d395262c68";
+    $fbconfig['appid' ]     = "256669324448487";
+    $fbconfig['secret']     = "0dfe9b5a0b1f1e242a29a55beeafaa0e";
     //$fbconfig['baseurl']    = "http://unifiedinfotech.net/jumblr/customer-register.php";
     $fbconfig['baseurl']    = SITE_URL."customer-register.php";
 
@@ -24,6 +24,9 @@
 
 		Contact Email
 		aadityajs@facebook.com
+		-----------------------------------------------
+		App ID: 	256669324448487
+		App Secret: 	0dfe9b5a0b1f1e242a29a55beeafaa0e
      */
 
 

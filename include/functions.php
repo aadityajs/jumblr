@@ -522,6 +522,19 @@ function comp_user($user_id) {
 }
 
 
+/**
+ *
+ * Get the id from the URL sent using GET method
+ * @author Aditya Jyoti Saha
+ * @param string $var
+ * @uses Pass the $_Get variable name in $var
+ */
+function GetIdFromUrl($var) {
+	$maskedVar = '?'.$var.'-';
+	$url = $_SERVER['REQUEST_URI'];
+	$id = end(explode($maskedVar, $url));
+	return $id;
+}
 
 
 ?>
