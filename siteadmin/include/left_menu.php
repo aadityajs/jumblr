@@ -40,6 +40,15 @@
 		</ul>
 		<?php }?>
 
+		<?php if(in_array("manage_dealcategory",$rolearray)){?>
+		<div class="menuheader expandable">Deal Category Management</div>
+		<ul class="categoryitems">
+			<li><a href="add_category.php">Add Deal Category</a></li>
+			<li><a href="show_categories.php">View Deal Category</a></li>
+		</ul>
+		<?php }?>
+
+
 		<?php if(in_array("manage_merchant",$rolearray)){?>
 		<div class="menuheader expandable">Merchant User Management</div>
 		<ul class="categoryitems">
@@ -135,18 +144,6 @@
 
 
 
-
-
-
-
-		<?php if(in_array("manage_dealcategory",$rolearray)){?>
-		<!--<div class="menuheader expandable">Deal Category Management</div>
-		<ul class="categoryitems">
-			<li><a href="add_category.php">Add Deal Category</a></li>
-			<li><a href="show_categories.php">View Deal Category</a></li>
-
-		</ul>
-		--><?php }?>
 
 		<?php if(in_array("manage_store",$rolearray)){?>
 		<!--<div class="menuheader expandable">Store Management</div>

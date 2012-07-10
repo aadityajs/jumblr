@@ -471,6 +471,15 @@ function ValidateEmail($email) {
 	}
 }
 
+/**
+ * Get the setting paramiter.
+ * @param str $param
+ */
+function getSettings($param) {
+	$sqlSettings = "SELECT * FROM ".TABLE_SETTING." WHERE name = '$param'";
+	$settings = mysql_fetch_array(mysql_query($sqlSettings));
+	return $settings['value'];
+}
 
 function getUserDetails($userId) {
 	if ($userId == '') {
@@ -482,7 +491,9 @@ function getUserDetails($userId) {
 }
 
 /**
- * Measure compiatablity rating of logged in user with other users
+ * Measure compiatablity rating of logged in user with other users<br/><br/>
+ * <b>SET Theorem</b><br/>A = {a1, a2, a3, a4, a5, a6}<br/>
+ * B = {b1, b2, a1, a2}<br/>B -> A = 2/4 = 50%<br/>A -> B = 2/6 = 33.33%<br/><br/><b>Weighted Average Method</b><br/>(A*Wmu+B*Wmo)/(Wmu+Wmo)
  * @author Aditya Jyoti Saha
  * @param $user_id
  **/
@@ -491,8 +502,11 @@ function comp_user($user_id) {
 	$loginUserFbId = $_SESSION['fb_id'];
 
 	$currentUser = getUserDetails();
-	$currentUserLikes = explode('~', $currentUser['likes']);
-	$currentUserLikes_count = count($currentUserLikes);
+	$currentUserMusic = explode(',', $currentUser['music']);
+	$currentUserMusic_count = count($currentUserMusic);
+
+	$currentUserMovie = explode(',', $currentUser['movies']);
+	$currentUserMovie_count = count($currentUserMovie);
 
 	//var_dump($currentUserLikes);
 	//echo '------------------------------------------------------------<br><br><br>';
@@ -502,22 +516,28 @@ function comp_user($user_id) {
 
 	//echo '<pre>'.print_r($UserRow['likes'], true).'</pre>';
 
-	$comp_user_rating = array_change_key_case(explode('~', $UserRow['likes']), CASE_LOWER );
+	$comp_user_rating = array_change_key_case(explode(',', $UserRow['music']), CASE_LOWER );
 	$comp_user_rating_count = count($comp_user_rating);
 
 	//var_dump($comp_user_rating);
 	//echo '------------------------------------------------------------<br><br><br>';
 
-	$i = 0;
-	foreach ($comp_user_rating as $value) {
-		if (in_array($value, $currentUserLikes)) {
-			//echo $value.'<br/>';
+	/*	Used for SET Theorem & Squared Average method
+	 * $i = 0;
+		foreach ($comp_user_rating as $value) {
+			if (in_array($value, $currentUserLikes)) {
+				//echo $value.'<br/>';
+			}
+			$matched = $i++;
 		}
-		$matched = $i++;
-	}
-	if ($matched <= 0) : $matched = 1; endif;
-	$comp_rate = round(((sqrt($comp_user_rating_count) + sqrt($currentUserLikes_count))* $matched)/100);	// (67+33*66)
+	 */
+	//if ($matched <= 0) : $matched = 1; endif;
 
+	$comp_rate = (($currentUserMusic_count*getSettings(weight_music))+($currentUserMovie_count*getSettings(weight_movie)))/(getSettings(weight_music)+getSettings(weight_movie)); // Using Weighted Average
+	//$comp_rate = round($matched*100/$comp_user_rating_count); // Using SET Theorem
+	//$comp_rate = round(((sqrt($comp_user_rating_count) + sqrt($currentUserLikes_count))* $matched)/100);	// (67+33*66) // Using Sqaured average
+
+	//echo '================'.$comp_rate;
 	return $comp_rate;
 }
 

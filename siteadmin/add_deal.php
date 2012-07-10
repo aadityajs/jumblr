@@ -1124,25 +1124,7 @@ $_SESSION["session_temp"] =uniqid();
                     </dl>-->
 
 
-					<!--<dl>
-                        <dt><label for="gender">Deal Category:</label></dt>
-                        <dd>
-                            <select name="deal_cat" class="dropdown" id="deal_cat" onChange="getCity('findsubcat.php?cat_id='+this.value)" size="1">
-								<option value="">-- Select --</option>
-                                <?php
 
-									$sql_categories=mysql_query("select cat_name,cat_id from " .TABLE_CATEGORIES." where parent_id=0 order by cat_name asc");
-									while($row_categories=mysql_fetch_array($sql_categories))
-									{
-								?>
-
-										<option value="<?php echo $row_categories[cat_id];?>" <?php if($row_categories[cat_id]==$row_deals[deal_cat]) { echo "selected"; }?>><?php echo $row_categories[cat_name];?></option>
-								<?php
-									}
-								?>
-                            </select>
-                        </dd>
-                    </dl> -->
 
 	<div id="step1" style="border: 0px solid #4CC7ED; display: block;">
 					<dl>
@@ -1172,6 +1154,26 @@ $_SESSION["session_temp"] =uniqid();
 	<center><input type="button" id="step1next" value="Next  >>"></center>
 
 	<div id="step2" style="border: 0px solid #4CC7ED; display: none;">
+
+					<dl>
+                        <dt><label for="gender">Deal Category:</label></dt>
+                        <dd>
+                            <select name="deal_cat" class="dropdown" id="deal_cat" onChange="getCity('findsubcat.php?cat_id='+this.value)" size="1">
+								<option value="">-- Select --</option>
+                                <?php
+
+									$sql_categories=mysql_query("select cat_name,cat_id from " .TABLE_CATEGORIES." where parent_id=0 order by cat_name asc");
+									while($row_categories=mysql_fetch_array($sql_categories))
+									{
+								?>
+
+										<option value="<?php echo $row_categories[cat_id];?>" <?php if($row_categories[cat_id]==$row_deals[deal_cat]) { echo "selected"; }?>><?php echo $row_categories[cat_name];?></option>
+								<?php
+									}
+								?>
+                            </select>
+                        </dd>
+                    </dl><!-- -->
 
                    <dl>
                         <dt><label for="deal_type">Deal Type:</label></dt>
@@ -1405,7 +1407,7 @@ $_SESSION["session_temp"] =uniqid();
 								$dsFCKeditor->BasePath = '../fckeditor/';
 								$dsFCKeditor->Value = stripslashes($row_deals['offer_details_sidebar']) ;
 								$dsFCKeditor->Width = '100%' ;
-								$dsFCKeditor->Height = '200' ;
+								$dsFCKeditor->Height = '400' ;
 								$dsFCKeditor->ToolbarSet = 'Default';
 								$dsFCKeditor->Create();
 							?>
@@ -1420,7 +1422,7 @@ $_SESSION["session_temp"] =uniqid();
 								$hFCKeditor->BasePath = '../fckeditor/';
 								$hFCKeditor->Value = stripslashes($row_deals['highlights']) ;
 								$hFCKeditor->Width = '100%' ;
-								$hFCKeditor->Height = '200' ;
+								$hFCKeditor->Height = '400' ;
 								$hFCKeditor->ToolbarSet = 'Default';
 								$hFCKeditor->Create();
 							?>
@@ -1435,7 +1437,7 @@ $_SESSION["session_temp"] =uniqid();
 								$fpFCKeditor->BasePath = '../fckeditor/';
 								$fpFCKeditor->Value = stripslashes($row_deals['fineprint']) ;
 								$fpFCKeditor->Width = '100%' ;
-								$fpFCKeditor->Height = '200' ;
+								$fpFCKeditor->Height = '400' ;
 								$fpFCKeditor->ToolbarSet = 'Default';
 								$fpFCKeditor->Create();
 							?>
@@ -1450,7 +1452,7 @@ $_SESSION["session_temp"] =uniqid();
 								$pFCKeditor->BasePath = '../fckeditor/';
 								$pFCKeditor->Value = stripslashes($row_deals['postage']) ;
 								$pFCKeditor->Width = '100%' ;
-								$pFCKeditor->Height = '200' ;
+								$pFCKeditor->Height = '400' ;
 								$pFCKeditor->ToolbarSet = 'Default';
 								$pFCKeditor->Create();
 							?>
