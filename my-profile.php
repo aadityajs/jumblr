@@ -27,7 +27,6 @@ if (!isset($profileId)) {
 					$profileUserCount = mysql_num_rows($db->query($sqlProfile));
 					//print_r($profileUser);
 
-					comp_user('4');
 				?>
 
                 <div style="width:200px; float: left; margin: 0 20px 0 0; overflow: hidden; text-align: center;">
