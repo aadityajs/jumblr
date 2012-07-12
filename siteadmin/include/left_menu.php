@@ -81,14 +81,13 @@
 			<li><a href="#">New Fund Request</a></li>
 
 		</ul>
-		<?php }?> -->
+		<?php } ?> -->
 
 		<?php if(in_array("manage_user",$rolearray)){?>
 		<div class="menuheader expandable">User Management</div>
 		<ul class="categoryitems">
 			<li><a href="add_user.php">Add User</a></li>
 			<li><a href="show_users.php">View Users</a></li>
-
 		</ul>
 		<?php }?>
 

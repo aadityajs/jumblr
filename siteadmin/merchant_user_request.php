@@ -7,7 +7,7 @@ $record = $db->query_first($sql);
 
 if($_REQUEST['search_str']!="")
 {
-	$where=" where first_name like '%$_REQUEST[search_str]%' or last_name like '%$_REQUEST[search_str]%' or email like '%$_REQUEST[search_str]%'  and reg_type='merchant'";
+	$where=" where first_name like '%$_REQUEST[search_str]%' or last_name like '%$_REQUEST[search_str]%' or email like '%$_REQUEST[search_str]%'  and status='merchant'";
 	$target="?srchstr=$_REQUEST[search_str]";
 	$export_to="csv.php?srchstr=$_REQUEST[search_str]";
 }
@@ -17,27 +17,27 @@ elseif(($_REQUEST['date_from']!="") && ($_REQUEST['date_to']!=""))
 {
 	$date_from=strftime("%Y-%m-%d", strtotime($_REQUEST['date_from']));
 	$date_to=strftime("%Y-%m-%d", strtotime($_REQUEST['date_to']));
-	$where=" where date_added between '$date_from' and '$date_to'  and reg_type='merchant'";
+	$where=" where date_added between '$date_from' and '$date_to'  and status='merchant'";
 	$target="?date_from=$date_from&date_to=$date_to";
 	$export_to="csv.php?date_from=$date_from$date_to=$date_to";
 }
 elseif(($_REQUEST['date_from']!="") && ($_REQUEST['date_to']==""))
 {
 	$date_from=strftime("%Y-%m-%d", strtotime($_REQUEST['date_from']));
-	$where=" where date_added>='$date_from'  and reg_type='merchant'";
+	$where=" where date_added>='$date_from'  and status='merchant'";
 	$target="?date_from=$date_from";
 	$export_to="csv.php?date_from=$date_from";
 }
 elseif(($_REQUEST['date_from']=="") && ($_REQUEST['date_to']!=""))
 {
 	$date_to=strftime("%Y-%m-%d", strtotime($_REQUEST['date_to']));
-	$where=" where date_added<='$date_to'  and reg_type='merchant'";
+	$where=" where date_added<='$date_to'  and status='merchant'";
 	$target="?date_to=$date_to";
 	$export_to="csv.php?date_to=$date_to";
 }
 else
 {
-	$where="  where reg_type='temp_merchant'";
+	$where="  where status='temp_merchant'";
 	$target="";
 	$export_to="csv.php";
 }
@@ -48,10 +48,10 @@ if (isset($_REQUEST['reg_type']) && isset($_REQUEST['user_id']) &&  $_REQUEST['r
 		$generated_raw_pass = str_rand($length = 12, $seeds = 'alphanum');
 		$generated_pass = base64_encode($generated_raw_pass);
 
-		$sql="UPDATE ".TABLE_USERS." set reg_type='merchant', password='$generated_pass' where user_id='".$_REQUEST['user_id']."'";
+		$sql="UPDATE ".TABLE_MERCHANTS." set status='merchant', password='$generated_pass' where mid='".$_REQUEST['user_id']."'";
 		mysql_query($sql);
 
-		$merchant_data = mysql_fetch_array(mysql_query("SELECT * FROM ".TABLE_USERS." WHERE user_id='".$_REQUEST['user_id']."'"));
+		$merchant_data = mysql_fetch_array(mysql_query("SELECT * FROM ".TABLE_MERCHANTS." WHERE mid='".$_REQUEST['user_id']."'"));
 
 
 		$Template = '<table width="760" border="0" align="center" cellpadding="0" cellspacing="0" >
@@ -280,8 +280,8 @@ left join ".TABLE_USER_SUBSCRIPTION." on (".TABLE_USERS.".user_id=".TABLE_USER_S
 
 
 }else{
-$sql="select * from ".TABLE_USERS.$where;
-$sqlStrAux = "SELECT count(*) as total FROM ".TABLE_USERS."$where";
+$sql="select * from ".TABLE_MERCHANTS.$where;
+$sqlStrAux = "SELECT count(*) as total FROM ".TABLE_MERCHANTS."$where";
 }
 
 $aux = mysql_fetch_assoc(mysql_query($sqlStrAux));
@@ -302,24 +302,24 @@ if($aux['total']>0){
 
     	<tr>
         	<!--<td><input type="checkbox" name="" /></td>-->
-            <td><a href="view_merchant_details.php?id=<?php echo $row_deals['user_id'];?>"><?php echo $row_deals['first_name'];?>&nbsp;<?php echo $row_deals['last_name'];?></a></td>
-			<td><?php echo $row_deals['phone_no'];?></td>
+            <td><a href="view_merchant_details.php?id=<?php echo $row_deals['mid'];?>"><?php echo $row_deals['employee_name'];?></a></td>
+			<td><?php echo $row_deals['phone'];?></td>
 			<td><?php echo $row_deals['email'];?></td>
             <td><?php echo strftime("%d %b %Y", strtotime($row_deals['date_added'])); ?></td>
 
-			<?php if($row_deals['reg_type']=='temp_merchant'){ ?>
-			<td><a href='merchant_user_request.php?reg_type=temp_merchant&user_id=<?php echo $row_deals['user_id']?>'><img src="images/unblock.png" width="20"></a></td>
+			<?php if($row_deals['status']=='temp_merchant'){ ?>
+			<td><a href='merchant_user_request.php?reg_type=temp_merchant&user_id=<?php echo $row_deals['mid']?>'><img src="images/unblock.png" width="20"></a></td>
 			<?php }?>
 
-			<td><a href="add_merchant_user.php?mode=edit&id=<?php echo $row_deals[user_id];?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
-            <td><a href="add_merchant_user.php?mode=delete&id=<?php echo $row_deals[user_id];?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" onClick='return confirm("Are you sure to delete this user?")' /></a>
-			<a href="<?php echo SITE_URL; ?>siteadmin/merchant_user_request.php?email=<?php echo $row_deals[user_id];?>" class="ask" title='Send Notification'><img src="images/email.png" alt="" title="" border="0" title='Send Notification' /></a>
+			<td><a href="add_merchant_user.php?mode=edit&id=<?php echo $row_deals[mid];?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
+            <td><a href="add_merchant_user.php?mode=delete&id=<?php echo $row_deals[mid];?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" onClick='return confirm("Are you sure to delete this user?")' /></a>
+			<a href="<?php echo SITE_URL; ?>siteadmin/merchant_user_request.php?email=<?php echo $row_deals[mid];?>" class="ask" title='Send Notification'><img src="images/email.png" alt="" title="" border="0" title='Send Notification' /></a>
 			</td>
         </tr>
 
     	 <?php
 
-		 $users[]=$row_deals['user_id'];
+		 $users[]=$row_deals['mid'];
 			}
 
 			$_SESSION['ids']=serialize($users);
@@ -364,7 +364,7 @@ if($aux['total']>0){
 			$record = $db->query_first($sql);
 
 			$uid = $_GET['email'];
-			$q=mysql_fetch_object(mysql_query("SELECT * from ".TABLE_USERS." where user_id='$uid'"));
+			$q=mysql_fetch_object(mysql_query("SELECT * from ".TABLE_MERCHANTS." where mid='$uid'"));
 			$usermail .=$q->email.",";
 
 			/*
@@ -393,7 +393,7 @@ if($aux['total']>0){
 						$messagebody = '
 						<html>
 						<head>
-						  <title>GeeLaza.com</title>
+						  <title>Jumblr.com</title>
 						</head>
 						<body>
 

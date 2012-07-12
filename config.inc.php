@@ -1,6 +1,6 @@
 <?php
 error_reporting(0);
-define("SITE_URL","http://aditya.com/jumblr/");
+define("SITE_URL","http://aditya/jumblr/");
 
 //define("SITE_URL","http://unifiedinfotech.net/jumblr/");
 

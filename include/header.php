@@ -370,14 +370,14 @@ function get_facebook_cookie_new($app_id, $app_secret)
 	$show_city = mysql_fetch_array(mysql_query($sql_show_city));
 
 	if ($_GET['city'] != "") {
-		header('location:'.SITE_URL.'city_cookie.php?city='.$_GET['city'].'&newssucc='.$_SESSION['newssucc'] );
+		header('location:'.SITE_URL.'city_cookie.php?city='.$_GET['city'].'&newssucc='.$_SESSION['newssucc']);
 
 	}
 ?>
 
 <?php
 
-	$country = 225;
+	$country = 225;		// Country code
 
 	$sql_city = "SELECT * FROM ".TABLE_CITIES."  WHERE country_id = $country GROUP BY city_name ASC";
 	$result_city = mysql_query($sql_city);
@@ -409,11 +409,17 @@ function get_facebook_cookie_new($app_id, $app_secret)
 				?>
         </select>
     </div>
+
     <div class="styled_select right" style="border: 0px solid #000;">
         <select style="width:170px;" name="user_type">
-          <option value="consumer">Category 1</option>
-          <option value="retailer">Category 2</option>
-          <option value="contractor">Category 3</option>
+
+        <?php
+	    	$sqlCat = "select * from ".TABLE_CATEGORIES." where parent_id=0";
+	    	$catRes = mysql_query($sqlCat);
+	    	while ($catRow = mysql_fetch_array($catRes)) {
+    	?>
+          <option value="consumer" id="<?php echo $catRow['cat_id']; ?>"><?php echo $catRow['cat_name']; ?></option>
+        <?php } ?>
         </select>
     </div>
 
@@ -479,7 +485,7 @@ function get_facebook_cookie_new($app_id, $app_secret)
 				elseif(!isset($_SESSION["user_id"]))
 				{
 				?>
-				<div style="text-align:right;"><a href="<?= SITE_URL ?>customer-login.php">Login</a>  |  <a href="<?= SITE_URL ?>customer-register.php">Register</a></div>
+				<div style="text-align:right;"><a href="<?= SITE_URL ?>customer-login.php">Login</a><!--   |  <a href="<?= SITE_URL ?>customer-register.php">Register</a> --></div>
 
 
 				<?php

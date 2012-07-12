@@ -1,8 +1,8 @@
 <?php
 include("include/header.php");
-
 if(strtolower($_POST["btnRegister"])=='submit')
 {
+
 	$dob = $_POST["year"].'-'.$_POST["month"].'-'.$_POST["day"];
 	$_POST["dob"] = $dob;
 	$_POST["reg_type"] = 'temp_merchant';
@@ -15,9 +15,31 @@ if(strtolower($_POST["btnRegister"])=='submit')
 	if ($_POST["lname"] == "") {
 	$lname = $_POST["company_md_lname"];
 	}
+	$privileges =  "manage_deal,manage_dealcategory,manage_store,manage_profile";
 
-	$sql_insert_merchant = "INSERT INTO ".TABLE_USERS."(company_name,first_name,last_name,address1,city,zip,state,email,phone_no,password,dob,reg_type,date_added,website,trading_name,company_type,company_reg_no,md_fname,md_lname,business_type,business_start_date,trading_address,hear_abt_us,job_type) VALUES('".$_POST["company_name"]."','".$fname."','".$lname."','".$_POST["address1"]."','".$_POST["city"]."','".$_POST["zip"]."','".$_POST["state"]."','".$_POST["email"]."','".$_POST["phone_no"]."','".$_POST["password"]."','".$_POST["dob"]."','".$_POST["reg_type"]."','".$date."','".$_POST["website"]."','".$_POST["company_trading_name"]."','".$_POST["company_type"]."','".$_POST["company_reg_no"]."','".$_POST["company_md_fname"]."','".$_POST["company_md_lname"]."','".$_POST["business_type"]."','".$_POST["business_start_date"]."','".$_POST["trading_address"]."','".$_POST["hear_abt_us"]."','".$_POST["company_job_type"]."')";
+	/** All Permissions
+	 * "manage_user,
+		manage_deal,
+		manage_admin,
+		manage_merchant,
+		manage_dealcategory,
+		manage_city,
+		manage_staticpage,
+		manage_faq,
+		manage_transactions,
+		manage_withdraw_request,
+		manage_store,
+		manage_profile"
+	 */
+
+	//mid 	muser_id
+
+	$sql_insert_merchant = "INSERT INTO ".TABLE_MERCHANTS." SET  location_id = '".$_POST["city"]."', job_title = '".$_POST["company_job_type"]."', employee_name = '".$fname." ".$lname."', password = '".$_POST["password"]."', email = '".$_POST["email"]."', store_name = '".$_POST["company_name"]."', address1 = '".$_POST["address1"]."', country = '".$_POST["city"]."', city = '".$_POST["city"]."', state = '".$_POST["state"]."', zip = '".$_POST["zip"]."', phone = '".$_POST["phone_no"]."', website = '".$_POST["website"]."', about = '".strip_tags($_POST["about"])."', here_from = '".$_POST["hear_abt_us"]."', business_type = '".$_POST["business_type"]."', status = '".$_POST["reg_type"]."', privileges = '".$privileges."', date_added = '".date('Y-m-d')."', date_modified = '".date('Y-m-d H:i:s')."'";
 	mysql_query($sql_insert_merchant);
+
+	//VALUES(,,,,,,,,'".$_POST["dob"]."',,'".$date."',,'".$_POST["company_trading_name"]."','".$_POST["company_type"]."','".$_POST["company_reg_no"]."','".$_POST["company_md_fname"]."','".$_POST["company_md_lname"]."','".$_POST["business_type"]."','".$_POST["business_start_date"]."','".$_POST["trading_address"]."','".$_POST["hear_abt_us"]."',)";
+	//$sql_insert_merchant = "INSERT INTO ".TABLE_USERS."(company_name,first_name,last_name,address1,city,zip,state,email,phone_no,password,dob,reg_type,date_added,website,trading_name,company_type,company_reg_no,md_fname,md_lname,business_type,business_start_date,trading_address,hear_abt_us,job_type) VALUES('".$_POST["company_name"]."','".$fname."','".$lname."','".$_POST["address1"]."','".$_POST["city"]."','".$_POST["zip"]."','".$_POST["state"]."','".$_POST["email"]."','".$_POST["phone_no"]."','".$_POST["password"]."','".$_POST["dob"]."','".$_POST["reg_type"]."','".$date."','".$_POST["website"]."','".$_POST["company_trading_name"]."','".$_POST["company_type"]."','".$_POST["company_reg_no"]."','".$_POST["company_md_fname"]."','".$_POST["company_md_lname"]."','".$_POST["business_type"]."','".$_POST["business_start_date"]."','".$_POST["trading_address"]."','".$_POST["hear_abt_us"]."','".$_POST["company_job_type"]."')";
+
 	//$GLOBALS["reg_msg"] = 'The merchant registration is successfull';
 
 	$Template = '
@@ -29,31 +51,31 @@ if(strtolower($_POST["btnRegister"])=='submit')
 		        </tr>
 		      <tr>
 		        <td style="font-family: Arial, Helvetica, sans-serif; text-align:left; line-height:18px; color:#000; font-size:13px; font-weight: normal; font-smooth: always;">
-		          <p>Dear '.ucfirst($_POST["company_name"]).',<br />
+		          <p>Dear '.ucfirst($fname.' '.$lname).',<br />
 		          </p>
-		          <p>Thanks for your interest in partnering with GeeLaza!</p>
+		          <p>Thanks for your interest in partnering with Jumblr!</p>
 		          <p>Right now, one of our Deal Research Specialists is taking a look at your information. We want to make sure that we can create a promotion that brings customers through your door and delivers measurable results.</p>
 		          <p>That way, everyone wins. specially you.</p>
 		          <p>We\'ll be in touch soon.</p>
 		          <p>Thanks again.</p>
-		          <p>The GeeLaza team.</p>         </td>
+		          <p>The Jumblr team.</p>         </td>
 		      </tr>
 		     </table></td>
 		  </tr>
 		</table>
 	';
 
-	$subject = "Thank You for Your Interest in GeeLaza";
+	$subject = "Thank You for Your Interest in Jumblr";
 
 	$sql="SELECT * FROM ".TABLE_ADMIN." where admin_name='admin'";
 	$admin=$db->query_first($sql);
 
 	$headers  = 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	$headers .= "From: GeeLaza Business Team<b2b@geelaza.com>". "\r\n" ;
+	$headers .= "From: Jumblr Business Team<b2b@Jumblr.com>". "\r\n" ;
 
 	@mail($to,$subject,$Template,$headers);
-}
+
 
 if(strtolower($_POST["btnLogin"])=='login')
 {
@@ -99,7 +121,7 @@ if(strtolower($_POST["btnLogin"])=='login')
 <div class="clear"></div>
 <h6 style="margin:-15px 0; background:#fff; padding:0px 0 10px 0; color: #404040; font: bold 30px/35px Candara, Arial, Helvetica, sans-serif;" >Thank You</h6>
 <!--<div class="txt1"><strong>All the require fields are represented by(<span style="color:#FF0000 !important;">*</span>)</strong></div>-->
-<div class="txt1_gp" style="padding-bottom: 10px;"><p>Thank you for your interest in being a GeeLaza merchant. We are in the middle of processing your request and you should hear from our representative soon!<br /><br />
+<div class="txt1_gp" style="padding-bottom: 10px;"><p>Thank you for your interest in being a Jumblr merchant. We are in the middle of processing your request and you should hear from our representative soon!<br /><br />
 
 Please note that we receive many requests to be our daily deal. So if you dont hear from us within 5 working days then please contact us and one of our representative will advice your further.<br />
 
@@ -136,73 +158,6 @@ Please note that we receive many requests to be our daily deal. So if you dont h
 </div>
 </div>
 
-
-
-<?php
-
-	   	$cookie = get_facebook_cookie('192309027517422', '7f1eb32e301277d025d35b77b06dd863');
-	   	if ($cookie) {
-		$user = json_decode(file_get_contents('https://graph.facebook.com/me?access_token=' .$cookie['access_token']));
-	   //var_dump($user);
-	   //echo '<pre>'.print_r($user,true).'</pre>';
-
-	 				/*echo $user->name;
-      				echo $user->first_name;
-      				echo $user->last_name;
-      				echo $user->gender;
-      				echo $user->timezone;
-      				echo $user->location->name;
-	  				echo $user->email;
-	  				echo $user->hometown->name;*/
-
-	   			$city = reset(explode(",", $user->location->name));
-	   			$country = end(explode(",", $user->location->name));
-	   			$add1 = reset(explode(",", $user->hometown->name));
-				$date = date('Y-m-d');
-
-
-			$sql_chk_fb_user = "SELECT * FROM ".TABLE_USERS." WHERE email = '".$user->email."'";
-			$chk_fb_user_res = mysql_query($sql_chk_fb_user);
-			$count_fb_user = mysql_num_rows($chk_fb_user_res);
-
-			if($count_fb_user <= 0)		//  Register & login via fb
-			{
-				$sql_insert_fb = "INSERT INTO ".TABLE_USERS.
-						  "(first_name,last_name,email,address1,country,city,date_added) VALUES('".$user->first_name."','".$user->last_name."','".$user->email."','".$add1."','".$country."','".$city."','".$date."')";
-
-				mysql_query($sql_insert_fb);
-
-				$sql_select_fb = "SELECT * FROM ".TABLE_USERS." WHERE email = '".$user->email."'";
-				$result_select_fb = mysql_query($sql_select_fb);
-				$count_select_fb = mysql_num_rows($result_select_fb);
-
-				if($count_select_fb >0) {
-					$row_select_fb = mysql_fetch_array($result_select_fb);
-					$user_id = $result_select_fb["user_id"];
-					$_SESSION["user_id"] = $user_id;
-					//header('Location: '.SITE_URL.'customer-account.php');
-				}
-
-			}		//  Register & login via fb End
-			else {
-				$sql_select_fb = "SELECT * FROM ".TABLE_USERS." WHERE email = '".$user->email."'";
-				$result_select_fb = mysql_query($sql_select_fb);
-				$count_select_fb = mysql_num_rows($result_select_fb);
-
-				if($count_select_fb >0) {
-					$row_select_fb = mysql_fetch_array($result_select_fb);
-					$user_id = $result_select_fb["user_id"];
-					$_SESSION["user_id"] = $user_id;
-					$_SESSION['fbuser'] = TRUE;
-					//header('Location: '.SITE_URL.'customer-account.php');
-				}
-
-			}
-
-
-	   	}
-?>
-
 <br/><br/>
 </div>
 </div>
@@ -212,3 +167,8 @@ Please note that we receive many requests to be our daily deal. So if you dont h
 <?php include ('include/sidebar-login.php'); ?>
 </div>
 <?php include("include/footer.php");?>
+<?php
+	} else {
+		header('location:'.SITE_URL);
+	}
+?>

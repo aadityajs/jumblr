@@ -173,13 +173,11 @@ if(strtolower($_POST["btnLogin"])=='login')
       <tr>
         <td>Country <span>*</span></td>
         <td>
-        	<div class="styled_select" style="width:450px;">
-                        <select name="country" id="country" class="selectbg" style="width:468px;">
+        	<div class="styled_select2" style="width:454px;">
+                        <select name="country" id="country" class="selectbg" style="width:472px;">
                         <option value=''> Select Country </option>
-                        <option value='United Kingdom'>United Kingdom</option>
-                        <option value='Ireland'>Ireland</option>
-                        <option value='Other'>Other</option>
-                        <!-- <?php
+
+                        <?php
                             $sql_country = "SELECT * FROM ".TABLE_COUNTRIES." GROUP BY country_name";
                             $result_country = mysql_query($sql_country);
                             while($row_country = mysql_fetch_array($result_country))
@@ -188,7 +186,8 @@ if(strtolower($_POST["btnLogin"])=='login')
                             <option value='<?php echo $row_country["country_id"] ?>'><?php echo $row_country["country_name"]; ?></option>
                         <?php
                             }
-                        ?> -->
+                        ?>
+                        <option value='Other'>Other</option>
                         </select>
                         </div>
                         <div id='mer_register_country_errorloc' class="error_orange"></div>
@@ -201,8 +200,8 @@ if(strtolower($_POST["btnLogin"])=='login')
       <tr>
         <td>Business type <span>*</span></br><!-- <span style="padding:0; margin:0; font:normal 12px/17px Arial, Helvetica, sans-serif; color: #757575; font-style: italic;">(check all that apply)</span> --></td>
         <td>
-        				<div class="styled_select" style="width:450px;">
-	                        <select name="business_type" id="business_type" class="selectbg" style="width:468px;">
+        				<div class="styled_select2" style="width:454px;">
+	                        <select name="business_type" id="business_type" class="selectbg" style="width:472px;">
 	                        <option value=""> Select Business Type </option>
 	                        <option value="Adventure/Outdoors">Adventure/Outdoors</option>
 	                        <option value="Canvas">Canvas</option>
@@ -303,6 +302,7 @@ xmlhttp.onreadystatechange=function()
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
     document.getElementById("mer_register_email_errorloc").innerHTML=xmlhttp.responseText;
+    //alert(xmlhttp.responseText);
     //document.getElementById('email').style.border = "1px solid red";
     }
   	else {
@@ -452,7 +452,8 @@ function hasValue() {
 
 <?php
 
-	   	$cookie = get_facebook_cookie('192309027517422', '7f1eb32e301277d025d35b77b06dd863');
+	   	/*
+	   	 * $cookie = get_facebook_cookie('192309027517422', '7f1eb32e301277d025d35b77b06dd863');
 	   	if ($cookie) {
 		$user = json_decode(file_get_contents('https://graph.facebook.com/me?access_token=' .$cookie['access_token']));
 	   //var_dump($user);
@@ -467,7 +468,7 @@ function hasValue() {
 	  				echo $user->email;
 	  				echo $user->hometown->name;*/
 
-	   			$city = reset(explode(",", $user->location->name));
+	   			/*$city = reset(explode(",", $user->location->name));
 	   			$country = end(explode(",", $user->location->name));
 	   			$add1 = reset(explode(",", $user->hometown->name));
 				$date = date('Y-m-d');
@@ -513,6 +514,7 @@ function hasValue() {
 
 
 	   	}
+	   	 */
 ?>
 
 <br/><br/>

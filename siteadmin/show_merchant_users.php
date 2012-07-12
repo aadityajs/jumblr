@@ -7,7 +7,7 @@ $record = $db->query_first($sql);
 
 if($_REQUEST['search_str']!="")
 {
-	$where=" where first_name like '%$_REQUEST[search_str]%' or last_name like '%$_REQUEST[search_str]%' or email like '%$_REQUEST[search_str]%'  and reg_type='merchant'";
+	$where=" where first_name like '%$_REQUEST[search_str]%' or last_name like '%$_REQUEST[search_str]%' or email like '%$_REQUEST[search_str]%'  and status='merchant'";
 	$target="?srchstr=$_REQUEST[search_str]";
 	$export_to="csv.php?srchstr=$_REQUEST[search_str]";
 }
@@ -17,27 +17,27 @@ elseif(($_REQUEST['date_from']!="") && ($_REQUEST['date_to']!=""))
 {
 	$date_from=strftime("%Y-%m-%d", strtotime($_REQUEST['date_from']));
 	$date_to=strftime("%Y-%m-%d", strtotime($_REQUEST['date_to']));
-	$where=" where date_added between '$date_from' and '$date_to'  and reg_type='merchant'";
+	$where=" where date_added between '$date_from' and '$date_to'  and status='merchant'";
 	$target="?date_from=$date_from&date_to=$date_to";
 	$export_to="csv.php?date_from=$date_from$date_to=$date_to";
 }
 elseif(($_REQUEST['date_from']!="") && ($_REQUEST['date_to']==""))
 {
 	$date_from=strftime("%Y-%m-%d", strtotime($_REQUEST['date_from']));
-	$where=" where date_added>='$date_from'  and reg_type='merchant'";
+	$where=" where date_added>='$date_from'  and status='merchant'";
 	$target="?date_from=$date_from";
 	$export_to="csv.php?date_from=$date_from";
 }
 elseif(($_REQUEST['date_from']=="") && ($_REQUEST['date_to']!=""))
 {
 	$date_to=strftime("%Y-%m-%d", strtotime($_REQUEST['date_to']));
-	$where=" where date_added<='$date_to'  and reg_type='merchant'";
+	$where=" where date_added<='$date_to'  and status='merchant'";
 	$target="?date_to=$date_to";
 	$export_to="csv.php?date_to=$date_to";
 }
 else
 {
-	$where="  where reg_type='merchant'";
+	$where="  where status='merchant'";
 	$target="";
 	$export_to="csv.php";
 }
@@ -185,8 +185,8 @@ left join ".TABLE_USER_SUBSCRIPTION." on (".TABLE_USERS.".user_id=".TABLE_USER_S
 
 
 }else{
-$sql="select * from ".TABLE_USERS.$where;
-$sqlStrAux = "SELECT count(*) as total FROM ".TABLE_USERS."$where";
+$sql="select * from ".TABLE_MERCHANTS.$where;
+$sqlStrAux = "SELECT count(*) as total FROM ".TABLE_MERCHANTS."$where";
 }
 
 $aux = mysql_fetch_assoc(mysql_query($sqlStrAux));
@@ -207,19 +207,19 @@ if($aux['total']>0){
 
     	<tr>
         	<!--<td><input type="checkbox" name="" /></td>-->
-            <td><a href="view_user_details.php?id=<?php echo $row_deals['user_id'];?>"><?php echo $row_deals['first_name'];?>&nbsp;<?php echo $row_deals['last_name'];?></a></td>
-			<td><?php echo $row_deals['phone_no'];?></td>
-			<td><a href="view_user_details.php?id=<?php echo $row_deals['user_id'];?>"><?php echo $row_deals['email'];?></a></td>
+            <td><a href="view_user_details.php?id=<?php echo $row_deals['mid'];?>"><?php echo $row_deals['employee_name'];?></a></td>
+			<td><?php echo $row_deals['phone'];?></td>
+			<td><a href="view_user_details.php?id=<?php echo $row_deals['mid'];?>"><?php echo $row_deals['email'];?></a></td>
             <td><?php echo strftime("%d %b %Y", strtotime($row_deals['date_added'])); ?></td>
-			<td><a href="add_merchant_user.php?mode=edit&id=<?php echo $row_deals[user_id];?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
-            <td><a href="add_merchant_user.php?mode=delete&id=<?php echo $row_deals[user_id];?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" onClick='return confirm("Are you sure to delete this user?")' /></a>
-			<a href="<?php echo SITE_URL; ?>siteadmin/merchant_user_request.php?email=<?php echo $row_deals[user_id];?>" class="ask" title='Send Userid And Password to merchant'><img src="images/email.png" alt="" title="" border="0" title='Send Userid And Password to merchant' /></a>
+			<td><a href="add_merchant_user.php?mode=edit&id=<?php echo $row_deals[mid];?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
+            <td><a href="add_merchant_user.php?mode=delete&id=<?php echo $row_deals[mid];?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" onClick='return confirm("Are you sure to delete this user?")' /></a>
+			<a href="<?php echo SITE_URL; ?>siteadmin/merchant_user_request.php?email=<?php echo $row_deals[mid];?>" class="ask" title='Send Userid And Password to merchant'><img src="images/email.png" alt="" title="" border="0" title='Send Userid And Password to merchant' /></a>
 			</td>
         </tr>
 
     	 <?php
 
-		 $users[]=$row_deals['user_id'];
+		 $users[]=$row_deals['mid'];
 			}
 
 			$_SESSION['ids']=serialize($users);

@@ -7645,3 +7645,38 @@ a.buynow_btn2{
 a.buynow_btn2:hover{
 	background: url(../images/buy_nowbtn_hover.png) left top no-repeat;
 }
+
+
+
+.styled_select2{
+   width: auto;
+   height: 30px;
+   overflow: hidden;
+   border-left: 1px solid #e0e0e3;
+   font: normal 12px/ Verdana, Arial, Helvetica, sans-serif;	
+   background: url(../images/drop_down.png) right center no-repeat;
+   z-index: 0;
+   display: block;
+   margin: 0;
+}
+.styled_select2 select{
+   background: transparent !important; 
+   -webkit-appearance: none;
+   width: auto;
+   text-transform: none;
+   border: 0px;
+   outline: none;
+   font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+   border: 0px;
+   padding: 6px 0 0 0px;
+	empty-cells: hide;
+   -webkit-appearance: none;
+   -webkit-padding: 0;
+   color: #7f7f7f;
+   z-index: 0;
+}
+.styled_select2 select option{
+	z-index: 0;
+	text-transform: capitalize;
+	 font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+}

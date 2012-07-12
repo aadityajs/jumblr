@@ -404,7 +404,7 @@ if(isset($_REQUEST['submit']))
 
 
 
-	//$data['deal_cat']=$_POST['deal_cat'];
+	$data['deal_cat']=$_POST['deal_cat'];
 	$data['store_id']=$_POST['store_id'];
 	$data['location_id']=$_POST['deal_city'];
 	$data['city']=$_POST['city'];
