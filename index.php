@@ -666,7 +666,7 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 					</script>
 				<?php }?>
 
-                  <div id="ca-container" class="ca-container">
+                  <div id="ca-container" class="ca-container" style="height: 620px;">
                     <div class="ca-wrapper">
 				<?php
 						foreach ($circleUser as $fbUser) {
@@ -691,12 +691,127 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
                            <div class="point">120</div>
                         </div>
                         -->
+                        <div class="clear"></div>
+
+<!-- Comment starts -->
+					<div style="padding: 50px 0 0 0; margin-top: 100px;">
+				  	  <h4>Deal Group Discussion Broad:</h4>
                     </div>
+                    <div class="clear"></div>
+                    <div class="comment_box" id="comment_box" style="margin-top: 10px; padding: 10px; height: 280px; overflow-x:hidden; overflow-y:scroll;">
+
+				<?php
+
+					$commentSql = "SELECT * FROM ".TABLE_DEAL_GROUP." WHERE deal_id = $today_res[deal_id]";
+					$commentData = $db->fetch_all_array($commentSql);
+					//print_r($commentData);
+					foreach ($commentData as $comment) {
+						//$comment[fb_id];
+						$userDetails = getFbUserDetails($comment[fb_id]);
+						//print_r($userDetails);
+				?>
+
+                       <div class="box3">
+                          <div class="box3_top">
+                           	 <div class="float_left"><img src="<?php echo $userDetails['pic_square']; ?>" alt="" width="50" height="50" class="blog"/></div>
+                               <div class="heading_txt">
+                               		<strong><?php echo $userDetails['name']; ?></strong><br/> <?php echo date("F j, Y, g:i a", $comment['date_added']); ?>
+                              </div>
+                            <div class="clear"></div>
+                          </div>
+                            <div class="inner_box30">
+                               <?php echo $comment[comment]; ?>
+                              </div>
+                             <div class="clear"></div>
+                         </div>
+
+					<?php } ?>
+
+					</div>
+
+					<div id="comment_post_box" style="margin-top: 10px;">
+
+                    	<textarea type="textarea" class="textarea" name="comment" id="comment" <?php echo (isset($_SESSION['fb_id']) ? '' : 'disabled=disabled') ?>><?php echo (isset($_SESSION['fb_id']) ? '' : 'Please login to post comment!') ?></textarea>
+                        <input type="button" name="commentPost" id="commentPost" onclick="return post_comment(<?php echo $today_res['deal_id']; ?>);" <?php echo (isset($_SESSION['fb_id']) ? '' : 'disabled=disabled') ?> value="Post" class="post_btn"/>
+                    </div>
+					<div class="clear"></div>
+
+
+                     <div class="clear"></div>
+                    </div>
+
+<!-- Comment ends -->
+
+
 		     	</div>
 
              <div class="clear"></div>
             </div>
 
+<?php $userDetails = getFbUserDetails($_SESSION[fb_id]); ?>
+<script type="text/javascript">
+function post_comment(deal_id) {
+	//alert('Hi'); return false;
+
+	//$('.error_orange').hide();
+	//$('.error').hide();
+	/*  $('input.text-input').css({backgroundColor:"#FFFFFF"});
+	  $('input.text-input').focus(function(){
+	    $(this).css({backgroundColor:"#FFDDAA"});
+	  });
+	  $('input.text-input').blur(function(){
+	    $(this).css({backgroundColor:"#FFFFFF"});
+	  });
+	*/
+
+	// validate and process form
+	// first hide any error messages
+	//$('.error_orange').hide();
+
+
+	/*	var name = $("input#name").val();
+		var email = $("input#cont_email").val();
+		var enquery = $("select#enquery").val();
+		var phno = $("input#phno").val();
+	*/
+		var details = $("textarea#comment").val();
+		$("textarea#comment").focus();
+
+	/*if (name == "" || email == "" || enquery == "" || details == "") {
+	  $("div#name_error").show();
+	  $("div#email_error").show();
+	  $("div#enquery_error").show();
+	  $("div#details_error").show();
+	  //$("div#phno_error").show();
+	 // $("input#name").focus();
+	  return false;
+	}*/
+
+	var dataString = '&details=' + details + '&deal_id=' + deal_id;
+	//alert (dataString);return false;
+	if (details != ' ') {
+		$.ajax({
+	  type: "POST",
+	  url: "ajax_comment.php",
+	  data: dataString,
+	  success: function() {
+	    $('#comment_post_box').append("<div id='message' class='message'></div>");
+	    $('#message').html("<p>Thank You</p>")
+	    //.append("<img id='checkmark' src='images/tick.png' />")
+	    //.append("<p>Thanks for posting your precious comment!</p>")
+	    //.hide()
+	    //.fadeIn(1500, function() {
+	     // $('#comment_post_box');
+	   // });
+	    $('#comment_box').append("<div class='box3'><div class='box3_top'><div class='float_left'><img src='<?php echo $userDetails[pic_square]; ?>' alt='' width='50' height='50' class='blog'/></div><div class='heading_txt'><strong><?php echo $userDetails[name]; ?></strong><br/> <?php echo date("F j, Y, g:i a"); ?> </div><div class='clear'></div></div><div class='inner_box30'>"+details+"</div><div class='clear'></div></div>");
+	    $('textarea#comment').val(' ');
+	  }
+	 });
+
+	}
+return false;
+}
+</script>
 
 <!-- jumblr deal members drop down ends -->
 

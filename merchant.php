@@ -56,12 +56,12 @@ if(strtolower($_POST["btnLogin"])=='login')
 
 
 <div id="container">
-<div id="leftcol">
+<div id="leftcol" style="width:690px;">
 <div class="deal_info">
 <div class="green_curv10"></div>
 <div class="clear"></div>
 <div class="green_curv30">
-<div class="today_deal">
+<div class="today_deal" style="width:690px;">
 <div class="register_box1">
 
 <div class="clear"></div>
@@ -261,7 +261,7 @@ if(strtolower($_POST["btnLogin"])=='login')
         </td>
       </tr>
       <tr>
-        <td><p style="margin-top: 20px;">By submitting this information you declare that the information is true, accurate and up to date. You also understand that upon submission, GeeLaza will begin the process of verifying this information, which may included, but is not limited to, perform credits, reference checks and  consumer credit checks.</p></td>
+        <td><p style="margin-top: 20px;">By submitting this information you declare that the information is true, accurate and up to date. You also understand that upon submission, Jumblr will begin the process of verifying this information, which may included, but is not limited to, perform credits, reference checks and  consumer credit checks.</p></td>
       </tr>
       <tr>
         <td>&nbsp;</td>

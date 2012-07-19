@@ -35,9 +35,13 @@ error_reporting(E_ERROR || E_WARNING || E_STRICT);
 	<link href="css/getdeals_style.css" rel="stylesheet" type="text/css" />
 	<link href="css/jumblr_style.css" rel="stylesheet" type="text/css" />
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+
 	<link rel="stylesheet" href="css/tipsy.css" type="text/css" />
 	<script type="text/javascript" src="js/jquery.tipsy.js"></script>
+
+
 
 
 
@@ -77,7 +81,7 @@ error_reporting(E_ERROR || E_WARNING || E_STRICT);
 
 
 <!-- <script type="text/javascript">
-$j = jQuery.noConflict();
+$j = jQuery.noConflict(true);
 
 			$j(document).ready(function() {
 
@@ -148,12 +152,6 @@ $j = jQuery.noConflict();
 				'transitionOut'		: 'fade'
 			});
 
-			$j("#contact").fancybox({
-				//alert("dsfdsfdsf");
-					'titlePosition'		: 'inside',
-					'transitionIn'		: 'fade',
-					'transitionOut'		: 'fade'
-				});
 
 			$j("#nodeal_info").fancybox({
 				'titlePosition'		: 'inside',
@@ -202,7 +200,7 @@ $j = jQuery.noConflict();
 
 
 
-		});
+		})($j);
 	</script>
 
 	<script type="text/javascript">

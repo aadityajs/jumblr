@@ -375,11 +375,17 @@ input.submit_btn:hover{
 }
 div#container{
 	/* background: url(../images/maincontent_bg.gif) left top no-repeat #7fd7fc; */
-	width:977px;
+	width:940px;
 	height: auto;
 	float: none;
 	margin: 0 auto;
 	overflow: hidden;
+	background: #fff;
+	behavior:url(js/PIE.htc);
+	position:relative;
+	border-radius: 0 0 6px 6px;
+	-moz-border-radius: 0 0 6px 6px;
+	-webkit-border-radius: 0 0 6px 6px;
 }
 div#container div#container{
 	background: none;
@@ -869,8 +875,8 @@ div#rightcol{
 	background: none;
 	width: 232px;
 	height: auto;
-	float: left;
-	margin: 10px 10px;	
+	float: right;
+	margin: 20px 10px 10px 0;	
 }
 .rightbox{
 	background: none;
@@ -6610,7 +6616,7 @@ font: normal 12px/18px Arial, Helvetica, sans-serif;
 text-decoration: none; 
 padding-left:0px; 
 cursor: pointer;
-text-align: left;
+text-align: left;left
 }
 
 .redemClass a{
@@ -7304,7 +7310,7 @@ input.blue_btng:hover{
 .rightbox09{
 	background: none;
 	overflow: hidden;
-	width: 250px;
+	width: 230px;
 	height: auto;
 	float: left;
 	border: 0;

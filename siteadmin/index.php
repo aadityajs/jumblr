@@ -5,6 +5,9 @@ require("../config.inc.php");
 if(!isset($_REQUEST['msg'])){
 $_REQUEST['msg']='';
 }
+if (isset($_SESSION['admin_id'])) {
+	header('location:'.SITE_URL.'siteadmin/home.php');
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -78,7 +81,7 @@ ddaccordion.init({
 <div id="main_container">
 
 	<div class="header_login">
-    <div style="width:auto; margin: 12px auto; float: right; margin: 150px 0px 0px 370px; position: absolute; border: 0px solid red;">
+    <div style="width:auto; float: right; margin: 150px 0px 0px 370px; position: absolute; border: 0px solid red;">
     <a href="<?php echo SITE_URL; ?>"><img src="images/logo.png" alt="" title="" border="0" /></a></div>
     </div>
 

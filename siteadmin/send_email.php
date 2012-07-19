@@ -16,9 +16,9 @@ require("../config.inc.php");
 require("../class/Database.class.php");
 require_once('../class/Thumbnail.class.php');
 require("../class/SimpleLargeXMLParser.class.php");
-$db = new Database(DB_SERVER, DB_USER, DB_PASS, DB_DATABASE);			
+$db = new Database(DB_SERVER, DB_USER, DB_PASS, DB_DATABASE);
 $db->connect();
-mysql_query("SET CHARACTER SET utf8"); 
+mysql_query("SET CHARACTER SET utf8");
 
 $admin_id=intval($_SESSION['admin_id']);
 $sql = "SELECT admin_name FROM `".TABLE_ADMIN."`  WHERE admin_id='$admin_id'";
@@ -26,64 +26,64 @@ $record = $db->query_first($sql);
 
 $userids=unserialize($_SESSION['ids']);
 foreach($userids as $uid){
-$q=mysql_fetch_object(mysql_query("SELECT * from ".TABLE_USERS." where user_id='$uid'"));
-$usermail .=$q->email.",";
+$q=mysql_fetch_object(mysql_query("SELECT * from ".TABLE_MERCHANTS." where mid='$uid'"));
+$usermail .=$q->employee_name."<".$q->email.">".",";
 }
 
 
 if(isset($_REQUEST['submit']))
-{	
+{
 	$usermail=$_POST['users'];
-	$subject=$_POST['subject'];	
-	$message=$_POST['message'];	
-	
-	
+	$subject=$_POST['subject'];
+	$message=$_POST['message'];
+
+
 				// multiple recipients
 			$to  = $usermail; // note the comma
-			
-			
-			
+
+
+
 			// message
 			$messagebody = '
 			<html>
 			<head>
-			  <title>Premium City.com Newsletter</title>
+			  <title>Jumblr.com Newsletter</title>
 			</head>
 			<body>
-			
+
 			  '.$message.'
 			</body>
 			</html>
 			';
-			
+
 			// To send HTML mail, the Content-type header must be set
 			$headers  = 'MIME-Version: 1.0' . "\r\n";
 			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-			
+
 			// Additional headers
 			$headers .= 'To: ';
 			$headerusermail=explode(",",$useremail);
 			foreach($headerusermail as $useremail){
-			$mailquery=mysql_fetch_object(mysql_query("SELECT first_name,last_name,email from ".TABLE_USERS." where email='".$useremail."'"));
-			
-			$headers .= $mailquery->first_name." ".$mailquery->last_name.'<'.$mailquery->email.'>,';
-			
+			$mailquery=mysql_fetch_object(mysql_query("SELECT employee_name,email from ".TABLE_MERCHANTS." where email='".$useremail."'"));
+
+			$headers .= $mailquery->employee_name.'<'.$mailquery->email.'>,';
+
 			}
 			$headers .="\r\n";
-			$headers .= 'From: GeeLaza.com <'.$record['email'].'>' . "\r\n";
-			
-			
+			$headers .= 'From: Jumblr.com <'.$record['email'].'>' . "\r\n";
+
+
 			// Mail it
 			$status=@mail($to, $subject, $message, $headers);
-	
+
 			if($status){
 			$msg='<div class="valid_box">Message sent successfully to the users</div>';
 			}
 			else{
 			$msg='<div class="error_box">Message not sent  to the users</div>';
 			}
-	
-	
+
+
 
 
 }
@@ -96,7 +96,7 @@ if(isset($_REQUEST['submit']))
 <title>::<?php echo TITLE;?>:: Administrator Panel</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
 <script type="text/javascript" src="clockp.js"></script>
-<script type="text/javascript" src="clockh.js"></script> 
+<script type="text/javascript" src="clockh.js"></script>
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="ddaccordion.js"></script>
 <script type="text/javascript">
@@ -105,7 +105,7 @@ ddaccordion.init({
 	contentclass: "submenu", //Shared CSS class name of contents group
 	revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
 	mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
-	collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
+	collapseprev: true, //Collapse previous content (so only one open at any time)? true/false
 	defaultexpanded: [], //index of content(s) open by default [index1, index2, etc] [] denotes no content
 	onemustopen: false, //Specify whether at least one header should be open always (so never all headers closed)
 	animatedefault: false, //Should contents open by default be animated into view?
@@ -130,11 +130,11 @@ ddaccordion.init({
 
 <script type="text/javascript" src="jconfirmaction.jquery.js"></script>
 <script type="text/javascript">
-	
+
 	$(document).ready(function() {
 		$('.ask').jConfirmAction();
 	});
-	
+
 </script>
 
 <script language="javascript" type="text/javascript" src="niceforms.js"></script>
@@ -147,50 +147,50 @@ ddaccordion.init({
 
 	<div class="header">
 <div class="logo"><a href="#"><img src="images/logo.png" width="145px" height="58px" alt="" title="" border="0" /></a></div>
-    
+
      <div class="right_header">Welcome <?php echo $record['admin_name'];?> | <a href="logout.php" class="logout">Logout</a></div>
     <div id="clock_a"></div>
     </div>
-    
+
     <div class="main_content">
-    
-      <?php include("include/top_menu.inc.php");?>                    
-                    
-    <div class="center_content">  
-    
-   		<?php require("include/left_menu.php"); ?>        
-    
-    <div class="right_content"> 	
-		 
-		 <div class="form">		 
-		 
-		
-		
+
+      <?php include("include/top_menu.inc.php");?>
+
+    <div class="center_content">
+
+   		<?php //require("include/left_menu.php"); ?>
+
+    <div class="right_content" style="width: 1040px;">
+
+		 <div class="form">
+
+
+
 					<h1>Send Email </h1>
 					<form method="post" action="" enctype="multipart/form-data" class="niceform2">
-					
+
 			<?php echo $msg?>
-		
+
                 <fieldset>
-				
+
                     <dl>
-                        <dt><label for="email">Users:</label></dt>
+                        <dt><label for="users">Users:</label></dt>
                         <dd>
-						
-							<textarea name="users" id="users" cols="45" rows="5"><?php echo $usermail?></textarea>	
-						
+
+							<textarea name="users" id="users" cols="120" rows="5"><?php echo $usermail?></textarea>
+
 						</dd>
                     </dl>
 					<dl>
                         <dt><label for="password">Subject:</label></dt>
-                        <dd><input type="text" name="subject" id="subject" size="54" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" /></dd>
+                        <dd><input type="text" name="subject" id="subject" size="160" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" /></dd>
                     </dl>
-					
-					
+
+
                     <dl>
-                        <dt><label for="password">Message:</label></dt>
+                        <dt><label for="message">Message:</label></dt>
                         <dd>
-						<?php									
+						<?php
 							$oFCKeditor = new FCKeditor('message');
 							$oFCKeditor->BasePath = '../fckeditor/';
 							$oFCKeditor->Value = stripslashes($row_deals['description']) ;
@@ -198,31 +198,31 @@ ddaccordion.init({
 							$oFCKeditor->Height = '200' ;
 							$oFCKeditor->ToolbarSet = 'Basic';
 							$oFCKeditor->Create();
-						?>		
-						
+						?>
+
 						</dd>
                     </dl>
-					
-					
+
+
                      <dl class="submit">
-                    <input type="submit" name="submit" id="submit" value="Send" />
+                    <input type="submit" name="submit" id="submit" value="Send" style="width: 100px; margin-left: 450px;"/>
                      </dl>
-					 
+
                 </fieldset>
-                
+
          </form>
          </div>
-		 
+
      </div><!-- end of right content-->
-            
-                    
-  </div>   <!--end of center content -->  
-    
+
+
+  </div>   <!--end of center content -->
+
     <div class="clear"></div>
     </div> <!--end of main content-->
-	
-    	<?php require("include/footer.inc.php"); ?>   
 
-</div>		
+    	<?php require("include/footer.inc.php"); ?>
+
+</div>
 </body>
 </html>

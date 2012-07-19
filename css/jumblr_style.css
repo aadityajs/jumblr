@@ -137,6 +137,7 @@ nav li a span{
 	height: 36px;
 	line-height: 36px;
 	padding-right: 5px;
+	font-size: 12px;
 }
 .login a{
 	color: #059720;
@@ -933,3 +934,109 @@ img.border{
 	background: none;
 	margin: 0 auto;
 }
+
+
+.top_about2{
+	background: url(../images/top_about2.png) left top no-repeat;
+	width: 925px;
+	height: 60px;
+	padding: 0 0 0 15px;
+	font: normal 24px/60px Tahoma, Arial, Helvetica, sans-serif;
+	color: #4d4d4d;
+}
+.bot_about2{
+	background: url(../images/bot_about2.png) left top no-repeat;
+	width: 940px;
+	height: 18px;	
+}
+.common_box{
+	width: 915px;
+	height: auto;
+	margin: 13px 0 13px 13px;
+}
+.create_ac{
+	border: 1px solid #CCCCCC; 
+	clear: both; 
+	padding: 2px; 
+	width: 780px;
+}
+.create_ac dt{
+	float: left;
+	width: 160px;
+	padding-left:10px;
+	border: 1px solid #fff;
+}
+.create_ac dd{	
+	border: 1px solid #fff;
+	width: 470px;
+	margin-left: 175px;
+}
+.create_ac dd span{
+	float: left;
+	width: 180px;
+	border: 1px solid #fff;
+	padding-top: 5px;
+}
+
+/*blog*/
+.box3{
+	width: 790px;
+	height: auto;
+	float: left;
+	margin: 0 0 15px 0;
+}
+.box3_top{
+	background: url(../images/box3_top.png) center top no-repeat;
+	height: 58px;
+	margin-top: 6px;
+}
+.box3_top img.blog{
+	margin: 4px 0 0 4px;
+	height: 50px;
+	height: 50px;
+}
+.inner_box30{
+	width: 700px;
+	height: auto;
+	float: right;
+	padding: 10px 0 0 0;
+	margin: 0 15px 0 0;
+	border-top: 1px dashed #bababa;
+}
+.heading_txt{
+	font: normal 11px/17px Georgia, "Times New Roman", Times, serif;
+	float: left;
+	width:auto;
+	color: #9f9f9f;
+	height: auto;
+	margin: 10px 0 0 12px;
+}
+.heading_txt strong{
+	color: #333333;
+	font: normal 18px/20px Georgia, "Times New Roman", Times, serif;
+}
+
+.textarea{
+	color: #36383a;
+	padding: 3px 0 3px 3px;
+	margin: 0px;
+	font: normal 13px/16px Arial, Helvetica, sans-serif;
+	width:790px;
+	height: 80px;
+	background: #f8f8f8;
+	border: 1px solid #d5d5d5;
+}
+.post_btn{
+	color: #fff;
+	padding: 3px 0;
+	margin: 4px 0 0 0;
+	font: bold 13px/26px Arial, Helvetica, sans-serif;
+	width:60px;
+	height: 26px;
+	cursor: pointer;
+	text-align: center;
+	background: #187697;
+	border: 1px solid #156c89;
+}
+
+

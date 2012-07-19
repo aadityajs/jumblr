@@ -29,9 +29,9 @@ if($mode=="edit")
 
 include("update_redemption.php");
 
-if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='receive')
+if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='Attach PayPal')
 {
- 	$sqlupdate = mysql_query("update ".TABLE_USERS." set paypal_email='".$_REQUEST['paypal_email']."' where user_id=".$_SESSION['muser_id']."");
+ 	$sqlupdate = mysql_query("update ".TABLE_MERCHANTS." set paypal_id='".$_REQUEST['paypal_email']."' where mid=".$_SESSION['muser_id']."");
 	header("location:merchant_home.php");
 	exit;
 }
@@ -46,28 +46,35 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='Update'
 
 
 	$mer_data = array();
-	$mer_data['company_name'] = $_POST["company_name"];
+	$mer_data['store_name'] = $_POST["company_name"];
+	$mer_data['employee_name'] = $_POST["employee_name"];
 	$mer_data['address1']     = $_POST["address1"];
-	$mer_data['cccity']        = $_POST["city"];
-	$mer_data['cczip']        = $_POST["zip"];
-	$mer_data['ccstate']      = $_POST["ccstate"];
+	$mer_data['city']        = $_POST["city"];
+	$mer_data['zip']        = $_POST["zip"];
+	$mer_data['state']      = $_POST["state"];
 	$mer_data['password']     = base64_encode($_POST["password"]);
+	//$mer_data['cpassword']     = base64_encode($_POST["cpassword"]);
 	$mer_data['email']        = $_POST["email"];
-	$mer_data['phone_no']     = $_POST["phone_no"];
+	$mer_data['phone']     = $_POST["phone_no"];
 	$mer_data['website']      = $_POST["website"];
-	$mer_data['paypal_email'] = $_POST["paypal_email"];
+	$mer_data['paypal_id'] = $_POST["paypal_email"];
 	$user_id                  = $_SESSION["muser_id"];
-
-	if($mer_data['password'] != '')
+//print_r($mer_data);
+	if($mer_data['password'] == base64_encode($_POST["cpassword"]) && $mer_data['password'] != '')
 	{
 		# update table table users
-		$db->query_update(TABLE_USERS, $mer_data, "user_id='$user_id'");
+		$db->query_update(TABLE_MERCHANTS, $mer_data, "mid='$user_id'");
 		header('location:merchant_home.php');
 		exit;
 	}
 }
 
-
+if ($_GET['req'] == 'rem' && $_GET['mmuid'] != '') {
+	$sqlRemoveMmu = "DELETE FROM ".TABLE_MERCHANTS." WHERE mid = $_GET[mmuid]";
+	$db->query($sqlRemoveMmu);
+	header('location:merchant_home.php');
+	exit;
+}
 
 
 
@@ -76,8 +83,8 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='Update'
 $mode=isset($_REQUEST['mode'])?$_REQUEST['mode']:'add';
 $deal_id=isset($_REQUEST['deal_id'])?$_REQUEST['deal_id']:'';
 
-$user_id=intval($_SESSION['merchantid']);
-$sql = "SELECT first_name,last_name,company_name FROM `".TABLE_USERS."` WHERE user_id='$user_id'";
+$user_id=intval($_SESSION['muser_id']);
+$sql = "SELECT * FROM `".TABLE_MERCHANTS."` WHERE mid='$user_id'";
 $record = $db->query_first($sql);
 if($mode=="edit")
 {
@@ -159,7 +166,7 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='Submit'
 	$data['referral_value']=$_POST['referral_value'];
 	$data['preview']=2;
 
-	/********************** Code for Getting Latitude and Longitude Starts *********************/
+/********************** Code for Getting Latitude and Longitude Starts *********************/
 
 	$address1=str_replace(" ","+",$_POST['address1']);
 	$address2=str_replace(" ","+",$_POST['address2']);
@@ -168,8 +175,8 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='Submit'
 
 	$concat_address=$address1."+".$address2."+".$city;
 
-
 /********************** Code for Getting Latitude and Longitude Ends *********************/
+
 		/* --------------------mail to similar users -----------------*/
 		$usersql=mysql_query("SELECT * FROM ".TABLE_USERS." where password<>''");
 
@@ -194,7 +201,7 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='Submit'
 				$to  = implode(",",array_unique($usermail));
 
 
-				$subject = $_POST['brand']." from DealFriends.com ";
+				$subject = $_POST['brand']." from Jumblr.com ";
 				$txt = "New offer is created in your city ".$_POST['city']."<br />";
 				$txt .= " Offer :<b>".$_POST['title']."</b><br/>";
 
@@ -204,7 +211,7 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='Submit'
 				$txt .= " Please visit the link :".SITE_URL."city/".str_replace(" ","-",trim(strtolower($_POST['city'])))."/offer/".str_replace(" ","-",trim(strtolower($_POST['brand'])))."<br/>";
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-				$headers .= "From: DealFriends.com<".$admin['email'].">". "\r\n" ;
+				$headers .= "From: Jumblr.com<".$admin['email'].">". "\r\n" ;
 
 				$status=@mail($to,$subject,$txt,$headers);
 
@@ -294,24 +301,31 @@ $_SESSION["session_temp"] =uniqid();
         }
     </script>
 
+<style>
+	.error{
+    	border: 0px solid red;
+		float: right !important;
+		margin-right: 50px !important;
+	}
+</style>
+
 <div id="container">
 <div class="deal_info">
 
-<div class="top_about">
-	<p>Wecome to Merchant Panel</p>
+<div class="top_about2">
+	Wecome to Merchant Panel
 </div>
-<div class="clear"></div>
-
-<div class="bot_about" style="height:auto;">
+<div class="common_box">
 
 	<div id="tabs">
 		<ul>
 			<li><a href="#tabs-1">Dashboard</a></li>
-			<li><a href="#tabs-2">Receive Payment</a></li>
-			<li><a href="#tabs-3">Merchant Account</a></li>
-			<li><a href="#tabs-4">Daily Deals</a></li>
-			<li><a href="#tabs-5">My Earnings</a></li>
+			<li><a href="#tabs-2">Payment</a></li>
+			<li><a href="#tabs-3">Account</a></li>
+			<li><a href="#tabs-4">Deals</a></li>
+			<li><a href="#tabs-5">Earnings</a></li>
 			<li><a href="#tabs-6">Reedem Value</a></li>
+			<li><a href="#tabs-7">Users</a></li>
 		</ul>
 
 		<div id="tabs-1">
@@ -369,7 +383,7 @@ $_SESSION["session_temp"] =uniqid();
 				<p style="width:120px; float: left;">
 				<a href="javascript: void(0);" onclick="javascript: lodetab('#tabs-6');">Redeem Value</a><br />
 				<!-- <a href="merchant_redeem_coupon.php">Redeem Value</a><br /> -->
-				Track and Enter GeeLaza Redemptions.
+				Track and Enter Jumblr Redemptions.
 				</p>
 				</li>
 				<!-- <li class="deals">
@@ -426,21 +440,21 @@ $_SESSION["session_temp"] =uniqid();
 			<div class="ttle_txt" style="background:none; padding-left:0px;">Receive Payment</div>
 			<?php
 				$user_id = $_SESSION["muser_id"];
-				$sql_user = "SELECT * FROM ".TABLE_USERS." WHERE user_id=".$user_id;
+				$sql_user = "SELECT * FROM ".TABLE_MERCHANTS." WHERE mid=".$user_id;
 				$result_user = mysql_query($sql_user);
 				$row_user = mysql_fetch_array($result_user);
 			?>
 			<div class="form_left">
 			<div class="form">
-			<div style="line-height:26px; text-align: center; padding:20px 0;"><a style="color:#0066CC;font:normal 20px/26px Arial, Helvetica, sans-serif;">Please Create a Paypal Account if you don't have one. And on having an Account please Feed the below Form with your prevalent Paypal ID.</a></div>
+			<div style="line-height:26px; text-align: center; padding:20px 0;"><span style="color:#0066CC;font:normal 20px/26px Arial, Helvetica, sans-serif;">Please put your PayPal Account id at below and update the settings to receive your payment.If you dont have a <a href="https://www.paypal.com" target="_blank">PayPal</a> id please create one.</span></div>
 			<div class="clear"></div>
 			<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" onSubmit="return validation()">
 			<p>
-			<label for="fullname" style="font-weight:900;color:#666666;">Paypal Email:</label>
-			<input class="lf" type="text" name="paypal_email" id="paypal_email" size="54" value="<?php echo stripslashes($row_user[paypal_email]);?>" />
+			<label for="fullname" style="font-weight:900;color:#666666;">PayPal Email:</label>
+			<input class="lf" type="text" name="paypal_email" id="paypal_email" size="54" value="<?php echo stripslashes($row_user[paypal_id]);?>" />
 			</p>
 			<p>
-			<input type="submit" name="submit" id="submit" value="receive" class="submit" style="margin:5px 0 0 220px; cursor:pointer;" />
+			<input type="submit" name="submit" id="submit" value="Attach PayPal" class="submit" style="margin:5px 0 0 190px; cursor:pointer;" />
 			</p>
 			</form>
 			</div>
@@ -453,6 +467,7 @@ $_SESSION["session_temp"] =uniqid();
 
 		<div id="tabs-3">
 								<div id="tab1s">
+								<div class="ttle_txt" style="background:none; padding-left:0px;">Merchant Account</div>
 									<ul>
 										<li><a href="#tab1s-1">Merchant Account</a></li>
 										<li><a href="#tab1s-2">Edit Merchant Account</a></li>
@@ -462,7 +477,7 @@ $_SESSION["session_temp"] =uniqid();
 
 										<?php
 										$user_id = $_SESSION["muser_id"];
-										$sql_user = "SELECT * FROM ".TABLE_USERS." WHERE user_id=".$user_id;
+										$sql_user = "SELECT * FROM ".TABLE_MERCHANTS." WHERE mid=".$user_id;
 										$result_user = mysql_query($sql_user);
 										$row_user = mysql_fetch_array($result_user);
 										?>
@@ -472,25 +487,33 @@ $_SESSION["session_temp"] =uniqid();
 
 										<p>
 										<label for="fullname">Company Name:</label>
-										<?php echo stripslashes($row_user['company_name']);?><br />
+										<?php echo stripslashes($row_user['store_name']);?><br />
 										<span class="validate_error" style="color:#FF0000" id="err1"></span>
 										</p>
 										<div class="clear"></div>
+
+										<p>
+										<label for="name">Merchant Name:</label>
+										<?php echo stripslashes($row_user['employee_name']);?><br />
+										<span class="validate_error" style="color:#FF0000" id="err1"></span>
+										</p>
+										<div class="clear"></div>
+
 										<p class="gray_02">
-										<label for="fullname">Company Address 1:</label>
-										<?php echo $row_user['ccaddress1']; ?>
+										<label for="fullname">Company Address:</label>
+										<?php echo $row_user['address1']; ?>
 										</p>
 										<div class="clear"></div>
 
 										<p>
 										<label for="email">Company City:</label>
-										<?php echo stripslashes($row_user['cccity']);?>
+										<?php echo stripslashes($row_user['city']);?>
 										</p>
 
 										<div class="clear"></div>
 										<p class="gray_02">
 										<label for="fullname">Company State:</label>
-										<?php echo stripslashes($row_user['ccstate']);?>
+										<?php echo stripslashes($row_user['state']);?>
 										</p>
 										<div class="clear"></div>
 
@@ -498,7 +521,7 @@ $_SESSION["session_temp"] =uniqid();
 
 										<p class="gray_02">
 										<label for="fullname">Company Zipcode: </label>
-										<?php echo $row_user['cczip']; ?>
+										<?php echo $row_user['zip']; ?>
 										</p>
 
 										<div class="clear"></div>
@@ -516,7 +539,7 @@ $_SESSION["session_temp"] =uniqid();
 										<div class="clear"></div>
 										<p class="gray_02">
 										<label for="fullname">Phone Number:</label>
-										<?php echo stripslashes($row_user['phone_no']);?>
+										<?php echo stripslashes($row_user['phone']);?>
 										</p>
 										<div class="clear"></div>
 										<p>
@@ -526,7 +549,7 @@ $_SESSION["session_temp"] =uniqid();
 										<div class="clear"></div>
 										<p class="gray_02">
 										<label for="fullname">Paypal Email:</label>
-										<?php echo stripslashes($row_user['paypal_email']); ?>
+										<?php echo stripslashes($row_user['paypal_id']); ?>
 										</p>
 										<div class="clear"></div>
 										<!--<p>
@@ -547,13 +570,19 @@ $_SESSION["session_temp"] =uniqid();
 										<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data" onSubmit="return validation()">
 										<p>
 										<label for="fullname">Company Name:</label>
-										<input type="text" class="lf" name="company_name" id="company_name" size="54" value="<?php echo stripslashes($row_user[company_name]);?>" /><br />
+										<input type="text" class="lf" name="company_name" id="company_name" size="54" value="<?php echo stripslashes($row_user[store_name]);?>" /><br />
 										<span class="validate_error" style="color:#FF0000" id="err1"></span>
 										</p>
 
 										<p>
-										<label for="fullname">Company Address 1:</label>
-										<input type="text" class="lf" name="address1" id="address1" size="54" value="<?php echo $row_user[ccaddress1]?>" />
+										<label for="fullname">Merchant Name:</label>
+										<input type="text" class="lf" name="employee_name" id="employee_name" size="54" value="<?php echo stripslashes($row_user[employee_name]);?>" /><br />
+										<span class="validate_error" style="color:#FF0000" id="err1"></span>
+										</p>
+
+										<p>
+										<label for="fullname">Company Address:</label>
+										<input type="text" class="lf" name="address1" id="address1" size="54" value="<?php echo $row_user[address1]?>" />
 										</p>
 
 <!--										<p>
@@ -568,7 +597,7 @@ $_SESSION["session_temp"] =uniqid();
 
 										foreach($city as $cityitem){
 										?>
-										<?php if($row_user['cccity']==$cityitem['city_name']){?>
+										<?php if($row_user['city']==$cityitem['city_name']){?>
 										<option value="<?php echo $cityitem['city_name']?>" selected="selected"><?php echo $cityitem['city_name']?></option>
 										<?php }else{?>
 										<option value="<?php echo $cityitem['city_name']?>"><?php echo $cityitem['city_name']?></option>
@@ -579,7 +608,7 @@ $_SESSION["session_temp"] =uniqid();
 
 										<p>
 										<label for="fullname">Company State:</label>
-										<input type="text" class="lf" name="state" id="state" size="54" value="<?php echo stripslashes($row_user[ccstate]);?>" />
+										<input type="text" class="lf" name="state" id="state" size="54" value="<?php echo stripslashes($row_user[state]);?>" />
 										</p>
 
 <!--										<p>
@@ -603,7 +632,7 @@ $_SESSION["session_temp"] =uniqid();
 
 										<p>
 										<label for="fullname">Company Zipcode: </label>
-										<input class="lf" name="zip" id="zip" type="text" value="<?php echo $row_user[cczip]?>" />
+										<input class="lf" name="zip" id="zip" type="text" value="<?php echo $row_user[zip]?>" />
 										</p>
 
 
@@ -630,7 +659,7 @@ $_SESSION["session_temp"] =uniqid();
 
 										<p>
 										<label for="fullname">Phone Number:</label>
-										<input class="lf" type="text" name="phone_no" id="phone_no" size="54" value="<?php echo stripslashes($row_user[phone_no]);?>" />
+										<input class="lf" type="text" name="phone_no" id="phone_no" size="54" value="<?php echo stripslashes($row_user[phone]);?>" />
 										</p>
 
 										<?php /*?><p>
@@ -646,7 +675,7 @@ $_SESSION["session_temp"] =uniqid();
 
 										<p>
 										<label for="fullname">Paypal Email:</label>
-										<input class="lf" type="text" name="paypal_email" id="paypal_email" size="54" value="<?php echo stripslashes($row_user[paypal_email]);?>" />
+										<input class="lf" type="text" name="paypal_email" id="paypal_email" size="54" value="<?php echo stripslashes($row_user[paypal_id]);?>" />
 										</p>
 
 
@@ -666,11 +695,11 @@ $_SESSION["session_temp"] =uniqid();
 
 			<style>
 			.dealcalcbox{
-			width:40px; height:25px; border:1px solid #cccccc; padding:2px;
+				width:40px; height:25px; border:1px solid #cccccc; padding:2px;
 			}
 
 			.dealcalctxtbox{
-			padding:4px; border-right:1px solid #000000;text-align:center
+				padding:4px; border-right:1px solid #000000;text-align:center
 			}
 			</style>
 
@@ -758,10 +787,8 @@ $_SESSION["session_temp"] =uniqid();
 
 		<div id="tabs-4">
 
-
-
-
 		<div id="tab3s">
+		<div class="ttle_txt" style="background:none; padding-left:0px;">Deals Management</div>
 		<ul>
 			<li><a href="#tab3s-1">Add Daily Deal</a></li>
 			<li><a href="#tab3s-2">Active Deals</a></li>
@@ -771,7 +798,7 @@ $_SESSION["session_temp"] =uniqid();
 		<div id="tab3s-1">
 
 				<div id="tab_1" style="display:block">
-				<div class="title_txt">GeeLaza! <!--Now!™--> helps you to be a part!</div>
+				<div class="title_txt">Jumblr! <!--Now!™--> helps you to be a part!</div>
 				<div class="main_box">
 				<div class="each_box">
 				<img src="images/core.jpg" alt="" width="191" height="138"/>
@@ -792,11 +819,11 @@ $_SESSION["session_temp"] =uniqid();
 				</div>
 				<div class="main_box">
 				<ul class="list_txt">
-				<li>GeeLaza are easy to Use and enough user friendly</li>
-				<li>GeeLaza gives easy access to the Merchant as well as to the user section.</li>
-				<li>GeeLaza is easy to add Deals along with all the transactional functionalities.</li>
-				<!--<li>GeeLaza are </li>
-				<li>GeeLaza Now!™ gives you the power to stay bu new</li>-->
+				<li>Jumblr is easy to Use and enough user friendly</li>
+				<li>Jumblr gives easy access to the Merchant as well as to the user section.</li>
+				<li>Jumblr is easy to add Deals along with all the transactional functionalities.</li>
+				<!--<li>Jumblr are </li>
+				<li>Jumblr Now!™ gives you the power to stay bu new</li>-->
 				</ul>
 				<div class="clear"></div>
 				</div>
@@ -824,7 +851,7 @@ $_SESSION["session_temp"] =uniqid();
 				<td style="padding:5px;">Discount Price</td>
 				<td style="padding:5px;">% Off</td>
 				<td style="padding:5px;">Merchant's Take</td>
-				<td style="padding:5px;">GeeLaza Fee</td>
+				<td style="padding:5px;">Jumblr Fee</td>
 				</tr>
 				<?php
 
@@ -1339,7 +1366,7 @@ $_SESSION["session_temp"] =uniqid();
 		<div id="tabs-5">
 		<?php
 				$muser_id=intval($_SESSION['muser_id']);
-				$sql = "SELECT first_name,last_name,company_name FROM `".TABLE_USERS."` WHERE user_id='$muser_id'";
+				$sql = "SELECT * FROM `".TABLE_MERCHANTS."` WHERE mid='$muser_id'";
 				$record = $db->query_first($sql);
 
 				$sql = "SELECT * FROM `".TABLE_STORES."` WHERE merchant_id='$muser_id'";
@@ -1373,7 +1400,7 @@ $_SESSION["session_temp"] =uniqid();
 		?>
 
                    <div class="form" style="border:1px solid #cccbc8; padding:8px; width:97%;">
-                    <div class="ttle_txt" style="background:none; padding-left:0px;">Daily Deal Earning</div>
+                    <div class="ttle_txt" style="background:none; padding-left:0px;">Deal Earning</div>
                      <div class="form_left">
 
 					<table width="100%" border="0" cellspacing="2" cellpadding="2" class="cart_box">
@@ -1423,6 +1450,7 @@ $_SESSION["session_temp"] =uniqid();
 
 		<div id="tabs-6">
 			<div id="tab2s">
+			<div class="ttle_txt" style="background:none; padding-left:0px;">Deal Redemption</div>
 				<ul>
 					<li><a href="#tab2s-1">Coupon Redemption</a></li>
 					<li><a href="#tab2s-2">Reedem Bulk Coupon</a></li>
@@ -1445,7 +1473,7 @@ $_SESSION["session_temp"] =uniqid();
 
 							}
 							.dealcalcbox{
-							width:40px; height:25px; border:1px solid #cccccc; padding:2px;
+								width:40px; height:25px; border:1px solid #cccccc; padding:2px;
 							}
 							</style>
 							<!--<h1><?php //echo $record['store_name'];?></h1>-->
@@ -1542,15 +1570,346 @@ $_SESSION["session_temp"] =uniqid();
 			</div>
 		</div>
 
+
+		<div id="tabs-7">
+			<div id="tab4s">
+			<div class="ttle_txt" style="background:none; padding-left:0px;">User Management</div>
+				<ul>
+					<li><a href="#tab4s-1">User Accounts</a></li>
+					<li><a href="#tab4s-2">Create User</a></li>
+				</ul>
+
+				<div id="tab4s-1">
+					Display all user added by this Merchant.<br/><br/>
+					<table width="100%" cellpadding="10" cellspacing="0" style="text-align: center;">
+							<tr bgcolor="silver">
+								<th>User</th>
+								<th>Login/Email</th>
+								<th>Phone</th>
+								<th>Date of Creation</th>
+								<th>Option</th>
+							</tr>
+					<?php
+						$merchantMaintenerSql = "SELECT * FROM ".TABLE_MERCHANTS." WHERE parent_id = $_SESSION[muser_id] AND status = 'merchant_maintainer'";
+						$merchantMaintainer = $db->fetch_all_array($merchantMaintenerSql);
+						//print_r($merchantMaintainer);
+
+						foreach ($merchantMaintainer as $mmUser) {
+
+					?>
+							<tr>
+								<td><?php echo $mmUser[employee_name]; ?></td>
+								<td><?php echo $mmUser[email]; ?></td>
+								<td><?php echo $mmUser[phone]; ?></td>
+								<td><?php echo date("d M Y",strtotime($mmUser[date_added])); ?></td>
+								<td><a href="<?php echo SITE_URL; ?>merchant_home.php?req=rem&mmuid=<?php echo $mmUser[mid]; ?>" onclick="return confirm('Are you sure to delete the user?');"><img alt="" src="images/cross.png"> Delete</a></td>
+							</tr>
+
+					<?php } ?>
+					</table>
+
+				</div>
+				<div class="clear"></div>
+				<div id="tab4s-2">
+					<div style="border:0px solid #cccbc8; padding:0px; width:auto;">
+
+		<!-- user add form starts -->
+
+		<div class="form">
+
+					<?php
+					if(isset($_REQUEST['submitUser']) && $_REQUEST['submitUser'] == "Submit")
+					{
+					// mid 	muser_id 	location_id 	job_title 	 date_added
+
+						//$user_id=intval($_REQUEST['id']);
+
+						$data['employee_name']=$_POST['employee_name'];
+						if(isset($_POST['cpassword'])){
+						$data['password']=base64_encode($_POST['cpassword']);
+						}
+						$data['parent_id']=$_SESSION["muser_id"];
+						$data['email']=$_POST['email'];
+						$data['privileges']=implode(",",$_POST['privileges']);
+						$data['store_name']=$_POST['company_name'];
+						$data['address1']=$_POST['address1'];
+						$data['country']=$_POST['country'];
+						$data['city']=$_POST['city'];
+						$data['state']=$_POST['state'];
+						$data['zip']=$_POST['zip'];
+						$data['phone']=$_POST['phone'];
+						$data['website']=$_POST['website'];
+						$data['about']=$_POST['about'];
+						$data['here_from']=$_POST['here_from'];
+						$data['business_type']=$_POST['business_type'];
+						$data['paypal_id']=$_POST['paypal_email'];
+						$data['status']='merchant_maintainer';
+
+
+						/*
+						 * $data['work_zipcode']=$_POST['work_zipcode'];
+						$data['gender']=$_POST['gender'];
+						$data['age_range']=$_POST['age_range'];
+						$data['reg_ip']=$_SERVER['REMOTE_ADDR'];
+						$data['reg_type']='merchant';
+
+						$data['address2']=$_POST['address2'];
+
+						$data['fax']=$_POST['fax'];
+						 */
+
+						if($_REQUEST['mode']=="edit")
+						{
+							$date_modified=date("Y-m-d H:i:s");
+							$data['date_modified']=$date_modified;
+							//$db->query_update(TABLE_MERCHANTS, $data, "mid='$user_id'");
+
+						}
+						else
+						{
+							$date_added=date("Y-m-d");
+							$data['date_added']=$date_added;
+							//echo '<pre>'.print_r($data, true).'</pre>';
+							$user_id=$db->query_insert(TABLE_MERCHANTS, $data);
+
+						}
+
+						//header("location:show_merchant_users.php");
+
+					}
+
+					?>
+
+					<?php
+						if($_REQUEST['mode']=="edit")
+						{
+					?>
+							<form method="post" name="frmUserAdd" action="?id=<?php echo $user_id;?>&mode=edit" enctype="multipart/form-data" onSubmit="return validation()">
+
+					<?php
+						}
+						else
+						{
+					?>
+							<form method="post" enctype="multipart/form-data" >
+
+					<?php
+						}
+					?>
+
+										<!-- Fieldset -->
+										<fieldset class="create_ac">
+
+									<?php
+										if($_REQUEST['mode']=="edit")
+										{
+									?>
+											<legend style="font-size: 12px;">Edit Account</legend>
+
+									<?php
+										}
+										else
+										{
+									?>
+											<legend style="font-size: 12px;">Create Account</legend>
+
+									<?php
+										}
+									?>
+
+										<!-- 	<dl>
+												<dt><label for="company_name">Company Name:</label></dt>
+												<dd>
+													<input type="text" name="company_name" id="company_name" size="54" value="<?php echo stripslashes($row_deals[store_name]);?>" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" /><br />
+												<span class="validate_error" style="color:#FF0000" id="err1"></span>
+												</dd>
+											</dl> -->
+
+											<dl>
+												<dt><label for="job_type">User Name: <span style="font-size: 12px; color: red;">*</span></label></dt>
+												<dd>
+													<input type="text" name="employee_name" id="user_name" class="lf" size="39" value="<?php echo stripslashes($row_deals[employee_name]);?>" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" />
+													<span class="error" style="display: none; float: right;">Enter user name</span>
+												</dd>
+											</dl>
+
+										<!--	<dl>
+												<dt><label for="address1">Company Address:</label></dt>
+												<dd><input type="text" name="address1" id="address1" size="54" value="<?php echo $row_deals[address1]?>" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" /></dd>
+											</dl>
+
+											 <dl>
+												<dt><label for="email">Company Address 2:</label></dt>
+												<dd><input type="text" name="address2" id="address2" size="54" value="<?php echo stripslashes($row_deals[address2]);?>" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" /></dd>
+											</dl>
+
+											<dl>
+												<dt><label for="city">Company City:</label></dt>
+												<dd>
+												<select name="city">
+												<option value="">-- Select --</option>
+												<?php $city=$db->fetch_all_array("SELECT * FROM ".TABLE_CITIES." where status='1' group by city_name order by city_name asc");
+
+												foreach($city as $cityitem){
+												?>
+												<?php if($row_deals[city]==$cityitem['city_name']){?>
+												<option value="<?php echo $cityitem['city_name']?>" selected="selected"><?php echo $cityitem['city_name']?></option>
+												<?php }else{?>
+												<option value="<?php echo $cityitem['city_name']?>"><?php echo $cityitem['city_name']?></option>
+												<?php } ?>
+												<?php } ?>
+												</select>
+												</dd>
+											</dl>
+
+											<dl>
+												<dt><label for="state">Company State:</label></dt>
+												<dd><input type="text" name="state" id="state" size="54" value="<?php echo stripslashes($row_deals[state]);?>" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" /></dd>
+											</dl>
+											<dl>
+											<dt><label for="country">Company Country:</label></dt>
+
+											<select name="country" class="dropdown" id="country" size="1">
+													<option value="">-- Select --</option>
+													<?php
+
+														$sql_categories=mysql_query("select * from " .TABLE_COUNTRIES." order by country_name asc");
+														while($row_categories=mysql_fetch_array($sql_categories))
+														{
+													?>
+
+															<option value="<?php echo $row_categories[country_id];?>" <?php if($row_categories[country_id]==$row_deals[country]) { echo "selected"; }?>><?php echo $row_categories[country_name];?></option>
+													<?php
+														}
+													?>
+												</select>
+									</dl>
+
+
+											<dl>
+												<dt><label for="zip">Company Zipcode: </label></dt>
+												<dd><input class="lf" name="zip" id="zip" type="text" value="<?php echo $row_deals[zip]?>" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;"/>
+												</dd>
+											</dl>-->
+
+											<dl>
+												<dt><label for="password">Password: <span style="font-size: 12px; color: red;">*</span></label></dt>
+												<dd><input class="lf" name="password" id="user_password" type="password" size="54" value="" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;"/>
+												<span class="error"  style="display: none; float: right;">Enter user password</span></dd>
+											</dl>
+
+
+
+											<dl>
+												<dt><label for="cpassword">Confirm Password: <span style="font-size: 12px; color: red;">*</span></label></dt>
+												<dd><input class="lf" name="cpassword" id="user_cpassword" type="password" value="" size="54" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;"/>
+												<span class="error"  style="display: none; float: right;">Confirm user password</span></dd>
+											</dl>
+
+
+											<dl>
+												<dt><label for="email">User Email: <span style="font-size: 12px; color: red;">*</span></label></dt>
+												<dd><input class="lf" name="email" id="user_email" type="text" size="54" value="<?php echo $row_deals[email]?>" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;"/>
+												<span class="error"  style="display: none; float: right;">Enter user email address</span></dd>
+											</dl>
+
+										<dl>
+											<dt><label for="phone">Phone: <span style="font-size: 12px; color: red;">*</span></label></dt>
+											<dd><input type="text" name="phone" id="user_phone" class="lf" size="54" value="<?php echo stripslashes($row_deals[phone]);?>" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" />
+											<span class="error" style="display: none; float: right;">Enter user phone number.</span></dd>
+										</dl>
+
+									<!-- 	<dl>
+											<dt><label for="website">Website:</label></dt>
+											<dd><input type="text" name="website" id="website" size="54" value="<?php echo stripslashes($row_deals[website]);?>" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" /></dd>
+										</dl>
+
+
+										<dl>
+											<dt><label for="paypal_email">Paypal Email:</label></dt>
+											<dd><input type="text" name="paypal_email" id="paypal_email" size="54" value="<?php echo stripslashes($row_deals[paypal_id]);?>" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" /></dd>
+										</dl> -->
+
+										<dl>
+										<?php
+											// All Priviledes //
+											// manage_user,manage_deal,manage_admin,manage_merchant,manage_dealcategory,manage_city,manage_staticpage,manage_faq
+											$privileges=explode(",",$row_deals[privileges]);
+										?>
+											<dt><label for="privileges">Permission: </label></dt>
+											<dd>
+											<lebel><input type="checkbox" name="privileges[]" value="manage_deal" <?php if(in_array("manage_deal",$privileges)){echo "checked";}?>/> Manage Deal</lebel>
+											<lebel><input type="checkbox" name="privileges[]" value="manage_store" <?php if(in_array("manage_store",$privileges)){echo "checked";}?>/> Manage Store</lebel>
+											</dd>
+										</dl>
+
+										<dl>
+											<dt><label for="about">Note:</label></dt>
+											<dd><textarea name="about" id="about" class="lf"  rows="10" cols="70" style="border: 1px solid #CCCCCC; background:#ececec; width: 350px; height: 140px;" /><?php echo stripslashes($row_deals[about]);?></textarea></dd>
+										</dl>
+
+
+											  <dl>
+												<input type="submit" name="submitUser" id="submitUser" onclick="return validate()" value="Submit" class="submit" style="margin-left: 170px;"/>
+												<input type="reset" name="reset" id="resetUser" value="Reset" class="submit" style="margin-left: 10px;"/>
+												 </dl>
+											</fieldset>
+										<!-- End of fieldset -->
+									</form>
+
+									<script language="javascript">
+
+									function validate()
+									{
+										var emp_name = $('#user_name').val();
+										var password = $('#user_password').val();
+										var cpassword = $('#user_cpassword').val();
+										var email = $('#user_email').val();
+										var phone = $('#user_phone').val();
+
+										var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+										if(reg.test(email) == false)
+										   {
+											$("span.error").show();
+										   }
+
+										//alert(emp_name);
+										if ( emp_name == '' || password == '' || cpassword == '' || email == '' || phone == '' ) {
+											//$("#submitUser").click(function(){
+												$("span.error").show();
+												$("span.error").effect("shake", { times:2, direction:'left', distance:10 }, 200);
+
+											//});
+											return false;
+										}
+
+										/*
+
+
+
+										*/
+
+										return true;
+									}
+
+									</script>
+
+
+
+         </div>
+
+		<!-- user add form ends -->
+		</div>
+				</div>
+
+			</div>
+		</div>
+
 	</div>
 
-
-
 </div>
 </div>
-
-</div> <!-- container end -->
-
+</div>
 
 
 
@@ -1558,7 +1917,7 @@ $_SESSION["session_temp"] =uniqid();
 
 </div>
 </div>
-<?php include ('include/sidebar.php'); ?>
+<?php //include ('include/sidebar.php'); ?>
 
 <div class="clear"><img src="images/spacer.gif" alt="" width="1" height="10" /></div>
 </div></div>

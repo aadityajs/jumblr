@@ -24,11 +24,14 @@ $db->connect();
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<meta http-equiv="imagestoolbar" content="no" />
-	<title>Welcome to our site</title>
+	<title>Welcome to Jumblr</title>
+	<link rel="stylesheet" href="css/base.css" type="text/css" media="all">
 	<link href="css/getdeals_style.css" rel="stylesheet" type="text/css" />
+	<link href="css/jumblr_style.css" rel="stylesheet" type="text/css" />
 
-
-	<!--<link href="css/base.css" rel="stylesheet" type="text/css" />-->
+	<link rel="stylesheet" href="css/tipsy.css" type="text/css" />
+	<script type="text/javascript" src="js/jquery.tipsy.js"></script>
+	<!--<link href="css/base.css" rel="stylesheet" type="text/css" />
 
 	<link href="css/nav.css" rel="stylesheet" type="text/css" />
      <script type="text/javascript" src="js/city.js"></script>
@@ -38,7 +41,7 @@ $db->connect();
 		<script type="text/javascript" src="js/jquery.bxSlider.js"></script>
 		 <script src="js/overlib.js"></script>
 
-		<link rel="stylesheet" type="text/css" href="css/dd.css" />
+		<link rel="stylesheet" type="text/css" href="css/dd.css" />-->
 		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 
 		--><!--<link href="SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css"/>-->
@@ -55,8 +58,8 @@ $db->connect();
 
 	</script>
 
-<link rel="stylesheet" type="text/css" href="css/nav/pro_dropdown_2.css" />
-<script src="jss/nav/stuHover.js" type="text/javascript"></script>
+<!-- <link rel="stylesheet" type="text/css" href="css/nav/pro_dropdown_2.css" />
+<script src="jss/nav/stuHover.js" type="text/javascript"></script> -->
 
 <!-- Tabs links include -->
 <link href="css/tabs/jquery.ui.all.css" rel="stylesheet" type="text/css"/>
@@ -80,14 +83,17 @@ $(function() {
 $(function() {
 	$( "#tab3s" ).tabs();
 });
+$(function() {
+	$( "#tab4s" ).tabs();
+});
 
 </script>
 
 <!-- --------------------- -->
-<!--  Nav Menu --------------------------------- -->
-	<link href="css/nav/layout.css" rel="stylesheet" type="text/css" />
-<!--	<link href="css/nav/style.css" rel="stylesheet" type="text/css" />
--->
+<!--  Nav Menu -->
+<!--	<link href="css/nav/layout.css" rel="stylesheet" type="text/css" />
+	<link href="css/nav/style.css" rel="stylesheet" type="text/css" />
+
 	<script type="text/javascript" src="js/nav/textresizedetector.js"></script>
 
 	<script type="text/javascript">
@@ -106,7 +112,7 @@ $(function() {
 	}
 	</script>
 
-	<link rel="stylesheet" href="css/nav/MenuMatic.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/nav/MenuMatic.css" type="text/css" media="all" />-->
 
 
 <!-- -------------------------------------------- -->
@@ -115,7 +121,7 @@ $(function() {
 </head>
 
 <body>
-<script src="http://connect.facebook.net/en_US/all.js"></script>
+<!-- <script src="http://connect.facebook.net/en_US/all.js"></script>
 <div id="fb-root"></div>
 <script type="text/javascript">
 		FB.init
@@ -133,7 +139,7 @@ $(function() {
 		});
 </script>
 <?php
-			function get_facebook_cookie($app_id, $app_secret)
+		/*	function get_facebook_cookie($app_id, $app_secret)
 			{
 			$args = array();
 			parse_str(trim($_COOKIE['fbs_' . $app_id], '\\"'), $args);
@@ -154,8 +160,9 @@ $(function() {
 
 			return $args;
 			}
+			*/
 
-?>
+?> -->
 
 <!--start maincontainer-->
 <!--start head-->
@@ -179,118 +186,64 @@ $(function() {
 	$result_city = mysql_query($sql_city);
 	$row_city_1 = mysql_fetch_array($result_city);
 ?>
-<div id="locations" class="locations" style="display: none;">
- 	<div id="citySelectBox" style=" ">
 
+<header>
+ <div class="header">
+  <div class="header_left">
+       <a href="<?= SITE_URL ?>"><img src="images/logo.png" alt="" border="0"/></a>
+  </div>
+  <div class="header_middle">
 
- 		<ul style="margin: 0 0 0 0px;" id="jCitiesSelectBox">
-
-				<?php
-					$c = 0;
-					while($row_city = mysql_fetch_array($result_city)) {
-						$c++;
+   	<div class="styled_select left" style="border: 0px solid #000;">
+        <select style="width:170px;" name="user_type" onchange="javascript: window.location.href = (this.options[selectedIndex].id);" >
+        	<option value=""><?php if ($_GET['nd'] || $ndpage == 'national_deals.php') {echo 'NATIONAL DEALS';} else {echo strtoupper($show_city["city_name"]);} ?></option>
+        	<?php
+					while($row_city = mysql_fetch_array($result_city))
+					{
+						?>
+						<option value="<?php echo $row_city['city_id']; ?>" id="<?php echo SITE_URL."?city=".$row_city["city_id"]; ?>" > <?php echo $row_city['city_name']; ?> </option>
+						<?php
+					}
 				?>
-					<li <?php //if ($c == 5) { echo 'style="border-right: none;"'; } ?>>
-						<span>
-							<a href="<?php echo SITE_URL."?city=".$row_city["city_id"]; ?>"> <?php echo $row_city["city_name"]; ?> </a>
-						</span>
-					</li>
-				<?php } ?>
+        </select>
+    </div>
 
-	    </ul>
+    <div class="styled_select right" style="border: 0px solid #000;">
+        <select style="width:170px;" name="user_type">
 
-	  <!-- 		<li><span>Aberdeen</span></li>
-	            <li><span>Bath</span></li>
-	            <li><span>Belfast</span></li>
-	            <li><span>Birmingham</span></li>
-	            <li><span>Blackpool</span></li>
-				<li style="border-right: none;"><span>Aberdeen</span></li>
-
-				<li><span>Aberdeen</span></li>
-	            <li><span>Bath</span></li>
-	            <li><span>Belfast</span></li>
-	            <li><span>Birmingham</span></li>
-	            <li><span>Blackpool</span></li>
-				<li style="border-right: none;"><span>Aberdeen</span></li>
-
-				<li><span>Aberdeen</span></li>
-	            <li><span>Bath</span></li>
-	            <li><span>Belfast</span></li>
-	            <li><span>Birmingham</span></li>
-	            <li><span>Blackpool</span></li>
-				<li style="border-right: none;"><span>Aberdeen</span></li>
-
-				<li><span>Aberdeen</span></li>
-	            <li><span>Bath</span></li>
-	            <li><span>Belfast</span></li>
-	            <li><span>Birmingham</span></li>
-	            <li><span>Blackpool</span></li>
-				<li style="border-right: none;"><span>Aberdeen</span></li> -->
-
+        <?php
+	    	$sqlCat = "select * from ".TABLE_CATEGORIES." where parent_id=0";
+	    	$catRes = mysql_query($sqlCat);
+	    	while ($catRow = mysql_fetch_array($catRes)) {
+    	?>
+          <option value="consumer" id="<?php echo $catRow['cat_id']; ?>"><?php echo $catRow['cat_name']; ?></option>
+        <?php } ?>
+        </select>
+    </div>
 
   </div>
-	  <div class="clear"></div>
-	  <div class="natioanl_D"><a href="<?php echo SITE_URL."national_deals.php?nd=National deals"; ?>">National deals</a></div>
-</div>
+  <div class="header_right">
+    <nav>
+        <ul>
+            <li><a href="<?php echo SITE_URL; ?>"><span><img src="images/icon_01.png" alt=""></span> <br>Home</a></li>
+          <li><a href="#"><span><img src="images/icon_02.png" alt=""></span> <br>Map</a></li>
+          <li><a href="#"><span><img src="images/icon_03.png" alt=""></span> <br>Help</a></li>
+          <?php if(isset($_SESSION["user_id"])) { ?>
+          <li><a href="<?= SITE_URL ?>customer-account.php"><span><img src="images/icon_04.png" alt=""></span> <br>My Account</a></li>
+          <?php } else { ?>
+          <li><a href="<?= SITE_URL ?>customer-login.php"><span><img src="images/icon_04.png" alt=""></span> <br>My Account</a></li>
+          <?php } ?>
+      </ul>
+    </nav>
+  </div>
+ <div class="clear"></div>
+ </div>
+</header>
 
-
-
-
-
-<div id="maindiv">
-<div class="header_main">
-<div id="header">
-	<div class="header_left"><a href="<?= SITE_URL ?>"><img src="images/logo.gif" alt="" width="181" height="107" border="0"/></a></div>
-
-				<div class="city">Select your city:<br/>
-				<!--<select name="websites2" id="websites1" style="width:177px;" class="styled" tabindex="1">
-				<option name="one" value="msDropDown1" selected="selected" class="img_none"> <?php echo strtoupper($row_city_1["city_name"]); ?> </option>
-				<?php
-					/*while($row_city = mysql_fetch_array($result_city))
-					{*/
-						?>
-						<option  name="two" value="PrototypeCombobox1"  class="img_none"> <?php echo $show_city['city_name']; ?> </option>
-						<?php
-					/*}*/
-				?>
-				</select>
-				-->
-
-				<?php
-					$base = basename($_SERVER['REQUEST_URI']);
-					$ndpage = explode("?", $base);
-					$ndpage = $ndpage[0];
-				?>
-
-				<div class="select" id="click"><?php if ($_GET['nd'] || $ndpage == 'national_deals.php') {echo 'NATIONAL DEALS';} else {echo strtoupper($show_city["city_name"]);} ?><div style="float: right; margin:0 0 0 20px; width:39px; height:38px;"><img src="images/drop_r.png" alt="" width="39" height="38" border="0"/></div></div>
-				</div>
-
-				<div class="header_right">
-				<div class="registration">
-
-				<div class="txt_box">
-				<form action="" name="frm_email_subs" method="post" onSubmit="javascript: return frm_email_subs(this.value);">
-					<input type="text" name="email_subs" class="text_field_ani" id="email_subs" value="Get deals by email" onclick="this.value=''" onblur="this.value='Get deals by email'" />
-					<input class="submit_btn" type="submit" name="email_subs_btn" id="email_subs_btn" value="SUBSCRIBE" />
-					<div id="email_subs_error_loc" class="error"></div>
-				</form>
-
-				<script type="text/javascript">
-					function frm_email_subs (email) {
-						//var email = document.getElementById('email_subs').value;
-						//alert(email); die();
-						if (email == "" || email == "Get deals by email") {
-							document.getElementById('email_subs_error_loc').innerHTML = "Enter your email address";
-							return false;
-						}
-						//return true;
-					}
-				</script>
-
-				</div>
-
-
-				<script type="text/javascript">
+<!--start maincontainer-->
+	<div id="maincontainer">
+	 	<div class="login" style="float: right;">
+	 		<script type="text/javascript">
 				$(document).ready(function() {
 				var toggle = function(direction, display) {
 				 return function() {
@@ -310,8 +263,7 @@ $(function() {
 
 				</script>
 
-
-				<?php
+	 			<?php
 				if ($cookie || $_SESSION['fbuser'] == TRUE) {
 				?>
 				<div ><a href="<?= SITE_URL ?>customer-account.php">My Account</a></div>
@@ -366,145 +318,102 @@ $(function() {
 				</div>-->
 				<?php
 				}
+				?>
 
-			?>
-			  	</div>
-
-
-			 <div class="clear"><img src="images/spacer.gif" alt="" width="1" height="1"/></div>
-
-
-         <div id="navigation">
-           <ul>
-            <li class="<?php if ($page == 'getdeals' || $page == 'index.php') { echo 'selected '; }?>link" style="width:117px;"><a href="<?php echo SITE_URL; ?>"><span>Today's Deals</span></a></li>
-			<li ><img src="images/devider.gif" alt="" width="2" height="28"/></li>
-            <li class="<?php if ($page == 'previous_deals.php') { echo 'selected '; }?>link" style="width:118px;"><a href="<?php echo SITE_URL; ?>previous_deals.php"><span>Previous Deals</span></a></li>
-			<li><img src="images/devider.gif" alt="" width="2" height="28"/></li>
-            <li class="<?php if ($page == 'howitworks.php') { echo 'selected '; }?>link" style="width:122px;"><a href="<?php echo SITE_URL; ?>howitworks.php"><span>How it works</span></a></li>
-			<li><img src="images/devider.gif" alt="" width="2" height="28"/></li>
-			<li style="padding: 4px 6px;"><img src="images/icon.png" alt="" width="21" height="20"/></li>
-            <li class="link" style="width:122px;"><a href="#"><span>Invite Friends</span></a></li>
-          </ul>
-        </div>
-
-			<!--<div style="width:518px; margin:25px 0 0 0;z-index:1000; position:absolute; text-align:right;">
-             <ul style="z-index:1001;">
-
-                <li class="dc" style="z-index:1001;">
-                <a href="#" class="menu">Toady's Deals</a>
-                </li>
-
-                <li class="dc" style="z-index:1001;">
-                <a href="#" class="menu">Past Deals</a>
-                </li>
-
-                <li class="dc" style="z-index:1001;">
-                <a href="#" class="menu">How it works</a>
-                </li>
-
-                <li class="dc" style="z-index:1001;">
-                <a href="#" class="menu">My Account</a>
-                <ul>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Receive Payment</a></li>
-                <li><a href="#">Merchant Account</a></li>
-				<li><a href="#">Daily Deals</a></li>
-				<li><a href="#">My Earnings</a></li>
-				<li><a href="#">Redeem Values</a></li>
-                </ul>
-                </li>
-            </ul>
-            </div>-->
-
-
-
-    </div>
-
-
-
-
-
-</div>
-</div>
+</div>	<!-- login end -->
 <div class="clear"></div>
 
-<?php if ($_GET['action'] != "") { ?>
-<div class="register_bg">
-<ul>
-<li><a href="#"><img src="images/late_btn.gif" alt="" width="159" height="39" border="0"/></a></li>
-<li>Sign up today for our email deals and you will never miss another deal !</li>
-<li><input type="text" name="textfield2" class="white_box" value="Enter your email address"/></li>
-<li><input type="submit" name="Submit" class="blue_btn" value="Register"/></li>
-</ul>
+<?php if ($_GET['action'] == "sold") { ?>
+<div style="margin: 0 20px 0 0;">
+<div class="register_Main1"><img src="images/cross.png" alt="" width="9" height="9" border="0" style="float: right; margin: 10px; cursor: pointer;" id="close"/>
+<div style="width:160px; margin: 86px 18px 0 auto; float: right;"><a href="<?php echo SITE_URL; ?>"><img src="images/view_today.png" alt="" width="177" height="33" border="0"/></a></div>
 </div>
+</div>
+
+
 <?php } ?>
-<?php if ($_GET['bye'] != "") { ?>
-<div class="register_bg">
-<h6 style="font-family: Arial; font-weight: bold; padding-left: 20px; color: #333333; font-size: 24px;">
-<?php echo $_GET['bye']; ?>
+
+<?php if ($_GET['bye'] != "" || $_GET['newssucc']) { ?>
+<div class="register_Main" style="margin: 0 10px 20px 0;">
+<div style="float:left; width:9px; height:49px; margin:0 0 0 0px;"><img src="images/g_left.png" alt="" width="9" height="49" border="0"/></div>
+<div class="register_bg" style="float: left; width: 920px;">
+<h6 style="font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: bold; <?php echo ($_GET['newssucc'] != ''? 'padding: 15px;' : 'padding: 15px 15px 0 0;;')?> color: #333333; font-size: 12px; line-height: 14px;">
+<span  id="close"><img src="images/closed.gif" width="15" height="13" align="right" style=" margin:0 -10px 0 0;" border="0"/></span>
+<?php echo '<span style="font-size: 16px;">'.$_GET['bye'].'</span>'; echo $_GET['newssucc']; ?>
 </h6>
+</div>
+<img src="images/g_right.png" alt="" width="9" height="49" border="0"/>
 </div>
 <?php } ?>
 
-<div id="container">
+<?php if ($_GET['errnewssucc'] != "") { ?>
+<div class="register_Main">
+<div style="float:left; width:9px; height:49px; margin:0 0 0 -5px;"><img src="images/g_left.png" alt="" width="9" height="49" border="0"/></div>
+<div class="register_bg">
+<h6 style="font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: bold; padding: 10px; color: #333333; font-size: 12px; line-height: 14px;">
+<span  id="close"><img src="images/closed.gif" width="15" height="13" align="right" style=" margin:0 -10px 0 0;" border="0"/></span>
+<img src="images/blue_big_cross.png" align="left" style="margin-right: 10px;"/>
+<?php echo $_GET['errnewssucc']; ?>
+</h6>
+</div>
+<div style="float:left; width:9px; height:49px; margin:0 0 0 0;"><img src="images/g_right.png" alt="" width="9" height="49" border="0"/></div>
+</div>
+<?php } ?>
+
+<?php if ($_GET['prs'] != "") { ?>
+<div class="register_Main">
+<div style="float:left; width:9px; height:49px; margin:0 0 0 -5px;"><img src="images/g_left.png" alt="" width="9" height="49" border="0"/></div>
+<div class="register_bg">
+<h6 style="font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: bold; padding: 10px; color: #333333; font-size: 14px;">
+<span  id="close"><img src="images/closed.gif" width="15" height="13" align="right" style=" margin:0 -10px 0 0;" border="0"/></span>
+<?php echo $_GET['prs']; ?>
+</h6>
+</div>
+<div style="float:left; width:9px; height:49px; margin:0 0 0 0;"><img src="images/g_right.png" alt="" width="9" height="49" border="0"/></div>
+</div>
+
+<?php } ?>
+
+
 
 <?php
 	$base = basename($_SERVER['REQUEST_URI']);
-	$page = explode("?", $base);
+	$page = explode("?city", $base);
 	$page = $page[0];
 
 
-if ($page == "index.php") { ?>
-<div id="subscribe" class="register_bg" style="height:14px; width: 680px; padding: 10px; font-family: Helvetica; font-size: 10.5px; color: gray;" >
 
-You have been subscribed to receive daily deals alert.
+if ($page == "index.php") { ?>
+
+
+<div class="register_Main">
+<div style="float:left; width:9px; height:49px; margin:0 0 0 0px;"><img src="images/g_left.png" alt="" width="9" height="49" border="0"></div>
+<div class="register_bg">
+<h6 style="font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: bold; padding: 10px; color: #333333; font-size: 14px;">
+<span id="close"><img src="images/closed.gif" width="15" height="13" align="right" style=" margin:0 -10px 0 0;" border="0"></span>
+You have been subscribed to receive daily deals alert.</h6>
+</div>
+<div style="float:left; width:9px; height:49px; margin:0 0 0 0;"><img src="images/g_right.png" alt="" width="9" height="49" border="0"></div>
+</div>
+<?php } ?>
+
+<?php if ($_GET['acsucc']) { ?>
+<div id="subscribe_succ" class="register_bg" style="height:14px; width: 680px; padding: 10px; font-family: Helvetica; font-size: 10.5px; color: gray;" >
+
+<?php echo $_GET['acsucc'];
+
+?>
 <span id="subscribe_close" style="float: right; margin-right: 10px; height:auto; width: 30px; cursor: pointer">Close</span>
 
 </div>
-<?php } ?>
-<script>
-$("div#click").click(function () {
-$("div#locations").slideToggle(300);
-});
+<?php
+	}
+?>
 
-$("div#locations").ready(function() {
-	$("div#locations").hide(0);
-});
-</script>
 
-<script>
-$("span#subscribe_close").click(function() {
-	$("div#subscribe").slideUp(300);
 
-});
-</script>
 
-<script>
-$("span#close").click(function() {
-	$("div.register_Main").slideUp(300);
 
-});
-</script>
 
-<script type="text/javascript" >
-/* $(document).ready(function(){
-  setTimeout(function(){
-  $("div#subscribe").fadeOut("slow", function () {
-  $("div#subscribe").remove();
-      }); }, 5000);
- });*/
-</script>
-
-<script type="text/javascript">
-
-$("span#myacc").click(function () {
-	$("div#menu").slideToggle("slow");			// slideToggle() / toggle()
-});
-
-$("div#menu").ready(function() {
-	$("div#menu").hide();
-});
-</script>
-<div id="leftcol">
-<div class="deal_info">
-		<!--end head-->
+<!--start body-->
+		<section id="body">

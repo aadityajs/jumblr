@@ -74,16 +74,18 @@
 	//die;
 
 
-    if ($user) {
-      try {
-        // Proceed knowing you have a logged in user who's authenticated.
-        $user_profile = $facebook->api('/me');
-      } catch (FacebookApiException $e) {
-        //you should use error_log($e); instead of printing the info on browser
-        d($e);  // d is a debug function defined at the end of this file
-        $user = null;
-      }
-    }
+	/*
+	 * if ($user) {
+	      try {
+	        // Proceed knowing you have a logged in user who's authenticated.
+	        $user_profile = $facebook->api('/me');
+	      } catch (FacebookApiException $e) {
+	        //you should use error_log($e); instead of printing the info on browser
+	        d($e);  // d is a debug function defined at the end of this file
+	        $user = null;
+	      }
+	    }
+	 */
 
    //	echo "===========";
 	//echo '<pre>'.print_r($user_profile,true).'</pre>';
