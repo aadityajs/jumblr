@@ -74,6 +74,7 @@ define('TABLE_BUSINESS_FAQS', "jumblr_businessfaqs");
 define('TABLE_REFUND_REQUEST', "jumblr_refund_request");
 define('TABLE_FB_USER', "jumblr_fb_user");
 define('TABLE_DEAL_GROUP', "jumblr_deal_group");
+define('TABLE_FB_USER_VIOLATION', "jumblr_fb_user_violation");
 
 
 

@@ -3,6 +3,7 @@ include 'include/header.php';
 
 if ($_GET) {
 	$profileId = GetIdFromUrl('profile');
+	$violatedProfileId = GetIdFromUrl('u_id');
 } elseif (isset($_SESSION['fb_id'])) {
 	$profileId = $_SESSION[fb_id];
 } else {
@@ -16,17 +17,29 @@ if (!isset($profileId)) {
 	$profileId = GetIdFromUrl('profile');
 }
 */
+$date = time();
+if(isset($_REQUEST['u_id'])) {
+
+	$sql="INSERT INTO ".TABLE_FB_USER_VIOLATION." set fb_id = '$_GET[u_id]',by_fb_id = '$_SESSION[fb_id]', date = '$date', status='violated'";
+	$db->query($sql);
+	$_SESSION['msg']="A violation report has been generated and sent to administrator for review. Thanks for your support.";
+	header("location:my-profile.php?profile-".$_REQUEST['u_id']);
+	exit;
+
+
+}
 ?>
 
 
 <div class="todays_deal">
                 <div class="todays_deal_left1" style="width:200px;">
 				<?php
+				if (isset($profileId)) {
 					$sqlProfile = "SELECT * FROM ".TABLE_FB_USER." WHERE fb_id = $profileId";
 					$profileUser = mysql_fetch_array(mysql_query($sqlProfile));
 					$profileUserCount = mysql_num_rows($db->query($sqlProfile));
 					//print_r($profileUser);
-
+				}
 				?>
 
                 <div style="width:200px; float: left; margin: 0 20px 0 0; overflow: hidden; text-align: center;">
@@ -37,7 +50,7 @@ if (!isset($profileId)) {
                 <div class="todays_deal_middle03">
                 	<div class="amount1"><a style="padding:0; margin:0;" href="<?php echo $profileUser['profile_url'];?>" target="_blank"><?php echo $profileUser['name'];?></a></div>
                     <div style="margin: -10px 10px 10px 10px;"><?php echo $profileUser['email'];?></div>
-                    <div class="rating1"><span>72</span></div>
+                    <div class="rating1"><span><?php echo comp_user($profileUser['user_id']); ?></span></div>
                  <div class="timer03">Compatibility</div>
                  <!--<div class="timer" style="padding:7px 0; height:54px;"><img src="images/buy_nowbtn.png" alt=""></div>
 -->                 <div class="clear"></div>
@@ -100,7 +113,10 @@ if (!isset($profileId)) {
 
 
 				<div class="clear"></div>
-				<div style="margin:8px 0;"><a href="#"><img src="images/concern_btn.png" alt="" width="150" border="0" height="30"></a></div>
+				<div style="margin:8px 0;">
+					<span class="error"><?php echo $_SESSION['msg']; ?></span><br/>
+					<a href="my-profile.php?u_id=<?php echo $profileUser['fb_id']?>"><img src="images/concern_btn.png" alt="" width="150" border="0" height="30"></a>
+				</div>
                 </div>
 				<div class="clear"></div>
             </div>

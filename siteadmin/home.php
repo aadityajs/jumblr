@@ -39,11 +39,11 @@ if($_REQUEST['mode']=="delete")
 		<h1 style="border-bottom: 2px solid #5ACBEE;">Welcome, <?php echo $record['admin_name'];?></h1>
 			<div style="clear: both;"></div>
 		 <div style="border: 1px solid #5ACBEE; padding: 5px; margin: 10px; width: 380px; height: 170px; float: left">
-		 	<h2 style="border-bottom: 1px dashed #5ACBEE; margin: 0;">Users</h2>
+		 	<h2 style="border-bottom: 1px dashed #5ACBEE; margin: 0;">Site Users</h2>
 		 	<?php
-		 		$user_count = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ".TABLE_USERS));
-		 		$active_user_count = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ".TABLE_USERS." WHERE status = 1"));
-		 		$inactive_user_count = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ".TABLE_USERS." WHERE status <> 1"));
+		 		$user_count = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ".TABLE_FB_USER));
+		 		$active_user_count = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ".TABLE_FB_USER." WHERE jumblr_status = 1"));
+		 		$inactive_user_count = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ".TABLE_FB_USER." WHERE jumblr_status <> 1"));
 		 	?>
 			<p><strong> Total Users:</strong> <?php echo $user_count[0]; ?> users</p>
 			<p><strong> Active Users:</strong> <?php echo $active_user_count[0]; ?> users</p>
@@ -52,15 +52,17 @@ if($_REQUEST['mode']=="delete")
 
 
 		 <div style="border: 1px solid #5ACBEE; padding: 5px; margin: 10px; width: 380px; height: 170px; float: left">
-		 	<h2 style="border-bottom: 1px dashed #5ACBEE; margin: 0;">Merchants</h2>
+		 	<h2 style="border-bottom: 1px dashed #5ACBEE; margin: 0;">Merchants & Maintainers</h2>
 		 	<?php
-		 		$mer_user_count = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ".TABLE_USERS." WHERE reg_type = 'merchant' OR reg_type = 'temp_merchant'"));
-		 		$mer_active_user_count = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ".TABLE_USERS." WHERE reg_type = 'merchant'"));
-		 		$mer_inactive_user_count = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ".TABLE_USERS." WHERE reg_type = 'temp_merchant'"));
+		 		$mer_user_count = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ".TABLE_MERCHANTS." WHERE status = 'merchant'"));
+		 		$mer_active_user_count = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ".TABLE_MERCHANTS." WHERE status = 'merchant'"));
+		 		$mer_inactive_user_count = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ".TABLE_MERCHANTS." WHERE status = 'temp_merchant'"));
+		 		$mer_maintainer_count = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ".TABLE_MERCHANTS." WHERE status = 'merchant_maintainer'"));
 		 	?>
 			<p><strong> Total Merchants:</strong>  <?php echo $mer_user_count[0]; ?> merchants</p>
 			<p><strong> Active Merchants:</strong> <?php echo $mer_active_user_count[0]; ?> merchants</p>
 			<p><strong> Pending Merchant Requests:</strong> <?php echo $mer_inactive_user_count[0]; ?> merchants</p>
+			<p><strong> Merchant Maintainer:</strong> <?php echo $mer_maintainer_count[0]; ?> merchant maintainers</p>
 		 </div>
 
 		 <div style="clear: both;"></div>

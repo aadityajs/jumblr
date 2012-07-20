@@ -427,7 +427,19 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
                         	</strong>
                         </div>
                     </div>
-                  <div class="rating">Group rating: <span>72</span></div>
+
+                 <?php
+					$sqlCircle = "SELECT * FROM ".TABLE_FB_USER." WHERE jumblr_status = 1";
+					$circleUser = $db->fetch_all_array($sqlCircle);
+					$circleUserCount = mysql_num_rows($db->query($sqlCircle));
+
+					foreach ($circleUser as $fbUser) {
+			        			$groupRating += comp_user($fbUser['user_id']);
+	        		}
+	        		$averageGroupRating = $groupRating/$circleUserCount;
+				?>
+
+                 <div class="rating">Group rating: <span><?php echo intval($averageGroupRating); ?></span></div>
                  <div class="timer"><img src="images/clock.png" alt=""><?php echo date("<b>D</b> M j | <b>g:i A</b>", strtotime($today_res['deal_end_time'])); ?></div>
 
                  <div class="timer" style="padding:7px 0; height:54px;">
@@ -452,11 +464,7 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
                 <div class="todays_deal_right" id="click">
                    <!-- <img src="images/member.png" alt=""> -->
 				<!-- Members circle starts -->
-				<?php
-					$sqlCircle = "SELECT * FROM ".TABLE_FB_USER;
-					$circleUser = $db->fetch_all_array($sqlCircle);
-					$circleUserCount = mysql_num_rows($db->query($sqlCircle));
-				?>
+
 					<div class="circleDiv">
 				    	<div class="innerCircle">
 				        <div class="cat_circle"><img src="images/cat_icon1.jpg" width="100" height="100" /></div>
@@ -713,9 +721,9 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 
                        <div class="box3">
                           <div class="box3_top">
-                           	 <div class="float_left"><img src="<?php echo $userDetails['pic_square']; ?>" alt="" width="50" height="50" class="blog"/></div>
+                           	 <div class="float_left"><a href="<?php echo $userDetails['profile_url']; ?>"><img src="<?php echo $userDetails['pic_square']; ?>" alt="" width="50" height="50" class="blog"/></a></div>
                                <div class="heading_txt">
-                               		<strong><?php echo $userDetails['name']; ?></strong><br/> <?php echo date("F j, Y, g:i a", $comment['date_added']); ?>
+                               		<strong><a href="<?php echo $userDetails['profile_url']; ?>"><?php echo $userDetails['name']; ?></a></strong><br/> <?php echo date("F j, Y, g:i a", $comment['date_added']); ?>
                               </div>
                             <div class="clear"></div>
                           </div>
@@ -789,7 +797,7 @@ function post_comment(deal_id) {
 
 	var dataString = '&details=' + details + '&deal_id=' + deal_id;
 	//alert (dataString);return false;
-	if (details != ' ') {
+	if (details != '') {
 		$.ajax({
 	  type: "POST",
 	  url: "ajax_comment.php",
@@ -821,8 +829,8 @@ return false;
 
 
 	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-	<!-- the jScrollPane script -->
-	<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+	<!-- the jScrollPane script
+	<script type="text/javascript" src="js/jquery.mousewheel.js"></script>-->
 	<script type="text/javascript" src="js/jquery.contentcarousel.js"></script>
 
 		<script type="text/javascript">

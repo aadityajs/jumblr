@@ -88,6 +88,7 @@
 		<ul class="categoryitems">
 			<li><a href="add_user.php">Add User</a></li>
 			<li><a href="show_users.php">View Users</a></li>
+			<li><a href="show_violated_users.php">View Violated Users</a></li>
 		</ul>
 		<?php }?>
 

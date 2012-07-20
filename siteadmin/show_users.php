@@ -9,7 +9,7 @@ $record = $db->query_first($sql);
 
 if($_REQUEST['search_str']!="")
 {
-	$where=" where first_name like '%$_REQUEST[search_str]%' or last_name like '%$_REQUEST[search_str]%' or email like '%$_REQUEST[search_str]%' and reg_type<>'merchant' ";
+	$where=" where first_name like '%$_REQUEST[search_str]%' or last_name like '%$_REQUEST[search_str]%' or email like '%$_REQUEST[search_str]%' and jumblr_status = 1";
 	$target="?srchstr=$_REQUEST[search_str]";
 	$export_to="csv.php?srchstr=$_REQUEST[search_str]";
 }
@@ -19,34 +19,34 @@ elseif(($_REQUEST['date_from']!="") && ($_REQUEST['date_to']!=""))
 {
 	$date_from=strftime("%Y-%m-%d", strtotime($_REQUEST['date_from']));
 	$date_to=strftime("%Y-%m-%d", strtotime($_REQUEST['date_to']));
-	$where=" where date_added between '$date_from' and '$date_to' and reg_type<>'merchant'";
+	$where=" where date_added between '$date_from' and '$date_to' and jumblr_status = 1";
 	$target="?date_from=$date_from&date_to=$date_to";
 	$export_to="csv.php?date_from=$date_from$date_to=$date_to";
 }
 elseif(($_REQUEST['date_from']!="") && ($_REQUEST['date_to']==""))
 {
 	$date_from=strftime("%Y-%m-%d", strtotime($_REQUEST['date_from']));
-	$where=" where date_added>='$date_from' and reg_type<>'merchant'";
+	$where=" where date_added>='$date_from' and jumblr_status = 1";
 	$target="?date_from=$date_from";
 	$export_to="csv.php?date_from=$date_from";
 }
 elseif(($_REQUEST['date_from']=="") && ($_REQUEST['date_to']!=""))
 {
 	$date_to=strftime("%Y-%m-%d", strtotime($_REQUEST['date_to']));
-	$where=" where date_added<='$date_to' and reg_type<>'merchant'";
+	$where=" where date_added<='$date_to' and jumblr_status = 1";
 	$target="?date_to=$date_to";
 	$export_to="csv.php?date_to=$date_to";
 }
 else
 {
-	$where=" where reg_type<>'merchant' ";
+	$where=" where jumblr_status <> 'inactive' ";
 	$target="";
 	$export_to="csv.php";
 }
 
 if(isset($_REQUEST['status']) && isset($_REQUEST['u_id']) &&  $_REQUEST['status']==2){
 
-	$sql="UPDATE ".TABLE_USERS." set status='".$_REQUEST['status']."' where user_id='".$_REQUEST['u_id']."'";
+	$sql="UPDATE ".TABLE_FB_USER." set jumblr_status='".$_REQUEST['status']."' where fb_id='".$_REQUEST['u_id']."'";
 	mysql_query($sql);
 	$_SESSION['msg']="User status successfully updated .";
 	header("location:show_users.php");
@@ -56,7 +56,7 @@ if(isset($_REQUEST['status']) && isset($_REQUEST['u_id']) &&  $_REQUEST['status'
 }elseif(isset($_REQUEST['status']) && isset($_REQUEST['u_id']) &&  $_REQUEST['status']==1){
 
 
-		$sql="UPDATE ".TABLE_USERS." set status='".$_REQUEST['status']."' where user_id='".$_REQUEST['u_id']."'";
+		$sql="UPDATE ".TABLE_FB_USER." set jumblr_status='".$_REQUEST['status']."' where fb_id='".$_REQUEST['u_id']."'";
 		mysql_query($sql);
 		$_SESSION['msg']="User status successfully updated .";
 		header("location:show_users.php");
@@ -222,12 +222,12 @@ color: #ccc;
 <table width="100%" cellpadding="0" cellspacing="0" border="0" class="rounded_box">
     <thead>
     	<tr>
+    		<th>Profile</th>
             <th>Full Name</th>
-			<th>Phone No</th>
 			<th>Email</th>
+			<th>Sex</th>
             <th>Date Added</th>
             <th>Status</th>
-            <th>Edit</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -261,8 +261,8 @@ left join ".TABLE_USER_SUBSCRIPTION." on (".TABLE_USERS.".user_id=".TABLE_USER_S
 
 
 }else{
-$sql="select * from ".TABLE_USERS."$where order by user_id desc";
-$sqlStrAux = "SELECT count(*) as total FROM ".TABLE_USERS."$where";
+$sql="select * from ".TABLE_FB_USER."$where order by name asc";
+$sqlStrAux = "SELECT count(*) as total FROM ".TABLE_FB_USER."$where";
 }
 
 $aux = mysql_fetch_assoc(mysql_query($sqlStrAux));
@@ -287,24 +287,25 @@ if($aux['total']>0){
 
     	<tr>
         	<!--<td><input type="checkbox" name="" /></td>-->
-            <td><a href="view_user_details.php?id=<?php echo $row_deals['user_id'];?>"><?php echo $row_deals['first_name'];?>&nbsp;<?php echo $row_deals['last_name'];?></a></td>
-			<td><?php echo $row_deals['phone_no'];?></td>
-			<td><a href="view_user_details.php?id=<?php echo $row_deals['user_id'];?>"><?php echo $row_deals['email'];?></a></td>
-            <td><?php echo strftime("%d %b %Y", strtotime($row_deals['date_added'])); ?></td>
+			<td><a href="<?php echo $row_deals['profile_url'];?>"><img alt="" src="<?php echo $row_deals['pic_square'];?>"></a></td>
+            <td><a href="<?php echo $row_deals['profile_url'];?>"><?php echo $row_deals['name'];?></a></td>
+			<td><a href="<?php echo $row_deals['profile_url'];?>"><?php echo $row_deals['email'];?></a></td>
+            <td><?php echo $row_deals['sex'];?></td>
+            <td><?php echo strftime("%d %b %Y", $row_deals['date_added']); ?></td>
 
-			<?php if($row_deals['status']==1){ ?>
-			<td><a href='show_users.php?status=2&u_id=<?php echo $row_deals['user_id']?>' title="Make inactive"><img src="images/unblock.png" width="20" /></a></td>
+			<?php if($row_deals['jumblr_status']==1){ ?>
+			<td><a href='show_users.php?status=2&u_id=<?php echo $row_deals['fb_id']?>' title="Make inactive"><img src="images/unblock.png" width="20" /></a></td>
 			<?php }else{?>
-			<td><a href='show_users.php?status=1&u_id=<?php echo $row_deals['user_id']?>' title="Make active"><img src="images/block.png" width="20" /></a></td>
+			<td><a href='show_users.php?status=1&u_id=<?php echo $row_deals['fb_id']?>' title="Make active"><img src="images/block.png" width="20" /></a></td>
 			<?php }?>
 
-			<td><a href="add_user.php?mode=edit&id=<?php echo $row_deals[user_id];?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
-            <td><a href="add_user.php?mode=delete&id=<?php echo $row_deals[user_id];?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" onClick='return confirm("Are you sure to delete this user?")' /></a></td>
+			<!-- <td><a href="add_user.php?mode=edit&id=<?php echo $row_deals[fb_id];?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td> -->
+            <td><a href="add_user.php?mode=delete&id=<?php echo $row_deals[fb_id];?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" onClick='return confirm("Are you sure to delete this user?")' /></a></td>
         </tr>
 
     	 <?php
 
-		 $users[]=$row_deals['user_id'];
+		 	$users[]=$row_deals['fb_id'];
 			}
 
 			$_SESSION['ids']=serialize($users);

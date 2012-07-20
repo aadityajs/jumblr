@@ -15,7 +15,7 @@ include_once "fbmain.php";
 
 	  		$fbUser['date_added'] = time();
 	  		$fbUser['last_updated'] = time();
-	  		$fbUser['jumblr_status'] = 1;
+
 
 	 		//$fbUser['name'];
       		$fbUser['first_name'];
@@ -31,6 +31,7 @@ include_once "fbmain.php";
 				if($count_fb_user > 0)		//  Register & login via fb
 				{
 					// Update user if already registered
+					$fbUser['jumblr_status'] = 1;
 					$db->query_update(TABLE_FB_USER, $fbUser, 'fb_id ='.$fbUser['fb_id']);
 					$_SESSION["user_id"] = $chk_fb_user_res['user_id'];
 					$_SESSION["fb_id"] = $chk_fb_user_res['fb_id'];
