@@ -529,22 +529,19 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 
 <!-- No deal layout starts -->
 
-<div class="midbg">
-<div class="today_deal">
-
-
-
+	<div class="common_box">
+	<div class="main_box">
 						<?php
 							$sql_nodeal_city = "SELECT * FROM ".TABLE_CITIES." WHERE city_id = $city";
 							$result_nodeal_city = mysql_query($sql_nodeal_city);
 							$row_nodeal_city = mysql_fetch_array($result_nodeal_city);
 						?>
-	  <div class="coming_soon">
+	  <div class="coming_soon" >
 	  <div class="coming_soon_top"></div>
 	  <div class="coming_soon_mid">
 	  <div class="coming_left">
 	   <img src="images/coming_small10.gif" alt="" width="322" height="224"/></div>
-	  <div class="coming_right">
+	  <div class="coming_right" style="width:510px;">
 	 <div>
 	 <p>COMING SOON: THE BEST DEALS THAT <?php echo strtoupper($row_nodeal_city[city_name]); ?> HAS TO OFFER</p>
 	 </div>
@@ -556,12 +553,13 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 	  </div>
 	  </div>
 	  <div class="coming_soon_bot"></div>
+      <div class="clear"></div>
 	  </div>
 
 
-</div>
-<div class="clear"><img src="images/spacer.gif" alt="" width="1" height="4" /></div>
-</div>
+	</div>
+	<div class="clear"><img src="images/spacer.gif" alt="" width="1" height="4" /></div>
+	</div>
 
 
 <div style="display: none;">
@@ -784,16 +782,6 @@ function post_comment(deal_id) {
 	*/
 		var details = $("textarea#comment").val();
 		$("textarea#comment").focus();
-
-	/*if (name == "" || email == "" || enquery == "" || details == "") {
-	  $("div#name_error").show();
-	  $("div#email_error").show();
-	  $("div#enquery_error").show();
-	  $("div#details_error").show();
-	  //$("div#phno_error").show();
-	 // $("input#name").focus();
-	  return false;
-	}*/
 
 	var dataString = '&details=' + details + '&deal_id=' + deal_id;
 	//alert (dataString);return false;

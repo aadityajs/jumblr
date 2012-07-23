@@ -38,6 +38,7 @@
   </footer>
 <!--end footer-->
 
+
 <script>
 $("div#click").click(function () {
 $("div#locations").slideToggle(300);

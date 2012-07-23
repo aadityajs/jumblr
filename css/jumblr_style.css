@@ -100,7 +100,7 @@ nav li a span{
 	display: inline-block;
 }
 
-.styled_select {
+/*.styled_select {
     background: url("../images/dropdown_bg.png") right center no-repeat ;
     border-left: 1px solid #535353;
     color: #3D3D3D;
@@ -130,7 +130,7 @@ nav li a span{
     font: 12px Verdana,Arial,Helvetica,sans-serif;
     text-transform: capitalize;
 }
-
+*/
 .login{
 	color: #059720;
 	text-align: right;

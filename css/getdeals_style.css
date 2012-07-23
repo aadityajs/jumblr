@@ -398,21 +398,21 @@ div#container div#container{
 
 div#leftcol{
 	background: none;
-	width: 704px;
+	width: 696px;
 	height: auto;
 	float: left;
 	margin: 10px auto;	
 }
 .deal_info{
 	background: none;
-	width: 704px;
+	width: 696px;
 	height: auto;
 	float: left;
 	margin: 0 auto;	
 }
 .topbg{
 	background: url(../images/top_bg.png) left top no-repeat;
-	width: 704px;
+	width: 696px;
 	height: 33px;
 	float: left;
 	margin: 0 auto;	
@@ -1103,7 +1103,7 @@ div#footer_bg{
 
 .top_about{
 	background: url(../images/top_about.png) left top no-repeat;
-	width: 704px;
+	width: 696px;
 	height: 60px;
 	float: left;
 	margin: 0 auto;
@@ -1133,7 +1133,7 @@ div#footer_bg{
 
 .contact_bg{
 	background: none;
-	width: 704px;
+	width: 696px;
 	height: auto;
 	float: left;
 	margin: 16px auto;	
@@ -1259,7 +1259,7 @@ input.blue_btn:hover{
 }
 .contact_us{
 	background: none;
-	width: 704px;
+	width: 696px;
 	height: auto;
 	float: left;
 	margin: 10px auto 0 auto;	
@@ -2455,7 +2455,7 @@ margin: 0;
 }
 .bot_about{
 	background: url(../images/bot_about.png) left top no-repeat;
-	width: 704px;
+	width: 696px;
 	height: 18px;	
 }
 
@@ -2463,7 +2463,7 @@ margin: 0;
 
 .botbg{
 	background: url(../images/bot_bg.png) left top no-repeat;
-	width: 704px;
+	width: 696px;
 	height: 33px;
 	float: left;
 	margin: 0 auto;	
@@ -2517,18 +2517,18 @@ input.text_box11{
 
 .green_curv1{
 	background: url(../images/green_curv1.png) left top no-repeat;
-	width: 704px;
+	width: 696px;
 	height: 21px;	
 }
 
 .green_curv2{
 	background: url(../images/green_curv2.png) left top no-repeat;
-	width: 704px;
+	width: 696px;
 	height: 21px;	
 }
 .green_curv3{
 	background: url(../images/green_curv3.png) left top repeat-y;
-	width: 704px;
+	width: 696px;
 	height: auto;
 	overflow: hidden;	
 }
@@ -3310,18 +3310,18 @@ table.topdisplay a:hover span{
 /*green_curv130-11-11*/
 .green_curv10{
 	background: url(../images/green_curv10.png) left top no-repeat;
-	width: 704px;
+	width: 696px;
 	height: 21px;	
 }
 
 .green_curv20{
 	background: url(../images/green_curv20.png) left top no-repeat;
-	width: 704px;
+	width: 696px;
 	height: 21px;	
 }
 .green_curv30{
 	background: url(../images/green_curv30.png) left top repeat-y;
-	width: 704px;
+	width: 696px;
 	height: auto;
 	overflow: hidden;	
 }
@@ -4013,7 +4013,7 @@ margin: 0;
 
 
 .refund_box{
-	width: 704px;
+	width: 696px;
 	height: auto;
 	background: none;
 	border: 0;
@@ -4023,13 +4023,13 @@ margin: 0;
 
 .refund_top{
 	background: url(../images/green_curv11.png) left bottom no-repeat;
-	width: 704px;
+	width: 696px;
 	height: 9px;
 }
 .refund_mid{
 	background: url(../images/green_curv13.png) left top repeat-y;
 	overflow: hidden;
-	width: 704px;
+	width: 696px;
 	height: auto;
 }
 .refund_mid p{
@@ -4066,7 +4066,7 @@ margin: 0;
 }
 .refund_bot{
 	background: url(../images/green_curv12.png) left top no-repeat;
-	width: 704px;
+	width: 696px;
 	height: 14px;
 }
 
@@ -7271,18 +7271,18 @@ input.text_boxgo{
 }
 .green_curv10{
 	background: url(../images/green_curv10.png) left top no-repeat;
-	width: 704px;
+	width: 696px;
 	height: 21px;	
 }
 
 .green_curv20{
 	background: url(../images/green_curv20.png) left top no-repeat;
-	width: 704px;
+	width: 696px;
 	height: 21px;	
 }
 .green_curv30{
 	background: url(../images/green_curv30.png) left top repeat-y;
-	width: 704px;
+	width: 696px;
 	height: auto;
 	overflow: hidden;	
 }
@@ -7361,14 +7361,15 @@ input.blue_btng:hover{
 /*=================================================10-05-2012===========================================================*/
 
 .coming_soon{
-	width: 667px;
+	width: 890px;
 	height: auto;
-	background: none;
+	background: #f9f9f9;
+	border: 1px solid #e1e1e1;
 	float: none;
 	margin: 10px auto;
 }
 
-.coming_soon_top{
+/*.coming_soon_top{
 	width: 667px;
 	height: 7px;
 	background: url(../images/topbg_new.gif) left top no-repeat;
@@ -7379,12 +7380,12 @@ input.blue_btng:hover{
 	background: url(../images/midbg_new.gif) left top repeat-y;
 	overflow: hidden;
 }
-
 .coming_soon_bot{
 	width: 667px;
 	height: 7px;
 	background: url(../images/botbg_new.gif) left top no-repeat;
 }
+*/
 .coming_left{
 	width: 346px;
 	height: 233px;
@@ -7653,6 +7654,38 @@ a.buynow_btn2:hover{
 }
 
 
+.styled_select{
+   width: auto;
+   height: 30px;
+   overflow: hidden;
+   border-left: 1px solid #e0e0e3;
+   font: normal 12px/ Verdana, Arial, Helvetica, sans-serif;	
+   background: url(../images/drop_down.png) right center no-repeat;
+   z-index: 0;
+   display: block;
+   margin: 0;
+}
+.styled_select select{
+   background: transparent !important; 
+   -webkit-appearance: none;
+   width: auto;
+   text-transform: none;
+   border: 0px;
+   outline: none;
+   font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+   border: 0px;
+   padding: 6px 0 0 0px;
+	empty-cells: hide;
+   -webkit-appearance: none;
+   -webkit-padding: 0;
+   color: #7f7f7f;
+   z-index: 0;
+}
+.styled_select select option{
+	z-index: 0;
+	text-transform: capitalize;
+	 font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+}
 
 .styled_select2{
    width: auto;
@@ -7685,4 +7718,41 @@ a.buynow_btn2:hover{
 	z-index: 0;
 	text-transform: capitalize;
 	 font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+}
+
+.styled_select3 {
+    background: url("../images/dropdown_bg.png") right center no-repeat ;
+    border-left: 1px solid #535353;
+    color: #3D3D3D;
+    display: block;
+    font: 11px/32px Verdana,Arial,Helvetica,sans-serif !important;
+    height: 32px !important;
+    margin: 0 !important;
+    overflow: hidden;
+    position: relative;
+    width: 150px;
+    z-index: 0;
+}
+.styled_select3 select {
+	background: transparent !important;
+   -webkit-appearance: none;
+   width: auto;
+   text-transform: none;
+   border: 0px;
+   outline: none;
+   float: left;
+   font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+   border: 0px;
+   color: #8b8b8b;
+   padding: 8px 0 0 10px;
+}
+.styled_select3 select option {
+    font: 12px Verdana,Arial,Helvetica,sans-serif;
+    text-transform: capitalize;
+}
+.common_box{
+	width: 880px;
+	height: auto;
+	padding: 10px;
+	background: #fff;
 }

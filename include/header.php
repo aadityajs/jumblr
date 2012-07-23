@@ -8,7 +8,6 @@ $db = new Database(DB_SERVER, DB_USER, DB_PASS, DB_DATABASE);
 $db->connect();
 error_reporting(E_ERROR || E_WARNING || E_STRICT);
 
-
 	// Maintenance mode checking
 	$mModeSelectSql = "SELECT * FROM ".TABLE_SETTING." WHERE `name` = 'm_mode';";
 	$mModeSelectRes = mysql_fetch_array(mysql_query($mModeSelectSql));
@@ -394,7 +393,7 @@ function get_facebook_cookie_new($app_id, $app_secret)
   </div>
   <div class="header_middle">
 
-   	<div class="styled_select left" style="border: 0px solid #000;">
+   	<div class="styled_select3 left" style="border: 0px solid #000;">
         <select style="width:170px;" name="user_type" onchange="javascript: window.location.href = (this.options[selectedIndex].id);" >
         	<option value=""><?php if ($_GET['nd'] || $ndpage == 'national_deals.php') {echo 'NATIONAL DEALS';} else {echo strtoupper($show_city["city_name"]);} ?></option>
         	<?php
@@ -408,15 +407,14 @@ function get_facebook_cookie_new($app_id, $app_secret)
         </select>
     </div>
 
-    <div class="styled_select right" style="border: 0px solid #000;">
-        <select style="width:170px;" name="user_type">
-
+    <div class="styled_select3 right" style="border: 0px solid #000;">
+        <select style="width:170px;" name="user_type" onchange="javascript: window.location.href = (this.options[selectedIndex].id); ">
         <?php
 	    	$sqlCat = "select * from ".TABLE_CATEGORIES." where parent_id=0";
 	    	$catRes = mysql_query($sqlCat);
 	    	while ($catRow = mysql_fetch_array($catRes)) {
     	?>
-          <option value="consumer" id="<?php echo $catRow['cat_id']; ?>"><?php echo $catRow['cat_name']; ?></option>
+          <option value="consumer" id="<?php echo SITE_URL."list.php?cat=".$catRow['cat_id']; ?>" <?php echo ($_GET['cat'] == $catRow['cat_id'] ? 'selected' : '');?>><?php echo $catRow['cat_name']; ?></option>
         <?php } ?>
         </select>
     </div>
@@ -483,7 +481,20 @@ function get_facebook_cookie_new($app_id, $app_secret)
 				elseif(!isset($_SESSION["user_id"]))
 				{
 				?>
-				<div style="text-align:right;"><a href="<?= SITE_URL ?>customer-login.php">Login</a><!--   |  <a href="<?= SITE_URL ?>customer-register.php">Register</a> --></div>
+
+				<div style="text-align:right;">
+					<a href="<?= SITE_URL ?>customer-login.php">Login</a>  <!-- |  <a href="<?= SITE_URL ?>customer-register.php">Register</a>
+
+					<a href="<?php echo $loginUrl; ?>"><img src="http://www.realestatenewport.com/assets/facebook-login-button-5c5750b27cc8759f735f49a5ad2a4263.png" alt="" /></a>-->
+
+					<!--<span><?php if ($cookie) { ?>
+                    <fb:login-button scope="email,publish_actions,user_about_me,user_activities,user_birthday,user_checkins,user_education_history,user_events,user_games_activity,user_groups,user_hometown,user_interests,user_likes,user_location,user_notes,user_photos,user_questions,user_relationship_details,user_relationships,user_religion_politics,user_status,user_subscriptions,user_videos,user_website,user_work_history,friends_about_me,friends_activities,friends_birthday,friends_checkins,friends_education_history,friends_events,friends_games_activity,friends_groups,friends_hometown,friends_interests,friends_likes,friends_location,friends_notes,friends_photos,friends_questions,friends_relationship_details,friends_relationships,friends_religion_politics,friends_status,friends_subscriptions,friends_videos,friends_website,friends_work_history,ads_management,create_event,create_note,export_stream,friends_online_presence,manage_friendlists,manage_notifications,manage_pages,offline_access,photo_upload,publish_checkins,publish_stream,read_friendlists,read_insights,read_mailbox,read_requests,rsvp_event,share_item,sms,status_update,user_online_presence,video_upload,xmpp_login" autologoutlink="true" onlogin="window.location.reload()"></fb:login-button>
+                    <?php unset($_SESSION['fbuser']); ?>
+                    <?php } else { ?><br />
+                    <span><fb:login-button scope="email,publish_actions,user_about_me,user_activities,user_birthday,user_checkins,user_education_history,user_events,user_games_activity,user_groups,user_hometown,user_interests,user_likes,user_location,user_notes,user_photos,user_questions,user_relationship_details,user_relationships,user_religion_politics,user_status,user_subscriptions,user_videos,user_website,user_work_history,friends_about_me,friends_activities,friends_birthday,friends_checkins,friends_education_history,friends_events,friends_games_activity,friends_groups,friends_hometown,friends_interests,friends_likes,friends_location,friends_notes,friends_photos,friends_questions,friends_relationship_details,friends_relationships,friends_religion_politics,friends_status,friends_subscriptions,friends_videos,friends_website,friends_work_history,ads_management,create_event,create_note,export_stream,friends_online_presence,manage_friendlists,manage_notifications,manage_pages,offline_access,photo_upload,publish_checkins,publish_stream,read_friendlists,read_insights,read_mailbox,read_requests,rsvp_event,share_item,sms,status_update,user_online_presence,video_upload,xmpp_login" autologoutlink="true">Connect</fb:login-button></span>
+                    <?php } ?></span>
+                     -->
+				</div>
 
 
 				<?php

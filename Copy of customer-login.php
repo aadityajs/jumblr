@@ -8,7 +8,7 @@ include_once "fbmain.php";
 ?>
 <script language="JavaScript" src="js/gen_validatorv4.js" type="text/javascript" xml:space="preserve"></script>
 
-<div id="container" style="background:none;">
+<div id="container">
 <div style="background:none; margin-top: 0;" id="leftcol">
 <div style="background:none;" class="">
 <!-- <div class="green_curv10"></div> -->

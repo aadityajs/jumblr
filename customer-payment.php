@@ -1,32 +1,14 @@
 <?php
-error_reporting(E_ERROR && E_STRICT);
 include("include/header.php");
+include 'fbmain.php';
+//error_reporting(E_ERROR && E_STRICT);
 session_start();
 ob_start();
 ?>
 <?php
 	if(!isset($_COOKIE["subscribe"]))
 	header("location:".SITE_URL);
-?>
-<?php
-/** Function to validate email with PHP
- * @author Aditya Jyoti Saha
- *
- * */
-function ValidateEmail($email) {
-	//$email = "someone@example.com";
 
-	if(eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $email)) {
-	  //echo "Valid email address.";
-	  return TRUE;
-	}
-	else {
-	  //echo "Invalid email address.";
-	  return FALSE;
-	}
-}
-?>
-<?php
 if ($_GET['item'] != "")  {
 	$prod_id = $_GET['item'];
 	$multi_deal_id = $_GET['mid'];
@@ -147,7 +129,7 @@ if ($_GET['gift'] == 'gifting') {
 <div class="signup_box1">
 <p class="reset" style="padding: 0px 0 0 15px; line-height: 10px; margin: 0px 0 0 0; font: normal 13px Arial Rounded MT Bold;">
 	<span><img alt="" src="images/gift_pix.gif" align="absmiddle"></span>
-	<span style="line-height: 10px; padding: 0 0 0 10px;">Buy this deal as gift. All GeeLaza deals are transferable!</span>
+	<span style="line-height: 10px; padding: 0 0 0 10px;">Buy this deal as gift. All Jumblr deals are transferable!</span>
 </p>
 </div>
 </div>
@@ -235,7 +217,7 @@ if ($_GET['gift'] == 'gifting') {
                 </table>
                 <br>
                 <?php if ($_GET['gift'] == 'gifting') : ?>
-                &nbsp;<a href="#giftdiv" id="gift" class="redemClass"><img alt="" src="images/icon_t.gif" align="bottom"> <b>Give this GeeLaza as Gift</b></a>
+                &nbsp;<a href="#giftdiv" id="gift" class="redemClass"><img alt="" src="images/icon_t.gif" align="bottom"> <b>Give this Jumblr as Gift</b></a>
 				<?php endif ?>
 
 				<div style="display: none;">
@@ -254,7 +236,7 @@ if ($_GET['gift'] == 'gifting') {
 
 
 								<div class="invita_deal">
-								<div><p style="font: bold 16px/16px Arial, Helvetica, sans-serif; padding: 14px 0 8px 0px; margin: 0;">Fill out the from below and give the gift of Geelaza!</p></div>
+								<div><p style="font: bold 16px/16px Arial, Helvetica, sans-serif; padding: 14px 0 8px 0px; margin: 0;">Fill out the from below and give the gift of Jumblr!</p></div>
 								<div class="clear"></div>
 								</div>
 								<div class="invita_deal">
@@ -461,8 +443,8 @@ $("div#redeem_div").ready(function() {
 		<div style="width:920px;">
 
         <!-- Login form starts -->
-            <form name="cust_login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"  onsubmit="javascript: return ValidateLoginForm();" style="margin:0px; padding:0px;">
-            <!--<h6 style="margin: -22px 0 6px 0; background:none; z-index: 1000;">Already have an Account?</h6>-->
+            <!-- <form name="cust_login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"  onsubmit="javascript: return ValidateLoginForm();" style="margin:0px; padding:0px;">
+            <h6 style="margin: -22px 0 6px 0; background:none; z-index: 1000;">Already have an Account?</h6>
 
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="loginBoxnew2">
               <tr>
@@ -530,8 +512,10 @@ $("div#redeem_div").ready(function() {
               </tr>
             </table>
 
-            </form>
-            <!-- Login form ends -->
+            </form> -->
+<!-- Login form ends -->
+			<span class="black_text1" style="color:#3A3B3D; margin-left: -15px;"><a href="<?php echo $loginUrl; ?>"><img src="http://www.realestatenewport.com/assets/facebook-login-button-5c5750b27cc8759f735f49a5ad2a4263.png" alt="" /></a>If you have an account on Facebook you can use it to log in.</span>
+
 
             <!-- Login form validator starts -->
 <script type="text/javascript">
@@ -610,7 +594,7 @@ if($flag !=0)
 	}
 	if($flag == 2)
 	{
-		//header('location:'.SITE_URL.'national_deals.php?acsucc=You\'ve successfully created your account. Welcome to GeeLaza!');
+		//header('location:'.SITE_URL.'national_deals.php?acsucc=You\'ve successfully created your account. Welcome to Jumblr!');
 		?>
 		<div style="width:100%; height:45px; background-color:#fff;padding-top:4px; padding-left:30px;  text-align: center;">
 		<label style="color:#006600;"><?php echo $msg; ?></label>
@@ -952,7 +936,7 @@ if($flag !=0)
 		   <div style="font: normal 18px/25px Arial, Helvetica, sans-serif; color:#4d4550; padding-left:30px;">Got questions?</div>
 
 			 <div id="gotqq1"><img src="images/1.png" align="absmiddle"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: void(0);">&nbsp;&nbsp;What happens after I buy the deal?</a></div>
-			 <div id="gotqa1" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">You can find the link to your voucher in your GeeLaza account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</span></div>
+			 <div id="gotqa1" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">You can find the link to your voucher in your Jumblr account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</span></div>
 			<div style="border-bottom: 1px solid #ccc; margin-left: 28px;"></div>
 			 <div id="gotqq2"><img src="images/2.png" align="absmiddle"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: void(0);">&nbsp;&nbsp;When can I use my deal?</a></div>
 			 <div id="gotqa2" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">Be patient. We will email you when your deal is ready to use.</span></div>
@@ -964,7 +948,7 @@ if($flag !=0)
 			 <div id="gotqa4" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">Off course! You can give our vouchers as a gift. Our vouchers are completely transferrable and don&prime;t worry about the name of the buyer on it.</span></div>
 			<div style="border-bottom: 1px solid #ccc; margin-left: 28px;"></div>
 			 <div id="gotqq5"><img src="images/5.png" align="absmiddle"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: void(0);">&nbsp;&nbsp;Can I get refund for my order?</a></div>
-			 <div id="gotqa5" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">Yes! GeeLaza will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</span></div>
+			 <div id="gotqa5" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">Yes! Jumblr will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</span></div>
 
 
            <script type="text/javascript">
@@ -1024,8 +1008,8 @@ if($flag !=0)
 			 <!--
 			 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onClick="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>What happens after I buy the deal?</p></div><div class=clear></div><div class=tip_mid><ul><li>You can find the link to your voucher in your GeeLaza account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/1.png" alt="" width="24" height="25"/></a></td>
-                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onClick="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>What happens after I buy the deal?</p></div><div class=clear></div><div class=tip_mid><ul><li>You can find the link to your voucher in your GeeLaza account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">What happens after I buy the deal?</a></td>
+                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onClick="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>What happens after I buy the deal?</p></div><div class=clear></div><div class=tip_mid><ul><li>You can find the link to your voucher in your Jumblr account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/1.png" alt="" width="24" height="25"/></a></td>
+                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onClick="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>What happens after I buy the deal?</p></div><div class=clear></div><div class=tip_mid><ul><li>You can find the link to your voucher in your Jumblr account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">What happens after I buy the deal?</a></td>
                   </tr>
                   <tr>
                     <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onClick="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>When can I use my deal?</p></div><div class=clear></div><div class=tip_mid><ul><li>Be patient. We will email you when your deal is ready to use.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/2.png" alt="" width="24" height="25"/></a></td>
@@ -1040,8 +1024,8 @@ if($flag !=0)
                     <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onClick="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>Can I buy a deal as gift?</p></div><div class=clear></div><div class=tip_mid><ul><li>Off course! You can give our vouchers as a gift. Our vouchers are completely transferrable and don&prime;t worry about the name of the buyer on it.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">Can I buy a deal as gift?</a></td>
                   </tr>
 				  <tr>
-                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onClick="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>Can I get refund for my order?</p></div><div class=clear></div><div class=tip_mid><ul><li>Yes! GeeLaza will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/5.png" alt="" width="24" height="25"/></a></td>
-                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onClick="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>Can I get refund for my order?</p></div><div class=clear></div><div class=tip_mid><ul><li>Yes! GeeLaza will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">Can I get refund for my order?</a></td>
+                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onClick="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>Can I get refund for my order?</p></div><div class=clear></div><div class=tip_mid><ul><li>Yes! Jumblr will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/5.png" alt="" width="24" height="25"/></a></td>
+                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onClick="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>Can I get refund for my order?</p></div><div class=clear></div><div class=tip_mid><ul><li>Yes! Jumblr will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">Can I get refund for my order?</a></td>
                   </tr>
                 </table>
 
@@ -1052,8 +1036,8 @@ if($flag !=0)
                 <!--
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>What happens after I buy the deal?</strong> <br /> <br />You can find the link to your voucher in your GeeLaza account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul><div class=white-tl></div><div class=white-bl></div><div class=white-tr></div><div class=white-br></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/1.png" alt="" width="24" height="25"/></a></td>
-                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container2 style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>What happens after I buy the deal?</strong> <br /> <br />You can find the link to your voucher in your GeeLaza account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul><div class=white-tl2></div><div class=white-bl2></div><div class=white-tr2></div><div class=white-br2></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">What happens after I buy the deal?</a></td>
+                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>What happens after I buy the deal?</strong> <br /> <br />You can find the link to your voucher in your Jumblr account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul><div class=white-tl></div><div class=white-bl></div><div class=white-tr></div><div class=white-br></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/1.png" alt="" width="24" height="25"/></a></td>
+                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container2 style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>What happens after I buy the deal?</strong> <br /> <br />You can find the link to your voucher in your Jumblr account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul><div class=white-tl2></div><div class=white-bl2></div><div class=white-tr2></div><div class=white-br2></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">What happens after I buy the deal?</a></td>
                   </tr>
                   <tr>
                     <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>When can I use my deal?</strong> <br /> <br />Be patient. We will email you when your deal is ready to use.</li></ul><div class=white-tl></div><div class=white-bl></div><div class=white-tr></div><div class=white-br></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/2.png" alt="" width="24" height="25"/></a></td>
@@ -1068,8 +1052,8 @@ if($flag !=0)
                     <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container2 style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>Can I buy a deal as gift?</strong> <br /> <br />Off course! You can give our vouchers as a gift. Our vouchers are completely transferrable and don&prime;t worry about the name of the buyer on it.</li></ul><div class=white-tl2></div><div class=white-bl2></div><div class=white-tr2></div><div class=white-br2></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">Can I buy a deal as gift?</a></td>
                   </tr>
 				  <tr>
-                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>Can I get refund for my order?</strong> <br /> <br />Yes! GeeLaza will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul><div class=white-tl></div><div class=white-bl></div><div class=white-tr></div><div class=white-br></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/5.png" alt="" width="24" height="25"/></a></td>
-                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container2 style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>Can I get refund for my order?</strong> <br /> <br />Yes! GeeLaza will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul><div class=white-tl2></div><div class=white-bl2></div><div class=white-tr2></div><div class=white-br2></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">Can I get refund for my order?</a></td>
+                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>Can I get refund for my order?</strong> <br /> <br />Yes! Jumblr will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul><div class=white-tl></div><div class=white-bl></div><div class=white-tr></div><div class=white-br></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/5.png" alt="" width="24" height="25"/></a></td>
+                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container2 style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>Can I get refund for my order?</strong> <br /> <br />Yes! Jumblr will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul><div class=white-tl2></div><div class=white-bl2></div><div class=white-tr2></div><div class=white-br2></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">Can I get refund for my order?</a></td>
                   </tr>
                 </table>
                  -->
@@ -1320,7 +1304,7 @@ xmlhttp.send();
    <!-- Registration from ends -->
 
 
-<div><h6 style="margin: 15px 0 15px 15px; background:none; font-size:24px; text-align:left;" >Choose Payment Method To Pay For Your GeeLaza Voucher</h6></div>
+<div><h6 style="margin: 15px 0 15px 15px; background:none; font-size:24px; text-align:left;" >Choose Payment Method To Pay For Your Jumblr Voucher</h6></div>
 
     <div style="border:1px solid #CCCCCC; margin:15px 0;">
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -1693,7 +1677,7 @@ xmlhttp.send();
 
                       <tr>
                         <td class="linkundrline" colspan="2" style="font-size:12px; padding-left:20px; font-weight: normal;">
-                        	By purchasing, you agree to the deal <a id="various3" href="#fine_print" style="color:3f48cc;">Fine Print </a>and the GeeLaza <a href="<?php echo SITE_URL; ?>page.php?page=Terms and Conditions" style="color:3f48cc;">Terms &amp; Conditions.</a>
+                        	By purchasing, you agree to the deal <a id="various3" href="#fine_print" style="color:3f48cc;">Fine Print </a>and the Jumblr <a href="<?php echo SITE_URL; ?>page.php?page=Terms and Conditions" style="color:3f48cc;">Terms &amp; Conditions.</a>
                         </td>
                       </tr>
                        <tr>
@@ -1926,8 +1910,8 @@ $('input[name="payment_system"]').change(function() {
 
 			 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>What happens after I buy the deal?</p></div><div class=clear></div><div class=tip_mid><ul><li>You can find the link to your voucher in your GeeLaza account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/1.png" alt="" width="24" height="25"/></a></td>
-                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>What happens after I buy the deal?</p></div><div class=clear></div><div class=tip_mid><ul><li>You can find the link to your voucher in your GeeLaza account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">What happens after I buy the deal?</a></td>
+                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>What happens after I buy the deal?</p></div><div class=clear></div><div class=tip_mid><ul><li>You can find the link to your voucher in your Jumblr account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/1.png" alt="" width="24" height="25"/></a></td>
+                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>What happens after I buy the deal?</p></div><div class=clear></div><div class=tip_mid><ul><li>You can find the link to your voucher in your Jumblr account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">What happens after I buy the deal?</a></td>
                   </tr>
                   <tr>
                     <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>When can I use my deal?</p></div><div class=clear></div><div class=tip_mid><ul><li>Be patient. We will email you when your deal is ready to use.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/2.png" alt="" width="24" height="25"/></a></td>
@@ -1942,16 +1926,16 @@ $('input[name="payment_system"]').change(function() {
                     <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>Can I buy a deal as gift?</p></div><div class=clear></div><div class=tip_mid><ul><li>Off course! You can give our vouchers as a gift. Our vouchers are completely transferrable and don&prime;t worry about the name of the buyer on it.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">Can I buy a deal as gift?</a></td>
                   </tr>
 				  <tr>
-                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>Can I get refund for my order?</p></div><div class=clear></div><div class=tip_mid><ul><li>Yes! GeeLaza will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/5.png" alt="" width="24" height="25"/></a></td>
-                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>Can I get refund for my order?</p></div><div class=clear></div><div class=tip_mid><ul><li>Yes! GeeLaza will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">Can I get refund for my order?</a></td>
+                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>Can I get refund for my order?</p></div><div class=clear></div><div class=tip_mid><ul><li>Yes! Jumblr will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/5.png" alt="" width="24" height="25"/></a></td>
+                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=tip_top><p>Can I get refund for my order?</p></div><div class=clear></div><div class=tip_mid><ul><li>Yes! Jumblr will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">Can I get refund for my order?</a></td>
                   </tr>
                 </table>
 
 			 <!--
 			 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td style="width: 24px; height:25px; padding-right: 10px;"><a href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>What happens after I buy the deal?</strong> <br /> <br />You can find the link to your voucher in your GeeLaza account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul><div class=white-tl></div><div class=white-bl></div><div class=white-tr></div><div class=white-br></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/1.png" alt="" width="24" height="25" style=" padding-top: 7px;"/></a></td>
-                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container2 style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>What happens after I buy the deal?</strong> <br /> <br />You can find the link to your voucher in your GeeLaza account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul><div class=white-tl2></div><div class=white-bl2></div><div class=white-tr2></div><div class=white-br2></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">What happens after I buy the deal?</a></td>
+                    <td style="width: 24px; height:25px; padding-right: 10px;"><a href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>What happens after I buy the deal?</strong> <br /> <br />You can find the link to your voucher in your Jumblr account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul><div class=white-tl></div><div class=white-bl></div><div class=white-tr></div><div class=white-br></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/1.png" alt="" width="24" height="25" style=" padding-top: 7px;"/></a></td>
+                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container2 style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>What happens after I buy the deal?</strong> <br /> <br />You can find the link to your voucher in your Jumblr account and also in your personal email. Most of our voucher can be redeemed online but if your voucher cannot be redeemed online then print your voucher and present it to the merchant.</li></ul><div class=white-tl2></div><div class=white-bl2></div><div class=white-tr2></div><div class=white-br2></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">What happens after I buy the deal?</a></td>
                   </tr>
                   <tr>
                     <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>When can I use my deal?</strong> <br /> <br />Be patient. We will email you when your deal is ready to use.</li></ul><div class=white-tl></div><div class=white-bl></div><div class=white-tr></div><div class=white-br></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/2.png" alt="" width="24" height="25" style=" padding-top: 7px;"/></a></td>
@@ -1966,8 +1950,8 @@ $('input[name="payment_system"]').change(function() {
                     <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container2 style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>Can I buy a deal as gift?</strong> <br /> <br />Off course! You can give our vouchers as a gift. Our vouchers are completely transferrable and don&prime;t worry about the name of the buyer on it.</li></ul><div class=white-tl2></div><div class=white-bl2></div><div class=white-tr2></div><div class=white-br2></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">Can I buy a deal as gift?</a></td>
                   </tr>
 				  <tr>
-                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>Can I get refund for my order?</strong> <br /> <br />Yes! GeeLaza will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul><div class=white-tl></div><div class=white-bl></div><div class=white-tr></div><div class=white-br></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/5.png" alt="" width="24" height="25" style=" padding-top: 7px;"/></a></td>
-                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container2 style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>Can I get refund for my order?</strong> <br /> <br />Yes! GeeLaza will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul><div class=white-tl2></div><div class=white-bl2></div><div class=white-tr2></div><div class=white-br2></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">Can I get refund for my order?</a></td>
+                    <td style="width: 24px; height:25px; padding-right: 10px"><a href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>Can I get refund for my order?</strong> <br /> <br />Yes! Jumblr will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul><div class=white-tl></div><div class=white-bl></div><div class=white-tr></div><div class=white-br></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/5.png" alt="" width="24" height="25" style=" padding-top: 7px;"/></a></td>
+                    <td style="font: normal 12px/40px Arial, Helvetica, sans-serif; text-align:left; color: #777777; border-bottom: solid 1px #cccccc;"><a style="color:#3bb8ff; font: normal 12px/40px Arial, Helvetica, sans-serif; text-decoration: none;" href="javascript: showDetails(10)" onclick="return overlib('&lt;font class=bodytext&gt;<div class=white-container2 style=width:220px; text-align:left; margin:80px auto;><ul><li><strong>Can I get refund for my order?</strong> <br /> <br />Yes! Jumblr will provide a refund if you change your mind within five days after you&prime;ve purchased your voucher and want to &ldquo;return&rdquo; the unused voucher.</li></ul><div class=white-tl2></div><div class=white-bl2></div><div class=white-tr2></div><div class=white-br2></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();">Can I get refund for my order?</a></td>
                   </tr>
                 </table>
 
@@ -2390,7 +2374,7 @@ $('input[name="payment_system"]').change(function() {
                       </tr> -->
 
                       <tr>
-                        <td class="linkundrline" colspan="2" style="font-size:12px; padding-left:20px; font-weight: normal;">By purchasing, you agree to the deal <a id="various3" href="#fine_print_login"  style="color:3f48cc;">Fine Print </a>and the GeeLaza <a href="<?php echo SITE_URL; ?>page.php?page=Terms and Conditions" style="color:3f48cc;">Terms &amp; Conditions.</a></td>
+                        <td class="linkundrline" colspan="2" style="font-size:12px; padding-left:20px; font-weight: normal;">By purchasing, you agree to the deal <a id="various3" href="#fine_print_login"  style="color:3f48cc;">Fine Print </a>and the Jumblr <a href="<?php echo SITE_URL; ?>page.php?page=Terms and Conditions" style="color:3f48cc;">Terms &amp; Conditions.</a></td>
                       </tr>
                        <tr>
                         <td colspan="2">
