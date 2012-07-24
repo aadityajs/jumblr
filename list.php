@@ -171,7 +171,7 @@ include 'include/header.php';
 
             </div>
 
-<script type="text/javascript">
+			<script type="text/javascript">
 				$('#ca-container<?php echo $today_row_bot_deals['deal_id']; ?>').contentcarousel();
 				$("div#todays_deal_right_circle<?php echo $today_row_bot_deals['deal_id']; ?>").click(function () {
 					$("div#ca-container<?php echo $today_row_bot_deals['deal_id']; ?>").slideToggle(300);

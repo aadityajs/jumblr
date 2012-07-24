@@ -1,6 +1,6 @@
 <?php
 error_reporting(0);
-define("SITE_URL","http://aditya/jumblr/");
+define("SITE_URL","http://aditya.com/jumblr/");
 
 //define("SITE_URL","http://unifiedinfotech.net/jumblr/");
 
@@ -75,6 +75,7 @@ define('TABLE_REFUND_REQUEST', "jumblr_refund_request");
 define('TABLE_FB_USER', "jumblr_fb_user");
 define('TABLE_DEAL_GROUP', "jumblr_deal_group");
 define('TABLE_FB_USER_VIOLATION', "jumblr_fb_user_violation");
+define('TABLE_CONTACTS', "jumblr_contact");
 
 
 

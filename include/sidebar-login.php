@@ -32,7 +32,7 @@ Custome Services</p>
 Please note you can retrieve your voucher by logging into your account via “Login” at the top of the website.<br /><br />
 Whatever the query, we’ll take care of it:</span>
 </div>
-<div style="width: 210px; margin: 0 auto; float: none; padding-left: 10px;"><a id="contact" href="#contactdiv"><img alt="" src="images/mail.png" align="absmiddle">&nbsp;<strong>support@Jumblr.com</strong></a></div>
+<div style="width: 210px; margin: 0 auto; float: none; padding-left: 10px;"><a id="various2" href="#contactdiv"><img alt="" src="images/mail.png" align="absmiddle">&nbsp;<strong>support@Jumblr.com</strong></a></div>
 </div>
 <div class="greenbot_bg"></div>
 

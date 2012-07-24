@@ -63,7 +63,7 @@ ob_start();
   <tr>
     <td align="center" valign="top"><table width="750" border="0" align="center" cellpadding="0" cellspacing="0">
       <tr>
-        <td width="531" style="font-family: Arial, Helvetica, sans-serif; text-align:right; line-height:24px; color:#999999; font-size:12px; font-weight: normal;">This message has come from the Geelaza customer service team</td>
+        <td width="531" style="font-family: Arial, Helvetica, sans-serif; text-align:right; line-height:24px; color:#999999; font-size:12px; font-weight: normal;">This message has come from the Jumblr customer service team</td>
         <td>&nbsp;</td>
         <td width="90" style="font-family: Arial, Helvetica, sans-serif; line-height:20px; color:#2a1d2f; font-size:12px; font-weight: bold;">Ticket #<?php echo $ticket; ?></td>
       </tr>
@@ -72,18 +72,18 @@ ob_start();
       </tr>
       <tr>
         <td colspan="3" style="font-family: Arial, Helvetica, sans-serif; text-align:left; line-height:24px; color:#000; font-size:12px; font-weight: normal;">
-          <p>Hi there, and we thank you for writing to GeeLaza.<br />
+          <p>Hi there, and we thank you for writing to Jumblr.<br />
           </p>
           <p>This is a automated reply to let you know that we have received your request. We will get back to you shortly.</p>
           <p>Thanks again,<br />
           </p>
-          <p>The GeeLaza Customer Service Team<br />
+          <p>The Jumblr Customer Service Team<br />
           </p>
           <p>Your request is monitored and here's a reminder of what your ticket was about.<br />
           </p>
           <p style="font-family: Arial, Helvetica, sans-serif; letter-spacing: 1px; line-height:20px; color:#2a1d2f; font-size:12px; font-weight: bold;">------------------------------------------------------------------------------------------------------------------------------------------------------</p>
           <p><strong><?=$email;?>, <?php echo date('M-d h:m'); ?> (BST):</strong></p>
-          <p><?=$details;?></p></td>
+          <p><?=strip_tags($details);?></p></td>
       </tr>
       <tr>
         <td colspan="3" style="border-top: 4px solid #7fd7fc;">&nbsp;</td>
@@ -99,11 +99,11 @@ ob_start();
 </body>
 </html>
 
-<?
+<?php
 $body = ob_get_contents();
 $date = date('M-d h:m');
-	$sql_contact = "INSERT INTO getdeals_contact VALUES ('','$name','$ticket','$email','$phno','$details',1,'$date')";
-	mysql_query($sql_contact);
+	$sql_contact = "INSERT INTO ".TABLE_CONTACTS." VALUES ('','$name','$ticket','$email','$phno','".mysql_escape_string($details)."',1,'$date')";
+	//mysql_query($sql_contact);
 
 	$to = $email;
 	$subject = 'Request Received: (ticket #'.$ticket.')';
@@ -111,7 +111,7 @@ $date = date('M-d h:m');
 
 	$headers  = 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	$headers .= "From: GeeLaza Support<support@geelaza.com>". "\r\n" ;
+	$headers .= "From: Jumblr Support<support@Jumblr.com>". "\r\n" ;
 
 	  mail($to,$subject,$content,$headers);
 	  exit;

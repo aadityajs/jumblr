@@ -18,7 +18,7 @@ $page_res = mysql_fetch_array(mysql_query($sql_page));
 
 
 <div class="deal_info">
-<div class="top_about">
+<div class="top_about2">
 <?php if ($qr <= 0) { ?>
 <p>Oops!</p>
 <?php } else { ?>
@@ -26,8 +26,14 @@ $page_res = mysql_fetch_array(mysql_query($sql_page));
 <?php } ?>
 </div>
 <div class="clear"></div>
-<div class="midbg">
-<div class="today_deal">
+<div class="midbg" style="width:940px;">
+<div class="today_deal" style="width:900px; margin-left:20px;">
+<style>
+	.today_deal .cms{
+		width:100%;
+		padding: 0px;
+	}
+</style>
 <?php if ($qr <= 0) { ?>
 <h1>You are not Authorised to come here.</h1>
 <?php } else { ?>
@@ -37,7 +43,6 @@ $page_res = mysql_fetch_array(mysql_query($sql_page));
 <!--<div style="width: 702px; float: none; margin: 0 auto; background:#1f1f1f;"><img src="images/logo_bot.gif" alt="" width="207" height="108" /></div>
 --></div>
 </div>
-<div class="bot_about"></div>
 <?php //include ('include/sidebar.php');?>
 </div></div>
 <div class="clear"><img src="images/spacer.gif" alt="" width="1" height="10" /></div>

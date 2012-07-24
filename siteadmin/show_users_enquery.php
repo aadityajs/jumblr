@@ -47,7 +47,7 @@ else
 if($_REQUEST['mode']=="delete")
 {
 	$id = $_GET['id'];
-	$sql_delete = "DELETE FROM getdeals_contact WHERE id = ".$id;
+	$sql_delete = "DELETE FROM ".TABLE_CONTACTS." WHERE id = ".$id;
 	mysql_query($sql_delete);
 	header('location:'.SITE_URL.'siteadmin/show_users_enquery.php');
 }
@@ -240,7 +240,7 @@ if(isset($_REQUEST['preference']) || isset($_REQUEST['subscription'])){
 $sql="SELECT * FROM `".TABLE_USERS."`
 left join ".TABLE_USER_SUBSCRIPTION." on (".TABLE_USERS.".user_id=".TABLE_USER_SUBSCRIPTION.".user_id) left join ".TABLE_USER_PREFERENCE." on (".TABLE_USERS.".user_id=".TABLE_USER_PREFERENCE.".user_id) left join ".TABLE_CITIES." on(".TABLE_USER_SUBSCRIPTION.".city_id=".TABLE_CITIES.".city_id) left join ".TABLE_CATEGORIES." on(".TABLE_USER_PREFERENCE.".category_id=".TABLE_CATEGORIES.".cat_id) where ".TABLE_CITIES.".city_name like '%".$_REQUEST['subscription']."%' and ".TABLE_CATEGORIES.".cat_name like '%".$_REQUEST['preference']."%' and ".TABLE_USERS.".reg_type<>'merchant' group by first_name";
 
-//$sql = "SELECT * FROM getdeals_contact";
+//$sql = "SELECT * FROM TABLE_CONTACTS";
 
 
 $sqlStrAux = "SELECT count(*) as total FROM `".TABLE_USERS."`
@@ -250,8 +250,8 @@ left join ".TABLE_USER_SUBSCRIPTION." on (".TABLE_USERS.".user_id=".TABLE_USER_S
 
 
 }else{
-$sql="select * from getdeals_contact ".$where." order by date desc";
-$sqlStrAux = "SELECT count(*) as total FROM getdeals_contact".$where;
+$sql="select * from  ".TABLE_CONTACTS.$where." order by date desc";
+$sqlStrAux = "SELECT count(*) as total FROM ".TABLE_CONTACTS.$where;
 }
 
 $aux = mysql_fetch_assoc(mysql_query($sqlStrAux));

@@ -190,6 +190,166 @@ $(document).ready(function() {
   });
 </script>
 
+
+<script type="text/javascript">
+//$j = jQuery.noConflict(true);
+			$(document).ready(function() {
+
+			/*
+			*   Examples - various
+			*/
+
+			$("#various1").fancybox({
+				'titlePosition'		: 'inside',
+				'speedIn':      300,
+			    'speedOut':     300,
+			    'transitionIn': 'elastic',
+			    'transitionOut': 'elastic',
+			    'easingIn':     'swing',
+			    'easingOut':    'swing',
+			    'hideOnOverlayClick' : false
+			});
+			$("#invite").fancybox({
+				'titlePosition'		: 'inside',
+				'speedIn':      300,
+			    'speedOut':     300,
+			    'transitionIn': 'elastic',
+			    'transitionOut': 'elastic',
+			    'easingIn':     'swing',
+			    'easingOut':    'swing',
+			    'hideOnOverlayClick' : false
+			});
+			$("#various2").fancybox({
+				'titlePosition'		: 'inside',
+				'speedIn':      300,
+			    'speedOut':     300,
+			    'transitionIn': 'elastic',
+			    'transitionOut': 'elastic',
+			    'easingIn':     'swing',
+			    'easingOut':    'swing',
+			    'hideOnOverlayClick' : false
+			});
+			$("#various3").fancybox({
+				'titlePosition'		: 'inside',
+				'speedIn':      300,
+			    'speedOut':     300,
+			    'transitionIn': 'elastic',
+			    'transitionOut': 'elastic',
+			    'easingIn':     'swing',
+			    'easingOut':    'swing',
+			    'hideOnOverlayClick' : false
+			});
+			$("#various4").fancybox({
+				'titlePosition'		: 'inside',
+				'speedIn':      300,
+			    'speedOut':     300,
+			    'easingIn':     'swing',
+			    'easingOut':    'swing',
+			    'hideOnOverlayClick' : false
+			});
+			$("#various5").fancybox({
+				'titlePosition'		: 'inside',
+				'speedIn':      300,
+			    'speedOut':     300,
+			    'easingIn':     'swing',
+			    'easingOut':    'swing',
+			    'hideOnOverlayClick' : false
+			});
+			$("#gift").fancybox({
+			//alert("dsfdsfdsf");
+				'titlePosition'		: 'inside',
+				'transitionIn'		: 'fade',
+				'transitionOut'		: 'fade'
+			});
+
+
+			$("#nodeal_info").fancybox({
+				'titlePosition'		: 'inside',
+				'speedIn':      300,
+			    'speedOut':     300,
+			    'transitionIn': 'elastic',
+			    'transitionOut': 'elastic',
+			    'easingIn':     'swing',
+			    'easingOut':    'swing',
+			    'hideOnOverlayClick' : false
+			});
+
+			$("#nodeal_info_btn").fancybox({
+				'titlePosition'		: 'inside',
+				'speedIn':      300,
+			    'speedOut':     300,
+			    'transitionIn': 'elastic',
+			    'transitionOut': 'elastic',
+			    'easingIn':     'swing',
+			    'easingOut':    'swing',
+			    'hideOnOverlayClick' : false
+			});
+
+
+			$("#variousall").fancybox({
+				'padding':          0,
+			    'cyclic':       true,
+			    'width':        625,
+			    'height':       350,
+			    'padding':      0,
+			    'margin':      0,
+			    'speedIn':      300,
+			    'speedOut':     300,
+			    'transitionIn': 'elastic',
+			    'transitionOut': 'elastic',
+			    'autoDimensions': 'true',
+			    'easingIn':     'swing',
+			    'easingOut':    'swing',
+			    'scrolling' : 'no',
+	            'hideOnContentClick' : true,
+	            'onCleanup' : gohome,
+			    'titleShow' : false,
+			    'hideOnOverlayClick' : false
+
+			});
+
+
+
+		});
+	</script>
+
+<script type="text/javascript">
+	//$q = jQuery.noConflict();
+
+	function recomEmailGet() {
+		$(document).ready(function() {
+			$q("#gift").fancybox({
+					'titlePosition'		: 'inside',
+					'transitionIn'		: 'none',
+					'transitionOut'		: 'none',
+					'hideOnOverlayClick' : false
+				}).trigger('click');
+	       });
+    	 }
+
+	function NewsSucc() {
+		$(document).ready(function() {
+					$("#various3").fancybox({
+							'titlePosition'		: 'inside',
+							'transitionIn'		: 'none',
+							'autoDimensions': 'true',
+							'transitionOut'		: 'none',
+							'hideOnOverlayClick' : false
+						}).trigger('click');
+			       });
+	}
+
+	function Gift() {
+		$(document).ready(function() {
+					$("#gift").fancybox({
+						//alert("dsfdsfdsf");
+						'titlePosition'		: 'inside',
+						'transitionIn'		: 'fade',
+						'transitionOut'		: 'fade'
+						}).trigger('click');
+			       });
+	}
+	   </script>
 </body>
 </html>
 

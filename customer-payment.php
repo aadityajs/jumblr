@@ -1,7 +1,8 @@
 <?php
 include("include/header.php");
-include 'fbmain.php';
-//error_reporting(E_ERROR && E_STRICT);
+if (!isset($_SESSION['fb_id'])) {
+	include 'fbmain.php';
+}
 session_start();
 ob_start();
 ?>
@@ -59,6 +60,7 @@ if ($_SESSION['gift'] == 'gifting') {
 
 <!-- Login code starts -->
 <?php
+/*
 	$flag = 0;
 	if(strtolower($_SERVER['REQUEST_METHOD']) == 'post' && $_POST['btnLogin'] == "Log In")
 	{
@@ -112,7 +114,7 @@ if ($_SESSION['gift'] == 'gifting') {
 
 	}
 
-
+*/
 ?>
 <!-- Login code ends -->
 <style type="text/css">
@@ -514,7 +516,7 @@ $("div#redeem_div").ready(function() {
 
             </form> -->
 <!-- Login form ends -->
-			<span class="black_text1" style="color:#3A3B3D; margin-left: -15px;"><a href="<?php echo $loginUrl; ?>"><img src="http://www.realestatenewport.com/assets/facebook-login-button-5c5750b27cc8759f735f49a5ad2a4263.png" alt="" /></a>If you have an account on Facebook you can use it to log in.</span>
+			<span class="black_text1" style="color:#3A3B3D; margin-left: -15px;"><a href="<?php echo $loginUrl; ?>"><img src="http://www.realestatenewport.com/assets/facebook-login-button-5c5750b27cc8759f735f49a5ad2a4263.png" alt="" align="top" /></a> If you have an account on Facebook you can use it to log in.</span>
 
 
             <!-- Login form validator starts -->

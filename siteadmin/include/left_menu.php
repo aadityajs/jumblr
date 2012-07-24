@@ -22,8 +22,8 @@
 			<li><a href="show_deals.php">View Deal</a></li>
 
 			<!--<li><a href="add_deal_item.php">Add Deal Item</a></li>-->
-			<!-- <li><a href="show_bestdeals.php">National & More Deal</a></li>
-			<li><a href="show_previous_deals.php">Previous Deal</a></li> -->
+			<li><a href="show_bestdeals.php">National & More Deal</a></li>
+			<!--<li><a href="show_previous_deals.php">Previous Deal</a></li> -->
 
 
 			</ul>
@@ -119,6 +119,12 @@
 			<!-- <li><a href="settings.php">Create Setting</a></li>
 			<li><a href="show_settings.php">Show Setting</a></li> -->
 		</ul>
+
+		<div class="menuheader expandable">Customer Support</div>
+		<ul class="categoryitems">
+			<li><a href="show_users_enquery.php">Users Enquiry</a></li>
+
+		</ul>
 		<?php }?>
 
 
@@ -135,11 +141,6 @@
 			<li><a href="show_business_faqs.php">View Business FAQ's</a></li>
 		</ul>
 
-		<div class="menuheader expandable">Customer Support</div>
-		<ul class="categoryitems">
-			<li><a href="show_users_enquery.php">Users Enquiry</a></li>
-
-		</ul>
 		<?php }?>-->
 
 

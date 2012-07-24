@@ -34,14 +34,12 @@ error_reporting(E_ERROR || E_WARNING || E_STRICT);
 	<link href="css/getdeals_style.css" rel="stylesheet" type="text/css" />
 	<link href="css/jumblr_style.css" rel="stylesheet" type="text/css" />
 
-	<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
+	<!--
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 
 	<link rel="stylesheet" href="css/tipsy.css" type="text/css" />
 	<script type="text/javascript" src="js/jquery.tipsy.js"></script>
-
-
-
 
 
 	<!--[if lt IE 9]>
@@ -72,14 +70,14 @@ error_reporting(E_ERROR || E_WARNING || E_STRICT);
 
 <!-- Fancy box script start -->
 
-<!--	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-
-	<script type="text/javascript" src="js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>-->
 	<script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-	<link rel="stylesheet" type="text/css" href="js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />-->
+	<link rel="stylesheet" type="text/css" href="js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 
 
-<!-- <script type="text/javascript">
+<!--
+<script type="text/javascript">
 $j = jQuery.noConflict(true);
 
 			$j(document).ready(function() {
@@ -199,7 +197,7 @@ $j = jQuery.noConflict(true);
 
 
 
-		})($j);
+		});
 	</script>
 
 	<script type="text/javascript">
@@ -245,9 +243,9 @@ $j = jQuery.noConflict(true);
 
     <!-- <script type="text/javascript" src="js/form.js"></script> -->
 
-	<!--<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-  	  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-  	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<!--	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  	  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+  		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 -->
 
 <!-- Gallery js and css
