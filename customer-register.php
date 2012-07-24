@@ -37,6 +37,7 @@ include_once "fbmain.php";
 					$_SESSION["fb_id"] = $chk_fb_user_res['fb_id'];
 					//sleep(30);
 					header('location: '.SITE_URL.'my-profile.php');
+					exit();
 					//echo "fine";
 				}
 				else {
@@ -45,6 +46,7 @@ include_once "fbmain.php";
 					$db->query_update(TABLE_FB_USER, $last_user_id, 'fb_id ='.$fbUser['fb_id']);
 					//sleep(30);
 					header('location: '.SITE_URL.'my-profile.php');
+					exit();
 
 					/*
 					 * $sql_insert = "INSERT INTO ".TABLE_USERS.
@@ -61,12 +63,12 @@ include_once "fbmain.php";
 
 
 ?>
-<div id="container">
-<div id="leftcol">
-<div class="deal_info">
-<div class="green_curv10"></div>
+<div id="container" style="background: none;">
+<div id="leftcol" style="float: none;">
+<div class="deal_info" style="float: none;">
+<div class="green_curv10" style="width: 704px;"></div>
 <div class="clear"></div>
-<div class="green_curv30">
+<div class="green_curv30" style="width: 704px;">
 <div class="today_deal">
 <div class="register_box1">
 
@@ -75,11 +77,10 @@ include_once "fbmain.php";
 </div>
 </div>
 </div>
-<div class="green_curv20"></div>
+<div class="green_curv20" style="width: 704px;"></div>
 </div>
 </div>
-
-<?php include ('include/sidebar-login.php'); ?>
+<?php //include ('include/sidebar-login.php'); ?>
 </div>
-
+</div>
 <?php include("include/footer.php");?>
