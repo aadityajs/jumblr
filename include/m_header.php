@@ -194,7 +194,7 @@ $(function() {
   </div>
   <div class="header_middle">
 
-   	<div class="styled_select left" style="border: 0px solid #000;">
+   	<div class="styled_select3 left" style="border: 0px solid #000;">
         <select style="width:170px;" name="user_type" onchange="javascript: window.location.href = (this.options[selectedIndex].id);" >
         	<option value=""><?php if ($_GET['nd'] || $ndpage == 'national_deals.php') {echo 'NATIONAL DEALS';} else {echo strtoupper($show_city["city_name"]);} ?></option>
         	<?php
@@ -208,7 +208,7 @@ $(function() {
         </select>
     </div>
 
-    <div class="styled_select right" style="border: 0px solid #000;">
+    <div class="styled_select3 right" style="border: 0px solid #000;">
         <select style="width:170px;" name="user_type">
 
         <?php

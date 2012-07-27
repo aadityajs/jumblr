@@ -546,7 +546,7 @@ function comp_user($user_id) {
 
 		}
 
-	if ($matched <= 0) : $matched = 7; endif;
+	if ($matched <= 0) : $matched = 0; endif;
 
 	//$comp_rate = (($currentUserMusic_count*getSettings(weight_music))+($currentUserMovie_count*getSettings(weight_movie)))/(getSettings(weight_music)+getSettings(weight_movie)); // Using Weighted Average
 	$comp_rate = round($matched*100/$comp_user_rating_count); // Using SET Theorem

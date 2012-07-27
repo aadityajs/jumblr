@@ -429,9 +429,21 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
                     </div>
 
                  <?php
-					$sqlCircle = "SELECT * FROM ".TABLE_FB_USER." WHERE jumblr_status = 1";
-					$circleUser = $db->fetch_all_array($sqlCircle);
-					$circleUserCount = mysql_num_rows($db->query($sqlCircle));
+                 	$dealPurUser = $db->fetch_all_array("SELECT DISTINCT(user_id) FROM jumblr_transaction as tran WHERE deal_id = $today_res[deal_id]");
+                 	//echo '<pre>'.print_r($dealPurUser, true).'</pre>';
+
+                 	$userArr = array();
+                 	foreach ($dealPurUser as $purUser) {
+	                 	$sqlCircle = "SELECT *
+												FROM jumblr_fb_user
+												WHERE fb_id =$purUser[user_id]";
+					$circleUser = mysql_fetch_array(mysql_query($sqlCircle));
+					array_push($userArr, $circleUser);
+					//echo '<pre>'.print_r($userArr, true).'</pre>';
+					}
+					//echo '<pre>'.print_r($userArr, true).'</pre>';
+					$circleUser = $userArr;
+					$circleUserCount = mysql_num_rows($db->query("SELECT DISTINCT(user_id) FROM jumblr_transaction as tran WHERE deal_id = $today_res[deal_id]"));
 
 					foreach ($circleUser as $fbUser) {
 			        			$groupRating += comp_user($fbUser['user_id']);
@@ -662,7 +674,7 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 
 
 
-
+<?php  if ($circleUserCount > 0) { ?>
 <!-- jumblr deal members drop down start -->
 <div class="todays_deal" id="locations" style="margin-top: -35px; z-index: 0; display: block; border: 0px solid red;">
 				<?php  if ($circleUserCount < 9) { ?>
@@ -708,7 +720,7 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 
 				<?php
 
-					$commentSql = "SELECT * FROM ".TABLE_DEAL_GROUP." WHERE deal_id = $today_res[deal_id]";
+					$commentSql = "SELECT * FROM ".TABLE_DEAL_GROUP." WHERE fb_id IN (SELECT DISTINCT(user_id) FROM jumblr_transaction as tran WHERE deal_id = $today_res[deal_id]) AND deal_id = $today_res[deal_id]";
 					$commentData = $db->fetch_all_array($commentSql);
 					//print_r($commentData);
 					foreach ($commentData as $comment) {
@@ -810,7 +822,7 @@ return false;
 </script>
 
 <!-- jumblr deal members drop down ends -->
-
+<?php } ?>
 
 <!-- ##################### -->
 
@@ -871,12 +883,91 @@ return false;
                     	<li><img src="<?php echo UPLOAD_PATH.$todays_image_bot_deals['file']; ?>" class="image0" width="268px" height="236px"></li>
                     </ul>
                 </div>
-                <div class="todays_deal_right" id="todays_deal_right_circle<?php echo $today_row_bot_deals['deal_id']; ?>" style="margin: 0 35px;">
-                   <img src="images/member.png" alt="">
+               <div class="todays_deal_right" id="todays_deal_right_circle<?php echo $today_row_bot_deals['deal_id']; ?>" style="margin: 0 35px;">
+
+				<?php
+                 	$dealPurUser = $db->fetch_all_array("SELECT DISTINCT(user_id) FROM jumblr_transaction as tran WHERE deal_id = $today_row_bot_deals[deal_id]");
+                 	//echo '<pre>'.print_r($dealPurUser, true).'</pre>';
+
+                 	$userArr = array();
+                 	foreach ($dealPurUser as $purUser) {
+	                 	$sqlCircle = "SELECT *
+												FROM jumblr_fb_user
+												WHERE fb_id =$purUser[user_id]";
+					$circleUser = mysql_fetch_array(mysql_query($sqlCircle));
+					array_push($userArr, $circleUser);
+					//echo '<pre>'.print_r($userArr, true).'</pre>';
+					}
+					//echo '<pre>'.print_r($userArr, true).'</pre>';
+					$circleUser = $userArr;
+					$circleUserCount = mysql_num_rows($db->query("SELECT DISTINCT(user_id) FROM jumblr_transaction as tran WHERE deal_id = $today_row_bot_deals[deal_id]"));
+
+					foreach ($circleUser as $fbUser) {
+			        			$groupRating += comp_user($fbUser['user_id']);
+	        		}
+	        		$averageGroupRating = $groupRating/$circleUserCount;
+				?>
+
+				<!-- Members circle starts -->
+				<div class="circleDiv">
+				<div class="innerCircle">
+				<div class="cat_circle"><img src="images/cat_icon1.jpg" width="100" height="100" /></div>
+					<?php
+						$fbUserCount = 1;
+						if ($circleUserCount <= 9) {
+							foreach ($circleUser as $fbUser) {
+									if ($fbUserCount <= 9) {
+										echo '<div id="img'.$fbUserCount.'" class="profile_img">
+												<a class="tips" href="my-profile.php?profile-'.$fbUser['fb_id'].'" title="'.$fbUser['name'].'<br/> Compatibility : '.comp_user($fbUser['user_id']).'" target="_blank">
+													<img src="'.$fbUser['pic_square'].'" alt="" />
+												</a>
+											</div>';
+										$fbUserCount++;
+									}
+							}
+						}	//else{
+
+							/*
+							 * foreach ($circleUser as $fbUser) {
+										if ($circleUserCount >= $fbUserCount) {
+											echo '<div id="img'.$fbUserCount.'" class="profile_img">
+													<a class="tips" href="'.$fbUser['profile_url'].'" title="'.$fbUser['name'].'" target="_blank">
+														<img src="'.$fbUser['pic_square'].'" alt="" />
+													</a>
+												</div>';
+											$fbUserCount++;
+										}
+								}
+							 */
+
+							for ($i = $circleUserCount+1; $i <= 9; $i++) {
+									echo '<div id="img'.$i.'" class="profile_img">
+										<a class="tips" href="'.SITE_FB_PROFILE.'" title="We want you here!" target="_blank">
+											<img src="images/no_image_profile.png" alt="" />
+										</a>
+									</div>';
+							}
+						//}
+					?>
+					<!-- <div id="img1" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity This is an example of south gravity'><img src="images/prof6.jpg" alt="" /></a></div>
+				    <div id="img2" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof2.jpg" alt="" /></a></div>
+				    <div id="img3" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof3.jpg" alt="" /></a></div>
+				    <div id="img4" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof4.jpg" alt="" /></a></div>
+				    <div id="img5" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof5.jpg" alt="" /></a></div>
+				    <div id="img6" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof7.jpg" alt="" /></a></div>
+				    <div id="img7" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof8.jpg" alt="" /></a></div>
+					<div id="img8" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof9.jpg" alt="" /></a></div>
+				    <div id="img9" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof9.jpg" alt="" /></a></div> -->
+				</div>
+			    </div>
+
+			<!-- Members circle ends -->
+
               </div>
+
                 <div class="todays_deal_middle">
 
-                	<div class="todays_bg"></div>
+                	<div class="todays_bg"><div class="todays_abc"><?php echo $circleUserCount; ?></div></div>
 
                 	<div class="amount">Amount: <span>&pound;<?php echo ($today_row_bot_deals['is_multi'] == 'n' ? number_format($today_row_bot_deals['discounted_price'], 2) : number_format($is_multi_bot_deals['multi_deal_item_price'], 2)); ?></span></span></div>
                     <div class="available">
@@ -912,7 +1003,7 @@ return false;
                         	</strong>
                         </div>
                     </div>
-                  <div class="rating">Group rating: <span>72</span></div>
+                  <div class="rating">Group rating: <span><?php echo intval($averageGroupRating); ?></span></div>
                  <div class="timer"><img src="images/clock.png" alt=""><?php echo date("<b>D</b> M j | <b>g:i A</b>", strtotime($today_row_bot_deals['deal_end_time'])); ?></div>
                  <div class="clear"></div>
                 </div>
@@ -923,83 +1014,32 @@ return false;
 				</a>
                 </h1>
                <div class="clear"></div>
-
+			<?php  if ($circleUserCount > 0) { ?>
                <!-- Slider starts -->
 
 					<div id="ca-container<?php echo $today_row_bot_deals['deal_id']; ?>" class="ca-container"  style="display: none;">
                     <div class="ca-wrapper">
 
-                        <div class="ca-item ca-item-3">
-                          <div class="jewellry_img_box">
-                           <img src="images/animal3.png" alt="" height="80" width="80">
-                           </div>
-                           <div class="point">120</div>
-                        </div>
+                       <?php
+						foreach ($circleUser as $fbUser) {
+		        				echo '<div class="ca-item ca-item-3">
+				                          <div class="jewellry_img_box">
+				                          	<a class="tips-right" href="'.$fbUser['profile_url'].'" title="'.$fbUser['name'].'" target="_blank">
+				                           		<img src="'.$fbUser['pic_square'].'" alt="" height="80" width="80">
+				                           	<div class="clear"></div>
+				                           	</a>
+				                           </div>
+				                           <div class="point">'.comp_user($fbUser['user_id']).'</div>
+				                        </div>';
 
-						<div class="ca-item ca-item-3">
-                          <div class="jewellry_img_box">
-                           <img src="images/animal3.png" alt="" height="80" width="80">
-                           </div>
-                           <div class="point">120</div>
-                        </div>
-                        <div class="ca-item ca-item-3">
-                          <div class="jewellry_img_box">
-                           <img src="images/animal3.png" alt="" height="80" width="80">
-                           </div>
-                           <div class="point">120</div>
-                        </div>
-                        <div class="ca-item ca-item-3">
-                          <div class="jewellry_img_box">
-                           <img src="images/animal3.png" alt="" height="80" width="80">
-                           </div>
-                           <div class="point">120</div>
-                        </div>
-                        <div class="ca-item ca-item-3">
-                          <div class="jewellry_img_box">
-                           <img src="images/animal3.png" alt="" height="80" width="80">
-                           </div>
-                           <div class="point">120</div>
-                        </div>
-                        <div class="ca-item ca-item-3">
-                          <div class="jewellry_img_box">
-                           <img src="images/animal3.png" alt="" height="80" width="80">
-                           </div>
-                           <div class="point">120</div>
-                        </div>
-                        <div class="ca-item ca-item-3">
-                          <div class="jewellry_img_box">
-                           <img src="images/animal3.png" alt="" height="80" width="80">
-                           </div>
-                           <div class="point">120</div>
-                        </div>
-                        <div class="ca-item ca-item-3">
-                          <div class="jewellry_img_box">
-                           <img src="images/animal3.png" alt="" height="80" width="80">
-                           </div>
-                           <div class="point">120</div>
-                        </div>
-                        <div class="ca-item ca-item-3">
-                          <div class="jewellry_img_box">
-                           <img src="images/animal3.png" alt="" height="80" width="80">
-                           </div>
-                           <div class="point">120</div>
-                        </div>
-                        <div class="ca-item ca-item-3">
-                          <div class="jewellry_img_box">
-                           <img src="images/animal3.png" alt="" height="80" width="80">
-                           </div>
-                           <div class="point">120</div>
-                        </div>
-                        <div class="ca-item ca-item-3">
-                          <div class="jewellry_img_box">
-                           <img src="images/animal3.png" alt="" height="80" width="80">
-                           </div>
-                           <div class="point">120</div>
-                        </div>
+			        			$fbUserCount++;
+			        			}
+						?>
                     </div>
 		     	</div>
 
 				<!-- Slider ends -->
+			<?php } ?>
 
             </div>
 

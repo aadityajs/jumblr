@@ -1,17 +1,30 @@
 <?php
 error_reporting(0);
-define("SITE_URL","http://aditya.com/jumblr/");
 
-//define("SITE_URL","http://unifiedinfotech.net/jumblr/");
+if ($_SERVER['REMOTE_ADDR'] == '192.168.1.177' || $_SERVER['HTTP_HOST'] == 'aditya.com') {
+	define("SITE_URL","http://aditya.com/jumblr/");
+	define('UPLOAD_PATH',"http://aditya.com/jumblr/upload_files/files/");
+	define('DB_SERVER', "localhost");
+	define('DB_USER', "root");
+	define('DB_PASS', "");
+}
+if ($_SERVER['REMOTE_ADDR'] != '192.168.1.177' || $_SERVER['HTTP_HOST'] == 'aditya') {
+	define("SITE_URL","http://aditya/jumblr/");
+	define('UPLOAD_PATH',"http://aditya/jumblr/upload_files/files/");
+	define('DB_SERVER', "localhost");
+	define('DB_USER', "root");
+	define('DB_PASS', "");
+}
+if ($_SERVER['HTTP_HOST'] == 'unifiedinfotech.net') {
+	define("SITE_URL","http://unifiedinfotech.net/jumblr/");
+	define('UPLOAD_PATH',"http://unifiedinfotech.net/jumblr/upload_files/files/");
+	define('DB_SERVER', "localhost");
+	define('DB_USER', "root");
+	define('DB_PASS', "unified2010");
+}
 
-define('TITLE', "Jumblr.com");
-define('DB_SERVER', "localhost");
-define('DB_USER', "root");
-define('DB_PASS', "");
-//define('DB_PASS', "unified2010");
 
-//define('UPLOAD_PATH',"http://unifiedinfotech.net/jumblr/upload_files/files/");
-define('UPLOAD_PATH',"http://aditya.com/jumblr/upload_files/files/");
+
 define('PROFILE_IAMGE_PATH',"upload_files/profile_image/");
 
 define('SITE_FB_PROFILE',"http://www.facebook.com/jumblr");

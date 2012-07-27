@@ -507,17 +507,18 @@ function get_facebook_cookie_new($app_id, $app_secret)
 				</div>
 
 
-				<div id="menu" style="display: none; position: static; right: -200; z-index: 1000; margin: 0 0 0 430px;">
-				<div class="menubox">
+				<div id="menu" style="display: none; position: static; right: -200; z-index: 1000; margin: 20px 0 0 0px;">
+				<div class="menubox" style="margin: 0;">
 				<div><img src="images/drop_top.png" alt="" width="141" height="12" border="0"/></div>
 				<div class="drop_menu">
 				<ul>
 				<li><a href="<?php echo SITE_URL ?>customer-account.php?tab=vouchers">My Vouchers</a></li>
 				<li><a href="<?php echo SITE_URL; ?>customer-account.php?tab=purchase">Purchase History</a></li>
-				<li><a href="<?php echo SITE_URL; ?>customer-account.php?tab=credit">Credits</a></li>
+				<li><a href="<?php echo SITE_URL; ?>customer-account.php?tab=jumble">Add Jumble!</a></li>
+				<!-- <li><a href="<?php echo SITE_URL; ?>customer-account.php?tab=credit">Credits</a></li>
 				<li><a href="<?php echo SITE_URL; ?>customer-account.php?tab=royal">Royal Points</a></li>
 				<li><a href="<?php echo SITE_URL; ?>customer-account.php?tab=subscriptions">Subscriptions</a></li>
-				<li><a href="<?php echo SITE_URL; ?>customer-account.php?tab=account">Account</a></li>
+				<li><a href="<?php echo SITE_URL; ?>customer-account.php?tab=account">Account</a></li> -->
 				<li><a href="<?php echo SITE_URL ?>clogout.php">Logout</a></li>
 				</ul>
                 <div class="clear"><img src="images/spacer.gif" alt="" width="1" height="1"/></div>

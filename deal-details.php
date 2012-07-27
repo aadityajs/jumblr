@@ -200,63 +200,82 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
                       <!-- <img src="images/member.png" alt=""> -->
 				<!-- Members circle starts -->
 				<?php
-					$sqlCircle = "SELECT * FROM ".TABLE_FB_USER;
-					$circleUser = $db->fetch_all_array($sqlCircle);
-					$circleUserCount = mysql_num_rows($db->query($sqlCircle));
+                 	$dealPurUser = $db->fetch_all_array("SELECT DISTINCT(user_id) FROM jumblr_transaction as tran WHERE deal_id = $today_res[deal_id]");
+                 	//echo '<pre>'.print_r($dealPurUser, true).'</pre>';
+
+                 	$userArr = array();
+                 	foreach ($dealPurUser as $purUser) {
+	                 	$sqlCircle = "SELECT *
+												FROM jumblr_fb_user
+												WHERE fb_id =$purUser[user_id]";
+					$circleUser = mysql_fetch_array(mysql_query($sqlCircle));
+					array_push($userArr, $circleUser);
+					//echo '<pre>'.print_r($userArr, true).'</pre>';
+					}
+					//echo '<pre>'.print_r($userArr, true).'</pre>';
+					$circleUser = $userArr;
+					$circleUserCount = mysql_num_rows($db->query("SELECT DISTINCT(user_id) FROM jumblr_transaction as tran WHERE deal_id = $today_res[deal_id]"));
+
+					foreach ($circleUser as $fbUser) {
+			        			$groupRating += comp_user($fbUser['user_id']);
+	        		}
+	        		$averageGroupRating = $groupRating/$circleUserCount;
 				?>
+
 					<div class="circleDiv">
-				    	<div class="innerCircle">
-				        <div class="cat_circle"><img src="images/cat_icon1.jpg" width="100" height="100" /></div>
-				        	<?php
-				        		$fbUserCount = 1;
-				        		if ($circleUserCount <= 9) {
-					        		foreach ($circleUser as $fbUser) {
-						        			if ($fbUserCount <= 9) {
-							        			echo '<div id="img'.$fbUserCount.'" class="profile_img">
-							        					<a class="tips" href="'.$fbUser['profile_url'].'" title="'.$fbUser['name'].'" target="_blank">
-							        						<img src="'.$fbUser['pic_square'].'" alt="" />
-							        					</a>
-							        				</div>';
-							        			$fbUserCount++;
-						        			}
-					        		}
-				        		}	//else{
+					<div class="innerCircle">
+					<div class="cat_circle"><img src="images/cat_icon1.jpg" width="100" height="100" /></div>
+						<?php
+							$fbUserCount = 1;
+							if ($circleUserCount <= 9) {
+								foreach ($circleUser as $fbUser) {
+										if ($fbUserCount <= 9) {
+											echo '<div id="img'.$fbUserCount.'" class="profile_img">
+													<a class="tips" href="my-profile.php?profile-'.$fbUser['fb_id'].'" title="'.$fbUser['name'].'<br/> Compatibility : '.comp_user($fbUser['user_id']).'" target="_blank">
+														<img src="'.$fbUser['pic_square'].'" alt="" />
+													</a>
+												</div>';
+											$fbUserCount++;
+										}
+								}
+							}	//else{
 
-					        		/*
-					        		 * foreach ($circleUser as $fbUser) {
-							        			if ($circleUserCount >= $fbUserCount) {
-								        			echo '<div id="img'.$fbUserCount.'" class="profile_img">
-								        					<a class="tips" href="'.$fbUser['profile_url'].'" title="'.$fbUser['name'].'" target="_blank">
-								        						<img src="'.$fbUser['pic_square'].'" alt="" />
-								        					</a>
-								        				</div>';
-								        			$fbUserCount++;
-							        			}
-						        		}
-					        		 */
+								/*
+								 * foreach ($circleUser as $fbUser) {
+											if ($circleUserCount >= $fbUserCount) {
+												echo '<div id="img'.$fbUserCount.'" class="profile_img">
+														<a class="tips" href="'.$fbUser['profile_url'].'" title="'.$fbUser['name'].'" target="_blank">
+															<img src="'.$fbUser['pic_square'].'" alt="" />
+														</a>
+													</div>';
+												$fbUserCount++;
+											}
+									}
+								 */
 
-					        		for ($i = $circleUserCount+1; $i <= 9; $i++) {
+								for ($i = $circleUserCount+1; $i <= 9; $i++) {
 										echo '<div id="img'.$i.'" class="profile_img">
-					        					<a class="tips" href="'.SITE_FB_PROFILE.'" title="We want you here!" target="_blank">
-					        						<img src="images/no_image_profile.png" alt="" />
-					        					</a>
-					        				</div>';
-					        		}
-				        		//}
-				        	?>
-				        	<!-- <div id="img1" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity This is an example of south gravity'><img src="images/prof6.jpg" alt="" /></a></div>
-				            <div id="img2" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof2.jpg" alt="" /></a></div>
-				            <div id="img3" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof3.jpg" alt="" /></a></div>
-				            <div id="img4" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof4.jpg" alt="" /></a></div>
-				            <div id="img5" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof5.jpg" alt="" /></a></div>
-				            <div id="img6" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof7.jpg" alt="" /></a></div>
-				            <div id="img7" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof8.jpg" alt="" /></a></div>
-				          	<div id="img8" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof9.jpg" alt="" /></a></div>
-				            <div id="img9" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof9.jpg" alt="" /></a></div> -->
-				        </div>
+											<a class="tips" href="'.SITE_FB_PROFILE.'" title="We want you here!" target="_blank">
+												<img src="images/no_image_profile.png" alt="" />
+											</a>
+										</div>';
+								}
+							//}
+						?>
+						<!-- <div id="img1" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity This is an example of south gravity'><img src="images/prof6.jpg" alt="" /></a></div>
+					    <div id="img2" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof2.jpg" alt="" /></a></div>
+					    <div id="img3" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof3.jpg" alt="" /></a></div>
+					    <div id="img4" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof4.jpg" alt="" /></a></div>
+					    <div id="img5" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof5.jpg" alt="" /></a></div>
+					    <div id="img6" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof7.jpg" alt="" /></a></div>
+					    <div id="img7" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof8.jpg" alt="" /></a></div>
+						<div id="img8" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof9.jpg" alt="" /></a></div>
+					    <div id="img9" class="profile_img"><a class="tips" href='#' title='This is an example of south gravity'><img src="images/prof9.jpg" alt="" /></a></div> -->
+					</div>
 				    </div>
 
 				<!-- Members circle ends -->
+
                 </div>
              <div class="clear"></div>
             </div>
@@ -399,7 +418,7 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 <!-- No deal layouot ends -->
 <?php } ?>
 
-
+<?php  if ($circleUserCount > 0) { ?>
 <!-- jumblr deal members drop down start -->
 <div class="todays_deal" id="locations" style="margin-top: -35px; z-index: 0; display: block; border: 0px solid red;">
 				<?php  if ($circleUserCount < 9) { ?>
@@ -407,15 +426,15 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 						$(document).ready(function() {
 							$('div.ca-nav').css({display: 'none'});});
 					</script>
-				<?php }?>
+				<?php } ?>
 
-                  <div id="ca-container" class="ca-container">
+                  <div id="ca-container" class="ca-container" style="height: 620px;">
                     <div class="ca-wrapper">
 				<?php
 						foreach ($circleUser as $fbUser) {
 		        				echo '<div class="ca-item ca-item-3">
 				                          <div class="jewellry_img_box">
-				                          	<a class="tips-right" href="'.$fbUser['profile_url'].'" title="'.$fbUser['name'].'<br/> Compatibility : '.comp_user($fbUser['user_id']).'" target="_blank">
+				                          	<a class="tips-right" href="'.$fbUser['profile_url'].'" title="'.$fbUser['name'].'" target="_blank">
 				                           		<img src="'.$fbUser['pic_square'].'" alt="" height="80" width="80">
 				                           	<div class="clear"></div>
 				                           	</a>
@@ -434,14 +453,130 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
                            <div class="point">120</div>
                         </div>
                         -->
+                        <div class="clear"></div>
+
+<!-- Comment starts -->
+					<div style="padding: 50px 0 0 0; margin-top: 100px;">
+				  	  <h4>Deal Group Discussion Broad:</h4>
                     </div>
+                    <div class="clear"></div>
+                    <div class="comment_box" id="comment_box" style="margin-top: 10px; padding: 10px; height: 280px; overflow-x:hidden; overflow-y:scroll;">
+
+				<?php
+
+					$commentSql = "SELECT * FROM ".TABLE_DEAL_GROUP." WHERE fb_id IN (SELECT DISTINCT(user_id) FROM jumblr_transaction as tran WHERE deal_id = $today_res[deal_id]) AND deal_id = $today_res[deal_id]";
+					$commentData = $db->fetch_all_array($commentSql);
+					//print_r($commentData);
+					foreach ($commentData as $comment) {
+						//$comment[fb_id];
+						$userDetails = getFbUserDetails($comment[fb_id]);
+						//print_r($userDetails);
+				?>
+
+                       <div class="box3">
+                          <div class="box3_top">
+                           	 <div class="float_left"><a href="<?php echo $userDetails['profile_url']; ?>"><img src="<?php echo $userDetails['pic_square']; ?>" alt="" width="50" height="50" class="blog"/></a></div>
+                               <div class="heading_txt">
+                               		<strong><a href="<?php echo $userDetails['profile_url']; ?>"><?php echo $userDetails['name']; ?></a></strong><br/> <?php echo date("F j, Y, g:i a", $comment['date_added']); ?>
+                              </div>
+                            <div class="clear"></div>
+                          </div>
+                            <div class="inner_box30">
+                               <?php echo $comment[comment]; ?>
+                              </div>
+                             <div class="clear"></div>
+                         </div>
+
+					<?php } ?>
+
+					</div>
+
+					<div id="comment_post_box" style="margin-top: 10px;">
+
+                    	<textarea type="textarea" class="textarea" name="comment" id="comment" <?php echo (isset($_SESSION['fb_id']) ? '' : 'disabled=disabled') ?>><?php echo (isset($_SESSION['fb_id']) ? '' : 'Please login to post comment!') ?></textarea>
+                        <input type="button" name="commentPost" id="commentPost" onclick="return post_comment(<?php echo $today_res['deal_id']; ?>);" <?php echo (isset($_SESSION['fb_id']) ? '' : 'disabled=disabled') ?> value="Post" class="post_btn"/>
+                    </div>
+					<div class="clear"></div>
+
+
+                     <div class="clear"></div>
+                    </div>
+
+<!-- Comment ends -->
+
+
 		     	</div>
 
              <div class="clear"></div>
             </div>
 
+<?php $userDetails = getFbUserDetails($_SESSION[fb_id]); ?>
+<script type="text/javascript">
+function post_comment(deal_id) {
+	//alert('Hi'); return false;
+
+	//$('.error_orange').hide();
+	//$('.error').hide();
+	/*  $('input.text-input').css({backgroundColor:"#FFFFFF"});
+	  $('input.text-input').focus(function(){
+	    $(this).css({backgroundColor:"#FFDDAA"});
+	  });
+	  $('input.text-input').blur(function(){
+	    $(this).css({backgroundColor:"#FFFFFF"});
+	  });
+	*/
+
+	// validate and process form
+	// first hide any error messages
+	//$('.error_orange').hide();
+
+
+	/*	var name = $("input#name").val();
+		var email = $("input#cont_email").val();
+		var enquery = $("select#enquery").val();
+		var phno = $("input#phno").val();
+	*/
+		var details = $("textarea#comment").val();
+		$("textarea#comment").focus();
+
+	var dataString = '&details=' + details + '&deal_id=' + deal_id;
+	//alert (dataString);return false;
+	if (details != '') {
+		$.ajax({
+	  type: "POST",
+	  url: "ajax_comment.php",
+	  data: dataString,
+	  success: function() {
+	    $('#comment_post_box').append("<div id='message' class='message'></div>");
+	    $('#message').html("<p>Thank You</p>")
+	    //.append("<img id='checkmark' src='images/tick.png' />")
+	    //.append("<p>Thanks for posting your precious comment!</p>")
+	    //.hide()
+	    //.fadeIn(1500, function() {
+	     // $('#comment_post_box');
+	   // });
+	    $('#comment_box').append("<div class='box3'><div class='box3_top'><div class='float_left'><img src='<?php echo $userDetails[pic_square]; ?>' alt='' width='50' height='50' class='blog'/></div><div class='heading_txt'><strong><?php echo $userDetails[name]; ?></strong><br/> <?php echo date("F j, Y, g:i a"); ?> </div><div class='clear'></div></div><div class='inner_box30'>"+details+"</div><div class='clear'></div></div>");
+	    $('textarea#comment').val(' ');
+	  }
+	 });
+
+	}
+return false;
+}
+</script>
 
 <!-- jumblr deal members drop down ends -->
+<?php } ?>
+	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+	<!-- the jScrollPane script
+	<script type="text/javascript" src="js/jquery.mousewheel.js"></script>-->
+	<script type="text/javascript" src="js/jquery.contentcarousel.js"></script>
+
+		<script type="text/javascript">
+			$('#ca-container').contentcarousel();
+		</script>
+
+
 
 <!-- details start -->
 
@@ -494,10 +629,10 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 <div style="width:890px; float: left; margin: 0  0 0 8px;">
 
 		   	<div class="tabs">
-			<a href="javascript: show_tab(1);" id="tab_1" style="text-decoration: none; margin-right: 8px;">Deal information</a>
-			<a href="javascript: show_tab(2);" id="tab_2" style="text-decoration: none; margin-right: 8px;">Highlights</a>
-			<a href="javascript: show_tab(3);" id="tab_3" style="text-decoration: none; margin-right: 8px;">Fine Prints</a>
-			<a href="javascript: show_tab(4);" id="tab_4" style="text-decoration: none; margin-right: 8px;">Company</a>
+			<a href="javascript: show_tab(1);" id="tab_1" style="text-decoration: none; margin-right: 0px;">Deal information</a>
+			<a href="javascript: show_tab(2);" id="tab_2" style="text-decoration: none; margin-right: 0px;">Highlights</a>
+			<a href="javascript: show_tab(3);" id="tab_3" style="text-decoration: none; margin-right: 0px;">Fine Prints</a>
+			<a href="javascript: show_tab(4);" id="tab_4" style="text-decoration: none; margin-right: 0px;">Company</a>
 			<a href="javascript: show_tab(5);" id="tab_5" style="text-decoration: none; margin-left: 0px;">Postage</a>
 			<!-- <a href="javascript: show_tab(6);" id="tab_6">Temp</a> -->
 		    </div>

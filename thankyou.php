@@ -622,7 +622,7 @@ if($_POST['payment_system'] == 'cc')
 				$deal_id = $custom_expl[1];
 				$trn_date = $custom_expl[2];
 
-				$user_id = $_SESSION['user_id'];
+				$user_id = $_SESSION['fb_id'];
 				$deal_id = $custom_expl[1];
 				$trn_date = $resArray['TIMESTAMP'];
 				$coupon_code = strtoupper(str_rand($length = 13, $seeds = 'alphanum'));
@@ -636,6 +636,10 @@ if($_POST['payment_system'] == 'cc')
 				$sql_trnsaction = "INSERT INTO ".TABLE_TRANSACTION." (tran_id,deal_id,transaction_status,amount,qty,transaction_date,user_id,withdraw_status,transaction_id,coupon_code)
 										VALUES(null,'$deal_id','$payment_status','$payment_gross','$qty','$trn_date','$user_id','$withdraw_status','$txn_id','$coupon_code')";
 				mysql_query($sql_trnsaction);
+
+				$sql_orders = "INSERT INTO ".TABLE_ORDER_DETAILS." (od_id, od_date, user_id, deal_id, od_status, od_memo, amount, quantity, wakadealsbuck_price, order_for, friend_name, friend_email, coupon_code)
+								VALUES (NULL, '$trn_date', '$user_id', '$deal_id', 'In process', '', '$payment_gross', '$qty', '', '', '', '', '$coupon_code');";
+				mysql_query($sql_orders);
 				$payment_flag = 1;
 
 			}
@@ -753,6 +757,10 @@ elseif($_POST['payment_system'] == 'maestro')
 				$sql_trnsaction = "INSERT INTO ".TABLE_TRANSACTION." (tran_id,deal_id,transaction_status,amount,qty,transaction_date,user_id,withdraw_status,transaction_id,coupon_code)
 										VALUES(null,'$deal_id','$payment_status','$payment_gross','$qty','$trn_date','$user_id','$withdraw_status','$txn_id','$coupon_code')";
 				mysql_query($sql_trnsaction);
+
+				$sql_orders = "INSERT INTO ".TABLE_ORDER_DETAILS." (od_id, od_date, user_id, deal_id, od_status, od_memo, amount, quantity, wakadealsbuck_price, order_for, friend_name, friend_email, coupon_code)
+								VALUES (NULL, '$trn_date', '$user_id', '$deal_id', 'In process', '', '$payment_gross', '$qty', '', '', '', '', '$coupon_code');";
+				mysql_query($sql_orders);
 				$payment_flag = 1;
 
 			}
@@ -816,6 +824,10 @@ if (!empty($_POST['custom'])) {
 		$sql_trnsaction = "INSERT INTO ".TABLE_TRANSACTION." (tran_id,deal_id,transaction_status,amount,qty,transaction_date,user_id,withdraw_status,transaction_id,coupon_code)
 								VALUES(null,'$deal_id','$payment_status','$payment_gross','$qty','$trn_date','$user_id','$withdraw_status','$txn_id','$coupon_code')";
 		mysql_query($sql_trnsaction);
+
+		$sql_orders = "INSERT INTO ".TABLE_ORDER_DETAILS." (od_id, od_date, user_id, deal_id, od_status, od_memo, amount, quantity, wakadealsbuck_price, order_for, friend_name, friend_email, coupon_code)
+								VALUES (NULL, '$trn_date', '$user_id', '$deal_id', 'In process', '', '$payment_gross', '$qty', '', '', '', '', '$coupon_code');";
+		mysql_query($sql_orders);
 		$payment_flag = 1;
 
 	}
@@ -855,16 +867,8 @@ if (!empty($_POST['custom'])) {
 
 ?>
 
-<div class="deal_info">
-<div class="top_about">
 
-<p>Thankyou</p>
-
-
-</div>
-<div class="clear"></div>
-<div class="midbg">
-<div class="today_deal">
+<div class="todays_deal">
 
 <h1>Thank you for buying!</h1>
 <!--
@@ -1188,15 +1192,8 @@ $email_Template_2 = '<table width="760" border="0" align="center" cellpadding="0
 
 
 <div class="clear"><img src="images/spacer.gif" alt="" width="1" height="40" /></div>
-<div style="width: 702px; float: none; margin: 0 auto; background:#1f1f1f;"><img src="images/logo_bot.gif" alt="" width="207" height="108" /></div>
-</div>
-</div>
-<div class="bot_about"></div>
-</div>
-
 
 </div>
-</div>
-</div>
+
 </div>
 <?php include ('include/footer.php'); ?>

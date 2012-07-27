@@ -1572,7 +1572,7 @@ Login
 
             				 <?php
 	            		 		//$amount = $_SESSION['total_price'];
-								$user_id = $_SESSION["user_id"];
+								$user_id = $_SESSION["fb_id"];
 								$deal_id = $prod_res['deal_id'];
 								//$qty = $_SESSION['qty'];
 								$trn_date = date("Y-m-d H:i:s");

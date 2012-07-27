@@ -141,7 +141,7 @@ Old Left tab My account design's .here class
 	<!--
 		function show_tab(ID)
 		{
-			for(i=1; i<=6; i++)
+			for(i=1; i<=7; i++)
 			{
 				document.getElementById("myaccount_"+i).style.display = "none";
 				/*document.getElementById("tab_"+i).style.backgroundPosition = "";
@@ -188,15 +188,16 @@ Old Left tab My account design's .here class
 </script>
 
 
-<div style="width:685px; float: left; margin: 0  0 0 8px;">
+<div style="width:100%; float: left; margin: 0  0 0 8px;">
 
    	<div class="tabs">
 		<a href="javascript: show_tab(1);" id="tab_1">My Vouchers</a>
 		<a href="javascript: show_tab(6);" id="tab_6">Purchase History</a>
-		<a href="javascript: show_tab(2);" id="tab_2">Credits</a>
+		<a href="javascript: show_tab(7);" id="tab_7">Add Jumble</a>
+		<!-- <a href="javascript: show_tab(2);" id="tab_2">Credits</a>
 		<a href="javascript: show_tab(4);" id="tab_4">Royal Points</a>
 		<a href="javascript: show_tab(5);" id="tab_5">Subscriptions</a>
-		<a href="javascript: show_tab(3);" id="tab_3">Account</a>
+		<a href="javascript: show_tab(3);" id="tab_3">Account</a> -->
     </div>
 
     <!--<div class="TabbedPanels">
@@ -212,7 +213,7 @@ Old Left tab My account design's .here class
     <div class="TabbedPanels1" id="myaccount_1">
 		<div class="title">My Vouchers</div>
 	<?php
-		$sql_orders = "SELECT * FROM ".TABLE_TRANSACTION." WHERE user_id = $_SESSION[user_id]";
+		$sql_orders = "SELECT * FROM ".TABLE_TRANSACTION." WHERE user_id = $_SESSION[fb_id]";
 		$orders_res = mysql_query($sql_orders);
 		$orders_num = mysql_num_rows($orders_res);
 
@@ -251,7 +252,7 @@ Old Left tab My account design's .here class
          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="transactions_box3">
           <tr>
             <th style="width:150px;">Deal Number</th>
-            <th style="width:100px;">Geelaza Code</th>
+            <th style="width:100px;">Jumblr Code</th>
             <th style="width:280px;">How to get your deal</th>
             <th style="width:150px;">Deal Status</th>
           </tr>
@@ -260,7 +261,7 @@ Old Left tab My account design's .here class
             <td style="width:100px;"><?php echo $orders_row['coupon_code']; ?></td>
             <td style="width:280px; line-height:15px;">Click on the link to open your vouchar<br /><img src="images/pdf_icon.gif" alt="" />
 			<a href="<?php echo SITE_URL; ?>pdf.php?deal_title=<?php echo $deal_details['title']; ?>&c_code=<?php echo $orders_row['coupon_code']; ?>&price=<?php echo $orders_row['amount']; ?>&e_valid=<?php echo $end_date_formated; ?>&s_valid=<?php echo $start_date_formated; ?>&img=<?php echo UPLOAD_PATH.$deal_image['file']; ?>" target="_new" onclick="">
-			Your Geelaza deal
+			Your Jumblr deal
 			</a></td>
             <td style="width:150px;"><?php echo ucfirst($orders_row['transaction_status']); ?></td>
           </tr>
@@ -303,7 +304,7 @@ Old Left tab My account design's .here class
                         <td  class="font12"><strong>Valid until: <?php echo $end_date_formated; ?></strong></td>
                       </tr>
                       <tr>
-                        <td colspan="2" style="padding: 8px 0 0 0;"><strong><a href="<?php echo SITE_URL; ?>index.php?action=view&id=<?php echo $orders_row['deal_id']; ?>"><?php echo $deal_details['title']; ?></a></strong></td>
+                        <td colspan="2" style="padding: 8px 0 0 0;"><strong><a href="<?php echo SITE_URL; ?>deal-details.php?action=view&id=<?php echo $orders_row['deal_id']; ?>" target="_blank"><?php echo $deal_details['title']; ?></a></strong></td>
                       </tr>
                       <tr class="savings">
                         <td><strong>Total Savings:</strong></td>
@@ -356,9 +357,8 @@ Old Left tab My account design's .here class
     We love our customers so therefore we will reward you 5 worth of credit for every new customer you bring our way (see details below)
 </div>
 
-<h4>This is how it works:</h4>
 <p class="center_align">
-	<img src="images/recomand.jpg" alt=""/>
+
 </p>
 
 <div class="content_box2" style="width:660px; border:1px solid #edeced; margin:0px; background:none; padding-top:10px;">
@@ -382,14 +382,14 @@ Old Left tab My account design's .here class
   <div class="clear"></div>
  </div>
 
-<h4>OK, but how does GeeLaza credits work?</h4>
+<h4>OK, but how does Jumblr credits work?</h4>
 
  <div class="content_box2" style="margin:0px; width:660px; background:none; padding:10px 0;">
         	<b> Why recommend deals?</b><br /> Recommending deals has many benefits but most importantly, we will credited you with &pound;5.00 which means you can get your next deal at even greater discounted price. The main reason we like our users to recommend deals is because we feel god to know that all people who are interested in buying our deals are aware of the deal. Help your friends and families to save money on great deals too!
 </div>
 
  <div class="content_box2" style="margin:0px; width:660px; background:none; padding:10px 0;">
-        	<b> How can I recommend GeeLaza to my friends who havent heard of GeeLaza?</b><br /> We provide our users with easy recommendation facilities to allow them to tell friends without doing much. Every deal that we feature on GeeLaza are assigned with a special link which you can send to your friends using Facebook, Twitter or Email.<br /><br /> Whoever you recommend us to, have 48 hours to create an account with us and buy a deal worth more than &pound;15 for the first time. If the 48 hours runs out and they haven’t created an account then we cannot give you the credit.
+        	<b> How can I recommend Jumblr to my friends who havent heard of Jumblr?</b><br /> We provide our users with easy recommendation facilities to allow them to tell friends without doing much. Every deal that we feature on Jumblr are assigned with a special link which you can send to your friends using Facebook, Twitter or Email.<br /><br /> Whoever you recommend us to, have 48 hours to create an account with us and buy a deal worth more than &pound;15 for the first time. If the 48 hours runs out and they haven’t created an account then we cannot give you the credit.
 </div>
 <div class="content_box2" style="margin:0px; width:660px;  background:none; padding:10px 0;">
 <b>How long is my account credit valid until?</b><br /> You have 3 months to use your credit. After the 3 months your unused credit will be no longer be valid to use.
@@ -590,7 +590,7 @@ Old Left tab My account design's .here class
           </tr>
 
           <tr>
-            <td><!-- To save these new settings, please enter your GeeLaza password --></td>
+            <td><!-- To save these new settings, please enter your Jumblr password --></td>
           </tr>
           <tr>
             <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -793,7 +793,7 @@ Old Left tab My account design's .here class
           </tr>
 
           <tr>
-            <td><!-- To save these new settings, please enter your GeeLaza password --></td>
+            <td><!-- To save these new settings, please enter your Jumblr password --></td>
           </tr>
           <tr>
             <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -1054,7 +1054,7 @@ Old Left tab My account design's .here class
           </tr>
 
           <tr>
-            <td><!-- To save these new settings, please enter your GeeLaza password --></td>
+            <td><!-- To save these new settings, please enter your Jumblr password --></td>
           </tr>
          <!--  <tr>
             <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -1211,7 +1211,7 @@ Old Left tab My account design's .here class
           </tr>
 
           <tr>
-            <td><!-- To save these new settings, please enter your GeeLaza password --></td>
+            <td><!-- To save these new settings, please enter your Jumblr password --></td>
           </tr>
 
           <tr>
@@ -1229,7 +1229,7 @@ Old Left tab My account design's .here class
 		</form>
 <table style="border:none;" class="account_table" id="unsubscribe">
 			<tr>
-				<td colspan="3"><a onclick="javascript:  UnsubAll();" style="cursor: pointer;"><b>Unsubscribe from all GeeLaza emails</b></a></td>
+				<td colspan="3"><a onclick="javascript:  UnsubAll();" style="cursor: pointer;"><b>Unsubscribe from all Jumblr emails</b></a></td>
 				<div id="unsubs_msg_loc"></div>
 			</tr>
       	</table>
@@ -1495,7 +1495,7 @@ function passMatch() {
 		<div class="content_box3">
           <h4>What is Royal Points?</h4>
           <p>
-            At GeeLaza we want to give our customers more than  just a great deal. We give our customers royal points and all of our members  are eligible to the royal points reward. It works in a simple yet effective way  to that you don&rsquo;t even notice. Whenever you return to <a href="http://www.geelaza.com">www.geelaza.com</a> and buy a deal then our  system will credited your account with 10 royal points. When your account royal  points reach 100 then you will get 25% discount on any deal so it&rsquo;s like double  discount.</p>
+            At Jumblr we want to give our customers more than  just a great deal. We give our customers royal points and all of our members  are eligible to the royal points reward. It works in a simple yet effective way  to that you don&rsquo;t even notice. Whenever you return to <a href="http://www.Jumblr.com">www.Jumblr.com</a> and buy a deal then our  system will credited your account with 10 royal points. When your account royal  points reach 100 then you will get 25% discount on any deal so it&rsquo;s like double  discount.</p>
           <p><strong>Example:</strong><br />
            You have bought lots of deals and your account royal  points is 100 and you buy a Samsung TV deal which costs &pound;100.00. But since you  have 100 royal points you only have to pay &pound;75.00 instead of &pound;100.00  (&pound;100.00/100*25%). However there is one tiny limitation, your account cannot go  above 100 royal points.</p>
 
@@ -1504,7 +1504,7 @@ function passMatch() {
 
 
           <h4>Can I use my royal points on anything?</h4>
-          <p>Yes! You can use your royal points on any deal featured on GeeLaza.</p>
+          <p>Yes! You can use your royal points on any deal featured on Jumblr.</p>
 
 		  <p><span style="color:red;">IMPORTANT:</span> We will automatically reduct the 25% of the  original price of the deal if you have 100 royal points.</p>
 
@@ -1652,7 +1652,7 @@ function passMatch() {
 	<div class="TabbedPanels1" id="myaccount_6" style="display:none;">
 		<div class="title">Purchase History</div>
     <?php
-		$sql_purchase_history = "SELECT * FROM ".TABLE_TRANSACTION." WHERE user_id = $_SESSION[user_id]";
+		$sql_purchase_history = "SELECT * FROM ".TABLE_TRANSACTION." WHERE user_id = $_SESSION[fb_id]";
 		$purchase_history_res = mysql_query($sql_purchase_history);
 		$purchase_history_num = mysql_num_rows($purchase_history_res);
 		$count = 0;
@@ -1664,7 +1664,7 @@ function passMatch() {
 		?>
 		<!--<p style="font-family: Helvetica; font-size: 16px;">You haven&rsquo;t made any purchases yet!</p>-->
        <h4>You haven&rsquo;t made any purchases yet!</h4>
-		<p style="font-family: Helvetica; font-size: 12px;">As  you purchase GeeLaza deals, this page will contain a history of all purchased  items for your personal reference.</p>
+		<p style="font-family: Helvetica; font-size: 12px;">As  you purchase Jumblr deals, this page will contain a history of all purchased  items for your personal reference.</p>
 		<?php
 		}
 		else {
@@ -1674,7 +1674,7 @@ function passMatch() {
             <th style="width:114px;">Purchased date</th>
             <th style="width:114px;">Deal Number</th>
             <th style="width:114px;">Quantity</th>
-            <th style="width:114px;">GeeLaza Code</th>
+            <th style="width:114px;">Jumblr Code</th>
             <th style="width:114px;">Savings</th>
             <th style="width:114px;">Price</th>
           </tr>
@@ -1713,7 +1713,16 @@ function passMatch() {
 		<?php } //End else ?>
 	</div><!-- 6 ends here  -->
 
+	<div class="TabbedPanels1" id="myaccount_7" style="display:none;">
+		<div class="title">Add new Jumble!</div>
+			<!-- Deal add form starts -->
 
+			Deal add form will be here
+
+			<!-- Deal add formends -->
+
+	</div>
+	<!-- 7 ends here  -->
 
   </div>
 
@@ -1839,7 +1848,7 @@ else
 </div>
 </div>
 <?php //include ('include/sidebar-login.php'); ?>
-</div></div></div>
+</div></div><br/>
 
 <?php
 include("include/footer.php");
@@ -1862,6 +1871,9 @@ else if ($_GET['tab'] == 'credit') {
 }
 else if ($_GET['tab'] == 'royal') {
 	echo '<script type="text/javascript">show_tab(4)</script>';
+}
+else if ($_GET['tab'] == 'jumble') {
+	echo '<script type="text/javascript">show_tab(7)</script>';
 }
 
 
