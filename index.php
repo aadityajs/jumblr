@@ -832,22 +832,10 @@ return false;
 
 		// Set map's center position by latitude and longitude coordinates.
 		$map->setCenter($map->getCenterLat(), $map->getCenterLng());
-		//$map->overrideCenterByGeo();
+		//$map->getMapMaker();
 
+		/*	API key = AIzaSyC9UNqcEMSb0Y9THkRudR34yQZkvLnRilM */
 
-		/*	API key = AIzaSyC9UNqcEMSb0Y9THkRudR34yQZkvLnRilM
-			foreach ($circleUser as $fbUser) {
-	        echo '<div class="ca-item ca-item-3">
-	                          <div class="jewellry_img_box">
-	                          <a class="tips-right" href="'.$fbUser['profile_url'].'" title="'.$fbUser['name'].'" target="_blank">
-	                           <img src="'.$fbUser['pic_square'].'" alt="" height="80" width="80">
-	                           <div class="clear"></div>
-	                           </a>
-	                           </div>
-	                           <div class="point">'.comp_user($fbUser['user_id']).'</div>
-	                        </div>';
-	        }
-		 */
 
 
 		// Set the default map type.
@@ -862,23 +850,6 @@ return false;
 		// Make zoom control compact.
 		$map->setZoomControlStyle(MapBuilder::ZOOM_CONTROL_STYLE_SMALL);
 		//$map->setMapTypeControl(MapBuilder::MAP_TYPE_CONTROL_STYLE_HORIZONTAL_BAR);
-
-
-		/* [0] => Array
-        (
-            [0] => Eifel Tower
-            [1] => 22.572646
-            [2] => 88.363895
-            [3] => #FF7B6F
-            [4] => http://armdex.com/maps/eifel-tower.jpg
-            [5] => 120
-            [6] => 160
-        )*/
-
-
-
-
-
 
 		$markers = array();
 		foreach ($dealPurUser as $purUser) {
@@ -899,30 +870,9 @@ return false;
 					//array_push($markers, $markerUser);
 
 					}
-					echo '<pre>'.print_r($markers, true).'</pre>';
+					//echo '<pre>'.print_r($markers, true).'</pre>';
 					//echo '<pre>'.print_r($markerUser, true).'</pre>';
 
-
-		/*foreach ($circleUser as $fbUser) {
-			//Get lat lng by human readable adress
-			$address = unserialize($fbUser['hometown_location']);
-			$fomatedAddress = $address[city].'+'.$address[state].'+'.$address[country];
-			//print_r($address);
-			$lat = reset($map->getLatLng($fomatedAddress));
-			$lng = end($map->getLatLng($fomatedAddress));
-
-			//array_push($markers, $fbUser['name']);
-			// Define locations and add markers with custom icons and attached info windows.
-			$locations = array(
-		    	array($fbUser['name'], $lat, $lng, '#FF7B6F', $fbUser['pic_square'], 50, 50),
-			);
-
-			//echo $fbUser['name'];
-        }*/
-
-
-		//echo '<pre>'.print_r($markers, true).'</pre>';
-		//echo '<pre>'.print_r($circleUser, true).'</pre>';
 
 		// Define locations and add markers with custom icons and attached info windows.
 		/*$locations = array(
