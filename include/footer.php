@@ -44,12 +44,18 @@ $("div#click").click(function () {
 $("div#locations").slideToggle(300);
 });
 
+$("a#locateDealMap").click(function () {
+	$("div#dealMap").slideToggle(300);
+	initialize();
+});
+
 
 
 $(document).ready(function(){
-$("div#locations").ready(function() {
+//$("div#locations").ready(function() {
 	$("div#locations").hide(0);
-});
+	//$("div#dealMap").hide(0);
+//});
 });
 </script>
 

@@ -530,7 +530,9 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 				    </div>
 
 				<!-- Members circle ends -->
+
                 </div>
+             <a href="javascript: void(0);" id="locateDealMap" style="padding: 15px;">Locate this deal</a>
              <div class="clear"></div>
             </div>
 
@@ -822,6 +824,138 @@ return false;
 </script>
 
 <!-- jumblr deal members drop down ends -->
+
+<!-- jumblr deal map start -->
+<?php
+		// Create MapBuilder object.
+		$map = new MapBuilder();
+
+		// Set map's center position by latitude and longitude coordinates.
+		$map->setCenter($map->getCenterLat(), $map->getCenterLng());
+		//$map->overrideCenterByGeo();
+
+
+		/*	API key = AIzaSyC9UNqcEMSb0Y9THkRudR34yQZkvLnRilM
+			foreach ($circleUser as $fbUser) {
+	        echo '<div class="ca-item ca-item-3">
+	                          <div class="jewellry_img_box">
+	                          <a class="tips-right" href="'.$fbUser['profile_url'].'" title="'.$fbUser['name'].'" target="_blank">
+	                           <img src="'.$fbUser['pic_square'].'" alt="" height="80" width="80">
+	                           <div class="clear"></div>
+	                           </a>
+	                           </div>
+	                           <div class="point">'.comp_user($fbUser['user_id']).'</div>
+	                        </div>';
+	        }
+		 */
+
+
+		// Set the default map type.
+		$map->setMapTypeId(MapBuilder::MAP_TYPE_ID_ROADMAP);
+
+		// Set width and height of the map.
+		$map->setSize(890, 500);
+
+		// Set default zoom level.
+		$map->setZoom(6);
+
+		// Make zoom control compact.
+		$map->setZoomControlStyle(MapBuilder::ZOOM_CONTROL_STYLE_SMALL);
+		//$map->setMapTypeControl(MapBuilder::MAP_TYPE_CONTROL_STYLE_HORIZONTAL_BAR);
+
+
+		/* [0] => Array
+        (
+            [0] => Eifel Tower
+            [1] => 22.572646
+            [2] => 88.363895
+            [3] => #FF7B6F
+            [4] => http://armdex.com/maps/eifel-tower.jpg
+            [5] => 120
+            [6] => 160
+        )*/
+
+
+
+
+
+
+		$markers = array();
+		foreach ($dealPurUser as $purUser) {
+	                 	$sqlMarker = "SELECT name,pic_square,hometown_location
+												FROM jumblr_fb_user
+												WHERE fb_id =$purUser[user_id]";
+					$markerUser = mysql_fetch_array(mysql_query($sqlMarker), MYSQL_NUM);
+
+					//Get lat lng by human readable adress
+					$address = unserialize($markerUser[2]);
+					$fomatedAddress = $address[city].'+'.$address[state].'+'.$address[country];
+					//print_r($address);
+					$lat = reset($map->getLatLng($fomatedAddress));
+					$lng = end($map->getLatLng($fomatedAddress));
+
+					$markers[] = array(0=>$markerUser[0], 1=>$lat, 2=>$lng, 3=>'#FF7B6F', 4=>$markerUser[1], 5=>50, 6=>60);
+
+					//array_push($markers, $markerUser);
+
+					}
+					echo '<pre>'.print_r($markers, true).'</pre>';
+					//echo '<pre>'.print_r($markerUser, true).'</pre>';
+
+
+		/*foreach ($circleUser as $fbUser) {
+			//Get lat lng by human readable adress
+			$address = unserialize($fbUser['hometown_location']);
+			$fomatedAddress = $address[city].'+'.$address[state].'+'.$address[country];
+			//print_r($address);
+			$lat = reset($map->getLatLng($fomatedAddress));
+			$lng = end($map->getLatLng($fomatedAddress));
+
+			//array_push($markers, $fbUser['name']);
+			// Define locations and add markers with custom icons and attached info windows.
+			$locations = array(
+		    	array($fbUser['name'], $lat, $lng, '#FF7B6F', $fbUser['pic_square'], 50, 50),
+			);
+
+			//echo $fbUser['name'];
+        }*/
+
+
+		//echo '<pre>'.print_r($markers, true).'</pre>';
+		//echo '<pre>'.print_r($circleUser, true).'</pre>';
+
+		// Define locations and add markers with custom icons and attached info windows.
+		/*$locations = array(
+		    array('Eifel Tower', $lat, $lng, '#FF7B6F', 'http://armdex.com/maps/eifel-tower.jpg', 120, 160),
+		    array('The Louvre', 48.8640411, 2.3360444, '#6BE337', 'http://armdex.com/maps/the-louvre.jpg', 160, 111),
+		    array('Musee d\'Orsay', 48.860181, 2.3249648, '#E6E325', 'http://armdex.com/maps/musee-dorsay.jpg', 160, 120),
+		    array('Jardin du Luxembourg', 48.8469529, 2.337285, '#61A1FF', 'http://armdex.com/maps/jardin-du-luxembourg.jpg', 160, 106),
+		    array('Promenade Plantee', 48.856614, 2.3522219, '#FF61E3', 'http://armdex.com/maps/promenade-plantee.jpg', 160, 120)
+		);
+		echo '<pre>'.print_r($locations, true).'</pre>';
+		*/
+		foreach ($markers as $i => $location) {
+		    $map->addMarker($location[1], $location[2], array(
+		        'title' => $location[0],
+		        'icon' => 'http://armdex.com/maps/icon' . ($i + 1) . '.png',
+		        'html' => '<div><img src="' . $location[4] . '" width="' . $location[5] . '" height="' . $location[6] . '" /></div><b>' . $location[0] . '</b>',
+		        'infoCloseOthers' => true,
+		    	'animation' => 'DROP'
+		    ));
+		}
+
+
+	?>
+<div class="todays_deal" id="dealMap" style="margin-top: -35px; z-index: 0; display: none; border: 0px solid red;">
+<?php
+
+	// Display the map.
+	$map->show();
+?>
+</div>
+
+<!-- jumblr deal map start -->
+
 <?php } ?>
 
 <!-- ##################### -->

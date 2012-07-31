@@ -18,7 +18,7 @@ error_reporting(E_ALL | E_STRICT);
 class UploadHandler
 {
     private $options;
-    
+
     function __construct($options=null) {
         $this->options = array(
             'script_url' => $_SERVER['PHP_SELF'],
@@ -56,7 +56,7 @@ class UploadHandler
             $this->options = array_merge_recursive($this->options, $options);
         }
     }
-    
+
     private function get_file_object($file_name) {
         $file_path = $this->options['upload_dir'].$file_name;
         if (is_file($file_path) && $file_name[0] !== '.') {
@@ -77,21 +77,21 @@ class UploadHandler
         }
         return null;
     }
-    
+
     private function get_file_objects() {
-	
+
 	$files=$this->get_files();
 	//scandir($this->options['upload_dir'])
         return array_values(array_filter(array_map(
             array($this, 'get_file_object'),
-      		$files      
+      		$files
         )));
     }
 
 	private function get_files(){
 	 require("config.inc.php");
 	  require("class/Database.class.php");
-	  $db = new Database(DB_SERVER, DB_USER, DB_PASS, DB_DATABASE);			
+	  $db = new Database(DB_SERVER, DB_USER, DB_PASS, DB_DATABASE);
 	  $db->connect();
 	  $files=array();
 		$fileq=mysql_query("SELECT * FROM ".TABLE_DEAL_IMAGES." where deal_id='".$_SESSION["session_temp"]."'");
@@ -100,8 +100,8 @@ class UploadHandler
 		}
 		return $files;
 	}
-	
-	
+
+
     private function create_scaled_image($file_name, $options) {
         $file_path = $this->options['upload_dir'].$file_name;
         $new_file_path = $options['upload_dir'].$file_name;
@@ -150,7 +150,7 @@ class UploadHandler
         @imagedestroy($new_img);
         return $success;
     }
-    
+
     private function has_error($uploaded_file, $file, $error) {
         if ($error) {
             return $error;
@@ -180,7 +180,7 @@ class UploadHandler
         }
         return $error;
     }
-    
+
     private function handle_file_upload($uploaded_file, $name, $size, $type, $error) {
         $file = new stdClass();
         $file->name = basename(stripslashes($name));
@@ -202,14 +202,14 @@ class UploadHandler
                         fopen($uploaded_file, 'r'),
                         FILE_APPEND
                     );
-					
+
                 } else {
                     move_uploaded_file($uploaded_file, $file_path);
                 }
-            
-			
+
+
 				$this->storetoTable($file->name);
-			
+
 			} else {
                 // Non-multipart uploads (PUT method support)
                 file_put_contents(
@@ -240,65 +240,65 @@ class UploadHandler
         }
         return $file;
     }
-    
+
   public function storetoTable($nam){
   require("./config.inc.php");
   require("./class/Database.class.php");
-  $db = new Database(DB_SERVER, DB_USER, DB_PASS, DB_DATABASE);			
+  $db = new Database(DB_SERVER, DB_USER, DB_PASS, DB_DATABASE);
   $db->connect();
-  
-  
+
+
   if(isset($_SESSION["session_temp"]))
 		{
-			
-			
-				$insert=mysql_query("insert into ".TABLE_DEAL_IMAGES." set deal_id='".$_SESSION["session_temp"]."', file='".$nam."'") ;
-		
-			
-			
+
+
+				echo $insert=mysql_query("insert into ".TABLE_DEAL_IMAGES." set deal_id='".$_SESSION["session_temp"]."', file='".$nam."'") ;
+
+
+
 		}
 		else
 		{
 			$dmyhis=date('YmdHis');
 			$_SESSION["session_temp"] = $dmyhis;
-			
+
 				$insert=mysql_query("insert into ".TABLE_DEAL_IMAGES." set deal_id='".$_SESSION["session_temp"]."', file='".$nam."'") ;
-		
-				
-			
+
+
+
 		}
 
 
 
-  
+
   }
-  
+
    public function deletefromTable($nam){
   require("./config.inc.php");
   require("./class/Database.class.php");
-  $db = new Database(DB_SERVER, DB_USER, DB_PASS, DB_DATABASE);			
+  $db = new Database(DB_SERVER, DB_USER, DB_PASS, DB_DATABASE);
   $db->connect();
-  
-  
+
+
   if(isset($_SESSION["session_temp"]))
 		{
-			
-			
+
+
 				$delete=mysql_query("delete from ".TABLE_DEAL_IMAGES." where deal_id='".$_SESSION["session_temp"]."' and file='".$nam."'") ;
-		
-			
-			
+
+
+
 		}
-		
 
 
 
-  
+
+
   }
-  
+
    public function get() {
         $file_name = isset($_REQUEST['file']) ?
-            basename(stripslashes($_REQUEST['file'])) : null; 
+            basename(stripslashes($_REQUEST['file'])) : null;
         if ($file_name) {
             $info = $this->get_file_object($file_name);
         } else {
@@ -307,9 +307,9 @@ class UploadHandler
         header('Content-type: application/json');
         echo json_encode($info);
     }
-    
+
     public function post() {
-	
+
         $upload = isset($_FILES[$this->options['param_name']]) ?
             $_FILES[$this->options['param_name']] : array(
                 'tmp_name' => null,
@@ -353,7 +353,7 @@ class UploadHandler
         }
         echo json_encode($info);
     }
-    
+
     public function delete() {
         $file_name = isset($_REQUEST['file']) ?
             basename(stripslashes($_REQUEST['file'])) : null;

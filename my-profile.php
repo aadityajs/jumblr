@@ -39,6 +39,10 @@ if(isset($_REQUEST['u_id'])) {
 					$profileUser = mysql_fetch_array(mysql_query($sqlProfile));
 					$profileUserCount = mysql_num_rows($db->query($sqlProfile));
 					//print_r($profileUser);
+					$home_loc = unserialize($profileUser[hometown_location]);
+					$cur_loc = unserialize($profileUser[current_location]);
+					//echo '<pre>'.print_r($home_loc).'</pre>';
+					//echo '<pre>'.print_r($home_loc, true).'</pre>';
 				}
 				?>
 

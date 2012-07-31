@@ -3,6 +3,8 @@ ob_start();
 session_start();
 date_default_timezone_set('Europe/London');
 require("config.inc.php");
+// Include MapBuilder class.
+require_once 'class/class.MapBuilder.php';
 require("class/Database.class.php");
 $db = new Database(DB_SERVER, DB_USER, DB_PASS, DB_DATABASE);
 $db->connect();

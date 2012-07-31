@@ -1049,4 +1049,63 @@ img.border{
 	border: 1px solid #156c89;
 }
 
+/*===============================================================goutam27-07-2012=================================================*/
 
+
+.tabs27{
+	font: bold 12px/32px Arial, Helvetica, sans-serif;
+	height: 32px;
+	margin: 5px 0 0 0;
+	width: 890px;
+	/*background: url(../images/grey_bg2.gif) center top repeat-x;*/
+	border-bottom: 0;
+}
+.tabs27 a{	
+	font: bold 14px/32px Arial, Helvetica, sans-serif;
+	display: inline-block;
+	height: 32px;
+	color: #000;
+	padding: 0 26px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-bottom: 1px solid #cccccc;
+	border-top: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+	border-left: 1px solid #cccccc;
+	background: #CCCCCC;
+}
+.tabs27 a:hover, .tabs a.here{
+	background: #F3F3F3;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
+	border-bottom: 1px solid #F3F3F3;
+	border-top: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+	border-left: 1px solid #cccccc;
+	font: bold 14px/32px Arial, Helvetica, sans-serif;
+	display: inline-block;
+	height: 32px;
+	color: #000;
+	padding: 0 26px;
+	text-decoration: none;
+}
+div#dealbg_bot127{
+	background: none;
+	margin: 10px auto;
+	float: left;
+	border: 0;
+	width: 890px;
+	height: auto;
+	overflow: hidden;
+}
+.TabbedPanelsContent27{
+	width: 860px;
+	border: 1px solid #ccc;
+	overflow: hidden;
+	color: #717171;
+	font: normal 12px/16px Arial, Helvetica, sans-serif;
+	padding: 6px 0 6px 18px;
+	background: #f3f3f3;	
+}

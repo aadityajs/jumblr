@@ -797,6 +797,8 @@ $_SESSION["session_temp"] =uniqid();
 
 		<div id="tab3s-1">
 
+			<form action="" method="post">
+
 				<div id="tab_1" style="display:block">
 				<div class="title_txt">Jumblr! <!--Now!™--> helps you to be a part!</div>
 				<div class="main_box">
@@ -1056,7 +1058,7 @@ $_SESSION["session_temp"] =uniqid();
 				</table>
 
 				</fieldset>
-				</form>
+				<!-- </form> -->
 				<script>
 				calculatedeal();
 				</script>
@@ -1177,7 +1179,7 @@ $_SESSION["session_temp"] =uniqid();
 				</fieldset>
 
 				</div>
-
+			</form>
 
 		</div>
 
