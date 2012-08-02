@@ -4425,7 +4425,7 @@ margin: -3px 0 -5px 0;
 	margin: 10px 0;
 }
 .transactions_box3{
-	width: 683px;
+	width: 800px;
 	height: auto;
 	margin: 1px auto;
 	border-collapse: collapse;
@@ -4587,7 +4587,7 @@ margin: -3px 0 -5px 0;
 	border: none;
 }
 .purchase_history{
-	width: 683px;
+	width: 800px;
 	height: auto;
 	margin: 10px auto;
 	border-collapse: collapse;
@@ -7734,25 +7734,35 @@ a.buynow_btn2:hover{
     z-index: 0;
 }
 .styled_select3 select {
-	background: transparent !important;
-   -webkit-appearance: none;
+	/*background: transparent !important;*/
+	background: #19191a;
+  /* -webkit-appearance: none;*/
    width: auto;
    text-transform: none;
    border: 0px;
    outline: none;
    float: left;
    font: normal 12px Verdana, Arial, Helvetica, sans-serif;
-   border: 0px;
-   color: #8b8b8b;
+   color: #fff;
    padding: 8px 0 0 10px;
+   background: rgb(54, 25, 25); /* Fall-back for browsers that don't support rgba */
+   background: rgba(54, 25, 25, .0);
+   
+   
 }
 .styled_select3 select option {
     font: 12px Verdana,Arial,Helvetica,sans-serif;
     text-transform: capitalize;
+	height: 21px;
+	background: #121213;
+	border: none;
+	padding-top: 3px;
+	border-bottom: 1px dotted #535353;
+	padding-left: 3px;
+
+	
 }
-.common_box{
-	width: 880px;
-	height: auto;
-	padding: 10px;
-	background: #fff;
+
+.styled_select3 select option:hover {
+    background-color: #595959;
 }

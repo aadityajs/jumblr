@@ -385,13 +385,16 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 							<a class="addthis_button_twitter"></a>
 							<a class="addthis_button_facebook"></a>
 							<a class="addthis_button_google_plusone_share"></a>
+
 							</div>
+
 							<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4fe2b61371e640b5"></script>
 							<!-- AddThis Button END -->
 
                          </li>
                     </ul>
                 </div>
+
                 <div class="todays_deal_middle">
                 	<div class="amount">Amount: <span>&pound;<?php echo ($today_res['is_multi'] == 'n' ? number_format($today_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); ?></span></div>
                     <div class="available">
@@ -472,6 +475,9 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 
                  </div>
                  <div class="clear"></div>
+                 <div style="margin: 21px 0 0 -60px; width: 270px; font-size: 11px; text-align:left;">
+                 <img src="images/pointer.png" alt="" align="absmiddle"><a href="javascript: void(0);" id="locateDealMap" style="padding: 10px; color:#9a9a9a;">Locate this deal</a>
+                 </div>
                 </div>
                 <div class="todays_deal_right" id="click">
                    <!-- <img src="images/member.png" alt=""> -->
@@ -479,14 +485,14 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 
 					<div class="circleDiv">
 				    	<div class="innerCircle">
-				        <div class="cat_circle"><img src="images/cat_icon1.jpg" width="100" height="100" /></div>
+				        <div class="cat_circle"> <img class="tips" src="images/cat_icon1.png" width="100" height="100" title="<br/>Click to See the Jumblrs!<br/><br/>"/></div>
 				        	<?php
 				        		$fbUserCount = 1;
 				        		if ($circleUserCount <= 9) {
 					        		foreach ($circleUser as $fbUser) {
 						        			if ($fbUserCount <= 9) {
 							        			echo '<div id="img'.$fbUserCount.'" class="profile_img">
-							        					<a class="tips" href="my-profile.php?profile-'.$fbUser['fb_id'].'" title="'.$fbUser['name'].'<br/> Compatibility : '.comp_user($fbUser['user_id']).'" target="_blank">
+							        					<a class="tips" href="my-profile.php?profile-'.$fbUser['fb_id'].'" title="'.$fbUser['name'].'<br/> Live Compatibility : '.comp_user($fbUser['user_id']).'" target="_blank">
 							        						<img src="'.$fbUser['pic_square'].'" alt="" />
 							        					</a>
 							        				</div>';
@@ -532,7 +538,7 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 				<!-- Members circle ends -->
 
                 </div>
-             <a href="javascript: void(0);" id="locateDealMap" style="padding: 15px;">Locate this deal</a>
+             <!--<a href="javascript: void(0);" id="locateDealMap" style="padding: 15px;">Locate this deal</a>-->
              <div class="clear"></div>
             </div>
 
@@ -630,14 +636,14 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 		?>
 
 
-		<form name="frm_email_subs2" method="post" onsubmit="javascript: return chk_email_subs2();">
+		<form name="frm_email_subs2" method="post" onSubmit="javascript: return chk_email_subs2();">
 		  <table width="100%" align="center" border="0" cellspacing="3" cellpadding="3" class="submit_box">
 		    <tr>
 		      <td width="31%">Your email address</td>
 		      <td width="69%"><strong>The Jumblr Promise</strong></td>
 		    </tr>
 		    <tr>
-		      <td><input type="text" class="fieldbg_30" name="email_subs2" id="email_subs2" value="Enter your email address" onclick="this.value=''"/><div id="email_subs_error_loc2" class="error_orange"></div></td>
+		      <td><input type="text" class="fieldbg_30" name="email_subs2" id="email_subs2" value="Enter your email address" onClick="this.value=''"/><div id="email_subs_error_loc2" class="error_orange"></div></td>
 		      <td>If you have any issue with using Jumblr, please contact us and we promise we will make it right</td>
 		    </tr>
 		    <tr>
@@ -750,13 +756,17 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 					</div>
 
 					<div id="comment_post_box" style="margin-top: 10px;">
-
-                    	<textarea type="textarea" class="textarea" name="comment" id="comment" <?php echo (isset($_SESSION['fb_id']) ? '' : 'disabled=disabled') ?>><?php echo (isset($_SESSION['fb_id']) ? '' : 'Please login to post comment!') ?></textarea>
-                        <input type="button" name="commentPost" id="commentPost" onclick="return post_comment(<?php echo $today_res['deal_id']; ?>);" <?php echo (isset($_SESSION['fb_id']) ? '' : 'disabled=disabled') ?> value="Post" class="post_btn"/>
+                       <div style="width:60px; float:left;">
+						<a href="<?php echo getLoginUserDetails(profile_url); ?>" style="clear:right;"> <img src='<?php echo getLoginUserDetails(pic_square); ?>' alt='' width='50' height='50' class='blog'/></a>
+                        </div>
+                        <div style="width:700px; float:left;">
+                    	<textarea type="textarea" class="textarea" name="comment" id="comment" style="width: 690px; height:50px;" <?php echo (isset($_SESSION['fb_id']) ? '' : 'disabled=disabled') ?>><?php echo (isset($_SESSION['fb_id']) ? '' : 'Please login to post comment!') ?></textarea>
+                        </div>
+                        <div style="width:40px; float:left;">
+                        <input type="button" name="commentPost" id="commentPost" onClick="return post_comment(<?php echo $today_res['deal_id']; ?>);" <?php echo (isset($_SESSION['fb_id']) ? '' : 'disabled=disabled') ?> value="Post" class="post_btn" style="height:60px; width:60px; margin:0"/>
+                    	<div class="clear"></div>
+                    	</div>
                     </div>
-					<div class="clear"></div>
-
-
                      <div class="clear"></div>
                     </div>
 
@@ -806,7 +816,7 @@ function post_comment(deal_id) {
 	  data: dataString,
 	  success: function() {
 	    $('#comment_post_box').append("<div id='message' class='message'></div>");
-	    $('#message').html("<p>Thank You</p>")
+	    $('#message').html("<p>Thanks for your precious comment.</p>")
 	    //.append("<img id='checkmark' src='images/tick.png' />")
 	    //.append("<p>Thanks for posting your precious comment!</p>")
 	    //.hide()
@@ -865,7 +875,7 @@ return false;
 					$lat = reset($map->getLatLng($fomatedAddress));
 					$lng = end($map->getLatLng($fomatedAddress));
 
-					$markers[] = array(0=>$markerUser[0], 1=>$lat, 2=>$lng, 3=>'#FF7B6F', 4=>$markerUser[1], 5=>50, 6=>60);
+					$markers[] = array(0=>$markerUser[0], 1=>$lat, 2=>$lng, 3=>'#FF7B6F', 4=>$markerUser[1], 5=>60, 6=>60, 7=>$address[city].','.$address[state].' '.$address[country]);
 
 					//array_push($markers, $markerUser);
 
@@ -888,7 +898,7 @@ return false;
 		    $map->addMarker($location[1], $location[2], array(
 		        'title' => $location[0],
 		        'icon' => 'http://armdex.com/maps/icon' . ($i + 1) . '.png',
-		        'html' => '<div><img src="' . $location[4] . '" width="' . $location[5] . '" height="' . $location[6] . '" /></div><b>' . $location[0] . '</b>',
+		        'html' => '<div><img src="' . $location[4] . '" width="' . $location[5] . '" height="' . $location[6] . '"align="texttop" />' .  $location[7] . '</div><b>' . $location[0] . '</b>',
 		        'infoCloseOthers' => true,
 		    	'animation' => 'DROP'
 		    ));
@@ -995,14 +1005,14 @@ return false;
 				<!-- Members circle starts -->
 				<div class="circleDiv">
 				<div class="innerCircle">
-				<div class="cat_circle"><img src="images/cat_icon1.jpg" width="100" height="100" /></div>
+				<div class="cat_circle"><img class="tips" src="images/cat_icon1.png" width="100" height="100" title="<br/>Click to See the Jumblrs!<br/><br/>"/></div>
 					<?php
 						$fbUserCount = 1;
 						if ($circleUserCount <= 9) {
 							foreach ($circleUser as $fbUser) {
 									if ($fbUserCount <= 9) {
 										echo '<div id="img'.$fbUserCount.'" class="profile_img">
-												<a class="tips" href="my-profile.php?profile-'.$fbUser['fb_id'].'" title="'.$fbUser['name'].'<br/> Compatibility : '.comp_user($fbUser['user_id']).'" target="_blank">
+												<a class="tips" href="my-profile.php?profile-'.$fbUser['fb_id'].'" title="'.$fbUser['name'].'<br/> Live Compatibility : '.comp_user($fbUser['user_id']).'" target="_blank">
 													<img src="'.$fbUser['pic_square'].'" alt="" />
 												</a>
 											</div>';
@@ -1154,7 +1164,7 @@ return false;
 
 
 <div id="email-form" class="LB-white-content" style="background: url(images/bodybg.jpg) left top repeat; margin:0;">
-	<a id="close" href="" onclick="HideLightBox(); return false;"></a>
+	<a id="close" href="" onClick="HideLightBox(); return false;"></a>
 
 		<div class="subscribe_box">
 		<!--<div id="cross"><a href="#"><img src="images/cross_white.gif" alt="" width="22" height="32" border="0" /></a></div>
@@ -1167,7 +1177,7 @@ return false;
 		<ul>
 		<li style="width: 450px; float: left; margin-top: 20px;">
 			<div id="email_check" style="float: left;"></div>
-			<input type="text" name="email" id="email_subscript" class="white_box2" value="Enter your email address" style="font-family: Georgia, 'Times New Roman', Times, serif; color:#999999; font-size: 18px; font-weight: normal;" onclick="javascript: if (this.value == 'Enter your email address') { this.value = '' };" onblur ="javascript: if (this.value == ''){ this.value = 'Enter your email address' }; "/>
+			<input type="text" name="email" id="email_subscript" class="white_box2" value="Enter your email address" style="font-family: Georgia, 'Times New Roman', Times, serif; color:#999999; font-size: 18px; font-weight: normal;" onClick="javascript: if (this.value == 'Enter your email address') { this.value = '' };" onblur ="javascript: if (this.value == ''){ this.value = 'Enter your email address' }; "/>
 		</li>
 		<li style="margin: 8px 0 0 40px;">
 			<div id="city_check" style="float: left;"></div>
@@ -1185,7 +1195,7 @@ return false;
 }
 							?>
               </select>
-			<input type="button" name="Submit" class="subs_btn" value="Sign up now" id="city_submit" onclick="javascript: return getSubscribeValues(this.id);"/>
+			<input type="button" name="Submit" class="subs_btn" value="Sign up now" id="city_submit" onClick="javascript: return getSubscribeValues(this.id);"/>
 		</li>
 		<!--<li style="margin: 8px 0 0 90px;">By subscribing I agree the <a href="#">Terms & Conditions</a> and <a href="#">Provacy Policy</a>.</li>-->
 		</ul>

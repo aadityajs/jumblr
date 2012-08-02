@@ -305,10 +305,10 @@ Old Left tab My account design's .here class
                       <tr>
                         <td colspan="2" style="padding: 8px 0 0 0;"><strong><a href="<?php echo SITE_URL; ?>deal-details.php?action=view&id=<?php echo $orders_row['deal_id']; ?>" target="_blank"><?php echo $deal_details['title']; ?></a></strong></td>
                       </tr>
-                      <tr class="savings">
+                      <!-- <tr class="savings">
                         <td><strong>Total Savings:</strong></td>
                        <td><strong>&pound;<?php echo $deal_details['savings'];?></strong></td>
-                      </tr>
+                      </tr> -->
                       <tr>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>

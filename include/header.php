@@ -43,7 +43,6 @@ error_reporting(E_ERROR || E_WARNING || E_STRICT);
 	<link rel="stylesheet" href="css/tipsy.css" type="text/css" />
 	<script type="text/javascript" src="js/jquery.tipsy.js"></script>
 
-
 	<!--[if lt IE 9]>
         <script type="text/javascript" src="http://info.template-help.com/files/ie6_warning/ie6_script_other.js"></script>
         <script type="text/javascript" src="js/html5.js"></script>
@@ -503,7 +502,7 @@ function get_facebook_cookie_new($app_id, $app_secret)
 				else
 				{
 				?>
-				<div style="float: right;"><a href="<?php echo SITE_URL ?>clogout.php">Logout</a>  |  <a href="javascript: void(0);"><span id="myacc">My Account</span></a>
+				<div style="float: right;"><span><a href="<?php echo SITE_URL; ?>customer-account.php?tab=jumble"><img src="images/addajumble.png" alt="" width="99" height="22" align="absmiddle"/></a></span>  |  <a href="<?php echo SITE_URL ?>clogout.php">Logout</a>  |  <a href="javascript: void(0);"><span id="myacc">My Account</span></a>
 
 
 				</div>

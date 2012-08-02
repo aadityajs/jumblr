@@ -499,6 +499,15 @@ function getFbUserDetails($fbId) {
 	return $userFbDetails;
 }
 
+function getLoginUserDetails($fieldName) {
+	if ($fbId == '') {
+		$fbId = $_SESSION['fb_id'];
+	}
+	$sqlFbUserDetails = "SELECT * FROM ".TABLE_FB_USER." WHERE fb_id = $fbId";
+	$userFbDetails = mysql_fetch_array(mysql_query($sqlFbUserDetails));
+	return $userFbDetails[$fieldName];
+}
+
 /**
  * Measure compiatablity rating of logged in user with other users<br/><br/>
  * <b>SET Theorem</b><br/>A = {a1, a2, a3, a4, a5, a6}<br/>

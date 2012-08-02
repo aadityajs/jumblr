@@ -697,6 +697,7 @@ div#dealbg_bot1{
 	background-color: #e6e6e6;
 	position: absolute;
 	z-index: 5000;
+	cursor: pointer;
 }
 
 .cat_circle img{
@@ -707,7 +708,12 @@ div#dealbg_bot1{
  	border-radius: 50em;
 	display: block;
 }
-
+.cat_circle:hover{
+	background: #ff8d12;
+	border: 1px solid #ee8411;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+}
 #img1{
 	margin: 10px 0 0 105px;
 }
@@ -1031,7 +1037,7 @@ img.border{
 	padding: 3px 0 3px 3px;
 	margin: 0px;
 	font: normal 13px/16px Arial, Helvetica, sans-serif;
-	width:790px;
+	width:760px;
 	height: 80px;
 	background: #f8f8f8;
 	border: 1px solid #d5d5d5;

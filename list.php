@@ -66,14 +66,14 @@ include 'include/header.php';
 
 					<div class="circleDiv">
 					<div class="innerCircle">
-					<div class="cat_circle"><img src="images/cat_icon1.jpg" width="100" height="100" /></div>
+					<div class="cat_circle"><img class="tips" src="images/cat_icon1.png" width="100" height="100" title="<br/>Click to See the Jumblrs!<br/><br/>"/></div>
 						<?php
 							$fbUserCount = 1;
 							if ($circleUserCount <= 9) {
 								foreach ($circleUser as $fbUser) {
 										if ($fbUserCount <= 9) {
 											echo '<div id="img'.$fbUserCount.'" class="profile_img">
-													<a class="tips" href="my-profile.php?profile-'.$fbUser['fb_id'].'" title="'.$fbUser['name'].'<br/> Compatibility : '.comp_user($fbUser['user_id']).'" target="_blank">
+													<a class="tips" href="my-profile.php?profile-'.$fbUser['fb_id'].'" title="'.$fbUser['name'].'<br/> Live Compatibility : '.comp_user($fbUser['user_id']).'" target="_blank">
 														<img src="'.$fbUser['pic_square'].'" alt="" />
 													</a>
 												</div>';
