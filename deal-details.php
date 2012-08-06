@@ -34,6 +34,7 @@ if (($_GET['action'] != "") && ($_GET['id'] != "")) {
 
 	$sql_todays_image = "SELECT * FROM ".TABLE_DEAL_IMAGES." WHERE deal_id = ".$today_res['deal_id'];
 	$todays_image = mysql_fetch_array(mysql_query($sql_todays_image));
+	$todays_image_count = mysql_num_rows(mysql_query($sql_todays_image));
 	//$todays_image_res = mysql_query($sql_todays_image);
 
 	// select multi deal if has
@@ -54,6 +55,7 @@ elseif(($_GET['id'] != ''))
 
 	$sql_todays_image = "SELECT * FROM ".TABLE_DEAL_IMAGES." WHERE deal_id = ".$today_res['deal_id'];
 	$todays_image = mysql_fetch_array(mysql_query($sql_todays_image));
+	$todays_image_count = mysql_num_rows(mysql_query($sql_todays_image));
 	//$todays_image_res = mysql_query($sql_todays_image);
 }
 else {
@@ -77,6 +79,7 @@ $city = end(explode("|",$_COOKIE['subscribe']));
 
 			$sql_todays_image = "SELECT * FROM ".TABLE_DEAL_IMAGES." WHERE deal_id = ".$today_res['deal_id'];
 			$todays_image = mysql_fetch_array(mysql_query($sql_todays_image));
+			$todays_image_count = mysql_num_rows(mysql_query($sql_todays_image));
 			//$todays_image_res = mysql_query($sql_todays_image);
 
 		}
@@ -102,7 +105,13 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
             	</h1>
                 <div class="todays_deal_left">
                     <ul>
-                    	<li><img src="<?php echo UPLOAD_PATH.$todays_image['file']; ?>" class="image0" width="348px" height="307px"></li>
+                    	<li>
+                    		<?php if ($todays_image_count > 0 ) { ?>
+                    		<img src="<?php echo UPLOAD_PATH.$todays_image['file']; ?>" class="image0" width="348px" height="307px">
+                    		<?php } else { ?>
+                    		<img src="images/no_img2.jpg" class="image0" width="348px" height="307px">
+                    		<?php } ?>
+                    	</li>
                         <li>&nbsp;</li>
                         <li class="share">
 
@@ -227,7 +236,7 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 
 					<div class="circleDiv">
 					<div class="innerCircle">
-					<div class="cat_circle"><img src="images/cat_icon1.png" width="100" height="100" /></div>
+					<div class="cat_circle"><img class="tips" src="images/cat_icon1.png" width="100" height="100" title="<br/>Click to See the Jumblrs!<br/><br/>"/></div>
 						<?php
 							$fbUserCount = 1;
 							if ($circleUserCount <= 9) {

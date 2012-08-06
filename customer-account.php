@@ -1833,17 +1833,24 @@ function passMatch() {
 					$data[waka_percent] = $_POST[wakapercent];
 					$data[description] = $_POST[description];
 					$data[deal_cat] = $_POST[deal_cat];
+					$data[city] = $_POST[city];
 					$data[website] = $_POST[website];
-					$data[deal_start_time] = $_POST[deal_start_time];
-					$data[deal_end_time] = $_POST[deal_end_time];
+					$data[deal_start_time] = date("Y-m-d G:i", strtotime($_POST[deal_start_time]));	//2012-07-24 00:00:00
+					$data[deal_end_time] = date("Y-m-d G:i", strtotime($_POST[deal_end_time]));
 					$data[max_coupons] = $_POST[max_coupons];
 					$data[status] = $_POST[status];
 					$data[offer_details] = $_POST[offer_details];
 					$data[deal_image] = $_POST[files];
+					$data[is_multi] = 'n';
 					//$data[] = $_POST[store_id];
 					//$data[] = $_POST[submit];
 					//echo '<pre>'.print_r($data, true).'</pre>';
-					$db->query_insert(TABLE_DEALS, $data);
+					if ($data[title] ==!'' || $data[full_price] ==!'' || $data[description] ==!'' || $data[deal_start_time] ==!'' || $data[deal_end_time] ==!'' || $data[max_coupons] ==!'' || $data[offer_details] ==!'') {
+					$lstInsertID = $db->query_insert(TABLE_DEALS, $data);
+					}
+					$dataimg['deal_id']=$lstInsertID;
+					$db->query_update(TABLE_DEAL_IMAGES, $dataimg, "deal_id='".$_SESSION["session_temp"]."'");
+					$_SESSION['msg']="Deal is updated successfully.";
 					//exit();
 				}
 			?>
@@ -1893,8 +1900,17 @@ function passMatch() {
 				<tr>
 				<td>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="cart_box" style="border:0px;">
+
 				<tr class="gray_02">
-				<td align="right" width="100"><strong>Set Deal Value:</strong></td>
+				<?php
+				$description=isset($row_deal['description'])?$row_deal['description']:'eg. food & drink or travel';
+				?>
+				<td align="right" ><strong>Title:</strong></td>
+				<td style="padding-left:10px;"><input type="text" size="100" class="lf" name="description" id="description" value="<?php echo $description?>"  onkeyup="calculatedeal('')" onClick="if(this.defaultValue==this.value) this.value=''"      onblur="if (this.value=='') this.value=this.defaultValue"/></td>
+				</tr>
+
+				<tr class="gray_02">
+				<td align="right" width="100"><strong>Price Details:</strong></td>
 				<td><br />
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="cart_box" style="background:#f00;">
 				<tr style="background-color:#000000;">
@@ -1938,13 +1954,12 @@ function passMatch() {
 				</tr>
 				</table></td>
 				</tr>
+
 				<tr class="gray_02">
-				<?php
-				$description=isset($row_deal['description'])?$row_deal['description']:'eg. food & drink or travel';
-				?>
-				<td align="right" ><strong>Description:</strong></td>
-				<td style="padding-left:10px;"><input type="text" size="50" class="lf" name="description" id="description" value="<?php echo $description?>"  onkeyup="calculatedeal('')" onClick="if(this.defaultValue==this.value) this.value=''"      onblur="if (this.value=='') this.value=this.defaultValue"/></td>
+				<td align="right" style="vertical-align:top"><strong># Available:</strong></td>
+				<td><input type="text" name="max_coupons" id="max_coupons" size="10" value="<?php echo stripslashes($row_deal['max_buy']);?>" class="lf"/></td>
 				</tr>
+
 				<tr class="gray_02">
 				<td align="right" style="vertical-align:top"><strong>Choose your deal's title:</strong></td>
 				<td style="border:0px;">
@@ -1986,35 +2001,49 @@ function passMatch() {
 				<tr class="gray_02">
 				<td align="right" style="vertical-align:top"><strong>Deal Start Time:</strong></td>
 				<td><!--<input type="text" name="deal_start_time" id="my_date_field" size="20" value="<?php //if(!empty($row_deal['deal_start_time'])){echo date("Y-m-d H:i",strtotime($row_deal['deal_start_time']));}?>" class="lf"/>-->
-				<script>
-				//$('#my_date_field').datetimepicker();
+				<!--  --><input type="text" name="deal_start_time" id="date" size="20" value="<?php if(!empty($row_deal['deal_start_time'])){echo date("Y-m-d 03:00",strtotime($row_deal['deal_start_time']));}?>" class="lf" onclick='fPopCalendar("date")' />
+				<script type="text/javascript">
+			 		var j = jQuery.noConflict();
+			 		jQuery('#date').datetimepicker();
 				</script>
-				<input type="text" name="deal_start_time" id="date" size="20" value="<?php if(!empty($row_deal['deal_start_time'])){echo date("Y-m-d 03:00",strtotime($row_deal['deal_start_time']));}?>" class="lf" onclick='fPopCalendar("date")' />
-				<?php
-				/*$myCalendar = new tc_calendar("date2", true, false);
-				$myCalendar->setIcon("calendar/images/iconCalendar.gif");
-				$myCalendar->setDate(date("d"), date("m"), date("Y"));
-				$myCalendar->setPath("calendar/");
-				$myCalendar->setYearInterval(1970, 2020);
-				$myCalendar->dateAllow("2008-05-13", "2015-03-01", false);
-				$myCalendar->disabledDay("sat");
-				$myCalendar->disabledDay("sun");
-				$myCalendar->writeScript();*/
-				?>
 				</td>
 				</tr>
 				<tr class="gray_02">
 				<td align="right" style="vertical-align:top"><strong>Deal End Time:</strong></td>
 				<td><!--<input type="text" name="deal_end_time" id="my_date_field2" size="20" value="<?php  //if(!empty($row_deal['deal_end_time'])){echo date("Y-m-d H:i",strtotime($row_deal['deal_end_time']));}?>" class="lf"/>-->
-				<script>
-				//$('#my_date_field2').datetimepicker();
-				</script>
 				<input type="text" name="deal_end_time" id="date1" size="20" value="<?php  if(!empty($row_deal['deal_end_time'])){echo date("Y-m-d H:i",strtotime($row_deal['deal_end_time']));}?>" class="lf" onclick='fPopCalendar("date1")' />
+				<script type="text/javascript">
+			 		var j = jQuery.noConflict();
+			 		jQuery('#date1').datetimepicker();
+				</script>
 				</td>
 				</tr>
+				<!--
 				<tr class="gray_02">
 				<td align="right" style="vertical-align:top"><strong>Max Buy:</strong></td>
 				<td><input type="text" name="max_coupons" id="max_coupons" size="10" value="<?php echo stripslashes($row_deal['max_buy']);?>" class="lf"/></td>
+				</tr>
+				 -->
+				 <tr class="gray_02">
+				<td align="right" style="vertical-align:top"><strong>Location:</strong></td>
+				<td>
+					<select name="city" class="dropdown" id="city" size="1">
+							<option value="">-- Select --</option>
+							<option value="-1" <?php if($row_deals[best_deal]=='y') { echo "selected"; }?>>National Deal</option>
+                                <?php
+
+								echo $sql_city = mysql_query("select * FROM " .TABLE_CITIES." where status = 1 order by city_name asc");
+								while($row_city = mysql_fetch_array($sql_city))
+								{
+							?>
+
+									<option value="<?php echo $row_city[city_id];?>" <?php if($row_city[city_id]==$row_deals[city]) { echo "selected"; }?>><?php echo $row_city[city_name];?></option>
+							<?php
+								}
+							?>
+
+                	</select>
+				</td>
 				</tr>
 				<tr class="gray_02">
 				<td colspan="2" align="center" style="padding-left: 300px;"><input type="button" name="back" value="Back" onclick="javascript: divopen(1)" class="submit" style="width:80px; height:30px; cursor:pointer;" />

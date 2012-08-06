@@ -43,6 +43,10 @@ error_reporting(E_ERROR || E_WARNING || E_STRICT);
 	<link rel="stylesheet" href="css/tipsy.css" type="text/css" />
 	<script type="text/javascript" src="js/jquery.tipsy.js"></script>
 
+	<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
+	<link rel="stylesheet" media="all" type="text/css" href="css/custom-timer.css" />
+
 	<!--[if lt IE 9]>
         <script type="text/javascript" src="http://info.template-help.com/files/ie6_warning/ie6_script_other.js"></script>
         <script type="text/javascript" src="js/html5.js"></script>

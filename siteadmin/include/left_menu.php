@@ -97,6 +97,8 @@
 		<ul class="categoryitems">
 			<li><a href="add_admin.php">Add Admin User</a></li>
 			<li><a href="show_admin.php">View Admin User</a></li>
+			<li><a href="settings.php">Create Setting</a></li>
+			<li><a href="show_settings.php">Show Setting</a></li>
 
 		</ul>
 		<?php }?>

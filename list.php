@@ -25,6 +25,7 @@ include 'include/header.php';
 			$total_buy_bot_deals = mysql_fetch_array(mysql_query($sql_todays_buy_bot_deals));
 
 			$sql_todays_image_bot_deals = "SELECT * FROM ".TABLE_DEAL_IMAGES." WHERE deal_id = ".$today_row_bot_deals['deal_id'];
+			$todays_image_bot_count = mysql_num_rows(mysql_query($sql_todays_image_bot_deals));
 			$todays_image_bot_deals = mysql_fetch_array(mysql_query($sql_todays_image_bot_deals));
 			//$todays_image_res = mysql_query($sql_todays_image);
 
@@ -36,7 +37,13 @@ include 'include/header.php';
 <div class="todays_deal" style="border:0px solid red;">
                 <div class="todays_deal_left" style="width:268px;">
                     <ul>
-                    	<li><img src="<?php echo UPLOAD_PATH.$todays_image_bot_deals['file']; ?>" class="image0" width="268px" height="236px"></li>
+                    	<li>
+                    		<?php if ($todays_image_bot_count > 0) { ?>
+                    		<img src="<?php echo UPLOAD_PATH.$todays_image_bot_deals['file']; ?>" class="image0" width="268px" height="236px">
+                    		<?php } else { ?>
+							<img src="images/no_img2.jpg" class="image0" width="267x" height="235px">
+                    		<?php } ?>
+                    	</li>
                     </ul>
                 </div>
                 <div class="todays_deal_right" id="todays_deal_right_circle<?php echo $today_row_bot_deals['deal_id']; ?>" style="margin: 0 35px;">

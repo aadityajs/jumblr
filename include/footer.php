@@ -104,10 +104,11 @@ $("span#myacc").click(function () {
 		  }, 5000, function() {
 		    // Animation complete.
 		  });
+		$("div#menu").css("margin","20px 0px 0 90px");
 
 });
 $("div#menu").mouseout(function () {
-	$("div#menu").slideUp("slow");			// slideToggle() / toggle()
+	$("div#menu").slideUp("fast");			// slideToggle() / toggle()
 });
 
 $("div#menu").ready(function() {

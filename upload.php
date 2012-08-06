@@ -252,7 +252,7 @@ class UploadHandler
 		{
 
 
-				echo $insert=mysql_query("insert into ".TABLE_DEAL_IMAGES." set deal_id='".$_SESSION["session_temp"]."', file='".$nam."'") ;
+				$insert=mysql_query("insert into ".TABLE_DEAL_IMAGES." set deal_id='".$_SESSION["session_temp"]."', file='".$nam."'") ;
 
 
 

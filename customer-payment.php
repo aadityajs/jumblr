@@ -512,7 +512,7 @@ if($flag !=0)
                     <tr>
                     <td style="vertical-align:top;  padding:0px;">
 <?php if (!isset($_SESSION['user_id'])) { ?>
-Not login
+
    <!-- Not Login Payment table starts -->
 <!-- <form action="" name="frmccnotloginpayment" method="post" class="skinned-form-controls skinned-form-controls-mac" onsubmit="javascript: return ValidateCcForm();"> -->
     <input type="hidden" maxlength="7" name="payment_amount" id="payment_amount" value="<?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //$prod_res['discounted_price']; ?>">
@@ -1187,7 +1187,7 @@ $('input[name="payment_system"]').change(function() {
                           </td>
 <?php } else { ?>
 
-Login
+
 <form class="skinned-form-controls skinned-form-controls-mac" action="thankyou.php" name="frmccloginpayment" method="post" onsubmit="javascript: return ValidateCcForm();">
 	<input type="hidden" maxlength="7" name="payment_amount" id="payment_amount" value="<?php echo($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); // $prod_res['discounted_price']; ?>">
 	<input type="hidden" name="paymentType" value="Sale" />

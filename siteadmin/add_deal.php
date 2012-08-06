@@ -322,10 +322,10 @@ $txt = '
 						                   </tr>
 						                <tr>
 						                    <td valign="top" align="center">
-						                    <a href="'.SITE_URL.'" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">&copy;GeeLaza.com</a>
+						                    <a href="'.SITE_URL.'" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">&copy;Jumblr.com</a>
 						                    <a href="'.SITE_URL.'page.php?page=Terms and Conditions" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Terms & Conditions</a>
 						                    <a href="'.SITE_URL.'customer-register.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Join Us</a>
-						                    <a href="'.SITE_URL.'page.php?page=About GeeLaza UK" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">About GeeLaza</a>
+						                    <a href="'.SITE_URL.'page.php?page=About Jumblr UK" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">About Jumblr</a>
 						                    <a href="'.SITE_URL.'merchant_login" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Real Deal with us</a>                   </td>
 						                 </tr>
 						             </table>
@@ -344,7 +344,7 @@ $txt = '
 						    <td valign="top" align="center" background="'.SITE_URL.'images/daily_email_images/bg_p.gif">
 						       <table width="600" bgcolor="#d1d1d1" border="0" cellspacing="0" cellpadding="0" style="width:600px; margin:0 auto;">
 						          <tr>
-						            <td style="padding:8px 4px; color:#5b5960; font-family:Arial, Helvetica, sans-serif; line-height:14px; font-size:11px; text-decoration:none;">except to obtain some advantage from it? But who has any right <a href="'.SITE_URL.'" style="color:#5eb1de;">GeeLaza</a> find fault with a man who chooses to enjoy a pleasure that has no annoyingfn consequences,          </td>
+						            <td style="padding:8px 4px; color:#5b5960; font-family:Arial, Helvetica, sans-serif; line-height:14px; font-size:11px; text-decoration:none;">except to obtain some advantage from it? But who has any right <a href="'.SITE_URL.'" style="color:#5eb1de;">Jumblr</a> find fault with a man who chooses to enjoy a pleasure that has no annoyingfn consequences,          </td>
 						         </tr>
 						        </table>
 						  </tr>
@@ -521,7 +521,7 @@ if(isset($_REQUEST['submit']))
 				$to  = implode(",",array_unique($usermail));
 
 
-				$subject = $_POST['brand']."GeeLaza.com ";
+				$subject = $_POST['brand']."Jumblr.com ";
 				//$txt = "New offer is created in your city ".$_POST['city']."<br />";
 				//$txt .= " Offer :<b>".$_POST['title']."</b><br/>";
 
@@ -862,10 +862,10 @@ if(isset($_REQUEST['submit']))
 						                   </tr>
 						                <tr>
 						                    <td valign="top" align="center">
-						                    <a href="'.SITE_URL.'" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">&copy;GeeLaza.com</a>
+						                    <a href="'.SITE_URL.'" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">&copy;Jumblr.com</a>
 						                    <a href="'.SITE_URL.'page.php?page=Terms and Conditions" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Terms & Conditions</a>
 						                    <a href="'.SITE_URL.'customer-register.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Join Us</a>
-						                    <a href="'.SITE_URL.'page.php?page=About GeeLaza UK" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">About GeeLaza</a>
+						                    <a href="'.SITE_URL.'page.php?page=About Jumblr UK" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">About Jumblr</a>
 						                    <a href="'.SITE_URL.'merchant_login" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Real Deal with us</a>                   </td>
 						                 </tr>
 						             </table>
@@ -884,7 +884,7 @@ if(isset($_REQUEST['submit']))
 						    <td valign="top" align="center" background="'.SITE_URL.'images/daily_email_images/bg_p.gif">
 						       <table width="600" bgcolor="#d1d1d1" border="0" cellspacing="0" cellpadding="0" style="width:600px; margin:0 auto;">
 						          <tr>
-						            <td style="padding:8px 4px; color:#5b5960; font-family:Arial, Helvetica, sans-serif; line-height:14px; font-size:11px; text-decoration:none;">except to obtain some advantage from it? But who has any right <a href="'.SITE_URL.'" style="color:#5eb1de;">GeeLaza</a> find fault with a man who chooses to enjoy a pleasure that has no annoyingfn consequences,          </td>
+						            <td style="padding:8px 4px; color:#5b5960; font-family:Arial, Helvetica, sans-serif; line-height:14px; font-size:11px; text-decoration:none;">except to obtain some advantage from it? But who has any right <a href="'.SITE_URL.'" style="color:#5eb1de;">Jumblr</a> find fault with a man who chooses to enjoy a pleasure that has no annoyingfn consequences,          </td>
 						         </tr>
 						        </table>
 						  </tr>
@@ -903,7 +903,7 @@ if(isset($_REQUEST['submit']))
 				//$txt .= " Please visit the link :".SITE_URL."city".str_replace(" ","-",trim(strtolower($_POST['city'])))."/offer/".str_replace(" ","-",trim(strtolower($_POST['brand'])))."<br/>";
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-				$headers .= "From: GeeLaza.com<".$admin['email'].">". "\r\n" ;
+				$headers .= "From: Jumblr.com<".$admin['email'].">". "\r\n" ;
 
 				$status=@mail($to,$subject,$txt,$headers);
 
