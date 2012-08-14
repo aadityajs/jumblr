@@ -58,7 +58,7 @@ $txt = '
 						                            	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						                                  <tr>
 						                                    <td valign="top" align="center" style="padding:8px 0 10px 15px; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:24px; font-weight:bold; text-align:center;">
-						                                    	&pound;'.$data['discounted_price'].'
+						                                    	'.getSettings(currency_symbol).$data['discounted_price'].'
 						                                    </td>
 						                                  </tr>
 						                                  <tr>
@@ -90,9 +90,9 @@ $txt = '
 						                                    <td valign="top" align="center" width="78" style="padding:8px 4px 5px 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:12px; font-weight:bold; text-align:center;">Your Save</td>
 						                                  </tr>
 						                                  <tr>
-						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.$data['full_price'].'</td>
+						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$data['full_price'].'</td>
 						                                    <td valign="top" align="center" style="padding:0 0 0 2px; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.$data['discount'].'</td>
-						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.$data['savings'].'</td>
+						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$data['savings'].'</td>
 						                              </tr>
 						                            </table>                            </td>
 						                          </tr>
@@ -146,9 +146,9 @@ $txt = '
 						                                    <td valign="top" align="center" width="78" style="padding:8px 4px 5px 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:12px; font-weight:bold; text-align:center;">Your Save</td>
 						                                  </tr>
 						                                  <tr>
-						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.$email_res2['full_price'].'</td>
+						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$email_res2['full_price'].'</td>
 						                                    <td valign="top" align="center" style="padding:0 0 0 2px; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.intval($email_res2['discounted_price']*100/$email_res2['full_price']).'%</td>
-						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.intval($email_res2['full_price']-$email_res2['discounted_price']).'</td>
+						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).intval($email_res2['full_price']-$email_res2['discounted_price']).'</td>
 						                              </tr>
 						                            </table>                                        </td>
 						                                      </tr>
@@ -157,7 +157,7 @@ $txt = '
 						                                  <td width="120" height="90" valign="top" background="'.SITE_URL.'images/daily_email_images/price_bg2.png">
 						                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
 						                                      <tr>
-						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;">&pound;'.$email_res2['discounted_price'].'</td>
+						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$email_res2['discounted_price'].'</td>
 						                                      </tr>
 						                                      <tr>
 						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#fff; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;"><a href="'.SITE_URL.'index.php?action=view&id='.$email_res2['deal_id'].'" style="color:#fff; text-decoration:none;">View Now !</a></td>
@@ -206,9 +206,9 @@ $txt = '
 						                                    <td valign="top" align="center" width="78" style="padding:8px 4px 5px 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:12px; font-weight:bold; text-align:center;">Your Save</td>
 						                                  </tr>
 						                                  <tr>
-						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.$email_res3['full_price'].'</td>
+						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$email_res3['full_price'].'</td>
 						                                    <td valign="top" align="center" style="padding:0 0 0 2px; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.intval($email_res3['discounted_price']*100/$email_res3['full_price']).'%</td>
-						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.intval($email_res3['full_price']-$email_res3['discounted_price']).'</td>
+						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).intval($email_res3['full_price']-$email_res3['discounted_price']).'</td>
 						                              </tr>
 						                            </table>                                        </td>
 						                                      </tr>
@@ -217,7 +217,7 @@ $txt = '
 						                                  <td width="120" height="90" valign="top" background="'.SITE_URL.'images/daily_email_images/price_bg2.png">
 						                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
 						                                      <tr>
-						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;">&pound;'.$email_res3['discounted_price'].'</td>
+						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$email_res3['discounted_price'].'</td>
 						                                      </tr>
 						                                      <tr>
 						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#fff; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;"><a href="'.SITE_URL.'index.php?action=view&id='.$email_res3['deal_id'].'" style="color:#fff; text-decoration:none;">View Now !</a></td>
@@ -266,9 +266,9 @@ $txt = '
 						                                    <td valign="top" align="center" width="78" style="padding:8px 4px 5px 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:12px; font-weight:bold; text-align:center;">Your Save</td>
 						                                  </tr>
 						                                  <tr>
-						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.$email_res4['full_price'].'</td>
+						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$email_res4['full_price'].'</td>
 						                                    <td valign="top" align="center" style="padding:0 0 0 2px; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.intval($email_res4['discounted_price']*100/$email_res4['full_price']).'%</td>
-						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.intval($email_res4['full_price']-$email_res4['discounted_price']).'</td>
+						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).intval($email_res4['full_price']-$email_res4['discounted_price']).'</td>
 						                              </tr>
 						                            </table>                                        </td>
 						                                      </tr>
@@ -277,7 +277,7 @@ $txt = '
 						                                  <td width="120" height="90" valign="top" background="'.SITE_URL.'images/daily_email_images/price_bg2.png">
 						                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
 						                                      <tr>
-						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;">&pound;'.$email_res4['discounted_price'].'</td>
+						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$email_res4['discounted_price'].'</td>
 						                                      </tr>
 						                                      <tr>
 						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#fff; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;"><a href="'.SITE_URL.'index.php?action=view&id='.$email_res4['deal_id'].'" style="color:#fff; text-decoration:none;">View Now !</a></td>
@@ -396,7 +396,7 @@ if($_REQUEST[mode]=="delete")
 if(isset($_REQUEST['submit']))
 {
 
-	//print_r($_POST);
+	//print_r($_POST);exit;
 	$multiDeal['name'] = $_POST['multi_deal_item_name'];
 	$multiDeal['price'] = $_POST['multi_deal_item_price'];
 	$multiDeal['disc'] = $_POST['multi_deal_item_disc'];
@@ -410,6 +410,7 @@ if(isset($_REQUEST['submit']))
 	$data['city']=$_POST['city'];
 	$data['title']=$_POST['title'];
 	$data['description']=$_POST['description'];
+	$data['address1'] = $_POST['searchTextField'];
 
 	$data['offer_details']=$_POST['offer_details'];
 	$data['offer_details_sidebar']=$_POST['offer_details_sidebar'];
@@ -464,6 +465,9 @@ if(isset($_REQUEST['submit']))
 	$data['item_control_type']=$_POST['item_control_type'];
 	$data['referral_no']=$_POST['referral_no'];
 	$data['referral_value']=$_POST['referral_value'];
+	
+	$data['place_lat'] = $_POST['lat'];
+	$data['place_lng'] = $_POST['lng'];
 
 	/********************** Code for Getting Latitude and Longitude Starts *********************/
 
@@ -598,7 +602,7 @@ if(isset($_REQUEST['submit']))
 						                            	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						                                  <tr>
 						                                    <td valign="top" align="center" style="padding:8px 0 10px 15px; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:24px; font-weight:bold; text-align:center;">
-						                                    	&pound;'.$data['discounted_price'].'
+						                                    	'.getSettings(currency_symbol).$data['discounted_price'].'
 						                                    </td>
 						                                  </tr>
 						                                  <tr>
@@ -630,9 +634,9 @@ if(isset($_REQUEST['submit']))
 						                                    <td valign="top" align="center" width="78" style="padding:8px 4px 5px 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:12px; font-weight:bold; text-align:center;">Your Save</td>
 						                                  </tr>
 						                                  <tr>
-						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.$data['full_price'].'</td>
+						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$data['full_price'].'</td>
 						                                    <td valign="top" align="center" style="padding:0 0 0 2px; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.intval($data['discounted_price']*100/$data['full_price']).'%</td>
-						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.strip_tags($data['full_price'] - $data['discounted_price']).'</td>
+						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).strip_tags($data['full_price'] - $data['discounted_price']).'</td>
 						                              </tr>
 						                            </table>                            </td>
 						                          </tr>
@@ -686,9 +690,9 @@ if(isset($_REQUEST['submit']))
 						                                    <td valign="top" align="center" width="78" style="padding:8px 4px 5px 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:12px; font-weight:bold; text-align:center;">Your Save</td>
 						                                  </tr>
 						                                  <tr>
-						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.$email_res2['full_price'].'</td>
+						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$email_res2['full_price'].'</td>
 						                                    <td valign="top" align="center" style="padding:0 0 0 2px; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.intval($email_res2['discounted_price']*100/$email_res2['full_price']).'%</td>
-						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.intval($email_res2['full_price']-$email_res2['discounted_price']).'</td>
+						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).intval($email_res2['full_price']-$email_res2['discounted_price']).'</td>
 						                              </tr>
 						                            </table>                                        </td>
 						                                      </tr>
@@ -697,7 +701,7 @@ if(isset($_REQUEST['submit']))
 						                                  <td width="120" height="90" valign="top" background="'.SITE_URL.'images/daily_email_images/price_bg2.png">
 						                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
 						                                      <tr>
-						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;">&pound;'.$email_res2['discounted_price'].'</td>
+						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$email_res2['discounted_price'].'</td>
 						                                      </tr>
 						                                      <tr>
 						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#fff; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;"><a href="'.SITE_URL.'index.php?action=view&id='.$email_res2['deal_id'].'" style="color:#fff; text-decoration:none;">View Now !</a></td>
@@ -746,9 +750,9 @@ if(isset($_REQUEST['submit']))
 						                                    <td valign="top" align="center" width="78" style="padding:8px 4px 5px 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:12px; font-weight:bold; text-align:center;">Your Save</td>
 						                                  </tr>
 						                                  <tr>
-						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.$email_res3['full_price'].'</td>
+						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$email_res3['full_price'].'</td>
 						                                    <td valign="top" align="center" style="padding:0 0 0 2px; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.intval($email_res3['discounted_price']*100/$email_res3['full_price']).'%</td>
-						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.intval($email_res3['full_price']-$email_res3['discounted_price']).'</td>
+						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).intval($email_res3['full_price']-$email_res3['discounted_price']).'</td>
 						                              </tr>
 						                            </table>                                        </td>
 						                                      </tr>
@@ -757,7 +761,7 @@ if(isset($_REQUEST['submit']))
 						                                  <td width="120" height="90" valign="top" background="'.SITE_URL.'images/daily_email_images/price_bg2.png">
 						                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
 						                                      <tr>
-						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;">&pound;'.$email_res3['discounted_price'].'</td>
+						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$email_res3['discounted_price'].'</td>
 						                                      </tr>
 						                                      <tr>
 						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#fff; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;"><a href="'.SITE_URL.'index.php?action=view&id='.$email_res3['deal_id'].'" style="color:#fff; text-decoration:none;">View Now !</a></td>
@@ -806,9 +810,9 @@ if(isset($_REQUEST['submit']))
 						                                    <td valign="top" align="center" width="78" style="padding:8px 4px 5px 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:12px; font-weight:bold; text-align:center;">Your Save</td>
 						                                  </tr>
 						                                  <tr>
-						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.$email_res4['full_price'].'</td>
+						                                    <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$email_res4['full_price'].'</td>
 						                                    <td valign="top" align="center" style="padding:0 0 0 2px; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.intval($email_res4['discounted_price']*100/$email_res4['full_price']).'%</td>
-						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.intval($email_res4['full_price']-$email_res4['discounted_price']).'</td>
+						                                    <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).intval($email_res4['full_price']-$email_res4['discounted_price']).'</td>
 						                              </tr>
 						                            </table>                                        </td>
 						                                      </tr>
@@ -817,7 +821,7 @@ if(isset($_REQUEST['submit']))
 						                                  <td width="120" height="90" valign="top" background="'.SITE_URL.'images/daily_email_images/price_bg2.png">
 						                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
 						                                      <tr>
-						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;">&pound;'.$email_res4['discounted_price'].'</td>
+						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#00cb46; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).$email_res4['discounted_price'].'</td>
 						                                      </tr>
 						                                      <tr>
 						                                        <td valign="top" align="center" style="padding:8px 0 10px 0; color:#fff; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:18px; font-weight:bold; text-align:center;"><a href="'.SITE_URL.'index.php?action=view&id='.$email_res4['deal_id'].'" style="color:#fff; text-decoration:none;">View Now !</a></td>
@@ -1349,6 +1353,111 @@ $_SESSION["session_temp"] =uniqid();
                         <dt><label for="email">Savings:</label></dt>
                         <dd><input type="text" name="savings" id="savings" size="54"  value="<?php echo stripslashes($row_deals['savings']);?>" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" /></dd>
                     </dl>
+								<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"
+				  type="text/javascript"></script>
+			
+				<style type="text/css">
+				  body {
+					font-family: sans-serif;
+					font-size: 14px;
+				  }
+				  #map_canvas {
+					height: 400px;
+					width: 600px;
+					margin-top: 0.6em;
+				  }
+				</style>
+			
+				<script type="text/javascript">
+				  function initialize() {
+					var mapOptions = {
+					  center: new google.maps.LatLng(-33.8688, 151.2195),
+					  zoom: 13,
+					  mapTypeId: google.maps.MapTypeId.ROADMAP
+					};
+					var map = new google.maps.Map(document.getElementById('map_canvas'),
+					  mapOptions);
+			
+					var input = document.getElementById('searchTextField');
+					var autocomplete = new google.maps.places.Autocomplete(input);
+			
+					autocomplete.bindTo('bounds', map);
+			
+					var infowindow = new google.maps.InfoWindow();
+					var marker = new google.maps.Marker({
+					  map: map
+					});
+			
+					google.maps.event.addListener(autocomplete, 'place_changed', function() {
+					  infowindow.close();
+					  var place = autocomplete.getPlace();
+					  if (place.geometry.viewport) {
+						map.fitBounds(place.geometry.viewport);
+					  } else {
+						map.setCenter(place.geometry.location);
+						map.setZoom(17);  // Why 17? Because it looks good.
+					  }
+			
+					  var image = new google.maps.MarkerImage(
+						  place.icon,
+						  new google.maps.Size(71, 71),
+						  new google.maps.Point(0, 0),
+						  new google.maps.Point(17, 34),
+						  new google.maps.Size(35, 35));
+					  marker.setIcon(image);
+					  marker.setPosition(place.geometry.location);
+					document.getElementById("lat").value=place.geometry.location.lat();
+					document.getElementById("lng").value=place.geometry.location.lng();
+					  var address = '';
+					  if (place.address_components) {
+						address = [(place.address_components[0] &&
+									place.address_components[0].short_name || ''),
+								   (place.address_components[1] &&
+									place.address_components[1].short_name || ''),
+								   (place.address_components[2] &&
+									place.address_components[2].short_name || '')
+								  ].join(' ');
+					  }
+			
+					  infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+					  infowindow.open(map, marker);
+					});
+			
+					// Sets a listener on a radio button to change the filter type on Places
+					// Autocomplete.
+					function setupClickListener(id, types) {
+					  var radioButton = document.getElementById(id);
+					  google.maps.event.addDomListener(radioButton, 'click', function() {
+						autocomplete.setTypes(types);
+					  });
+					}
+			
+					setupClickListener('changetype-all', []);
+					setupClickListener('changetype-establishment', ['establishment']);
+					setupClickListener('changetype-geocode', ['geocode']);
+				  }
+				  google.maps.event.addDomListener(window, 'load', initialize);
+				</script>
+					 <dl id="main_loc">
+                        <dt><label for="email">Location:</label></dt>
+                        <dd>
+						 <div>
+						  <input id="searchTextField" name="searchTextField" type="text" size="50">
+						 <!-- <input type="radio" name="type" id="changetype-all" checked="checked">
+						  <label for="changetype-all">All</label>
+					
+						  <input type="radio" name="type" id="changetype-establishment">
+						  <label for="changetype-establishment">Establishments</label>
+					
+						  <input type="radio" name="type" id="changetype-geocode">
+						  <label for="changetype-geocode">Geocodes</lable>-->
+						</div>
+                        	<div id="map_canvas" ></div>
+							<div id="displaycsv" style="width:600px;height:0px;margin-top:10px;overflow:auto;padding:10px;border:0px solid ;"></div>
+							<input type="hidden" name="lat" id="lat" value="<?php echo stripslashes($row_deals['place_lat']);?>"/>
+							<input type="hidden" name="lng" id="lng" value="<?php echo stripslashes($row_deals['place_lng']);?>"/>
+						</dd>
+                    </dl>
 
 					<!--
 					<dl>
@@ -1501,7 +1610,7 @@ $_SESSION["session_temp"] =uniqid();
 
 		 <div id="step3" style="display: none;">
 		 <div class="clear"></div>
-			<span style="font-weight:bold">Upload Files:</span>
+			<span style="font-weight:bold">Upload Files:( Please add  348X307px dimention picture )</span>
 
 
 					<!-- <iframe src="uploader/example/uploader.php" width="600" frameborder="0" scrolling="no"></iframe>-->
@@ -1611,6 +1720,7 @@ $("input#step1next").click(function () {
 	$("div#step1").slideUp(1000);
 	$("div#step2").fadeIn(1000);
 	$("div#step3").show();			// slideToggle() / toggle()
+	initialize();
 	$("input#step1next").hide();
 });
 

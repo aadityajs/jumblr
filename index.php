@@ -1,5 +1,6 @@
 <?php
 include("include/header.php");
+include 'recommendation_popup.php';
 
 ?>
 
@@ -21,6 +22,7 @@ include("include/header.php");
 			//header('location:index.php?city='.$city_name_data['city_id']);
 		}
 		*/
+
 ?>
 <?php
 	if(!isset($_COOKIE["subscribe"]))
@@ -312,7 +314,7 @@ elseif(($_GET['id'] != ''))
 }
 else {
 $city = end(explode("|",$_COOKIE['subscribe']));
-	$sql_today = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city LIMIT 0, 1";
+	 $sql_today = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city LIMIT 0, 1";
 	//$sql_today = "SELECT * FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_end_time LIKE '".date("Y-m-d")."%' LIMIT 0, 1";
 	$today_res = mysql_fetch_array(mysql_query($sql_today));
 
@@ -346,7 +348,12 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 			<div class="todays_deal">
             	<div class="todays_deal_img"></div>
                 <a href="<?php echo SITE_URL;?>deal-details.php?action=view&id=<?php echo $today_res['deal_id']; ?>"><div class="more_info"></div></a>
-                <div class="reffer_friend" style="z-index: 1;"></div>
+
+	            <a <?php if (isset($_SESSION['fb_id'])) { ?>href="#inline1" id="various4" <?php } else { ?>href="<?php echo SITE_URL; ?>customer-login.php"<?php } ?>>
+	                <div class="reffer_friend" style="z-index: 1;">
+
+	                </div>
+	            </a> <!-- -->
             	<h1 style="margin-left:48px;">
             		<?php if ($_GET['action'] != "sold") { ?>
 						<a href="<?php echo SITE_URL; ?>customer-payment.php?item=<?php echo $today_res['deal_id']; ?>">
@@ -385,9 +392,7 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 							<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
 							<div style="float: left;">
 							Share The Deal:
-                        	<!-- <a <?php if (isset($_SESSION['user_id'])) { ?>href="#inline1" id="various1" <?php } else { ?>href="<?php echo SITE_URL; ?>recomendation.php"<?php } ?>>
-                            <img src="images/social_01.png" alt="">
-                            </a> -->
+
 							</div>
 							<a class="addthis_button_email"></a>
 							<a class="addthis_button_blogger"></a>
@@ -405,7 +410,7 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
                 </div>
 
                 <div class="todays_deal_middle">
-                	<div class="amount">Amount: <span>&pound;<?php echo ($today_res['is_multi'] == 'n' ? number_format($today_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); ?></span></div>
+                	<div class="amount">Amount: <span><?php echo getSettings(currency_symbol); ?><?php echo ($today_res['is_multi'] == 'n' ? number_format($today_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); ?></span></div>
                     <div class="available">
                     	<div style="border-right:1px solid #d2d2d2;">
                         	Available<br>
@@ -484,8 +489,8 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 
                  </div>
                  <div class="clear"></div>
-                 <div style="margin: 21px 0 0 -60px; width: 270px; font-size: 11px; text-align:left;">
-                 <img src="images/pointer.png" alt="" align="absmiddle"><a href="javascript: void(0);" id="locateDealMap" style="padding: 10px; color:#9a9a9a;">Locate this deal</a>
+                 <div style="margin: 18px 0 0 -60px; width: 270px; font-size: 11px; text-align:left;">
+                 <img src="images/icon1.png" alt="" align="absmiddle"><a href="javascript: void(0);" id="locateDealMap" style="padding: 10px; color:#9a9a9a;">Locate this deal</a>
                  </div>
                 </div>
                 <div class="todays_deal_right" id="click">
@@ -551,42 +556,49 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
              <div class="clear"></div>
             </div>
 
-			<?php include 'multi-deal-popup.php';?>
+			<?php //include 'multi-deal-popup.php';?>
 
 
 <?php } else {?>
 
 <!-- No deal layout starts -->
 
-	<div class="common_box">
-	<div class="main_box">
-						<?php
-							$sql_nodeal_city = "SELECT * FROM ".TABLE_CITIES." WHERE city_id = $city";
-							$result_nodeal_city = mysql_query($sql_nodeal_city);
-							$row_nodeal_city = mysql_fetch_array($result_nodeal_city);
-						?>
-	  <div class="coming_soon" >
+	<div>
+
+
+	<div class="todays_deal">
+		<?php
+            $sql_nodeal_city = "SELECT * FROM ".TABLE_CITIES." WHERE city_id = $city";
+            $result_nodeal_city = mysql_query($sql_nodeal_city);
+            $row_nodeal_city = mysql_fetch_array($result_nodeal_city);
+
+        ?>
+    <div class="moreinfo_top"></div>
+      <div class="moreinfo_mid" style="width:890px;">
+	  <div class="coming_soon" style="width:850px;">
 	  <div class="coming_soon_top"></div>
 	  <div class="coming_soon_mid">
 	  <div class="coming_left">
 	   <img src="images/coming_small10.gif" alt="" width="322" height="224"/></div>
-	  <div class="coming_right" style="width:510px;">
+	  <div class="coming_right" style="width:480px;">
 	 <div>
 	 <p>COMING SOON: THE BEST DEALS THAT <?php echo strtoupper($row_nodeal_city[city_name]); ?> HAS TO OFFER</p>
 	 </div>
 	 <div style="margin:20px auto;">
 	 Discover your city upto 90% off See your city in a brand new light with Jumblr. New and diverse deals on spa, beauty, leisure, restaurents and sport bring Jumblr customers excitement for upto 90% less, every single day. But it's not just about presenting deals, Jumblr...</div>
 	 <div class="clear"></div>
-	 <div class="sendbtn"><a id="nodeal_info_btn" href="#more_info_div"></a></div>
+	 <!-- <div class="sendbtn"><a id="nodeal_info_btn" href="#more_info_div"></a></div> -->
 	 <div style="float: right; margin: 4px auto; width: 90px; font: bold 22px/24px Arial, Helvetica, sans-serif; color:#3d3a3a;">- 90%</div>
 	  </div>
 	  </div>
 	  <div class="coming_soon_bot"></div>
       <div class="clear"></div>
 	  </div>
-
-
+      </div>
+     <div class="moreinfo_bot"></div>
 	</div>
+
+
 	<div class="clear"><img src="images/spacer.gif" alt="" width="1" height="4" /></div>
 	</div>
 
@@ -693,7 +705,7 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 
 <?php  if ($circleUserCount > 0) { ?>
 <!-- jumblr deal members drop down start -->
-<div class="todays_deal" id="locations" style="margin-top: -35px; z-index: 0; display: block; border: 0px solid red;">
+<div class="todays_deal" id="locations" style="margin-top: -35px; z-index: 0; display: block;">
 				<?php  if ($circleUserCount < 9) { ?>
 					<script type='text/javascript'>
 						$(document).ready(function() {
@@ -701,7 +713,7 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 					</script>
 				<?php }?>
 
-                  <div id="ca-container" class="ca-container" style="height: 620px;">
+                  <div id="ca-container" class="ca-container" style="height: auto;">
                     <div class="ca-wrapper">
 				<?php
 						foreach ($circleUser as $fbUser) {
@@ -769,7 +781,18 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 						<a href="<?php echo getLoginUserDetails(profile_url); ?>" style="clear:right;"> <img src='<?php echo getLoginUserDetails(pic_square); ?>' alt='' width='50' height='50' class='blog'/></a>
                         </div>
                         <div style="width:700px; float:left;">
-                    	<textarea type="textarea" class="textarea" name="comment" id="comment" style="width: 690px; height:50px;" <?php echo (isset($_SESSION['fb_id']) ? '' : 'disabled=disabled') ?>><?php echo (isset($_SESSION['fb_id']) ? '' : 'Please login to post comment!') ?></textarea>
+                    	<textarea type="textarea" class="textarea" name="comment" id="comment" onkeyup="showSuggestion();" style="width: 690px; height:50px;" <?php echo (isset($_SESSION['fb_id']) ? '' : 'disabled=disabled') ?>><?php echo (isset($_SESSION['fb_id']) ? '' : 'Please login to post comment!') ?></textarea>
+                    	<div id="dropBox" style="display: none;">
+						     <ul>
+						         	<li><a href="#"><span><img src="images/google_icon.png" alt="" width="17" height="17" /></span>asaSAsaS</a></li>
+						            <li><a href="#"><span><img src="images/google_icon.png" alt="" width="17" height="17" /></span>asaSAsaS</a></li>
+						            <li><a href="#"><span><img src="images/google_icon.png" alt="" width="17" height="17" /></span>asaSAsaS</a></li>
+						            <li><a href="#"><span><img src="images/google_icon.png" alt="" width="17" height="17" /></span>asaSAsaS</a></li>
+						            <li><a href="#"><span><img src="images/google_icon.png" alt="" width="17" height="17" /></span>asaSAsaS</a></li>
+						            <li><a href="#"><span><img src="images/google_icon.png" alt="" width="17" height="17" /></span>asaSAsaS</a></li>
+						        </ul>
+						</div>
+
                         </div>
                         <div style="width:40px; float:left;">
                         <input type="button" name="commentPost" id="commentPost" onClick="return post_comment(<?php echo $today_res['deal_id']; ?>);" <?php echo (isset($_SESSION['fb_id']) ? '' : 'disabled=disabled') ?> value="Post" class="post_btn" style="height:60px; width:60px; margin:0"/>
@@ -825,7 +848,7 @@ function post_comment(deal_id) {
 	  data: dataString,
 	  success: function() {
 	    $('#comment_post_box').append("<div id='message' class='message'></div>");
-	    $('#message').html("<p>Thanks for your precious comment.</p>")
+	    //$('#message').html("<p>Thanks for your precious comment.</p>")
 	    //.append("<img id='checkmark' src='images/tick.png' />")
 	    //.append("<p>Thanks for posting your precious comment!</p>")
 	    //.hide()
@@ -840,6 +863,55 @@ function post_comment(deal_id) {
 	}
 return false;
 }
+
+var gotit=0;
+function showSuggestion() {
+	var conte=document.getElementById("comment").value;
+	var showSugg = '&details=' + conte ;
+	//alert(showSugg);
+	var loc=conte.indexOf('@');
+
+		if(loc>=0 && gotit==0) {
+			gotit=1;
+
+			$.ajax({
+				  type: "POST",
+				  url: "ajax_suggestiont.php",
+				  data: showSugg,
+				  success: function(data) {
+				    $('#dropBox').html(data);
+				    gotit=0;
+				    //alert(data); jqSuggListClick
+				    //$('#message').html("<p>Thanks for your precious comment.</p>")
+				    //.append("<img id='checkmark' src='images/tick.png' />")
+				    //.append("<p>Thanks for posting your precious comment!</p>")
+				    //.hide()
+				    //.fadeIn(1500, function() {
+				     // $('#comment_post_box');
+				   // });
+				    //$('#comment_box').append("<div class='box3'><div class='box3_top'><div class='float_left'><img src='<?php echo $userDetails[pic_square]; ?>' alt='' width='50' height='50' class='blog'/></div><div class='heading_txt'><strong><?php echo $userDetails[name]; ?></strong><br/> <?php echo date("F j, Y, g:i a"); ?> </div><div class='clear'></div></div><div class='inner_box30'>"+details+"</div><div class='clear'></div></div>");
+				    //$('textarea#comment').val(' ');
+				  }
+				 });
+
+
+			//alert(loc);
+			//$('#dropBox').html('hi, here will be the response!');
+			$('#dropBox').show();
+
+	        }
+
+}
+
+
+</script>
+
+<script>
+
+function testSugg() {
+
+	}
+
 </script>
 
 <!-- jumblr deal members drop down ends -->
@@ -906,7 +978,8 @@ return false;
 		foreach ($markers as $i => $location) {
 		    $map->addMarker($location[1], $location[2], array(
 		        'title' => $location[0],
-		        'icon' => 'http://armdex.com/maps/icon' . ($i + 1) . '.png',
+		        //'icon' => 'http://armdex.com/maps/icon' . ($i + 1) . '.png',
+		        'icon' => 'images/marker_icon.png',
 		        'html' => '<div><img src="' . $location[4] . '" width="' . $location[5] . '" height="' . $location[6] . '"align="texttop" />' .  $location[7] . '</div><b>' . $location[0] . '</b>',
 		        'infoCloseOthers' => true,
 		    	'animation' => 'DROP'
@@ -1079,7 +1152,7 @@ return false;
 
                 	<div class="todays_bg"><div class="todays_abc"><?php echo $circleUserCount; ?></div></div>
 
-                	<div class="amount">Amount: <span>&pound;<?php echo ($today_row_bot_deals['is_multi'] == 'n' ? number_format($today_row_bot_deals['discounted_price'], 2) : number_format($is_multi_bot_deals['multi_deal_item_price'], 2)); ?></span></span></div>
+                	<div class="amount">Amount: <span><?php echo getSettings(currency_symbol); ?><?php echo ($today_row_bot_deals['is_multi'] == 'n' ? number_format($today_row_bot_deals['discounted_price'], 2) : number_format($is_multi_bot_deals['multi_deal_item_price'], 2)); ?></span></span></div>
                     <div class="available">
                     	<div style="border-right:1px solid #d2d2d2;">
                         	Available<br>
@@ -1178,85 +1251,17 @@ return false;
 
 
 
-
-<div id="email-form" class="LB-white-content" style="background: url(images/bodybg.jpg) left top repeat; margin:0;">
-	<a id="close" href="" onClick="HideLightBox(); return false;"></a>
-
-		<div class="subscribe_box">
-		<!--<div id="cross"><a href="#"><img src="images/cross_white.gif" alt="" width="22" height="32" border="0" /></a></div>
-		-->
-        <div class="title_txt" style="font-size: 27px; font-family:Georgia, 'Times New Roman', Times, serif;">We give you the best daily deals in your city!</div>
-        <div class="title_txt2" style="font-family:Georgia, 'Times New Roman', Times, serif;">Save up to 90% in restaurants, spas, cinemas, gyms, event and many more...</div>
-		<div class="clear"></div>
-		<form name="select_city" id="select_city" action="<?php echo $_SERVER["PHP_SELF"]?>">
-		<div id="subscribe">
-		<ul>
-		<li style="width: 450px; float: left; margin-top: 20px;">
-			<div id="email_check" style="float: left;"></div>
-			<input type="text" name="email" id="email_subscript" class="white_box2" value="Enter your email address" style="font-family: Georgia, 'Times New Roman', Times, serif; color:#999999; font-size: 18px; font-weight: normal;" onClick="javascript: if (this.value == 'Enter your email address') { this.value = '' };" onblur ="javascript: if (this.value == ''){ this.value = 'Enter your email address' }; "/>
-		</li>
-		<li style="margin: 8px 0 0 40px;">
-			<div id="city_check" style="float: left;"></div>
-			<select name="city" id="city" class="text_select">
-                        <option value="" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size:18px; font-weight: normal; color:#999999;">Choose your city</option>
-                        <option value="National deal" id="nd">National Deal</option>
-                        <?php
-							$sql_cities = "SELECT * FROM ".TABLE_CITIES." GROUP BY city_name";
-							$result_cities = mysql_query($sql_cities);
-							while($row_cities = mysql_fetch_array($result_cities))
-{
-								?>
-                        <option value="<?php echo $row_cities["city_id"]; ?>"><?php echo $row_cities["city_name"]; ?></option>
-                        <?php
-}
-							?>
-              </select>
-			<input type="button" name="Submit" class="subs_btn" value="Sign up now" id="city_submit" onClick="javascript: return getSubscribeValues(this.id);"/>
-		</li>
-		<!--<li style="margin: 8px 0 0 90px;">By subscribing I agree the <a href="#">Terms & Conditions</a> and <a href="#">Provacy Policy</a>.</li>-->
-		</ul>
-		</div>
-		</form>
-
-		<div class="clear"><img src="images/spacer.gif" alt="" width="1" height="150" border="0" /></div>
-
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="65%">
-            	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="share_box1">
-                  <tr>
-                    <td>
-                    	<ul class="tick_list">
-                            <li>One email a day with at least 50% off the best brands.</li>
-                            <li>No spam ever, unsubscribe with just one click</li>
-                        </ul>
-                    </td>
-                  </tr>
-                  <tr>
-
-                  	<td><p style="float:left;"><a href="<?php echo SITE_URL;?>?city=31">Already a member?</a></p> <p style="float:right;">
-                  	<a href="<?php echo SITE_URL; ?>page.php?page=Privacy%20Policy">Our Privacy Policy</a></p></td>
-                  </tr>
-                </table>
-            </td>
-            <td width="30%">
-            	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="share_box2">
-                  <tr>
-                    <td><img src="images/no_1.png" alt="" border="0" /></td>
-                    <td>Buy</td>
-                    <td><img src="images/no_2.png" alt="" border="0" /></td>
-                    <td>Share</td>
-                    <td><img src="images/no_3.png" alt="" border="0" /></td>
-                    <td style="padding-right:10px;">Enjoy</td>
-                  </tr>
-                </table>
-
-            </td>
-          </tr>
-        </table>
+<div id="email-form" class="LB-white-content" style="height:450px;">
+	<!-- <a id="close" href="" onClick="HideLightBox(); return false;"></a> -->
+        <div class="header_txt">
+        	Be part of the Jumblr movement
+            <a href="<?php echo SITE_URL; ?>customer-login.php?ref=fb"><img src="http://www.realestatenewport.com/assets/facebook-login-button-5c5750b27cc8759f735f49a5ad2a4263.png" alt="" /></a>
+        </div>
+		<!--<div style="text-align:right; padding-right:33px;"><a href="<?php echo SITE_URL; ?>customer-login.php?ref=fb"><img src="http://www.realestatenewport.com/assets/facebook-login-button-5c5750b27cc8759f735f49a5ad2a4263.png" alt="" /></a></div>-->
+		<div class="subscribe_box" style="margin-left: 33px; margin-top:15px;">
+			<iframe width="630" height="340" src="http://www.youtube.com/embed/UOUDFUiN7ew" frameborder="0" allowfullscreen></iframe>
 
 		</div>
-</div>
 
 
 

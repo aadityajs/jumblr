@@ -29,9 +29,9 @@ $email_Template_1 = '
 		                  <td width="74%"><p><strong>Thank you very much for your order, '.ucfirst($user['first_name']).' '.ucfirst($user['last_name']).'.</strong></p>
 		                      <p>Thank the deal has been successfully closed we\'ll send you the voucher and all relevant information in a separate email.<br />
 		                      </p>
-		                    <p>Get yourself &pound;5 GeeLaza credit now. Recommend this deal to your friends. We will credit you<br />
-		                      to the value of &pound;5 as a reward for every friend you send our way who buys this. or any other<br />
-		                      deal on GeeLaza. You can redeem this credit against a future deal of your choice.<br />
+		                    <p>Get yourself '.getSettings(currency_symbol).'5 Jumblr credit now. Recommend this deal to your friends. We will credit you<br />
+		                      to the value of '.getSettings(currency_symbol).'5 as a reward for every friend you send our way who buys this. or any other<br />
+		                      deal on Jumblr. You can redeem this credit against a future deal of your choice.<br />
 		                      </p>
 		                    <p>Your Groupon team<br />
 		                      </p>
@@ -44,10 +44,10 @@ $email_Template_1 = '
 		                      <tr>
 		                        <td bgcolor="#fff8d9"><table width="132" border="0" align="center" cellpadding="0" cellspacing="0">
 		                            <tr>
-		                              <td align="left" valign="top"><p> &pound;5 GeeLaza credit for every recruited friend</p>
+		                              <td align="left" valign="top"><p> '.getSettings(currency_symbol).'5 Jumblr credit for every recruited friend</p>
 		                                  <p>Redeen your credit againt your next deal.<br />
 		                                  </p>
-		                                <p>Restaurants. spas, beauty and leisure enjoy GeeLaza with friends. </p></td>
+		                                <p>Restaurants. spas, beauty and leisure enjoy Jumblr with friends. </p></td>
 		                            </tr>
 		                        </table></td>
 		                      </tr>
@@ -124,16 +124,16 @@ $email_Template_1 = '
 		          <tr>
 		            <td align="left" valign="top" style="font-family: Arial, Helvetica, sans-serif; text-align:left; line-height:18px; color:#000; font-size:13px; font-weight: normal; font-smooth: always;"><table width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 1px solid #d2d2d2;">
 		                <tr>
-		                  <td width="18%" bgcolor="#ececec" style="border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:18px; font-weight: normal; font-smooth: always; padding: 4px 6px;">GeeLaza Title </td>
-		                  <td width="82%" style="border-bottom: 1px solid #d2d2d2; padding: 0 6px;">'.$deal_details['title'].'(worth &pound;'.intval($deal_details['full_price']).')</td>
+		                  <td width="18%" bgcolor="#ececec" style="border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:18px; font-weight: normal; font-smooth: always; padding: 4px 6px;">Jumblr Title </td>
+		                  <td width="82%" style="border-bottom: 1px solid #d2d2d2; padding: 0 6px;">'.$deal_details['title'].'(worth '.getSettings(currency_symbol).intval($deal_details['full_price']).')</td>
 		                </tr>
 		                <tr>
 		                  <td bgcolor="#ececec" style="border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:18px; font-weight: normal; font-smooth: always; padding: 4px 6px;">Price </td>
-		                  <td style="border-bottom: 1px solid #d2d2d2; padding: 0 6px;">&pound;'.intval($deal_details['discounted_price']).'</td>
+		                  <td style="border-bottom: 1px solid #d2d2d2; padding: 0 6px;">'.getSettings(currency_symbol).intval($deal_details['discounted_price']).'</td>
 		                </tr>
 		                <tr>
 		                  <td bgcolor="#ececec" style="border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:18px; font-weight: normal; font-smooth: always; padding: 4px 6px;">Discount</td>
-		                  <td style="border-bottom: 1px solid #d2d2d2; padding: 0 6px;">&pound;'.intval($deal_details['full_price'] - $deal_details['discounted_price']).'</td>
+		                  <td style="border-bottom: 1px solid #d2d2d2; padding: 0 6px;">'.getSettings(currency_symbol).intval($deal_details['full_price'] - $deal_details['discounted_price']).'</td>
 		                </tr>
 		                <tr>
 		                  <td bgcolor="#ececec" style="border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:18px; font-weight: normal; font-smooth: always; padding: 4px 6px;">Quantity</td>
@@ -141,7 +141,7 @@ $email_Template_1 = '
 		                </tr>
 		                <tr>
 		                  <td bgcolor="#f2f0c0" style="border-right: 1px solid #d2d2d2; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:22px; font-weight: bold; font-smooth: always; padding: 4px 6px;">Total</td>
-		                  <td bgcolor="#f2f0c0" style="padding: 0 6px; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:22px; font-weight: bold; font-smooth: always; padding: 4px 6px;">&pound;'.$payment_gross.'</td>
+		                  <td bgcolor="#f2f0c0" style="padding: 0 6px; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:22px; font-weight: bold; font-smooth: always; padding: 4px 6px;">'.getSettings(currency_symbol).$payment_gross.'</td>
 		                </tr>
 		            </table></td>
 		          </tr>
@@ -418,7 +418,7 @@ $email_Template_1 = '
 											</td>
 										  </tr>
 										  <tr>
-											<td valign="top" style="color:#828585; padding:0 0 10px 18px; font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:12px; font-weight:normal; border-bottom:2px solid #7fd7fc;">Thank you for becoming a GeeLaza member! Each day, we’ll email you with great experiences and values at local restaurants, events, fitness, and more. <br /> You\'ll love it-we promise.</td>
+											<td valign="top" style="color:#828585; padding:0 0 10px 18px; font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:12px; font-weight:normal; border-bottom:2px solid #7fd7fc;">Thank you for becoming a Jumblr member! Each day, we’ll email you with great experiences and values at local restaurants, events, fitness, and more. <br /> You\'ll love it-we promise.</td>
 										  </tr>
 									 </table>
 								  </td>
@@ -433,7 +433,7 @@ $email_Template_1 = '
 											<td valign="top" align="left" style="color:#828585; padding:0 6px 10px 6px; font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:12px; font-weight:normal;">
 
 											  <p><b style="color:#279cea;padding:0 0 6px 0;font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:13px; font-weight:bold; display:inline-block;">What happens when you buy a deal?</b><br />
-						When you purchase a deal, we&rsquo;ll send you a voucher 24-48  hours after the clock runs out on your deal. If you ever lose this email, you  can access by loggin into your GeeLaza account and it will be under &ldquo;My  Vouchers&rdquo;. Once you&rsquo;ve received your voucher, simply follow instructions on the  voucher to enjoy the deal, or you can send your voucher to a loved one as a  gift (don&rsquo;t worry about your name being on the voucher).</p>
+						When you purchase a deal, we&rsquo;ll send you a voucher 24-48  hours after the clock runs out on your deal. If you ever lose this email, you  can access by loggin into your Jumblr account and it will be under &ldquo;My  Vouchers&rdquo;. Once you&rsquo;ve received your voucher, simply follow instructions on the  voucher to enjoy the deal, or you can send your voucher to a loved one as a  gift (don&rsquo;t worry about your name being on the voucher).</p>
 
 						<p><b style="color:#279cea;padding:0 0 8px 0;font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:13px; font-weight:bold; display:inline-block;">Check out today&rsquo;s deal now and then start saving! </b><br />
 						Right now we&rsquo;re in the process of expanding to cover all  areas in the UK, so if your area doesn&rsquo;t get a deal immediately don&rsquo;t worry,  we&rsquo;ll have deals there soon.<br /><br />
@@ -462,7 +462,7 @@ $email_Template_1 = '
 
 						   <p> If you need any help, get in touch with us. We thank you  once again for registering with us and we hope you have a great time and enjoy deal  hunting.</p>
 							<p><b>Need help?</b> <a href="#" style="color:#279cea; text-decoration:none;">Click here</a></p>
-							<p><b>The GeeLaza Team</b></p>
+							<p><b>The Jumblr Team</b></p>
 										  </td>
 										  </tr>
 										 </table>
@@ -496,7 +496,7 @@ $email_Template_1 = '
 											<a href="'.SITE_URL.'" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">&copy; GeeLaza.com</a>
 											<a href="'.SITE_URL.'page.php?page=Terms and Conditions" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Terms & Conditions</a>
 											<a href="'.SITE_URL.'customer-register.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Join Us</a>
-											<a href="'.SITE_URL.'page.php?page=About GeeLaza UK" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">About GeeLaza</a>
+											<a href="'.SITE_URL.'page.php?page=About Jumblr UK" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">About GeeLaza</a>
 											<a href="'.SITE_URL.'merchant_business.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Run Deal With Us</a>                   </td>
 										 </tr>
 									 </table>
@@ -515,7 +515,7 @@ $email_Template_1 = '
 							<td valign="top" align="center" background="'.SITE_URL.'images/daily_email_images/bg_p.gif">
 							   <table width="600" bgcolor="#d1d1d1" border="0" cellspacing="0" cellpadding="0" style="width:600px; margin:0 auto;">
 								  <tr>
-									<td style="padding:8px 4px; color:#5b5960; font-family:Arial, Helvetica, sans-serif; line-height:14px; font-size:11px; text-decoration:none;">Please add info@geelaza.com to your address book or safe sender list so our emails get to your inbox.<br />The message was sent by GeeLaza UK.
+									<td style="padding:8px 4px; color:#5b5960; font-family:Arial, Helvetica, sans-serif; line-height:14px; font-size:11px; text-decoration:none;">Please add info@geelaza.com to your address book or safe sender list so our emails get to your inbox.<br />The message was sent by Jumblr UK.
 						</td>
 								 </tr>
 								 <tr>
@@ -539,14 +539,14 @@ $email_Template_1 = '
 
 
 
-					$subject = "Welcome to GeeLaza.com ";
+					$subject = "Welcome to Jumblr.com ";
 
 					$sql="SELECT * FROM ".TABLE_ADMIN." where admin_name='admin'";
 					$admin=$db->query_first($sql);
 
 					$headers  = 'MIME-Version: 1.0' . "\r\n";
 					$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-					$headers .= "From: GeeLaza.com<voucher@geelaza.com>". "\r\n" ;
+					$headers .= "From: Jumblr.com<voucher@jumblr.com>". "\r\n" ;
 
 					@mail($email,$subject,$Template,$headers);
 			}
@@ -664,7 +664,7 @@ if($_POST['payment_system'] == 'cc')
 
 								$headers  = 'MIME-Version: 1.0' . "\r\n";
 								$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-								$headers .= "From: GeeLaza.com<admin@geelaza.com>". "\r\n" ;
+								$headers .= "From: Jumblr.com<admin@jumblr.com>". "\r\n" ;
 
 								@mail($email,$subject,$giftEmailTemplate,$headers);
 								echo "<p>Your gift has been sent successfully</p>";
@@ -713,7 +713,7 @@ elseif($_POST['payment_system'] == 'maestro')
 		$zip = urlencode($_POST['mzip']);
 		$amount = urlencode($_POST['payment_amount']);
 		//$currencyCode=urlencode($_POST['currency']);
-		$currencyCode="GBP";
+		$currencyCode="USD";
 		$paymentType=urlencode($_POST['paymentType']);
 
 		/* Construct the request string that will be sent to PayPal.
@@ -902,9 +902,9 @@ $email_Template_1 = '
 		                  <td width="74%"><p><strong>Thank you very much for your order, '.ucfirst($user['first_name']).' '.ucfirst($user['last_name']).'.</strong></p>
 		                      <p>Thank the deal has been successfully closed we\'ll send you the voucher and all relevant information in a separate email.<br />
 		                      </p>
-		                    <p>Get yourself &pound;5 GeeLaza credit now. Recommend this deal to your friends. We will credit you<br />
-		                      to the value of &pound;5 as a reward for every friend you send our way who buys this. or any other<br />
-		                      deal on GeeLaza. You can redeem this credit against a future deal of your choice.<br />
+		                    <p>Get yourself '.getSettings(currency_symbol).'5 Jumblr credit now. Recommend this deal to your friends. We will credit you<br />
+		                      to the value of '.getSettings(currency_symbol).'5 as a reward for every friend you send our way who buys this. or any other<br />
+		                      deal on Jumblr. You can redeem this credit against a future deal of your choice.<br />
 		                      </p>
 		                    <p>Your Groupon team<br />
 		                      </p>
@@ -917,10 +917,10 @@ $email_Template_1 = '
 		                      <tr>
 		                        <td bgcolor="#fff8d9"><table width="132" border="0" align="center" cellpadding="0" cellspacing="0">
 		                            <tr>
-		                              <td align="left" valign="top"><p> &pound;5 GeeLaza credit for every recruited friend</p>
+		                              <td align="left" valign="top"><p> '.getSettings(currency_symbol).'5 Jumblr credit for every recruited friend</p>
 		                                  <p>Redeen your credit againt your next deal.<br />
 		                                  </p>
-		                                <p>Restaurants. spas, beauty and leisure enjoy GeeLaza with friends. </p></td>
+		                                <p>Restaurants. spas, beauty and leisure enjoy Jumblr with friends. </p></td>
 		                            </tr>
 		                        </table></td>
 		                      </tr>
@@ -997,16 +997,16 @@ $email_Template_1 = '
 		          <tr>
 		            <td align="left" valign="top" style="font-family: Arial, Helvetica, sans-serif; text-align:left; line-height:18px; color:#000; font-size:13px; font-weight: normal; font-smooth: always;"><table width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 1px solid #d2d2d2;">
 		                <tr>
-		                  <td width="18%" bgcolor="#ececec" style="border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:18px; font-weight: normal; font-smooth: always; padding: 4px 6px;">GeeLaza Title </td>
-		                  <td width="82%" style="border-bottom: 1px solid #d2d2d2; padding: 0 6px;">'.$deal_details['title'].'(worth &pound;'.intval($deal_details['full_price']).')</td>
+		                  <td width="18%" bgcolor="#ececec" style="border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:18px; font-weight: normal; font-smooth: always; padding: 4px 6px;">Jumblr Title </td>
+		                  <td width="82%" style="border-bottom: 1px solid #d2d2d2; padding: 0 6px;">'.$deal_details['title'].'(worth '.getSettings(currency_symbol).intval($deal_details['full_price']).')</td>
 		                </tr>
 		                <tr>
 		                  <td bgcolor="#ececec" style="border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:18px; font-weight: normal; font-smooth: always; padding: 4px 6px;">Price </td>
-		                  <td style="border-bottom: 1px solid #d2d2d2; padding: 0 6px;">&pound;'.intval($deal_details['discounted_price']).'</td>
+		                  <td style="border-bottom: 1px solid #d2d2d2; padding: 0 6px;">'.getSettings(currency_symbol).intval($deal_details['discounted_price']).'</td>
 		                </tr>
 		                <tr>
 		                  <td bgcolor="#ececec" style="border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:18px; font-weight: normal; font-smooth: always; padding: 4px 6px;">Discount</td>
-		                  <td style="border-bottom: 1px solid #d2d2d2; padding: 0 6px;">&pound;'.intval($deal_details['full_price'] - $deal_details['discounted_price']).'</td>
+		                  <td style="border-bottom: 1px solid #d2d2d2; padding: 0 6px;">'.getSettings(currency_symbol).intval($deal_details['full_price'] - $deal_details['discounted_price']).'</td>
 		                </tr>
 		                <tr>
 		                  <td bgcolor="#ececec" style="border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:18px; font-weight: normal; font-smooth: always; padding: 4px 6px;">Quantity</td>
@@ -1014,7 +1014,7 @@ $email_Template_1 = '
 		                </tr>
 		                <tr>
 		                  <td bgcolor="#f2f0c0" style="border-right: 1px solid #d2d2d2; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:22px; font-weight: bold; font-smooth: always; padding: 4px 6px;">Total</td>
-		                  <td bgcolor="#f2f0c0" style="padding: 0 6px; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:22px; font-weight: bold; font-smooth: always; padding: 4px 6px;">&pound;'.$payment_gross.'</td>
+		                  <td bgcolor="#f2f0c0" style="padding: 0 6px; font-family: Times New Roman, Times, serif; text-align:left; line-height:28px; color:#2c2a2a; font-size:22px; font-weight: bold; font-smooth: always; padding: 4px 6px;">'.getSettings(currency_symbol).$payment_gross.'</td>
 		                </tr>
 		            </table></td>
 		          </tr>
@@ -1036,16 +1036,16 @@ $email_Template_1 = '
 		';
 
 //		echo $email_Template_1;
-		$subject = "GeeLaza - your order has been received";
+		$subject = "Jumblr- your order has been received";
 
 		$sql="SELECT * FROM ".TABLE_ADMIN." where admin_name='admin'";
 		$admin=$db->query_first($sql);
 
 		$headers  = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-		$headers .= "From: GeeLaza<voucher@geelaza.com>". "\r\n" ;
+		$headers .= "From: Jumblr<voucher@jumblr.com>". "\r\n" ;
 
-		@mail($user['email'],$subject,$email_Template_1,$headers);
+	//	@mail($user['email'],$subject,$email_Template_1,$headers);
 
 
 
@@ -1095,10 +1095,10 @@ $email_Template_2 = '<table width="760" border="0" align="center" cellpadding="0
 					          </tr>
 					          <tr>
 					          <td colspan="2" align="left" valign="top"><p><strong>Your voucher details</strong><br /><br />
-					            YOUR GEELA CODE is <strong>'.$coupon_code.'</strong> and this deal is valid from  09/02/2012 to 08/05/12.<br /><br />
-					            We have also attached a PDF document of your GeeLaza deal to  this email, which you may need to print out.<br /><br />
-					            Make sure you check the ‘valid from’ and ‘valid to’ dates.  You won’t be able to use your GeeLaza Deal after these dates. For some details  you may be required to give your GeeLaza voucher to a member of staff (or  merchant) – so remember to print it out and take it with you!<br /><br />
-					            If you have any problems please email <a href="mailto:support@geelaza.com" style="color:#000; text-decoration:none;">support@geelaza.com</a> or visit our  website’s <a href="'.SITE_URL.'faq.php" style="color:#2b4bd1; text-decoration:none; font-weight:bold;">FAQ</a> and don’t forget to check out <a href="'.SITE_URL.'" style="color:#000; text-decoration:none;">www.geelaza.com</a>  for more great deals.<br /><br />The GeeLaza Team</p></td>
+					            YOUR JUMBLR CODE is <strong>'.$coupon_code.'</strong> and this deal is valid from  09/02/2012 to 08/05/12.<br /><br />
+					            We have also attached a PDF document of your Jumblr deal to  this email, which you may need to print out.<br /><br />
+					            Make sure you check the ‘valid from’ and ‘valid to’ dates.  You won’t be able to use your Jumblr Deal after these dates. For some details  you may be required to give your Jumblr voucher to a member of staff (or  merchant) – so remember to print it out and take it with you!<br /><br />
+					            If you have any problems please email <a href="mailto:support@jumblr.com" style="color:#000; text-decoration:none;">support@jumblr.com</a> or visit our  website’s <a href="'.SITE_URL.'faq.php" style="color:#2b4bd1; text-decoration:none; font-weight:bold;">FAQ</a> and don’t forget to check out <a href="'.SITE_URL.'" style="color:#000; text-decoration:none;">www.jumblr.com</a>  for more great deals.<br /><br />The Jumblr Team</p></td>
 					          </tr>
 					          <tr>
 					            <td colspan="2" align="left" valign="top">&nbsp;</td>
@@ -1157,7 +1157,7 @@ $email_Template_2 = '<table width="760" border="0" align="center" cellpadding="0
 
 		$headers  = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-		$headers .= "From: GeeLaza<voucher@geelaza.com>". "\r\n" ;
+		$headers .= "From: Jumblr<voucher@jumblr.com>". "\r\n" ;
 
 		@mail($user['email'],$subject,$email_Template_2,$headers);
 

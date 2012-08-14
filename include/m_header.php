@@ -25,10 +25,14 @@ $db->connect();
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<meta http-equiv="imagestoolbar" content="no" />
 	<title>Welcome to Jumblr</title>
+	<link rel="icon" href="<?php echo SITE_URL; ?>jfavicon.ico">
+
 	<link rel="stylesheet" href="css/base.css" type="text/css" media="all">
 	<link href="css/getdeals_style.css" rel="stylesheet" type="text/css" />
 	<link href="css/jumblr_style.css" rel="stylesheet" type="text/css" />
 
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="css/tipsy.css" type="text/css" />
 	<script type="text/javascript" src="js/jquery.tipsy.js"></script>
 	<!--<link href="css/base.css" rel="stylesheet" type="text/css" />
@@ -45,6 +49,7 @@ $db->connect();
 		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 
 		--><!--<link href="SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css"/>-->
+
 	<script type="text/javascript">
 
 /*	$(function(){
@@ -63,7 +68,7 @@ $db->connect();
 
 <!-- Tabs links include -->
 <link href="css/tabs/jquery.ui.all.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="js/tabs/jquery-1.5.1.js"></script>
+<!--<script type="text/javascript" src="js/tabs/jquery-1.5.1.js"></script>-->
 <script type="text/javascript" src="js/tabs/jquery.ui.core.js"></script>
 <script type="text/javascript" src="js/tabs/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="js/tabs/jquery.ui.tabs.js"></script>
@@ -196,7 +201,7 @@ $(function() {
 
    	<div class="styled_select3 left" style="border: 0px solid #000;">
         <select style="width:170px;" name="user_type" onchange="javascript: window.location.href = (this.options[selectedIndex].id);" >
-        	<option value=""><?php if ($_GET['nd'] || $ndpage == 'national_deals.php') {echo 'NATIONAL DEALS';} else {echo strtoupper($show_city["city_name"]);} ?></option>
+        	<!-- <option value=""><?php if ($_GET['nd'] || $ndpage == 'national_deals.php') {echo 'NATIONAL DEALS';} else {echo strtoupper($show_city["city_name"]);} ?></option> -->
         	<?php
 					while($row_city = mysql_fetch_array($result_city))
 					{
@@ -226,7 +231,17 @@ $(function() {
     <nav>
         <ul>
             <li><a href="<?php echo SITE_URL; ?>"><span><img src="images/icon_01.png" alt=""></span> <br>Home</a></li>
-          <li><a href="#"><span><img src="images/icon_02.png" alt=""></span> <br>Map</a></li>
+          <li><a href="javascript: void(0);" id="openDateSearch"><span><img src="images/icon_02.png" alt=""></span> <br>Search</a>
+		  </li>
+		  <div style="display:none; position: absolute; z-index: 1000; margin: 60px 0 0 90px; height:auto; background-color:#343535; border: 1px solid #575757; width: 274px;" id="search_date" class="debug">
+				<form name="search_dt" action="<?php echo SITE_URL; ?>list.php?srch=search_date" method="post">
+				<span style="padding:0 8px; margin: 0; color:#b6b6b6;">Start Time</span>
+				<input type="text" name="date_srch" id="date_srch"  value=""  style="width: 168px; height: 19px; background: #39393a; border: 1px solid #5d5d5d; margin: 10px 9px;" onclick='fPopCalendar("date_srch")' /><br />
+				<span style="padding:0 10px; margin: 0; color:#b6b6b6;">End Time</span>
+				<input type="text" name="date_srch1" id="date_srch1" value=""  style="width: 168px; height: 19px; background: #39393a; border: 1px solid #5d5d5d; margin: 4px 9px;" onclick='fPopCalendar("date_srch1")' /><br />
+				<!--<input type="hidden" name="srch" id="srch" value="search_date" />-->
+				<input type="submit" name="submit" value="Submit" style="width: auto; color: #FFFFFF; height: 21px; background: #ff8d12; border: 1px solid #e27600; font: normal 12px/20px Arial, Helvetica, sans-serif; padding: 0 10px 4px 10px; margin: 6px 0 6px 85px;"/></form>
+			</div>
           <li><a href="#"><span><img src="images/icon_03.png" alt=""></span> <br>Help</a></li>
           <?php if(isset($_SESSION["user_id"])) { ?>
           <li><a href="<?= SITE_URL ?>customer-account.php"><span><img src="images/icon_04.png" alt=""></span> <br>My Account</a></li>
@@ -409,6 +424,20 @@ You have been subscribed to receive daily deals alert.</h6>
 <?php
 	}
 ?>
+
+	<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
+	<link rel="stylesheet" media="all" type="text/css" href="css/custom-timer.css" />
+
+
+
+
+	<link rel="stylesheet" href="css/lat-long-drag_1.css" type="text/css" media="screen" />
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="js/lat-long-drag_1.js"></script>
+	<script type="text/javascript" src="js/lat-long-drag_all.js"></script>
+
+
 
 
 

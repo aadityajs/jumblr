@@ -58,15 +58,15 @@ error_reporting(E_ERROR && E_STRICT);
 </div>
 <div class="clear"></div>
 <!--<div class="left_green_ani_27">-->
-<div class="blue_00a2e8"><p>Price : <?php echo '&pound;'.$previous_details['discounted_price']; ?></p></div>
+<div class="blue_00a2e8"><p>Price : <?php echo getSettings(currency_symbol);?><?php echo $previous_details['discounted_price']; ?></p></div>
 <div class="blue_99d9ea"><p><span style="font-size: 11px; font-weight: normal; color: #000000;">Savings :
-<?php echo '&pound;'. ($previous_details['full_price'] - $previous_details['discounted_price']); ?></span></p></div>
+<?php echo getSettings(currency_symbol);?><?php echo ($previous_details['full_price'] - $previous_details['discounted_price']); ?></span></p></div>
 <!--<p>Discount
 <?php echo intval($previous_details['discounted_price']*100/$previous_details['full_price']); ?>%</p>-->
 <!--</div>-->
 <!--<div class="left_green_ani_27">
 <p style="font-size: 11px; font-weight: normal; color: #000000;">Value :
-<?php echo '&pound;'.$previous_details['full_price']; ?></p>
+<?php echo getSettings(currency_symbol);?><?php echo $previous_details['full_price']; ?></p>
 </div>-->
 </div>
 </div>

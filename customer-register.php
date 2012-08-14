@@ -36,6 +36,16 @@ include_once "fbmain.php";
 					$_SESSION["user_id"] = $chk_fb_user_res['user_id'];
 					$_SESSION["fb_id"] = $chk_fb_user_res['fb_id'];
 					//sleep(30);
+					//header('location: '.SITE_URL.'?city=31');
+
+					$cookie_expiry_time = time()+(3600000*24*1);
+					$subscribeCookie= explode('|', $_COOKIE[subscribe]);
+					$subscribeCookie[1] = 1;
+					$subscribeCookie[0] = 1;	// Default city bath
+					//print_r($subscribeCookie);
+					$subscribeCookieVal = implode('|', $subscribeCookie);
+					setcookie('subscribe',$subscribeCookieVal,$cookie_expiry_time);
+
 					header('location: '.SITE_URL.'my-profile.php');
 					exit();
 					//echo "fine";
@@ -45,6 +55,15 @@ include_once "fbmain.php";
 					$last_user_id['user_id'] = $db->query_insert(TABLE_FB_USER, $fbUser);
 					$db->query_update(TABLE_FB_USER, $last_user_id, 'fb_id ='.$fbUser['fb_id']);
 					//sleep(30);
+
+					$cookie_expiry_time = time()+(3600000*24*1);
+					$subscribeCookie= explode('|', $_COOKIE[subscribe]);
+					$subscribeCookie[1] = 1;
+					$subscribeCookie[0] = 1;	// Default city Bath
+					//print_r($subscribeCookie);
+					$subscribeCookieVal = implode('|', $subscribeCookie);
+					setcookie('subscribe',$subscribeCookieVal,$cookie_expiry_time);
+
 					header('location: '.SITE_URL.'my-profile.php');
 					exit();
 

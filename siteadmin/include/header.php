@@ -40,10 +40,19 @@ $record = $db->query_first($sql);
 
 		<link rel="stylesheet" media="all" type="text/css" href="css/jquery-ui-1.8.16.custom.css" />
 		<link rel="stylesheet" media="all" type="text/css" href="css/custom-timer.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="css/places.css" />
 
 
 <!--<script type="text/javascript" src="js/jquery6.min.js"></script>-->
 <script type="text/javascript" src="js/ddaccordion.js"></script>
+
+
+<link rel="stylesheet" href="../css/lat-long-drag_1.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="../js/lat-long-drag_1.js"></script>	
+<script type="text/javascript" src="../js/lat-long-drag_all.js"></script>	   
+
+
 <script type="text/javascript">
 
 

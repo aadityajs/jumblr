@@ -204,15 +204,15 @@ if ($_GET['gift'] == 'gifting') {
 						</div>
                     </td>
                      <td>x</td>
-                    <td>&pound;<?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //number_format($prod_res['discounted_price'], 2); ?></td>
+                    <td><?php echo getSettings(currency_symbol); ?><?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //number_format($prod_res['discounted_price'], 2); ?></td>
                     <td>=</td>
-                    <td><div id="total_price">&pound;<?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //number_format($prod_res['discounted_price'], 2); ?></div></td>
+                    <td><div id="total_price"><?php echo getSettings(currency_symbol); ?><?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //number_format($prod_res['discounted_price'], 2); ?></div></td>
                   </tr>
 
                   <!--<tr>
                     <td colspan="3" style="font: bold 15px/26px Arial, Helvetica, sans-serif; text-align:right;">Total Cost = </td>
                     <td style="font: bold 15px/26px Arial, Helvetica, sans-serif; text-align:right; text-align:left; padding-left:10px;">
-                    	<div id="big_total_price">&pound;<?php echo strip_tags($prod_res['discounted_price']); ?></div>
+                    	<div id="big_total_price"><?php echo getSettings(currency_symbol); ?><?php echo strip_tags($prod_res['discounted_price']); ?></div>
                     	<?php //echo $_SESSION['total_price']; ?>
                     </td>
                   </tr>-->
@@ -392,21 +392,46 @@ if ($_GET['gift'] == 'gifting') {
 				<div style="width: 100%; height: auto; margin:0;">
 				  <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr style="height: 40px;">
-					 <td style="color:#7fd7fc; font: normal 12px/18px Arial, Helvetica, sans-serif;" width="59%">
+					<?php
+					
+					$chk_fb_sql = "SELECT * FROM ".TABLE_FB_USER." WHERE fb_id  = '".$_SESSION['fb_id']."'";
+					$fb_query =  mysql_fetch_array(mysql_query($chk_fb_sql));
+					 $email = $fb_query['email'];
+					
+					
+					
+					$chk_recom_vault_sql = "SELECT * FROM ".TABLE_CREDITS_VAULT." WHERE user_id  = '$email'";
+					$recom_vault_query = mysql_query($chk_recom_vault_sql);
+					$chk_recom_vault_row = mysql_num_rows($recom_vault_query);
+					if ($chk_recom_vault_row > 0) {
+
+					?> <td style="color:#7fd7fc; font: normal 12px/18px Arial, Helvetica, sans-serif;" width="59%">
 					 <div id="redeem" style="width: 330px;" class="redemClass">
-					 	<p style="padding:0; margin:0 0 0 5px;"><a href="javascript: void(0);">Do you want to use your credit?</a></p>
+					 	<p style="padding:0; margin:0 0 0 5px;"><a href="javascript: void(0);">Do you want to use your discount?</a></p>
 					 </div>
 					 <div class="clear"></div>
 
 					 <div id="redeem_div" style="width:330px; padding-top: 1px;  display: none;">
-					 <div style="width:150px; float: left; margin: 5px 0 0 5px;"><input style="width:175px;" type="text" name="lemail" value="cxzczc"class="text_box1" /></div>
-					 <div style="float: right; text-align:right; width: 130px; margin-top: 3px;"><input type="submit" class="tellbtn13" name="submit" value="Apply"/></div>
+					 <div style="width:150px; float: left; margin: 5px 0 0 5px;">
+					 
+					 <label>20% discount</label>
 					 </div>
+					 <?php
 
-					 </td>
+					   $discount=$prod_res['discounted_price']-($prod_res['discounted_price']*getSettings(discount));
+
+					  ?>
+					 <div style="float: right; text-align:right; width: 130px; margin-top: 3px;"><input type="submit" class="tellbtn13" name="submit" value="Apply" id="discount" onclick="return change('<?php echo number_format($discount,2) ?>')"/></div><div id="disp" style="display:none">Discount will be deducted from purchase value</div>
+					 </div>
+					
+					 </td> <?php
+					 }
+					 ?>
+
                       <td style="font-family:Arial Rounded MT Bold; font-size: 14px; color: #333333; text-align:right; text-align:left; padding-left:10px;" width="65%">Total amount:</td>
                       <td style="font-family:Arial Rounded MT Bold; font-size: 20px; color: #000; text-align:left; padding-left:15px;" width="36%;">
-                      	<div id="big_total_price" style="text-align:right; padding-right: 15px;">&pound;<?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //number_format($prod_res['discounted_price'], 2); ?><span></span>
+
+                      	<div id="big_total_price" style="text-align:right; padding-right: 15px;"><?php echo getSettings(currency_symbol); ?><?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //number_format($prod_res['discounted_price'], 2); ?><span></span>
                       	</div>
                     	<?php //echo $_SESSION['total_price']; ?></td>
                     </tr>
@@ -438,8 +463,9 @@ $("div#redeem_div").ready(function() {
 <div class="accounts_top"></div>
 <div class="accounts_mid">
 
+<?php if (!$_SESSION['fb_id']) { ?>
 <p class="black_text1" style="color:#3A3B3D; margin: 5px 15px 0 0;"><a href="<?php echo $loginUrl; ?>"><img src="http://www.realestatenewport.com/assets/facebook-login-button-5c5750b27cc8759f735f49a5ad2a4263.png" alt="" align="top" /></a> Please login with Facebook to buy this deal. If you have an account on Facebook you can use it to log in.</p>
-
+<?php } ?>
                 <div class="clear"></div>
                 <div class="register_box2">
 
@@ -630,7 +656,7 @@ if($flag !=0)
                                   <tr>
                                     <td width="315">CARD NUMBER</td>
                                     <!-- <td>CARD TYPE</td> -->
-                                    <td width="315" style="padding-left: 0px;">SECURITY CODE <a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool12><div class=arrowright></div><div class=tip_top12></div><div class=clear></div><div class=tip_mid12><img src=images/toobg.gif style=padding-left:16px; /></div><div class=tip_bot12></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/question.png" alt="" width="12" height="12" /></a></td>
+                                    <td width="315" style="padding-left: 0px;">SECURITY CODE <a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool12><div class=arrowright></div><div class=tip_top12></div><div class=clear></div><div class=tip_mid12><img src=images/toobg.gif style=padding-left:16px; /></div><div class=tip_bot12></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/question.png" alt="" width="12" height="12" class="tips" original-title="3 digits security code"/></a></td>
                                   </tr>
                                   <tr>
                                     <td><input type="text" maxlength="19" name="creditCardNumber" id="creditCardNumber" class="text_box12" style="width:285px" value=""/></td>
@@ -759,7 +785,7 @@ if($flag !=0)
                                   </tr>
 								   <tr>
 		                        <td>CARD NUMBER</td>
-		                        <td style="padding-left: 8px;">SECURITY CODE <a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=arrowright></div><div class=tip_top></div><div class=clear></div><div class=tip_mid><img src=images/toobg.gif style=padding-left:20px; /></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/question.png" alt="" width="12" height="12" /></a></td>
+		                        <td style="padding-left: 8px;">SECURITY CODE <a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=arrowright></div><div class=tip_top></div><div class=clear></div><div class=tip_mid><img src=images/toobg.gif style=padding-left:20px; /></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/question.png" alt="" width="12" height="12" class="tips" original-title="3 digits security code"/></a></td>
 		                      </tr>
 		                      <tr>
                                     <td><input type="text" maxlength="19" name="creditCardNumber" id="creditCardNumber" class="text_box123" style="width:289px" value=""/></td>
@@ -872,7 +898,7 @@ if($flag !=0)
 								<li>One per person.</li>
 								<li>May buy multiples as gifts.</li>
 								<li>Voucher valid for 1 month.</li>
-								<li>POstage costs an aditional &pound;4.95</li>
+								<li>POstage costs an aditional <?php echo getSettings(currency_symbol); ?>4.95</li>
 								<li>Please allow up to 10 working days for delivery after redeeming.</li>
 							</ul> -->
 							<br/>
@@ -897,7 +923,7 @@ if($flag !=0)
 							<input type="hidden" name="custom" value="<?php echo $user_id.",".$deal_id.",".$trn_date; ?>">
 							<input type="hidden" name="item_name" value="<?php echo $prod_res['title']; ?>">
 
-                        <input type="submit" name="Submit" value="Submit Order" class="buyu_btn07" style="margin-left:16px;"/>   </td>
+                        <input type="submit" name="Submit" value="Buy Now" class="buyu_btn07" style="margin-left:16px;"/>   </td>
                       </tr>
                       <tr>
                         <td colspan="2">&nbsp;</td>
@@ -1321,7 +1347,7 @@ $('input[name="payment_system"]').change(function() {
                                   <tr>
                                     <td width="315">CARD NUMBER</td>
                                     <!-- <td>CARD TYPE</td> -->
-                                    <td width="315">SECURITY CODE <a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=arrowright></div><div class=tip_top></div><div class=clear></div><div class=tip_mid><img src=images/toobg.gif style=padding-left:20px; /></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/question.png" alt="" width="12" height="12" /></a></td>
+                                    <td width="315">SECURITY CODE <a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=arrowright></div><div class=tip_top></div><div class=clear></div><div class=tip_mid><img src=images/toobg.gif style=padding-left:20px; /></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/question.png" alt="" width="12" height="12" class="tips" original-title="3 digits security code"/></a></td>
                                   </tr>
                                   <tr>
                                     <td><input type="text" maxlength="19" name="creditCardNumber" id="creditCardNumber" class="text_box123" style="width:285px" value="4379828854845152"/></td>
@@ -1450,7 +1476,7 @@ $('input[name="payment_system"]').change(function() {
                                   </tr>
 								   <tr>
 		                        <td>CARD NUMBER</td>
-		                        <td>SECURITY CODE <a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=arrowright></div><div class=tip_top></div><div class=clear></div><div class=tip_mid><img src=images/toobg.gif style=padding-left:20px; /></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/question.png" alt="" width="12" height="12" /></a></td>
+		                        <td>SECURITY CODE <a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool><div class=arrowright></div><div class=tip_top></div><div class=clear></div><div class=tip_mid><img src=images/toobg.gif style=padding-left:20px; /></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/question.png" alt="" width="12" height="12" class="tips" original-title="3 digits security code"/></a></td>
 		                      </tr>
 		                      <tr>
                                     <td><input type="text" maxlength="19" name="mcreditCardNumber" id="creditCardNumber" class="text_box123" style="width:285px" value=""/></td>
@@ -1560,7 +1586,7 @@ $('input[name="payment_system"]').change(function() {
 								<li>One per person.</li>
 								<li>May buy multiples as gifts.</li>
 								<li>Voucher valid for 1 month.</li>
-								<li>POstage costs an aditional &pound;4.95</li>
+								<li>POstage costs an aditional <?php echo getSettings(currency_symbol); ?>4.95</li>
 								<li>Please allow up to 10 working days for delivery after redeeming.</li>
 							</ul>
 						</div>
@@ -1583,7 +1609,7 @@ $('input[name="payment_system"]').change(function() {
 							<input type="hidden" name="custom" value="<?php echo $user_id.",".$deal_id.",".$trn_date; ?>">
 							<input type="hidden" name="item_name" value="<?php echo $prod_res['title']; ?>">
 
-                        <input type="submit" name="Submit" value="Submit Order" class="buyu_btn07" style="margin-left:16px;"/>   </td>
+                        <input type="submit" name="Submit" value="Buy Now" class="buyu_btn07" style="margin-left:16px;"/>   </td>
                       </tr>
                       <tr>
                         <td colspan="2">&nbsp;</td>
@@ -1785,19 +1811,30 @@ $('input[name="payment_system"]').change(function() {
 
 
 <script type="text/javascript">
+var flag_disc=0;
+$("document").ready(function(){
 
+	$("#discount").click(function(){
+	
+	flag_disc=1;
+	document.getElementById("disp").style.display='block';
+
+	});
+
+});
 function total_price(qty) {
 	var single_price = <?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //$prod_res['discounted_price']; ?>;
 	//alert (single_price);
 	var total_price = single_price*qty;
 
-	document.getElementById('total_price').innerHTML = '&pound;'+total_price;
+	document.getElementById('total_price').innerHTML = '<?php echo getSettings(currency_symbol); ?>'+total_price;
 }
 
 function ajaxReq(str)
 {
 var xmlhttp;
-//alert(str);
+//alert(flag_disc);
+//alert(flag_disc);
 if (str.length==0)
   {
   document.getElementById("total_price").innerHTML="";
@@ -1815,12 +1852,29 @@ xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
-	  //alert(xmlhttp.responseText);
-	  	document.getElementById("payment_amount").value = xmlhttp.responseText;
-	    document.getElementById("total_price").innerHTML='&pound;'+xmlhttp.responseText;
-	    document.getElementById("big_total_price").innerHTML = '&pound;'+xmlhttp.responseText;
-	    document.getElementById("frm_paypal_total_price").value=xmlhttp.responseText;
-	    document.getElementById("frm_paypal_total_qty").value=str;
+	  
+	    if(flag_disc==1)
+		{
+			var total = xmlhttp.responseText;
+			var disc=parseFloat('<?php echo getSettings(discount)?>');
+			document.getElementById("payment_amount").value = addCommas(total-(total*disc));
+			//alert(addCommas(total));
+			document.getElementById("total_price").innerHTML='<?php echo getSettings(currency_symbol); ?>'+addCommas((total-(total*disc)));
+			document.getElementById("big_total_price").innerHTML = '<?php echo getSettings(currency_symbol); ?>'+addCommas((total-(total*disc)));
+			document.getElementById("frm_paypal_total_price").value=addCommas((total-(total*disc)));
+			document.getElementById("frm_paypal_total_qty").value=str;
+		}
+		else
+		{
+			//var total = xmlhttp.responseText;
+			
+			//alert(number(xmlhttp.responseText));
+			document.getElementById("payment_amount").value = xmlhttp.responseText;
+			document.getElementById("total_price").innerHTML='<?php echo getSettings(currency_symbol); ?>'+xmlhttp.responseText;
+			document.getElementById("big_total_price").innerHTML = '<?php echo getSettings(currency_symbol); ?>'+xmlhttp.responseText;
+			document.getElementById("frm_paypal_total_price").value=xmlhttp.responseText;
+			document.getElementById("frm_paypal_total_qty").value=str;
+		}
 
     }
   }
@@ -1831,6 +1885,27 @@ xmlhttp.open("GET","ajax_payment.php?qty="+str+"&id="+<?php echo $prod_id; ?>,tr
 <?php } ?>
 xmlhttp.send();
 }
+
+function addCommas(num) {
+
+    var p = num.toFixed(2).split(".");
+    return p[0].split("").reverse().reduce(function(acc, num, i, orig) {
+        return  num + (i && !(i % 3) ? "," : "") + acc;
+    }, "") + "." + p[1];
+	
+}
+
+
+function change(val)
+{
+	
+			document.getElementById("payment_amount").value = (val);
+			//alert(val);
+			document.getElementById("total_price").innerHTML='<?php echo getSettings(currency_symbol); ?>'+(val);
+			document.getElementById("big_total_price").innerHTML = '<?php echo getSettings(currency_symbol); ?>'+(val);
+			document.getElementById("frm_paypal_total_price").value=(val);
+}
+
 
 </script>
 

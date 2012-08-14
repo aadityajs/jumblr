@@ -6,7 +6,7 @@ session_start();
 $mpdf=new mPDF();
 $user_id = $_SESSION["user_id"];
 
-isLogin();
+//isLogin();
 ?>
 
 <?php
@@ -141,7 +141,7 @@ Old Left tab My account design's .here class
 	<!--
 		function show_tab(ID)
 		{
-			for(i=1; i<=7; i++)
+			for(i=1; i<=9; i++)
 			{
 				document.getElementById("myaccount_"+i).style.display = "none";
 				/*document.getElementById("tab_"+i).style.backgroundPosition = "";
@@ -193,6 +193,8 @@ Old Left tab My account design's .here class
 		<a href="javascript: show_tab(1);" id="tab_1" style="text-decoration: none; margin-right: 0px;">My Vouchers</a>
 		<a href="javascript: show_tab(6);" id="tab_6" style="text-decoration: none; margin-right: 0px;">Purchase History</a>
 		<a href="javascript: show_tab(7);" id="tab_7" style="text-decoration: none; margin-right: 0px;">Add Jumble</a>
+		<a href="javascript: show_tab(8);" id="tab_8" style="text-decoration: none; margin-right: 0px;">Past Jumble</a>
+		<a href="javascript: show_tab(9);" id="tab_9" style="text-decoration: none; margin-right: 0px;">Refer Jumble</a>
 		<!-- <a href="javascript: show_tab(2);" id="tab_2">Credits</a>
 		<a href="javascript: show_tab(4);" id="tab_4">Royal Points</a>
 		<a href="javascript: show_tab(5);" id="tab_5">Subscriptions</a>
@@ -276,7 +278,7 @@ Old Left tab My account design's .here class
                       </tr>
                       <tr>
                         <td><strong>Price:</strong></td>
-                        <td>&pound;<?php echo $orders_row['amount']; ?></td>
+                        <td><?php echo getSettings(currency_symbol); ?><?php echo $orders_row['amount']; ?></td>
                       </tr>
                       <tr>
                         <td><strong>Quantiry:</strong></td>
@@ -284,7 +286,7 @@ Old Left tab My account design's .here class
                       </tr>
                       <tr>
                         <td><strong>Value:</strong></td>
-                        <td>&pound;<?php echo $deal_details['full_price']; ?></td>
+                        <td><?php echo getSettings(currency_symbol); ?><?php echo $deal_details['full_price']; ?></td>
                       </tr>
                       <tr>
                         <td><strong>Discount:</strong></td>
@@ -340,7 +342,7 @@ Old Left tab My account design's .here class
 		<?php } else { ?>
 		<div class="clear"></div>
       	<div style="float:right; height:29px; margin:-26px 0 0 0; padding:0px; width:150px; text-align:center; font: bold 12px/29px Candara, Arial, Helvetica, sans-serif;  background: url(images/tab_bg1.gif) left top repeat-x;">
-		  Credits: &pound;<?php echo number_format(get_credits($_SESSION['user_id']),2); ?>
+		  Credits: <?php echo getSettings(currency_symbol); ?><?php echo number_format(get_credits($_SESSION['user_id']),2); ?>
 		</div>
 		<?php } ?>
 	  </div>
@@ -384,11 +386,11 @@ Old Left tab My account design's .here class
 <h4>OK, but how does Jumblr credits work?</h4>
 
  <div class="content_box2" style="margin:0px; width:660px; background:none; padding:10px 0;">
-        	<b> Why recommend deals?</b><br /> Recommending deals has many benefits but most importantly, we will credited you with &pound;5.00 which means you can get your next deal at even greater discounted price. The main reason we like our users to recommend deals is because we feel god to know that all people who are interested in buying our deals are aware of the deal. Help your friends and families to save money on great deals too!
+        	<b> Why recommend deals?</b><br /> Recommending deals has many benefits but most importantly, we will credited you with <?php echo getSettings(currency_symbol); ?>5.00 which means you can get your next deal at even greater discounted price. The main reason we like our users to recommend deals is because we feel god to know that all people who are interested in buying our deals are aware of the deal. Help your friends and families to save money on great deals too!
 </div>
 
  <div class="content_box2" style="margin:0px; width:660px; background:none; padding:10px 0;">
-        	<b> How can I recommend Jumblr to my friends who havent heard of Jumblr?</b><br /> We provide our users with easy recommendation facilities to allow them to tell friends without doing much. Every deal that we feature on Jumblr are assigned with a special link which you can send to your friends using Facebook, Twitter or Email.<br /><br /> Whoever you recommend us to, have 48 hours to create an account with us and buy a deal worth more than &pound;15 for the first time. If the 48 hours runs out and they havent created an account then we cannot give you the credit.
+        	<b> How can I recommend Jumblr to my friends who havent heard of Jumblr?</b><br /> We provide our users with easy recommendation facilities to allow them to tell friends without doing much. Every deal that we feature on Jumblr are assigned with a special link which you can send to your friends using Facebook, Twitter or Email.<br /><br /> Whoever you recommend us to, have 48 hours to create an account with us and buy a deal worth more than <?php echo getSettings(currency_symbol); ?>15 for the first time. If the 48 hours runs out and they havent created an account then we cannot give you the credit.
 </div>
 <div class="content_box2" style="margin:0px; width:660px;  background:none; padding:10px 0;">
 <b>How long is my account credit valid until?</b><br /> You have 3 months to use your credit. After the 3 months your unused credit will be no longer be valid to use.
@@ -1383,28 +1385,28 @@ function passMatch() {
             <td colspan="2"><b>What is your income?</b></td>
           </tr>
           <tr>
-            <td><input type="radio" name="radioincome" id="radioincome" value="Less than &pound;19,000" <?php echo ($extra_details['income'] == 'Less than 19,000'? "checked='checked'":""); ?>></td>
-            <td>Less than &pound;19,000</td>
+            <td><input type="radio" name="radioincome" id="radioincome" value="Less than <?php echo getSettings(currency_symbol); ?>19,000" <?php echo ($extra_details['income'] == 'Less than 19,000'? "checked='checked'":""); ?>></td>
+            <td>Less than <?php echo getSettings(currency_symbol); ?>19,000</td>
           </tr>
           <tr>
-            <td><input type="radio" name="radioincome" id="radioincome" value="&pound;20,000 - &pound;26,000" <?php echo ($extra_details['income'] == '20,000 - 26,000'? "checked='checked'":""); ?>></td>
-            <td>&pound;20,000 - &pound;26,000</td>
+            <td><input type="radio" name="radioincome" id="radioincome" value="<?php echo getSettings(currency_symbol); ?>20,000 - <?php echo getSettings(currency_symbol); ?>26,000" <?php echo ($extra_details['income'] == '20,000 - 26,000'? "checked='checked'":""); ?>></td>
+            <td><?php echo getSettings(currency_symbol); ?>20,000 - <?php echo getSettings(currency_symbol); ?>26,000</td>
           </tr>
           <tr>
-            <td><input type="radio" name="radioincome" id="radioincome" value="&pound;27,000 - &pound;34,000" <?php echo ($extra_details['income'] == '27,000 - 34,000'? "checked='checked'":""); ?>></td>
-            <td>&pound;27,000 - &pound;34,000</td>
+            <td><input type="radio" name="radioincome" id="radioincome" value="<?php echo getSettings(currency_symbol); ?>27,000 - <?php echo getSettings(currency_symbol); ?>34,000" <?php echo ($extra_details['income'] == '27,000 - 34,000'? "checked='checked'":""); ?>></td>
+            <td><?php echo getSettings(currency_symbol); ?>27,000 - <?php echo getSettings(currency_symbol); ?>34,000</td>
           </tr>
           <tr>
-            <td><input type="radio" name="radioincome" id="radioincome" value="&pound;35,000 - &pound;44,000" <?php echo ($extra_details['income'] == '35,000 - 44,000'? "checked='checked'":""); ?>></td>
-            <td>&pound;35,000 - &pound;44,000</td>
+            <td><input type="radio" name="radioincome" id="radioincome" value="<?php echo getSettings(currency_symbol); ?>35,000 - <?php echo getSettings(currency_symbol); ?>44,000" <?php echo ($extra_details['income'] == '35,000 - 44,000'? "checked='checked'":""); ?>></td>
+            <td><?php echo getSettings(currency_symbol); ?>35,000 - <?php echo getSettings(currency_symbol); ?>44,000</td>
           </tr>
           <tr>
-            <td><input type="radio" name="radioincome" id="radioincome" value="&pound;45,000 - &pound;69,000" <?php echo ($extra_details['income'] == '45,000 - 69,000'? "checked='checked'":""); ?>></td>
-            <td>&pound;45,000 - &pound;69,000</td>
+            <td><input type="radio" name="radioincome" id="radioincome" value="<?php echo getSettings(currency_symbol); ?>45,000 - <?php echo getSettings(currency_symbol); ?>69,000" <?php echo ($extra_details['income'] == '45,000 - 69,000'? "checked='checked'":""); ?>></td>
+            <td><?php echo getSettings(currency_symbol); ?>45,000 - <?php echo getSettings(currency_symbol); ?>69,000</td>
           </tr>
           <tr>
-            <td><input type="radio" name="radioincome" id="radioincome" value="Over &pound;70,000" <?php echo ($extra_details['income'] == 'Over 70,000'? "checked='checked'":""); ?>></td>
-            <td>Over &pound;70,000</td>
+            <td><input type="radio" name="radioincome" id="radioincome" value="Over <?php echo getSettings(currency_symbol); ?>70,000" <?php echo ($extra_details['income'] == 'Over 70,000'? "checked='checked'":""); ?>></td>
+            <td>Over <?php echo getSettings(currency_symbol); ?>70,000</td>
           </tr>
 
 
@@ -1496,7 +1498,7 @@ function passMatch() {
           <p>
             At Jumblr we want to give our customers more than  just a great deal. We give our customers royal points and all of our members  are eligible to the royal points reward. It works in a simple yet effective way  to that you don&rsquo;t even notice. Whenever you return to <a href="http://www.Jumblr.com">www.Jumblr.com</a> and buy a deal then our  system will credited your account with 10 royal points. When your account royal  points reach 100 then you will get 25% discount on any deal so it&rsquo;s like double  discount.</p>
           <p><strong>Example:</strong><br />
-           You have bought lots of deals and your account royal  points is 100 and you buy a Samsung TV deal which costs &pound;100.00. But since you  have 100 royal points you only have to pay &pound;75.00 instead of &pound;100.00  (&pound;100.00/100*25%). However there is one tiny limitation, your account cannot go  above 100 royal points.</p>
+           You have bought lots of deals and your account royal  points is 100 and you buy a Samsung TV deal which costs <?php echo getSettings(currency_symbol); ?>100.00. But since you  have 100 royal points you only have to pay <?php echo getSettings(currency_symbol); ?>75.00 instead of <?php echo getSettings(currency_symbol); ?>100.00  (<?php echo getSettings(currency_symbol); ?>100.00/100*25%). However there is one tiny limitation, your account cannot go  above 100 royal points.</p>
 
           <h4>How long is my royal points valid until?</h4>
          <p> Once your account has reached 100 royal points then you have  45 days to use it on any deal. After 45 days is you haven&rsquo;t used your points  then it will automatically go back to &ldquo;0&rdquo; (ZERO) so be sure to use it.</p>
@@ -1560,10 +1562,10 @@ function passMatch() {
 					<td><p>
 					<?php
 					//$city_id = $_GET['city_id'];
-					$get_national_deal = mysql_num_rows(mysql_query("SELECT * FROM ".TABLE_USER_SUBSCRIPTION." WHERE user_id = $user_id AND city_id = -1"));
+					/*$get_national_deal = mysql_num_rows(mysql_query("SELECT * FROM ".TABLE_USER_SUBSCRIPTION." WHERE user_id = $user_id AND city_id = -1"));
 					if ($get_national_deal >= 1) {
 						echo '<div class="list_box">National Deal</div>';
-					}
+					}*/
 				?>
 				<?php while ($show_city_list = mysql_fetch_array($show_city)) {
 						//$country = 225;
@@ -1702,8 +1704,8 @@ function passMatch() {
             <td style="width:114px;">Deal Number <?php echo $count; ?></td>
             <td style="width:114px;"><?php echo $purchase_history_row['qty']; ?></td>
             <td style="width:114px;"><?php echo $purchase_history_row['coupon_code']; ?></td>
-            <td style="width:114px;">&pound;<?php echo $deal_details['savings']; ?></td>
-            <td style="width:114px;">&pound;<?php echo $purchase_history_row['amount']; ?></td>
+            <td style="width:114px;"><?php echo getSettings(currency_symbol); ?><?php echo $deal_details['savings']; ?></td>
+            <td style="width:114px;"><?php echo getSettings(currency_symbol); ?><?php echo $purchase_history_row['amount']; ?></td>
           </tr>
 
           <?php } ?>
@@ -1827,6 +1829,7 @@ function passMatch() {
 					$data[discounted_price] = $_POST[customerdisc];
 					$data[savings] = $_POST[retailvalue] - $_POST[customerdisc];
 					$data[discount] = $_POST[custpercent];
+					$data[address1] = $_POST[searchTextField];
 					$data[merchant_take] = $_POST[merchant_take];
 					$data[merchantpercent] = $_POST[merchantpercent];
 					$data[jumblr_comission] = $_POST[wakadealfee];
@@ -1842,6 +1845,8 @@ function passMatch() {
 					$data[offer_details] = $_POST[offer_details];
 					$data[deal_image] = $_POST[files];
 					$data[is_multi] = 'n';
+					$data[place_lat] = $_POST['lat'];
+					$data[place_lng] = $_POST['lng'];
 					//$data[] = $_POST[store_id];
 					//$data[] = $_POST[submit];
 					//echo '<pre>'.print_r($data, true).'</pre>';
@@ -2003,8 +2008,8 @@ function passMatch() {
 				<td><!--<input type="text" name="deal_start_time" id="my_date_field" size="20" value="<?php //if(!empty($row_deal['deal_start_time'])){echo date("Y-m-d H:i",strtotime($row_deal['deal_start_time']));}?>" class="lf"/>-->
 				<!--  --><input type="text" name="deal_start_time" id="date" size="20" value="<?php if(!empty($row_deal['deal_start_time'])){echo date("Y-m-d 03:00",strtotime($row_deal['deal_start_time']));}?>" class="lf" onclick='fPopCalendar("date")' />
 				<script type="text/javascript">
-			 		var j = jQuery.noConflict();
-			 		jQuery('#date').datetimepicker();
+			 		//var j = jQuery.noConflict();
+			 		//jQuery('#date').datetimepicker();
 				</script>
 				</td>
 				</tr>
@@ -2013,8 +2018,8 @@ function passMatch() {
 				<td><!--<input type="text" name="deal_end_time" id="my_date_field2" size="20" value="<?php  //if(!empty($row_deal['deal_end_time'])){echo date("Y-m-d H:i",strtotime($row_deal['deal_end_time']));}?>" class="lf"/>-->
 				<input type="text" name="deal_end_time" id="date1" size="20" value="<?php  if(!empty($row_deal['deal_end_time'])){echo date("Y-m-d H:i",strtotime($row_deal['deal_end_time']));}?>" class="lf" onclick='fPopCalendar("date1")' />
 				<script type="text/javascript">
-			 		var j = jQuery.noConflict();
-			 		jQuery('#date1').datetimepicker();
+			 		//var j = jQuery.noConflict();
+			 		//jQuery('#date1').datetimepicker();
 				</script>
 				</td>
 				</tr>
@@ -2029,7 +2034,7 @@ function passMatch() {
 				<td>
 					<select name="city" class="dropdown" id="city" size="1">
 							<option value="">-- Select --</option>
-							<option value="-1" <?php if($row_deals[best_deal]=='y') { echo "selected"; }?>>National Deal</option>
+							<!-- <option value="-1" <?php if($row_deals[best_deal]=='y') { echo "selected"; }?>>National Deal</option> -->
                                 <?php
 
 								echo $sql_city = mysql_query("select * FROM " .TABLE_CITIES." where status = 1 order by city_name asc");
@@ -2047,7 +2052,7 @@ function passMatch() {
 				</tr>
 				<tr class="gray_02">
 				<td colspan="2" align="center" style="padding-left: 300px;"><input type="button" name="back" value="Back" onclick="javascript: divopen(1)" class="submit" style="width:80px; height:30px; cursor:pointer;" />
-				<input type="button" name="next" value="Next" onclick="javascript: divopen(3)" class="submit" style="width:80px; height:30px; cursor:pointer;" onmouseover="return checkcore();" />
+				<input type="button" name="next" value="Next" onclick="javascript: divopen(3); initialize();" class="submit" style="width:80px; height:30px; cursor:pointer;" onmouseover="return checkcore();" />
 				</tr>
 				</table>
 				</td>
@@ -2079,6 +2084,111 @@ function passMatch() {
 				</td>
 
 				</tr>
+				<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"
+      type="text/javascript"></script>
+
+    <style type="text/css">
+      body {
+        font-family: sans-serif;
+        font-size: 14px;
+      }
+      #map_canvas {
+        height: 400px;
+        width: 600px;
+        margin-top: 0.6em;
+      }
+    </style>
+
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(-33.8688, 151.2195),
+          zoom: 13,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById('map_canvas'),
+          mapOptions);
+
+        var input = document.getElementById('searchTextField');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+          map: map
+        });
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+          infowindow.close();
+          var place = autocomplete.getPlace();
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+          }
+
+          var image = new google.maps.MarkerImage(
+              place.icon,
+              new google.maps.Size(71, 71),
+              new google.maps.Point(0, 0),
+              new google.maps.Point(17, 34),
+              new google.maps.Size(35, 35));
+          marker.setIcon(image);
+          marker.setPosition(place.geometry.location);
+		document.getElementById("lat").value=place.geometry.location.lat();
+		document.getElementById("lng").value=place.geometry.location.lng();
+          var address = '';
+          if (place.address_components) {
+            address = [(place.address_components[0] &&
+                        place.address_components[0].short_name || ''),
+                       (place.address_components[1] &&
+                        place.address_components[1].short_name || ''),
+                       (place.address_components[2] &&
+                        place.address_components[2].short_name || '')
+                      ].join(' ');
+          }
+
+          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+          infowindow.open(map, marker);
+        });
+
+        // Sets a listener on a radio button to change the filter type on Places
+        // Autocomplete.
+        function setupClickListener(id, types) {
+          var radioButton = document.getElementById(id);
+          google.maps.event.addDomListener(radioButton, 'click', function() {
+            autocomplete.setTypes(types);
+          });
+        }
+
+        setupClickListener('changetype-all', []);
+        setupClickListener('changetype-establishment', ['establishment']);
+        setupClickListener('changetype-geocode', ['geocode']);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+				<tr class="gray_02">
+				<td align="right" style="vertical-align:top"><strong>Location:</strong></td>
+				<td>
+				 <div>
+				  <input id="searchTextField" name="searchTextField"  type="text" size="50">
+				 <!-- <input type="radio" name="type" id="changetype-all" checked="checked">
+				  <label for="changetype-all">All</label>
+
+				  <input type="radio" name="type" id="changetype-establishment">
+				  <label for="changetype-establishment">Establishments</label>
+
+				  <input type="radio" name="type" id="changetype-geocode">
+				  <label for="changetype-geocode">Geocodes</lable>-->
+				</div>
+				 <div id="map_canvas" style="width: 700px;"></div>
+				 <div id="displaycsv" style="margin-top:10px;overflow:auto;padding:10px;border:0px solid ;"></div>
+				<input type="hidden" name="lat" id="lat" value="0"/>
+				<input type="hidden" name="lng" id="lng" value="0"/>
+				</td></tr>
 
 				<tr class="gray_02">
 				<td colspan="2" align="center" style="padding-left: 300px;"><input type="button" name="back" value="Back" onclick="javascript: divopen(2)" class="submit" style="width:80px; height:30px; cursor:pointer;" />
@@ -2094,7 +2204,7 @@ function passMatch() {
 
 			</div>
 
-			<div id="dealtab_4" style="display:none">
+			<div id="dealtab_4" style="display:none" >
 
 				<div class="step_01 active" style="margin-left:15px;">Step 1</div><div class="step_01 active">Step 2</div><div class="step_01 active">Step 3</div>
 				<div class="clear"></div>
@@ -2149,7 +2259,7 @@ function passMatch() {
 
 
 				<fieldset class="fieldset">
-				<legend>Add Picture</legend>
+				<legend>Add Picture <a href="javascript: void(0);" class="tips" original-title="Please add  348X307px dimention picture."><img src="images/question.png" width="12" height="12" vspace="0" align="middle" ></a></legend>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 				<td>
@@ -2243,8 +2353,8 @@ function passMatch() {
 				</td>
 				</tr>
 				</script>
-				<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-				<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
+				<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+				<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>-->
 				<script src="//ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 				<script src="<?php echo SITE_URL?>siteadmin/js/uploader/jquery.iframe-transport.js"></script>
 				<script src="<?php echo SITE_URL?>siteadmin/js/uploader/jquery.fileupload.js"></script>
@@ -2275,6 +2385,86 @@ function passMatch() {
 
 	</div>
 	<!-- 7 ends here  -->
+
+	<div class="TabbedPanelsContent" id="myaccount_8" style="display: none;">
+		<div class="title">Past Jumbles</div>
+	<?php
+		$sql_past_jmblr = "SELECT tt.coupon_code,td.title,td.discounted_price,tt.transaction_date,tt.transaction_status,usr.name,usr.profile_url,img.file FROM ".TABLE_TRANSACTION." tt LEFT JOIN ". TABLE_DEALS." td on td.deal_id=tt.deal_id LEFT JOIN ". TABLE_FB_USER." usr on td.admin_id = usr.fb_id LEFT JOIN ".TABLE_DEAL_IMAGES." img on td.deal_id=img.deal_id WHERE td.admin_id = $_SESSION[fb_id]"." AND td.deal_type = 'user_deal'";
+		$sql_cur = "SELECT * FROM ".TABLE_SETTING." WHERE id=8";
+
+		$cur_res = mysql_query($sql_cur);
+		$cur=mysql_fetch_row($cur_res);
+
+		//$_SESSION[fb_id]
+		//echo $sql_past_jmblr;
+		$past_jmblr_res = mysql_query($sql_past_jmblr);
+		$past_jmblr_num = mysql_num_rows($past_jmblr_res);
+
+		if ($past_jmblr_num <= 0) {
+	?>
+		<h4>You haven&rsquo;t bought a deal yet.</h4>
+		<p>There is no deal by you.</p>
+	<?php
+		}
+		else {
+
+		$count = 0;
+
+		while ($orders_row = mysql_fetch_array($past_jmblr_res)) {
+
+
+			$count++;
+
+	?>
+	<!-- loop start -->
+		<div class="TabbedPanelsContent27" id="myaccount_1">
+         <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+			<th style="width:20px;">Deal No</th>
+			<th style="width:100px;">Deal Images </th>
+			<th style="width:100px;">Deal Title </th>
+
+			<th style="width:100px;">Deal Price </th>
+			<th style="width:100px;">Deal Status </th>
+			<th style="width:100px;">Purchase Date </th>
+			<th style="width:150px;">Buyer</th>
+          </tr>
+		  <tr><td>&nbsp;</td></tr>
+           <tr>
+             <td style="width:150px;"><?php echo $count; ?></td>
+			 <td style="width:100px;"><img src="<?php echo UPLOAD_PATH.$orders_row['file']; ?>" height="60" width="60"/></td>
+             <td style="width:100px;"><?php echo $orders_row['title']; ?></td>
+
+			 <td style="width:100px;"><?php echo $cur[2].$orders_row['discounted_price']; ?></td>
+			 <td style="width:100px;"><?php echo $orders_row['transaction_status']; ?></td>
+			 <td style="width:100px;"><?php echo $orders_row['transaction_date']; ?></td>
+
+			<td style="width:100px;"><a href="<?php echo $orders_row['profile_url']; ?>"><?php echo $orders_row['name']; ?></a></td>
+          </tr>
+          </table>
+
+
+       </div>
+	   <!-- loop ends -->
+<?php
+		} // End while
+		}	// End else
+?>
+
+    </div>
+
+	<!-- 8 ends here  -->
+
+	<!-- 9 refer friends starts here -->
+	<div class="TabbedPanelsContent" id="myaccount_9" style="display: none;">
+		<div class="title">Refer Jumbles</div>
+		<a href="#inline1" id="various4">
+			Invite your friends for your your jumblr. If they signs up and buys a deal successfully they will get <?php echo getSettings(discount); ?>% discount.
+        </a>
+		<br/><br/>
+
+	</div>
+	<!-- 9 refer friends ends here  -->
 
   </div>
 
@@ -2426,6 +2616,12 @@ else if ($_GET['tab'] == 'royal') {
 }
 else if ($_GET['tab'] == 'jumble') {
 	echo '<script type="text/javascript">show_tab(7)</script>';
+}
+else if ($_GET['tab'] == 'past_jumble') {
+	echo '<script type="text/javascript">show_tab(8)</script>';
+}
+else if ($_GET['tab'] == 'refer_jumble') {
+	echo '<script type="text/javascript">show_tab(9)</script>';
 }
 
 

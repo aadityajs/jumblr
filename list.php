@@ -1,12 +1,45 @@
 <?php
 include 'include/header.php';
-
-	$deal_cat = $_GET['cat'];
-	if (isset($deal_cat)) {
 	$city = end(explode("|",$_COOKIE['subscribe']));
-	//sql_today_bot_deals = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city LIMIT 1, 2";
-	$sql_today_bot_deals = "SELECT * FROM ".TABLE_DEALS." WHERE deal_cat = $deal_cat AND status >= 1 AND deal_end_time >= '".date("Y-m-d G:i:s")."' LIMIT 0, 5";
+	$deal_cat = $_GET['cat'];
+	$deal_type = $_GET['d'];
+	$search_date = $_GET['srch'];
+	if (isset($deal_cat)) {
 
+		//sql_today_bot_deals = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city LIMIT 1, 2";
+		$sql_today_bot_deals = "SELECT * FROM ".TABLE_DEALS." WHERE deal_cat = $deal_cat AND city = $city AND status >= 1 AND deal_end_time >= '".date("Y-m-d G:i:s")."' LIMIT 0, 5";
+	} elseif (isset($deal_type)) {
+		$deal_type == 'business-generated' ? $deal_type = 'dailydeal' : $deal_type = 'user_deal';
+		$sql_today_bot_deals = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE deal_type = '$deal_type' AND status >= 1  AND city = $city AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' LIMIT 0, 10";
+		//$sql_today_bot_deals = "SELECT * FROM ".TABLE_DEALS." WHERE deal_type = '$deal_type' AND city = $city AND status >= 1 AND deal_end_time >= '".date("Y-m-d G:i:s")."' LIMIT 0, 5";
+	}
+	elseif (isset($search_date)) {
+    $dt_srch = $_POST['in_date_srch'];
+	$array_dt = explode(",",$dt_srch);
+	
+	for($i=0;$i<count($array_dt);$i++)
+	{
+		 $arr[$i]=date("Y-m-d",strtotime($array_dt[$i]));
+		
+	}
+	
+		$dt=implode("','",$arr);
+	 
+	
+		/*$start_time = $_POST['date_srch'];
+		$end_time = $_POST['date_srch1'];
+
+		$start_time = date("Y-m-d G:i:s",strtotime($_POST['date_srch']));
+		$end_time = date("Y-m-d G:i:s",strtotime($_POST['date_srch1']));*/
+		//echo date("Y-m-d",$_POST['in_date_srch']);
+		$sql_today_bot_deals = "SELECT *  FROM ".TABLE_DEALS." WHERE status >= 1  AND city = $city AND deal_start_time IN ( '$dt ' )   LIMIT 0, 5";
+		//echo 	$sql_today_bot_deals;
+
+	}
+	else {
+		header('location:'.SITE_URL);
+		exit();
+	}
 
 	$num_rows = mysql_num_rows(mysql_query($sql_today_bot_deals)) ;
 	if ($num_rows > 0) {
@@ -23,7 +56,7 @@ include 'include/header.php';
 
 			$sql_todays_buy_bot_deals = "SELECT SUM(qty) FROM ".TABLE_TRANSACTION." WHERE deal_id = ".$today_row_bot_deals['deal_id'];
 			$total_buy_bot_deals = mysql_fetch_array(mysql_query($sql_todays_buy_bot_deals));
-
+//print_r($total_buy_bot_deals);exit;
 			$sql_todays_image_bot_deals = "SELECT * FROM ".TABLE_DEAL_IMAGES." WHERE deal_id = ".$today_row_bot_deals['deal_id'];
 			$todays_image_bot_count = mysql_num_rows(mysql_query($sql_todays_image_bot_deals));
 			$todays_image_bot_deals = mysql_fetch_array(mysql_query($sql_todays_image_bot_deals));
@@ -129,7 +162,7 @@ include 'include/header.php';
 
                 	<div class="todays_bg"><div class="todays_abc"><?php echo $circleUserCount; ?></div></div>
 
-                	<div class="amount">Amount: <span>&pound;<?php echo ($today_row_bot_deals['is_multi'] == 'n' ? number_format($today_row_bot_deals['discounted_price'], 2) : number_format($is_multi_bot_deals['multi_deal_item_price'], 2)); ?></span></span></div>
+                	<div class="amount">Amount: <span><?php echo getSettings(currency_symbol); ?><?php echo ($today_row_bot_deals['is_multi'] == 'n' ? number_format($today_row_bot_deals['discounted_price'], 2) : number_format($is_multi_bot_deals['multi_deal_item_price'], 2)); ?></span></span></div>
                     <div class="available">
                     	<div style="border-right:1px solid #d2d2d2;">
                         	Available<br>
@@ -232,35 +265,42 @@ include 'include/header.php';
 
 <!-- No deal layout starts -->
 
-	<div class="common_box">
-	<div class="main_box">
-						<?php
-							$sql_nodeal_city = "SELECT * FROM ".TABLE_CITIES." WHERE city_id = $city";
-							$result_nodeal_city = mysql_query($sql_nodeal_city);
-							$row_nodeal_city = mysql_fetch_array($result_nodeal_city);
-						?>
-	  <div class="coming_soon" >
+	<div>
+
+
+	<div class="todays_deal">
+		<?php
+            $sql_nodeal_city = "SELECT * FROM ".TABLE_CITIES." WHERE city_id = $city";
+            $result_nodeal_city = mysql_query($sql_nodeal_city);
+            $row_nodeal_city = mysql_fetch_array($result_nodeal_city);
+
+        ?>
+    <div class="moreinfo_top"></div>
+      <div class="moreinfo_mid" style="width:890px;">
+	  <div class="coming_soon" style="width:850px;">
 	  <div class="coming_soon_top"></div>
 	  <div class="coming_soon_mid">
 	  <div class="coming_left">
 	   <img src="images/coming_small10.gif" alt="" width="322" height="224"/></div>
-	  <div class="coming_right" style="width:510px;">
+	  <div class="coming_right" style="width:480px;">
 	 <div>
 	 <p>COMING SOON: THE BEST DEALS THAT <?php echo strtoupper($row_nodeal_city[city_name]); ?> HAS TO OFFER</p>
 	 </div>
 	 <div style="margin:20px auto;">
 	 Discover your city upto 90% off See your city in a brand new light with Jumblr. New and diverse deals on spa, beauty, leisure, restaurents and sport bring Jumblr customers excitement for upto 90% less, every single day. But it's not just about presenting deals, Jumblr...</div>
 	 <div class="clear"></div>
-	 <div class="sendbtn"><a id="nodeal_info_btn" href="#more_info_div"></a></div>
+	 <!-- <div class="sendbtn"><a id="nodeal_info_btn" href="#more_info_div"></a></div> -->
 	 <div style="float: right; margin: 4px auto; width: 90px; font: bold 22px/24px Arial, Helvetica, sans-serif; color:#3d3a3a;">- 90%</div>
 	  </div>
 	  </div>
 	  <div class="coming_soon_bot"></div>
       <div class="clear"></div>
 	  </div>
-
-
+      </div>
+     <div class="moreinfo_bot"></div>
 	</div>
+
+
 	<div class="clear"><img src="images/spacer.gif" alt="" width="1" height="4" /></div>
 	</div>
 
@@ -367,9 +407,7 @@ include 'include/header.php';
 ?>
 
 
-<?php } else {
-	header('location:'.SITE_URL);
-} ?>
+
 
 
 </div>

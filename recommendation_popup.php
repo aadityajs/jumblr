@@ -3,7 +3,7 @@
 			<?php //if (isset($_SESSION['user_id'])) { ?>
 				<div class="deal_recomm">
 				<div class="top_recomm">
-				<p>Recommend now and get credits</p>
+				<p>Recommend now to your friends</p>
 				</div>
 				<div class="clear"></div>
 				<div style="border-bottom: 3px solid #7fd7fb;"></div>
@@ -22,10 +22,10 @@
 
 				//echo '<img src="UPLOAD_PATH.$email_image_1[file]">';
 
-					$user_id = $_SESSION['user_id'];
-					$sql_select = "SELECT * FROM ".TABLE_USERS." WHERE user_id= $user_id";
+					$user_id = $_SESSION['fb_id'];
+					$sql_select = "SELECT * FROM ".TABLE_FB_USER." WHERE fb_id= $user_id";
 					$result_select = mysql_fetch_array(mysql_query($sql_select));
-					$user_name = $result_select['first_name'].' '.$result_select['last_name'];
+					$user_name = $result_select['name'];
 
 					$recom_email_save = $email_res_recom['savings'];
 					$recom_email_disc = $email_res_recom['discount'];
@@ -37,7 +37,7 @@
 							<table border="0" cellspacing="0" cellpadding="0" width="620" style="vertical-align:top; width:620px; margin:0 auto;">
                            <tr>
 							<td height="16" style="height:16px; line-height:16px; color:#4f4437; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:12px; font-weight: normal; text-align: center; vertical-align: middle;">
-							Add "rewards@geelaza.com" to your address book to ensure you get emails from GeeLaza.
+							Add "rewards@Jumblr.com" to your address book to ensure you get emails from Jumblr.
 							</td>
 						  </tr>
 						  <tr>
@@ -54,7 +54,7 @@
 									<td width="171" height="76" align="left" valign="top" style="vertical-align:top; text-align:left; width:171px; height:76px; line-height:0px;">
 										<img src="'.SITE_URL.'images/reg_newsletter/logo.png" width="164" height="72" alt="" />
 									</td>
-									<td width="350" valign="top" style="vertical-align:top; width:350px; color:#fff; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:25px; font-weight:bold; padding:12px 10px 0 6px;">'.$user_name.' has invited you to join GeeLaza</td>
+									<td width="350" valign="top" style="vertical-align:top; width:350px; color:#fff; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:25px; font-weight:bold; padding:12px 10px 0 6px;">'.$user_name.' has invited you to join Jumblr</td>
 								  </tr>
 							  </table>
 								</td>
@@ -75,10 +75,10 @@
 											<td valign="top" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:15px; font-weight:normal; padding:0 0 0 6px;"><strong>'. $_POST['fmsg'] .'</strong></td>
 										  </tr>
 										  <tr>
-											<td valign="top" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:15px; font-weight:normal; padding:0 0 0 6px;"> You can learn more about GeeLaza in the <a href="'. SITE_URL .'faq.php" style="color:#009CE8;">FAQ section.</a></td>
+											<td valign="top" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:15px; font-weight:normal; padding:0 0 0 6px;"> You can learn more about Jumblr in the <a href="'. SITE_URL .'faq.php" style="color:#009CE8;">FAQ section.</a></td>
 										  </tr>
 										  <tr>
-										  <td style="color:#4f4437; font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:11px; font-weight:normal; padding:8px 0 0 6px;">If you purchase this deal within 48 hours of opening a GeeLaza account, &pound;5 will automatically be credited to your friend\'s GeeLaza account, so you can both enjoy great saving! You will hear nothing else from us as a result of this referral. You have not been added to any database and there is no need to ask for removal. <br/>See our <a href="'.SITE_URL.'page.php?page=Privacy Policy" style="font-size: 12px; text-decoration: underline; color:#4f4437;">Privacy Policy</a>.</td>
+										  <td style="color:#4f4437; font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:11px; font-weight:normal; padding:8px 0 0 6px;">If you purchase this deal within 48 hours of opening a Jumblr account, '.getSettings(currency_symbol).'5 will automatically be credited to your friend\'s Jumblr account, so you can both enjoy great saving! You will hear nothing else from us as a result of this referral. You have not been added to any database and there is no need to ask for removal. <br/>See our <a href="'.SITE_URL.'page.php?page=Privacy Policy" style="font-size: 12px; text-decoration: underline; color:#4f4437;">Privacy Policy</a>.</td>
 										  </tr>
 										  <tr>
 											  <td height="8"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="8" /></td>
@@ -87,7 +87,7 @@
 											<td background="'.SITE_URL.'images/reg_newsletter/box_bg.gif" height="198" valign="top">
 											 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 											 <tr>
-												<td colspan="5" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:24px; font-weight:bold; padding:10px 0 20px 0; text-align:center;">What can GeeLaza do for you?</td>
+												<td colspan="5" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:24px; font-weight:bold; padding:10px 0 20px 0; text-align:center;">What can Jumblr do for you?</td>
 											 </tr>
 											 <tr>
 											 <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -148,7 +148,7 @@
                             <td height="10"><img src="'.SITE_URL.'images/spacer.gif" alt="" width="1" height="10" /></td>
                           </tr>
                           <tr>
-                            <td valign="top" align="center" style="padding:0 0 0 15px; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; text-align:center;">For &pound;'. $email_res_recom['discounted_price'].'</td>
+                            <td valign="top" align="center" style="padding:0 0 0 15px; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; text-align:center;">For '. getSettings(currency_symbol). $email_res_recom['discounted_price'].'</td>
                           </tr>
 <tr>
                             <td height="10"><img src="'.SITE_URL.'images/spacer.gif" alt="" width="1" height="10" /></td>
@@ -167,7 +167,7 @@
                                   <tr>
                                     <td width="27">&nbsp;</td>
                                     <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; text-align:center;" width="99" align="center" valign="middle">Discount '.$recom_email_disc.'%</td>
-                                    <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; text-align:center;" width="44%" align="center" valign="middle">Saving &pound;'.$recom_email_save.'</td>
+                                    <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; text-align:center;" width="44%" align="center" valign="middle">Saving '.getSettings(currency_symbol).$recom_email_save.'</td>
                                   </tr>
                                 </table></td>
                               </tr>
@@ -223,10 +223,10 @@
 										   </tr>
 										<tr>
 											<td valign="top" align="center">
-											<a href="'.SITE_URL.'" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">&copy; GeeLaza.com</a>
+											<a href="'.SITE_URL.'" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">&copy; Jumblr.com</a>
 											<a href="'.SITE_URL.'page.php?page=Terms and Conditions" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Terms & Conditions</a>
 											<a href="'.SITE_URL.'customer-register.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Join Us</a>
-											<a href="'.SITE_URL.'page.php?page=About GeeLaza UK" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">About GeeLaza</a>
+											<a href="'.SITE_URL.'page.php?page=About Jumblr UK" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">About Jumblr</a>
 											<a href="'.SITE_URL.'merchant_business.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Run Deal With Us</a>                   </td>
 										 </tr>
 									 </table>
@@ -252,7 +252,7 @@
 					 * <table border="0" cellspacing="0" cellpadding="0" width="620" style="vertical-align:top; width:620px; margin:0 auto;">
                            <tr>
 							<td height="16" style="height:16px; line-height:16px; color:#4f4437; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:12px; font-weight: normal; text-align: center; vertical-align: middle;">
-							Add "rewards@geelaza.com" to your address book to ensure you get emails from GeeLaza.
+							Add "rewards@Jumblr.com" to your address book to ensure you get emails from Jumblr.
 							</td>
 						  </tr>
 						  <tr>
@@ -269,7 +269,7 @@
 									<td width="171" height="76" align="left" valign="top" style="vertical-align:top; text-align:left; width:171px; height:76px; line-height:0px;">
 										<img src="'.SITE_URL.'images/reg_newsletter/logo.png" width="164" height="72" alt="" />
 									</td>
-									<td width="350" valign="top" style="vertical-align:top; width:350px; color:#fff; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:25px; font-weight:bold; padding:12px 10px 0 6px;">'.$user_name.' has invited you to join GeeLaza</td>
+									<td width="350" valign="top" style="vertical-align:top; width:350px; color:#fff; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:25px; font-weight:bold; padding:12px 10px 0 6px;">'.$user_name.' has invited you to join Jumblr</td>
 								  </tr>
 							  </table>
 								</td>
@@ -290,10 +290,10 @@
 											<td valign="top" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:15px; font-weight:normal; padding:0 0 0 6px;">'. $_POST['fmsg'] .'</td>
 										  </tr>
 										  <tr>
-											<td valign="top" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:15px; font-weight:normal; padding:0 0 0 6px;"> You can learn more about GeeLaza in the <a href="'. SITE_URL .'faq.php" style="color:#009CE8;">FAQ section.</a></td>
+											<td valign="top" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:15px; font-weight:normal; padding:0 0 0 6px;"> You can learn more about Jumblr in the <a href="'. SITE_URL .'faq.php" style="color:#009CE8;">FAQ section.</a></td>
 										  </tr>
 										  <tr>
-										  <td style="color:#4f4437; font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:11px; font-weight:normal; padding:8px 0 0 6px;">If you purchase this deal within 48 hours of opening a GeeLaza account, &pound;5 will automatically be credited to your friend\'s GeeLaza account, so you can both enjoy great saving! You will hear nothing else from us as a result of this referral. You have not been added to any database and there is no need to ask for removal. <br/>See our <a href="'.SITE_URL.'page.php?page=Privacy Policy" style="font-size: 12px; text-decoration: underline; color:#4f4437;">Privacy Policy</a>.</td>
+										  <td style="color:#4f4437; font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:11px; font-weight:normal; padding:8px 0 0 6px;">If you purchase this deal within 48 hours of opening a Jumblr account, &pound;5 will automatically be credited to your friend\'s Jumblr account, so you can both enjoy great saving! You will hear nothing else from us as a result of this referral. You have not been added to any database and there is no need to ask for removal. <br/>See our <a href="'.SITE_URL.'page.php?page=Privacy Policy" style="font-size: 12px; text-decoration: underline; color:#4f4437;">Privacy Policy</a>.</td>
 										  </tr>
 										  <tr>
 											  <td height="8"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="8" /></td>
@@ -302,7 +302,7 @@
 											<td background="'.SITE_URL.'images/reg_newsletter/box_bg.gif" height="198" valign="top">
 											 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 											 <tr>
-												<td colspan="5" style="color:#14131b; font-family:Times New Roman, Times, serif; line-height:17px; font-size:24px; font-weight:bold; padding:10px 0 20px 0; text-align:center;">What can GeeLaza do for you?</td>
+												<td colspan="5" style="color:#14131b; font-family:Times New Roman, Times, serif; line-height:17px; font-size:24px; font-weight:bold; padding:10px 0 20px 0; text-align:center;">What can Jumblr do for you?</td>
 											 </tr>
 											  <tr>
 												<td width="10" valign="top"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="10" height="1" /></td>
@@ -419,10 +419,10 @@
 										   </tr>
 										<tr>
 											<td valign="top" align="center">
-											<a href="'.SITE_URL.'" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">&copy; GeeLaza.com</a>
+											<a href="'.SITE_URL.'" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">&copy; Jumblr.com</a>
 											<a href="'.SITE_URL.'page.php?page=Terms and Conditions" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Terms & Conditions</a>
 											<a href="'.SITE_URL.'customer-register.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Join Us</a>
-											<a href="'.SITE_URL.'page.php?page=About GeeLaza UK" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">About GeeLaza</a>
+											<a href="'.SITE_URL.'page.php?page=About Jumblr UK" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">About Jumblr</a>
 											<a href="'.SITE_URL.'merchant_business.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Run Deal With Us</a>                   </td>
 										 </tr>
 									 </table>
@@ -456,13 +456,14 @@
 					//$fmsg = $_POST['fmsg'];
 					//$headers  = 'MIME-Version: 1.0' . "\r\n";
 					$headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-					$headers .= "From: GeeLaza Referral<rewards@geelaza.com>";
+					$headers .= "From: Jumblr Referral<rewards@Jumblr.com>";
 					$femail = $_POST['femail'];
-					$sub = ucwords($user_name)." has invited you to join GeeLaza";
+					$sub = ucwords($user_name)." has invited you to join Jumblr";
 
 
-					@mail($femail, $sub, $template_recom, $headers);
-					//header('location: recom_thanks.php');
+					//@mail($femail, $sub, $template_recom, $headers);
+					header('location: '.SITE_URL);
+					exit();
 				}
 
 			?>
@@ -506,10 +507,10 @@ Your friend.</textarea></div>
 				<div class="massage_right">
 				<div><img src="images/dollar.jpg" alt="" width="168" height="108" /></div>
 				<div>
-				<ul>
-				<li style="float:left; width: 16px; margin: 0 auto;"><a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool style=z-index:510><div class=tip_top></div><div class=clear></div><div class=arrowright1></div><div class=tip_mid><h2>How does it work?</h2><ul><li>You receive &pound;5.00 credit for every friend who buys a deal via your link within 48 hours of opening a GeeLaza account. You can buy and enjoy even greater savings! You\'ll find an overview of your successful recommendations at Credits after you log in.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/question.png" width="12" height="12" vspace="4" align="default" ></a></li>
+				<!-- <ul>
+				<li style="float:left; width: 16px; margin: 0 auto;"><a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool style=z-index:510><div class=tip_top></div><div class=clear></div><div class=arrowright1></div><div class=tip_mid><h2>How does it work?</h2><ul><li>You receive &pound;5.00 credit for every friend who buys a deal via your link within 48 hours of opening a Jumblr account. You can buy and enjoy even greater savings! You\'ll find an overview of your successful recommendations at Credits after you log in.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/question.png" width="12" height="12" vspace="4" align="default" ></a></li>
 				<li style="float: right; width: 162px; margin: 0 auto;">You'll be credited &pound;5 on every successfull recommendation</li>
-				</ul>
+				</ul> -->
 				</div>
 				</div>
 				</div>
@@ -585,7 +586,7 @@ Your friend.</textarea></div>
 			if (empty($_POST['password_box']))
 				$ers['password']="Password missing !";
 			if (empty($_POST['provider_box']))
-				$ers['provider']="Please give your valid webmail address and corresponding password";
+				$ers['provider']="Please provide valid webmail address and corresponding password";
 			if (count($ers)==0)
 				{
 				$inviter->startPlugin($_POST['provider_box']);
@@ -623,7 +624,7 @@ Your friend.</textarea></div>
 	?>
 
 
-				<div class="invita_deal">
+				<!-- <div class="invita_deal">
 				<div><p class="red">Or spread the word by:<span style="padding: 6px 6px; margin:0;"><a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool style=z-index:510><div class=tip_top></div><div class=clear></div><div class=arrowright1></div><div class=tip_mid><h2 style=line-height:17px>How to recommend deals in social networks, like e.g. Facebook or Twitter?</h2><ul><li>Login to your Facebook or Twitter account. The deal you want to recommend to your Facebook friends or Twitter followers will then appeares as a post on your Facebook wall or in your Twitter tweets.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/question.png" width="12" height="12" vspace="4" align="default" ></a></span>
 					<span><a name="fb_share" type="icon_link">Facebook</a>
 					<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share"
@@ -638,20 +639,20 @@ Your friend.</textarea></div>
 
 	<!-- <a href="https://twitter.com/share" class="twitter-share-button" data-text="Twitter" data-via="unifiedinfotech" data-count="none">Twitter</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> -->
-					</span>
+				<!--	</span>
 				</p></div>
 				<div class="clear"></div>
 				</div>
 				<div class="clear"><img src="images/spacer.gif" alt="" width="1" height="10" /></div>
-				<div style="border-bottom: 3px solid #7fd7fb;"></div>
+				<div style="border-bottom: 3px solid #7fd7fb;"></div> -->
 				<div class="clear"></div>
 
 			<form action='<?php echo SITE_URL; ?>?recommend=import' method='POST' name='openinviter'>
 
 				<div class="invita_deal">
 				<div>
-				<p class="red">The fastest way:<span style="padding: 0 6px; margin:0;"><a href="javascript: showDetails(10)" onmouseover="return overlib('&lt;font class=bodytext&gt;<div class=tiptool style=z-index:510><div class=tip_top></div><div class=clear></div><div class=arrowright1></div><div class=tip_mid><h2>How do I recommend deals per email?</h2><ul><li>Enter your email address and corresponding password here (not your GeeLaza account details). The next step allowes you to decide which contacts you want to recommend the deals to. GeeLaza does not save this data.</li></ul></div><div class=tip_bot></div></div>&lt;/font&gt;',BORDER,'1');" onMouseOut="nd();"><img src="images/question.png" width="12" height="12" vspace="4" align="default" ></a></span></p><span>Enter your email address and select people from your email account to whom you want to recommend this deal to.</span>
-				<div class="error_orange10"><?php echo ers($ers).oks($oks); ?> </div>
+				<p class="red">The fastest way:<span style="padding: 0 6px; margin:0;"><a href="javascript: void(0);" class="tips" original-title="Provide your webmail email address and password below to get all the contacts. All those imported contact will be shown at the above textbox."><img src="images/question.png" width="12" height="12" vspace="4" align="middle" ></a></span></p><span>Enter your email address and select people from your email account to whom you want to recommend this deal to.</span>
+				<div class="error_orange"><?php echo ers($ers).oks($oks); ?> </div>
 
 				</div>
 				<div class="clear"><img src="images/spacer.gif" alt="" width="1" height="14"/></div>
@@ -688,7 +689,7 @@ Your friend.</textarea></div>
 				</div>
 
 				<div class="clear"></div>
-				<div style="float:right; margin:0 auto; width: 150px;"><span>GeeLaza does not save your password!</span></div>
+				<div style="float:right; margin:0 auto; width: 150px;"><span>Jumblr does not save your password!</span></div>
 				</div>
 				</div>
 

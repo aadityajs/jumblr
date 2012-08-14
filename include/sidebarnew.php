@@ -46,9 +46,9 @@ if ($rows != 0) {
 <div style="width: 230px; margin: 5px auto; float: none;">
 <div style="width: 110px; margin: 0 6px; float: left;"><img src="<?php echo UPLOAD_PATH.$national_image['file']; ?>" alt="" width="106" height="70" class="border"/></div>
 <div class="left_green">
-<p>&pound;<?php echo $national_res['discounted_price']; ?></p>
+<p><?php  echo getSettings(currency_symbol);?><?php echo $national_res['discounted_price']; ?></p>
 <p style="padding-top: 5px;"><span style="text-align:center;">instead of<br/>
-&pound;<?php echo $national_res['full_price']; ?></span></p>
+<?php  echo getSettings(currency_symbol);?><?php echo $national_res['full_price']; ?></span></p>
 </div>
 </div>
 <div class="clear"></div>
@@ -110,9 +110,9 @@ $todays_image = mysql_fetch_array(mysql_query($sql_todays_image));
   <div style="width: 230px; margin: 5px auto; float: none;">
   <div style="width: 110px; margin: 0 0 0 2px; float: left;"><img src="<?php echo UPLOAD_PATH.$todays_image['file']; ?>" alt="" width="106" height="70" class="border"/></div>
     <div style="margin-right: 10px;" class="left_green">
-      <p>&pound;<?php echo strip_tags($today_res['discounted_price']); ?></p>
+      <p><?php  echo getSettings(currency_symbol);?><?php echo strip_tags($today_res['discounted_price']); ?></p>
       <p style="padding-top: 5px;"><span style="text-align:center;">instead of<br/>
-        &pound;<?php echo strip_tags($today_res['full_price']); ?></span></p> </div>
+       <?php  echo getSettings(currency_symbol);?><?php echo strip_tags($today_res['full_price']); ?></span></p> </div>
   </div>
   <div class="clear"></div>
   <a href="<?php echo SITE_URL."index.php?action=view&id=".$today_res['deal_id'];?>"><div class="see"></div></a>
@@ -310,7 +310,7 @@ return false;
                                     <div id="gotqa2" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">You can always find  all of your deals that you bought by clicking on &ldquo;My Account&rdquo; then select &ldquo;My  Vouchers&rdquo; from the option list in the top right corner (if you&rsquo;re logged in),  or by <a href="<?php echo SITE_URL; ?>customer-login.php">click</a> here.</span></div>
 
                                     <li id="gotqq3">How do I get credit for my referral work?</li>
-                                    <div id="gotqa3" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">Well put &pound;5 worth of credit in your account after they (the person you recommended deal to) buy their first deal of more than 15! (This can take up to 48 hours). You can check your account credit by logging in and then go to Credits.</span></div>
+                                    <div id="gotqa3" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">Well put <?php  echo getSettings(currency_symbol);?>5 worth of credit in your account after they (the person you recommended deal to) buy their first deal of more than 15! (This can take up to 48 hours). You can check your account credit by logging in and then go to Credits.</span></div>
 
                                     <li id="gotqq4">What if my voucher deal is about to expire?</li>
                                     <div id="gotqa4" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">We can&rsquo;t do much once your voucher has expired  so we recommend you to use your voucher before it expires otherwise you&rsquo;ve  wasted your money!</span></div>

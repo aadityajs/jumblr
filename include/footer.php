@@ -13,10 +13,10 @@
             <img src="images/com_07.png" alt="">
             <img src="images/com_08.png" alt="">
       </div>
-      <div class="map">
-       	 <div style="width:310px; padding-top:20px;"><img src="images/map.png" alt=""></div>
-       	 <div style="width:320px; margin:0 20px 0 20px; padding-top:35px;">Why not visit our store at <br> 292 St kilda Road, St Kilda VIC 3182</div>
-         <div class="payment_bg">
+       <div class="map">
+       	<!-- <div style="width:310px; padding-top:20px;"><img src="images/map.png" alt=""></div>
+       	 <div style="width:320px; margin:0 20px 0 20px; padding-top:35px;">Why not visit our store at <br> 292 St kilda Road, St Kilda VIC 3182</div>-->
+         <div class="payment_bg" style="float: right;">
          	<img src="images/paypal_01.png" alt="">
             <img src="images/paypal_02.png" alt="">
             <img src="images/paypal_03.png" alt="">
@@ -25,7 +25,10 @@
       <div class="clear"></div>
       <div class="copy_right">
       	 <ul>
-         	 <li><img src="images/social_06.png" alt=""> <img src="images/social_07.png" alt=""></li>
+         	 <li>
+         	 	<a href="<?php echo SITE_FB_PROFILE; ?>"><img src="images/social_06.png" alt=""></a>
+         	 	<a href="<?php echo SITE_TWITTER_PROFILE; ?>"><img src="images/social_07.png" alt=""></a>
+         	 </li>
          </ul>
          <ul>
          	 <li class="center_align">Copyright &copy; <?php echo date('Y'); ?> Belliniholdings.com</li>
@@ -37,7 +40,13 @@
     </div>
   </footer>
 <!--end footer-->
-
+<?php if ($_GET['recommend'] == 'import' && isset($_SESSION['recomEmails'])) { ?>
+<script type="text/javascript">
+	$('document').ready(function() {
+		recomEmailGet();
+		});
+</script>
+<?php } ?>
 
 <script>
 $("div#click").click(function () {
@@ -51,12 +60,50 @@ $("a#locateDealMap").click(function () {
 
 
 
+
+/* Date search cod
+ */
+ $("#openDateSearch").click(function () {
+		$("#search_date").slideToggle(300);
+		//var dt = jQuery.noConflict();
+		// Multi date selection
+		$('#date_srch_cal').multiDatesPicker();
+		$('#date_srch_cal').focus(function() {
+			$('#date_srch_cal').css('background-color','#707070');
+			$('#date_srch_cal').css('color','#efefef');
+		});
+
+		//$('#date_srch').datetimepicker();
+		$('#date_srch').focus(function() {
+			$('#date_srch').css('background-color','#707070');
+			$('#date_srch').css('color','#efefef');
+		});
+
+		//var dt = jQuery.noConflict();
+		//$('#date_srch1').datetimepicker();
+		$('#date_srch1').focus(function() {
+			$('#date_srch1').css('background-color','#707070');
+			$('#date_srch1').css('color','#efefef');
+		});
+	});
+
+
+$("#submit").click(function () {
+
+//window.loca
+});
+
 $(document).ready(function(){
 //$("div#locations").ready(function() {
 	$("div#locations").hide(0);
+	$("#dropBox").hide(0);
+	$("#search_date").hide(0);
+
 	//$("div#dealMap").hide(0);
 //});
 });
+
+
 </script>
 
 <script>
@@ -324,14 +371,14 @@ $(document).ready(function() {
 	//$q = jQuery.noConflict();
 
 	function recomEmailGet() {
-		$(document).ready(function() {
-			$q("#gift").fancybox({
+		//$(document).ready(function() {
+			$("#various4").fancybox({
 					'titlePosition'		: 'inside',
 					'transitionIn'		: 'none',
 					'transitionOut'		: 'none',
 					'hideOnOverlayClick' : false
 				}).trigger('click');
-	       });
+	       //});
     	 }
 
 	function NewsSucc() {

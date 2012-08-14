@@ -18,10 +18,10 @@
 		<div class="pop_inner<?php echo ($count%2 == 0 ? '' : '1'); ?>">
 		<div class="pop_left">
 		<div><p><a href="<?php echo SITE_URL;?>customer-payment.php?item=<?php echo $today_res['deal_id']; ?>&mid=<?php echo $multi_deal_row['multi_deal_id']; ?>"><?php echo $multi_deal_row['multi_deal_item_name']; ?></a></p></div>
-		<div><p><strong><?php echo $multi_deal_row['multi_deal_item_disc']; ?> </strong>Discount - Save <strong>&pound;<?php echo number_format($multi_deal_row['multi_deal_item_save'], 2); ?></strong></p></div>
+		<div><p><strong><?php echo $multi_deal_row['multi_deal_item_disc']; ?> </strong>Discount - Save <strong><?php echo getSettings(currency_symbol); ?><?php echo number_format($multi_deal_row['multi_deal_item_save'], 2); ?></strong></p></div>
 		</div>
 		<div class="pop_mid">
-		<div style="margin: 8px 0;"><p>Price<br/>&pound;<?php echo number_format($multi_deal_row['multi_deal_item_price'], 2); ?> </p></div>
+		<div style="margin: 8px 0;"><p>Price<br/><?php echo getSettings(currency_symbol); ?><?php echo number_format($multi_deal_row['multi_deal_item_price'], 2); ?> </p></div>
 		</div>
 		<div class="pop_right">
 		<div><a class="buynow_btn2" href="<?php echo SITE_URL;?>customer-payment.php?item=<?php echo $today_res['deal_id']; ?>&mid=<?php echo $multi_deal_row['multi_deal_id']; ?>">Buy it now</a></div>

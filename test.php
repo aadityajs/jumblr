@@ -3,142 +3,119 @@
     <head>
 
       <title>My Great Website</title>
-
+    <link rel="stylesheet" href="js/themes/base/jquery.ui.all.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="js/jquery.ui.core.js"></script>
+	<script src="js/jquery.ui.widget.js"></script>
+	<script src="js/jquery.ui.position.js"></script>
+	<script src="js/jquery.ui.autocomplete.js"></script>
     </head>
 
     <body>
 
-      <div id="fb-root"></div>
 
-		<script src="http://connect.facebook.net/en_US/all.js"></script>
-		
-		<script>
-		
-		FB.init
-		(
+       <meta charset="utf-8">
+
+	<style>
+	#project-label {
+		display: block;
+		font-weight: bold;
+		margin-bottom: 1em;
+	}
+	#project-icon {
+		float: left;
+		height: 32px;
+		width: 32px;
+	}
+	#project-description {
+		margin: 0;
+		padding: 0;
+	}
+	</style>
+	<script>
+	$(function() {
+		var projects = [
 			{
-				appId: '192309027517422', 
-				status: true,
-				cookie: true, xfbml: true
-			}
-		);
-		
-		FB.Event.subscribe('auth.login', function(response) 
-		{
-			window.location.reload();
-		});
-		
-		</script>
-
-       
-
-       <?php
-
-		function get_facebook_cookie($app_id, $app_secret) 
-		{
-			$args = array();
-			parse_str(trim($_COOKIE['fbs_' . $app_id], '\\"'), $args);
-			ksort($args);
-			$payload = '';
-			
-			foreach ($args as $key => $value) 
+				value: "jquery",
+				label: "jQuery",
+				desc: "the write less, do more, JavaScript library",
+				icon: "jquery_32x32.png"
+			},
 			{
-				if ($key != 'sig') 
-				{
-					$payload .= $key . '=' . $value;
-				}
-			}
-			
-			if (md5($payload . $app_secret) != $args['sig']) 
+				value: "jquery-ui",
+				label: "jQuery UI",
+				desc: "the official user interface library for jQuery",
+				icon: "jqueryui_32x32.png"
+			},
 			{
-				return null;
+				value: "sizzlejs",
+				label: "Sizzle JS",
+				desc: "a pure-JavaScript CSS selector engine",
+				icon: "sizzlejs_32x32.png"
 			}
-			
-			return $args;
-		}
+		];
 
-	   	$cookie = get_facebook_cookie('192309027517422', '7f1eb32e301277d025d35b77b06dd863');	
+$('#project').keyup(function (evt) {
+        if(evt.keyCode === 50) {
 
-	  ?>
+            alert(evt.keyCode);
+		//autocomplete.simulate("keydown", { keyCode: $.ui.keyCode.DOWN });
 
-          <?php if ($cookie) 
-		  { 
+		$( "#project" ).autocomplete({
+			minLength: 0,
+			source: projects,
+			focus: function( event, ui ) {
+				$( "#project" ).val( ui.item.label );
+				return false;
+			},
+			select: function( event, ui ) {
+				$( "#project" ).val( ui.item.label );
+				$( "#project-id" ).val( ui.item.value );
+				$( "#project-description" ).html( ui.item.desc );
+				$( "#project-icon" ).attr( "src", "images/" + ui.item.icon );
 
-		  $user = json_decode(file_get_contents('https://graph.facebook.com/me?access_token=' .$cookie['access_token']));
-			
-	
-		   //var_dump($user);
-		   //echo '<pre>'.print_r($user,true).'</pre>';
-		  
-		  ?>
+				return false;
+			}
+		})
 
-      Welcome <?php echo $user->name;
-      				echo $user->first_name;
-      				echo $user->gender;
-      				echo $user->timezone;
-      			
-      				echo $user->location->name;	
-
-	  				echo $user->email;
-	  				
-	  				echo $user->hometown->name;
-
-	   ?>
-
-   
-
-	  <fb:login-button perms="email" autologoutlink="true" onlogin="window.location.reload()"></fb:login-button> 
-
-       <!--  <script>window.location.reload()</script>-->
-
-	
-    <?php } else { ?>
-
-    
-
-  <fb:login-button perms="email" autologoutlink="true">Login</fb:login-button> 
-      
-      
-<!--     <a id="fb-login" class="" href="javascript:void(0);">
-<img src="fb_login.png">
-</a> -->
-<script>
-
-
-document.getElementById("fb-login").onclick = function()
-	{ 
-	FB.login(function(response)
-		{
-		window.location.href = "http://nuwaytechnologies.com/armadealz/receiver3.php";
-		},
-		{
-		perms : "email,share_item"
-		}
-	);
-};
-
-</script>
-
-     <!-- <script>window.location.reload()</script>-->
-
-    <?php }
-
-	
+		.data( "autocomplete" )._renderItem = function( ul, item ) {
+			return $( "<li></li>" )
+				.data( "item.autocomplete", item )
+				.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+				.appendTo( ul );
+		};
 
 
 
-	 ?>
 
-  <!--         <div align="center">
+            }
+        });
 
-           <img id="image"/>
 
-           <div id="name"></div>
 
-            <div id="email"></div>
+	});
+	</script>
 
-           </div>
--->
+
+
+
+
+
+<div class="demo">
+	<div id="project-label">Select a project (type "j" for a start):</div>
+	<img id="project-icon" src="images/transparent_1x1.png"  class="ui-state-default"//>
+	<input id="project"/>
+	<input type="hidden" id="project-id"/>
+	<p id="project-description"></p>
+</div><!-- End demo -->
+
+
+
+<div class="demo-description">
+<p>You can use your own custom data formats and displays by simply overriding the default focus and select actions.</p>
+<p>Try typing "j" to get a list of projects or just press the down arrow.</p>
+</div><!-- End demo-description -->
+
     </body>
 
  </html>

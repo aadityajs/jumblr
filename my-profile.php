@@ -35,6 +35,8 @@ if(isset($_REQUEST['u_id'])) {
                 <div class="todays_deal_left1" style="width:200px;">
 				<?php
 				if (isset($profileId)) {
+
+
 					$sqlProfile = "SELECT * FROM ".TABLE_FB_USER." WHERE fb_id = $profileId";
 					$profileUser = mysql_fetch_array(mysql_query($sqlProfile));
 					$profileUserCount = mysql_num_rows($db->query($sqlProfile));
@@ -68,7 +70,7 @@ if(isset($_REQUEST['u_id'])) {
              <div class="clear"></div>
 			 <div class="todays_deal_left" style="margin: 18px auto;">
                            <!-- AddThis Button BEGIN -->
-							<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+							<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
 							<div style="float: left;">
                         	<!-- <a <?php if (isset($_SESSION['user_id'])) { ?>href="#inline1" id="various1" <?php } else { ?>href="<?php echo SITE_URL; ?>recomendation.php"<?php } ?>>
                             <img src="images/social_01.png" alt="">

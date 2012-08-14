@@ -25,7 +25,7 @@ include_once "fbmain.php";
 <h6 style="margin:0; background:#fff; padding:0 0 6px 0; line-height:46px; font-size:25px; height:auto; white-space:normal;">Recommend us and we will top up your credit</h6>
  <div class="content_box3">
     Why not surprise your friends with unbeatable deals in your city while earning easy cash at the same time?
-    We love our customers so therefore we will reward you &pound;5 worth of credit for every new customer you bring our way (see details below)
+    We love our customers so therefore we will reward you <?php echo getSettings(currency_symbol);?>5 worth of credit for every new customer you bring our way (see details below)
 </div>
 
 <div class="heading_txt2">This is how it works:</div>
@@ -53,7 +53,7 @@ include_once "fbmain.php";
 <h1 style="width:100%; padding:15px 0; text-align:left; font-family: Candara, Arial, Helvetica, sans-serif; font-size: 21px; color:#444540;">OK, but how does GeeLaza credits work?</h1>
 
  <div class="content_box2" style="margin:0px; width:660px; background:none; padding:10px 0;">
-        	<b style="text-align:left; font-family: Candara, Arial, Helvetica, sans-serif; font-size: 14px; color:#444540;"> Why recommend deals?</b><br /> Recommending deals has many benefits but most importantly, we will credited you with &pound;5.00 which means you can get your next deal at even greater discounted price. The main reason we like our users to recommend deals is because we feel god to know that all people who are interested in buying our deals are aware of the deal. Help your friends and families to save money on great deals too!
+        	<b style="text-align:left; font-family: Candara, Arial, Helvetica, sans-serif; font-size: 14px; color:#444540;"> Why recommend deals?</b><br /> Recommending deals has many benefits but most importantly, we will credited you with <?php echo getSettings(currency_symbol);?>5.00 which means you can get your next deal at even greater discounted price. The main reason we like our users to recommend deals is because we feel god to know that all people who are interested in buying our deals are aware of the deal. Help your friends and families to save money on great deals too!
 </div>
 
  <div class="content_box2" style="margin:0px; width:660px; background:none; padding:10px 0;">

@@ -65,13 +65,28 @@ header{
 	margin: 31px 0 0 18px;
 }
 .header_right{
-	width: 360px;
+	width: 372px;
 	height: 69px;
 	float: right;
 	padding: 18px 0 0 0;
 }
+.header_right a{
+	padding: 5px 23px 5px 24px !important;
+	text-align: center;
+	height: 40px;
+	color: #b6b6b6;
+	display: inline-block;
+}
+.header_right a:hover{
+	padding: 5px 23px 5px 24px !important;
+	text-align: center;
+	height: 40px;
+	color: #ff8d12;
+	display: inline-block;
+}
+
 nav{
-	width: 360px;
+	width: 372px;
 	height: 50px;
 }
 nav li{
@@ -89,7 +104,7 @@ nav li{
 	-webkit-border-radius: 3px;	
 }	
 nav li a{
-	padding: 5px 24px 5px 25px !important;
+	padding: 5px 23px 5px 24px !important;
 	text-align: center;
 	height: 40px;
 	color: #b6b6b6;
@@ -155,6 +170,18 @@ nav li a span{
 	padding: 25px 25px;
 	margin: 0 0 30px 0;
 	background: #fff;
+	behavior:url(js/PIE.htc);
+	position:relative;
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+.todays_deal1{
+	width: 890px;
+	height: auto;
+	padding: 25px 25px;
+	margin: 0 0 30px 0;
+	background: #000;
 	behavior:url(js/PIE.htc);
 	position:relative;
 	border-radius: 6px;
@@ -361,7 +388,16 @@ footer{
 .copy_right ul li img{
 	vertical-align: middle;
 }
-
+copy_right ul li a{
+	color:#909090;
+	line-height: 50px;
+	text-transform: uppercase;
+}
+copy_right ul li a:hover{
+	color: #ff8d12;
+	line-height: 50px;
+	text-transform: uppercase;
+}
 
 /*inner page*/
 .jewellry_img_box{
@@ -696,7 +732,7 @@ div#dealbg_bot1{
 	border: solid 1px #c9c5c5;
 	background-color: #e6e6e6;
 	position: absolute;
-	z-index: 5000;
+	z-index: 500;
 	cursor: pointer;
 }
 
@@ -766,30 +802,38 @@ div#dealbg_bot1{
 	width: 700px;
 	height: auto;
 	margin: 0px;
-	background-color: white;
+	background: #fff;
 	z-index: 1002;
 	overflow: hidden;
+	border-radius: 6px;
+	border: 5px solid #707070;
 }
-
+.header_txt{
+	font: normal 24px/24px Arial, Helvetica, sans-serif;
+	padding: 15px 0 15px 30px;
+	color: #333;
+}
+.header_txt a{
+	font: normal 24px/24px Arial, Helvetica, sans-serif;
+}
 a#close {
 	height: 30px;
 	width: 30px;
 	position: absolute;
 	top: 3px;
 	left: 93.5%;
+	background: #f00;
 	background: url(../images/close.png) 0 0;
 }
 
 a#close:hover {
 	background: url(../images/close.png) 0 -30px;
 }
-
 #connectBox h1 {
 	float: left;
 	width: 302px;
 	margin: 0 0 0 0;
 }
-
 #connectBox h1 a {
 	display: block;
 	height: 253px;
@@ -1114,4 +1158,73 @@ div#dealbg_bot127{
 	font: normal 12px/16px Arial, Helvetica, sans-serif;
 	padding: 6px 0 6px 18px;
 	background: #f3f3f3;	
+}
+.generated{
+	width: auto;
+	color: #fff;
+	float: left;
+	display: inline-block;
+	font: bold 13px Arial, Helvetica, sans-serif;
+	padding: 10px 15px 10px 15px;
+	background: #454640;
+	margin: 0 5px 0 0;
+	border-radius: 5px 5px 0 0;
+	border: 1px solid #454640;
+	border-bottom: 0px;
+}
+.generated:hover, .generated.here{
+	background: #d2d2d2;
+	color: #353535;
+	border: 1px solid #9c9c9c;
+	border-bottom: 0px;
+}
+
+
+
+/*===================== Drop box css  ================*/
+#dropBox{
+width: 693px;
+height: 150px;
+border-bottom: solid 1px #d5d5d5;
+border-left: solid 1px #d5d5d5;
+border-right:solid 1px #d5d5d5;;
+-moz-box-shadow: 1px 2px 1px #a0a0a0;
+-webkit-box-shadow: 1px 2px 1px #a0a0a0;
+box-shadow: 1px 2px 1px #a0a0a0;
+background: #FFF;
+z-index: 10000;
+overflow: scroll;
+}
+
+#dropBox ul{
+padding: 0;
+margin: 0;
+}
+
+#dropBox ul li{
+padding: 0;
+margin: 0;
+list-style-type: none;
+height: 34px;
+
+}
+#dropBox ul li a{
+font: normal 11px Arial, Helvetica, sans-serif;
+color:#333333;
+text-decoration: none;
+display: block;
+vertical-align: text-top;
+}
+#dropBox ul li a:hover{
+font: normal 11px Arial, Helvetica, sans-serif;
+color:#333333;
+text-decoration: none;
+display: block;
+background: #eeeeee;
+}
+
+#dropBox ul li img{
+padding: 2px 5px;
+height: 30px;
+width: 30px;
 }

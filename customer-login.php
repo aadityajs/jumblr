@@ -3,8 +3,10 @@ include("include/header.php");
 include_once "fbmain.php";
 ?>
 <?php
-	if(!isset($_COOKIE["subscribe"]))
-	header("location:".SITE_URL);
+	if($_GET["ref"] == 'fb') {
+		header("location:".$loginUrl );
+	}
+
 ?>
 <script language="JavaScript" src="js/gen_validatorv4.js" type="text/javascript" xml:space="preserve"></script>
 

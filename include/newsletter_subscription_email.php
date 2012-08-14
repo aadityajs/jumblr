@@ -104,9 +104,9 @@ $template = '<table border="0" cellspacing="0" cellpadding="0" width="620" style
                                   <td valign="top" align="center" width="78" style="padding:8px 4px 5px 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:12px; font-weight:bold; text-align:center;">Your Save</td>
                                 </tr>
                                 <tr>
-                                  <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.strip_tags($deal_sql_details['full_price']).'</td>
+                                  <td valign="top" align="center" style="padding:0 0 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).strip_tags($deal_sql_details['full_price']).'</td>
                                   <td valign="top" align="center" style="padding:0 0 0 2px; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.intval($deal_sql_details['discounted_price']*100/$deal_sql_details['full_price']).'%</td>
-                                  <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">&pound;'.strip_tags($today_res['full_price'] - $today_res['discounted_price']).'</td>
+                                  <td valign="top" align="center" style="padding:0 4px 0 0; color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:16px; font-weight:bold; text-align:center;">'.getSettings(currency_symbol).strip_tags($today_res['full_price'] - $today_res['discounted_price']).'</td>
                                 </tr>
                             </table></td>
                           </tr>

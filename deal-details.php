@@ -147,7 +147,7 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
                     </ul>
                 </div>
                 <div class="todays_deal_middle">
-                	<div class="amount">Amount: <span>&pound;<?php echo ($today_res['is_multi'] == 'n' ? number_format($today_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); ?></span></div>
+                	<div class="amount">Amount: <span><?php echo getSettings(currency_symbol); ?><?php echo ($today_res['is_multi'] == 'n' ? number_format($today_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); ?></span></div>
                     <div class="available">
                     	<?php /*if ($_GET['action'] != "sold") {
 					   			if($total_buy[0] != 0) {echo $total_buy[0].' Bought!';} else {echo "Not Yet Bought!";}

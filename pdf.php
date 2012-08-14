@@ -26,8 +26,8 @@ $html = '
           <tr>
             <td align="left" valign="top" style="font-family:Courier New, Courier, monospace; text-align:left; line-height:19px; color:#000; font-size:20px; font-weight: normal; font-smooth: always; padding-bottom:10px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td width="74%" height="180" align="left" valign="top"  style="font-family: Arial, Helvetica, sans-serif;"><p><strong>This Jumblr Deal Entiies The Bearer To:</strong></p><br /> <p style="font-size:14px; color:#626262;">'.$deal_title.' (Worth &pound;'.$price.') </p><br />
-                    <!-- <p style="font-size:16px; color:#4e4e4e; font-weight: bold;">Jumblr value: &pound;39.98</p></td> -->
+                  <td width="74%" height="180" align="left" valign="top"  style="font-family: Arial, Helvetica, sans-serif;"><p><strong>This Jumblr Deal Entiies The Bearer To:</strong></p><br /> <p style="font-size:14px; color:#626262;">'.$deal_title.' (Worth '.getSettings(currency_symbol).$price.') </p><br />
+                    <!-- <p style="font-size:16px; color:#4e4e4e; font-weight: bold;">Jumblr value: '.getSettings(currency_symbol).'39.98</p></td> -->
                   <td width="26%" align="center" valign="middle"><img src="'.$img.'" width="233" height="178" /></td>
                 </tr>
             </table></td>

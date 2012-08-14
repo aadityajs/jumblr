@@ -8,7 +8,7 @@
 <div class="curmid_bg">
 <div style="width: 230px; margin: 5px auto; float: none;">
 
-<div style="width: 220px; margin: 0 auto; float: right;"><p class="text11">If you recomend Jumblr UK to your friends and your recomendations are succefull then we will credit your account with &pound; 7 that can you use to buy deals.</p></div>
+<div style="width: 220px; margin: 0 auto; float: right;"><p class="text11">If you recomend Jumblr UK to your friends and your recomendations are succefull then we will credit your account with <?php  echo getSettings(currency_symbol);?> 7 that can you use to buy deals.</p></div>
 <center><input type="button" class="reset_btn_big" value="Recomend now" style="font-size: 16px;"></center>
 </div>
 

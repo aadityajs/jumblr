@@ -34,30 +34,30 @@ $sql_national_image = "SELECT * FROM ".TABLE_DEAL_IMAGES." WHERE deal_id = ".$na
 $national_image = mysql_fetch_array(mysql_query($sql_national_image));
 //if ($rows != 0) {
 ?>
-<?php if ($_GET['nd'] != "National deals") { ?>
-<div class="rightbox">
+<?php //if ($_GET['nd'] != "National deals") { ?>
+<!-- <div class="rightbox">
 <div class="headingbg_national">
 <p>Todays National deal</p>
 </div>
 <div style="background: #fff;">
 <div class="clear"></div>
-<div style="padding: 10px 10px;"><span><a href="<?php echo SITE_URL ;?>national_deals.php?nd=National deals"><?php echo $national_res['title']; ?></a></span></div>
+<div style="padding: 10px 10px;"><span><a href="<?php //echo SITE_URL ;?>national_deals.php?nd=National deals"><?php //echo $national_res['title']; ?></a></span></div>
 <div class="clear"></div>
 <div style="width: 230px; margin: 5px auto; float: none;">
-<div style="width: 110px; margin: 0 6px; float: left;"><img src="<?php echo UPLOAD_PATH.$national_image['file']; ?>" alt="" width="106" height="70" class="border"/></div>
+<div style="width: 110px; margin: 0 6px; float: left;"><img src="<?php //echo UPLOAD_PATH.$national_image['file']; ?>" alt="" width="106" height="70" class="border"/></div>
 <div class="left_green">
-<p>&pound;<?php echo $national_res['discounted_price']; ?></p>
+<p>&pound;<?php //echo $national_res['discounted_price']; ?></p>
 <p style="padding-top: 5px;"><span style="text-align:center;">instead of<br/>
-&pound;<?php echo $national_res['full_price']; ?></span></p>
+&pound;<?php //echo $national_res['full_price']; ?></span></p>
 </div>
 </div>
 <div class="clear"></div>
-<a href="<?php echo SITE_URL; ?>national_deals.php?nd=National deals"><div class="see"></div></a>
+<a href="<?php //echo SITE_URL; ?>national_deals.php?nd=National deals"><div class="see"></div></a>
 <div class="clear"><img src="images/spacer.gif" alt="" width="1" height="1" /></div>
 </div>
 <div style="width:232px; height:11px;"><img src="images/right_bttom.png" alt="" width="232" height="11" /></div>
-</div>
-<?php } ?>
+</div> -->
+<?php //} ?>
 
 <div class="clear"><img src="images/spacer.gif" alt="" width="1" height="10" /></div>
 <?php //} ?>
@@ -111,9 +111,9 @@ $todays_image = mysql_fetch_array(mysql_query($sql_todays_image));
   <div style="width: 230px; margin: 5px auto; float: none;">
   <div style="width: 110px; margin: 0 0 0 2px; float: left;"><img src="<?php echo UPLOAD_PATH.$todays_image['file']; ?>" alt="" width="106" height="70" class="border"/></div>
     <div style="margin-right: 10px;" class="left_green">
-      <p>&pound;<?php echo strip_tags($today_res['discounted_price']); ?></p>
+      <p><?php  echo getSettings(currency_symbol);?><?php echo strip_tags($today_res['discounted_price']); ?></p>
       <p style="padding-top: 5px;"><span style="text-align:center;">instead of<br/>
-        &pound;<?php echo strip_tags($today_res['full_price']); ?></span></p> </div>
+        <?php  echo getSettings(currency_symbol);?><?php echo strip_tags($today_res['full_price']); ?></span></p> </div>
   </div>
   <div class="clear"></div>
   <a href="<?php echo SITE_URL."index.php?action=view&id=".$today_res['deal_id'];?>"><div class="see"></div></a>

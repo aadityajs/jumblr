@@ -73,6 +73,7 @@ if(isset($_REQUEST['submit']))
                     </dl>
 					<?php } else { ?>
 					<dl>
+						<input type="hidden" name="name" id="name" size="54" value="<?php echo stripslashes($row_deals[name]);?>" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" />
                         <dt><label for="email">Edit Setting for: </label></dt>
                         <dd><label style="border: 1px solid #CCCCCC; height: 25px; background:#ececec; padding: 8px;" ><?php echo stripslashes($row_deals[name]);?></label> (Readonly)</dd>
                     </dl>

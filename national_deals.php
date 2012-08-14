@@ -91,14 +91,14 @@ error_reporting(E_ERROR && E_STRICT);
 
 	  <div class="deal_left" style="margin-top: 5px;">
 
-	  <div class="pric"><span>&pound;<?php echo ($today_res['discounted_price']); ?></span></div>
+	  <div class="pric"><span><?php echo getSettings(currency_symbol); ?><?php echo ($today_res['discounted_price']); ?></span></div>
 
 	  <div class="blue_box" style="margin-top:55px;">
 	  <div class="timer_box2">
 	  <ul>
-	  <li><p>Value<br/><span>&pound;<?php echo $today_res['full_price']; ?></span></p></li>
+	  <li><p>Value<br/><span><?php echo getSettings(currency_symbol);?><?php echo $today_res['full_price']; ?></span></p></li>
 	  <li><p>Discount <br/><span><?php echo $today_res['discount']; ?></span></p></li>
-	  <li style="border-right: 0;"><p>Saving<br/><span>&pound;<?php echo $today_res['savings']; ?></span></p></li>
+	  <li style="border-right: 0;"><p>Saving<br/><span><?php echo getSettings(currency_symbol);?><?php echo $today_res['savings']; ?></span></p></li>
 	  </ul>
 	  </div>
 	  </div>
@@ -696,13 +696,13 @@ else
 	  <div style="font: bold 28px/30px Arial, Helvetica, sans-serif; color: #000000; padding: 4px 0 0 14px;">COMING SOON: THE BEST DEALS THAT NATIONAL DEAL HAS TO OFFER</div>
 	  <div class="clear"><img src="images/spacer.gif" alt="" width="1" height="1" /></div>
 
-		<div class="pric"><span>&pound;10</span></div>
+		<div class="pric"><span><?php echo getSettings(currency_symbol);?>10</span></div>
 	  <div class="deal_left">
 	   <div class="blue_box" style="margin-top: 50px;">
 	  <div class="timer_box2">
 	  <ul>
 	  <li style="width: 50%"><h3>Discount<br/><span>90%</span></h3></li>
-	  <li style="border-right: 0;"><h3>Savings<br/><span>&pound;90</span></h3></li>
+	  <li style="border-right: 0;"><h3>Savings<br/><span><?php echo getSettings(currency_symbol);?>?90</span></h3></li>
 	  </ul>
 	  </div>
 	  </div>

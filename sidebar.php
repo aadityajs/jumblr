@@ -46,9 +46,9 @@ if ($rows != 0) {
 <div style="width: 230px; margin: 5px auto; float: none;">
 <div style="width: 110px; margin: 0 6px; float: left;"><img src="<?php echo UPLOAD_PATH.$national_image['file']; ?>" alt="" width="106" height="70" class="border"/></div>
 <div class="left_green">
-<p>&pound;<?php echo $national_res['discounted_price']; ?></p>
+<p><?php  echo getSettings(currency_symbol);?><?php echo $national_res['discounted_price']; ?></p>
 <p style="padding-top: 5px;"><span style="text-align:center;">instead of<br/>
-&pound;<?php echo $national_res['full_price']; ?></span></p>
+<?php  echo getSettings(currency_symbol);?><?php echo $national_res['full_price']; ?></span></p>
 </div>
 </div>
 <div class="clear"></div>
@@ -107,9 +107,9 @@ $todays_image = mysql_fetch_array(mysql_query($sql_todays_image));
   <div style="width: 230px; margin: 5px auto; float: none;">
   <div style="width: 110px; margin: 0 0 0 2px; float: left;"><img src="<?php echo UPLOAD_PATH.$todays_image['file']; ?>" alt="" width="106" height="70" class="border"/></div>
     <div style="margin-right: 10px;" class="left_green">
-      <p>&pound;<?php echo strip_tags($today_res['discounted_price']); ?></p>
+      <p><?php  echo getSettings(currency_symbol);?><?php echo strip_tags($today_res['discounted_price']); ?></p>
       <p style="padding-top: 5px;"><span style="text-align:center;">instead of<br/>
-        &pound;<?php echo strip_tags($today_res['full_price']); ?></span></p> </div>
+        <?php  echo getSettings(currency_symbol);?><?php echo strip_tags($today_res['full_price']); ?></span></p> </div>
   </div>
   <div class="clear"></div>
   <a href="<?php echo SITE_URL."index.php?action=view&id=".$today_res['deal_id'];?>"><div class="see"></div></a>

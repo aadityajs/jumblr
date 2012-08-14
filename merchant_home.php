@@ -114,12 +114,15 @@ if($mode=="delete")
 
 if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='Submit') {
 
+	//print_r($_POST);exit;
+
 	$data['deal_cat']=$_POST['deal_cat'];
 	$data['store_id']=$_POST['store_id'];
 	$data['location_id']=$_POST['location_id'];
-	$data['city_id']=$_POST['city'];
+	$data['city']=$_POST['city'];
 	$data['title']=$_POST['title'];
 	$data['description']=$_POST['description'];
+	$data['address1'] = $_POST['searchTextField'];
 
 	$data['full_price']=$_POST['retailvalue'];
 	//$data['discounted_price']=$_POST['discounted_price'];
@@ -144,7 +147,7 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='Submit'
 
 
 	$data['date_added']=date("Y-m-d");
-	$data['address1']=$_POST['address1'];
+	//$data['address1']=$_POST['address1'];
 
 
 
@@ -164,7 +167,7 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='Submit'
 	$data['item_control_type']=$_POST['item_control_type'];
 	$data['referral_no']=$_POST['referral_no'];
 	$data['referral_value']=$_POST['referral_value'];
-	$data['preview']=2;
+	//$data['preview']=2;
 
 /********************** Code for Getting Latitude and Longitude Starts *********************/
 
@@ -256,8 +259,8 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='Submit'
 
 
 
-		$primary_id=$db->query_insert(TABLE_DEALS, $data);
-		//die();
+		 $primary_id=$db->query_insert(TABLE_DEALS, $data);
+//		die();
 		$mdata['user_id']=$_POST['mid'];
 		$mdata['deal_id']=$primary_id;
 		$db->query_insert(TABLE_DEALS_MERCHANT, $mdata);
@@ -270,7 +273,7 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='Submit'
 
 
 		$_SESSION['msg']="Deal is added successfully.";
-		header("location:merchantpreview.php?deal_id=$mdata[deal_id]");
+		header("location:merchant_home.php");
 		exit;
 	}
 
@@ -358,7 +361,7 @@ $_SESSION["session_temp"] =uniqid();
 				<li class="deals">
 				<p style="width:70px; float: left;"><img src="images/deals_box_icon1.png" alt=""></p>
 				<p style="width:120px; float: left;">
-				<a href="javascript: void(0);" onclick="javascript: lodetab('#tabs-4');">Daily deals</a><br />
+				<a href="javascript: void(0);" onClick="javascript: lodetab('#tabs-4');">Daily deals</a><br />
 				<!-- <a href="merchant_adddeal.php">Daily deals</a><br /> -->
 				Manage your daily deals.
 				</p>
@@ -381,7 +384,7 @@ $_SESSION["session_temp"] =uniqid();
 				<li class="deals">
 				<p style="width:70px; float: left;"><img src="images/deals_box_icon2.png" alt=""></p>
 				<p style="width:120px; float: left;">
-				<a href="javascript: void(0);" onclick="javascript: lodetab('#tabs-6');">Redeem Value</a><br />
+				<a href="javascript: void(0);" onClick="javascript: lodetab('#tabs-6');">Redeem Value</a><br />
 				<!-- <a href="merchant_redeem_coupon.php">Redeem Value</a><br /> -->
 				Track and Enter Jumblr Redemptions.
 				</p>
@@ -404,7 +407,7 @@ $_SESSION["session_temp"] =uniqid();
 				<li class="deals">
 				<p style="width:70px; float: left;"><img src="images/deals_box_icon3.png" alt=""></p>
 				<p style="width:120px; float: left;">
-				<a href="javascript: void(0);" onclick="javascript: lodetab('#tabs-3');">Personal Account</a><br />
+				<a href="javascript: void(0);" onClick="javascript: lodetab('#tabs-3');">Personal Account</a><br />
 				<!-- <a href="merchant_account.php">Personal Account</a><br /> -->
 				Update your personal information..
 				</p>
@@ -829,7 +832,7 @@ $_SESSION["session_temp"] =uniqid();
 				</ul>
 				<div class="clear"></div>
 				</div>
-				<div style="text-align: right;"><input type="button" name="next" value="Start" onclick="javascript: divopen(2)" class="submit" style="width:80px; height:30px; cursor:pointer;" /></div>
+				<div style="text-align: right;"><input type="button" name="next" value="Start" onClick="javascript: divopen(2)" class="submit" style="width:80px; height:30px; cursor:pointer;" /></div>
 				<div class="clear"></div>
 				</div>
 
@@ -941,7 +944,11 @@ $_SESSION["session_temp"] =uniqid();
 				<script>
 				//$('#my_date_field').datetimepicker();
 				</script>
-				<input type="text" name="deal_start_time" id="date" size="20" value="<?php if(!empty($row_deal['deal_start_time'])){echo date("Y-m-d 03:00",strtotime($row_deal['deal_start_time']));}?>" class="lf" onclick='fPopCalendar("date")' />
+				<input type="text" name="deal_start_time" id="date3" size="20" value="<?php if(!empty($row_deal['deal_start_time'])){echo date("Y-m-d 03:00",strtotime($row_deal['deal_start_time']));}?>" class="lf" onclick='fPopCalendar("date")' />
+				<script type="text/javascript">
+			 		//var jq = jQuery.noConflict();
+			 		jQuery('#date3').datetimepicker();
+				</script>
 				<?php
 				/*$myCalendar = new tc_calendar("date2", true, false);
 				$myCalendar->setIcon("calendar/images/iconCalendar.gif");
@@ -961,16 +968,21 @@ $_SESSION["session_temp"] =uniqid();
 				<script>
 				//$('#my_date_field2').datetimepicker();
 				</script>
-				<input type="text" name="deal_end_time" id="date1" size="20" value="<?php  if(!empty($row_deal['deal_end_time'])){echo date("Y-m-d H:i",strtotime($row_deal['deal_end_time']));}?>" class="lf" onclick='fPopCalendar("date1")' />
+				<input type="text" name="deal_end_time" id="date4" size="20" value="<?php  if(!empty($row_deal['deal_end_time'])){echo date("Y-m-d H:i",strtotime($row_deal['deal_end_time']));}?>" class="lf" onclick='fPopCalendar("date1")' />
+				<script type="text/javascript">
+			 		//var jq = jQuery.noConflict();
+			 		jQuery('#date4').datetimepicker();
+				</script>
+
 				</td>
 				</tr>
 				<tr class="gray_02">
-				<td align="right" style="vertical-align:top"><strong>Max Buy:</strong></td>
+				<td align="right" style="vertical-align:top"><strong>Number of Tickets/Seats Available:</strong></td>
 				<td><input type="text" name="max_coupons" id="max_coupons" size="10" value="<?php echo stripslashes($row_deal['max_buy']);?>" class="lf"/></td>
 				</tr>
 				<tr class="gray_02">
-				<td colspan="2" align="center" style="padding-left: 300px;"><input type="button" name="back" value="Back" onclick="javascript: divopen(1)" class="submit" style="width:80px; height:30px; cursor:pointer;" />
-				<input type="button" name="next" value="Next" onclick="javascript: divopen(3)" class="submit" style="width:80px; height:30px; cursor:pointer;" onmouseover="return checkcore();" />
+				<td colspan="2" align="center" style="padding-left: 300px;"><input type="button" name="back" value="Back" onClick="javascript: divopen(1)" class="submit" style="width:80px; height:30px; cursor:pointer;" />
+				<input type="button" name="next" value="Next" onClick="javascript: divopen(3); initialize();" class="submit" style="width:80px; height:30px; cursor:pointer;" onMouseOver="return checkcore();" />
 				</tr>
 				</table>
 				</td>
@@ -1000,13 +1012,116 @@ $_SESSION["session_temp"] =uniqid();
 				<option value="2" <?php if($row_deal['status']=='2'){echo "Selected";}?>>Upcoming</option>
 				<option value="3" <?php if($row_deal['status']=='3'){echo "Selected";}?>>End</option>
 				</select>
-				</td>
+				</td></tr>
+							<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"
+				  type="text/javascript"></script>
+			
+				<style type="text/css">
+				  body {
+					font-family: sans-serif;
+					font-size: 14px;
+				  }
+				  #map_canvas {
+					height: 400px;
+					width: 600px;
+					margin-top: 0.6em;
+				  }
+				</style>
+			
+				<script type="text/javascript">
+				  function initialize() {
+					var mapOptions = {
+					  center: new google.maps.LatLng(-33.8688, 151.2195),
+					  zoom: 13,
+					  mapTypeId: google.maps.MapTypeId.ROADMAP
+					};
+					var map = new google.maps.Map(document.getElementById('map_canvas'),
+					  mapOptions);
+			
+					var input = document.getElementById('searchTextField');
+					var autocomplete = new google.maps.places.Autocomplete(input);
+			
+					autocomplete.bindTo('bounds', map);
+			
+					var infowindow = new google.maps.InfoWindow();
+					var marker = new google.maps.Marker({
+					  map: map
+					});
+			
+					google.maps.event.addListener(autocomplete, 'place_changed', function() {
+					  infowindow.close();
+					  var place = autocomplete.getPlace();
+					  if (place.geometry.viewport) {
+						map.fitBounds(place.geometry.viewport);
+					  } else {
+						map.setCenter(place.geometry.location);
+						map.setZoom(17);  // Why 17? Because it looks good.
+					  }
+			
+					  var image = new google.maps.MarkerImage(
+						  place.icon,
+						  new google.maps.Size(71, 71),
+						  new google.maps.Point(0, 0),
+						  new google.maps.Point(17, 34),
+						  new google.maps.Size(35, 35));
+					  marker.setIcon(image);
+					  marker.setPosition(place.geometry.location);
+					document.getElementById("lat").value=place.geometry.location.lat();
+					document.getElementById("lng").value=place.geometry.location.lng();
+					  var address = '';
+					  if (place.address_components) {
+						address = [(place.address_components[0] &&
+									place.address_components[0].short_name || ''),
+								   (place.address_components[1] &&
+									place.address_components[1].short_name || ''),
+								   (place.address_components[2] &&
+									place.address_components[2].short_name || '')
+								  ].join(' ');
+					  }
+			
+					  infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+					  infowindow.open(map, marker);
+					});
+			
+					// Sets a listener on a radio button to change the filter type on Places
+					// Autocomplete.
+					function setupClickListener(id, types) {
+					  var radioButton = document.getElementById(id);
+					  google.maps.event.addDomListener(radioButton, 'click', function() {
+						autocomplete.setTypes(types);
+					  });
+					}
+			
+					setupClickListener('changetype-all', []);
+					setupClickListener('changetype-establishment', ['establishment']);
+					setupClickListener('changetype-geocode', ['geocode']);
+				  }
+				  google.maps.event.addDomListener(window, 'load', initialize);
+				</script>
+				<tr class="gray_02">
+				<td align="right" style="vertical-align:top"><strong>Location:</strong></td>
+				<td>
+				 <div>
+				  <input id="searchTextField" name="searchTextField" type="text" size="50">
+				  <!--<input type="radio" name="type" id="changetype-all" checked="checked">
+				  <label for="changetype-all">All</label>
+			
+				  <input type="radio" name="type" id="changetype-establishment">
+				  <label for="changetype-establishment">Establishments</label>
+			
+				  <input type="radio" name="type" id="changetype-geocode">
+				  <label for="changetype-geocode">Geocodes</lable>-->
+				</div>
+				 <div id="map_canvas" style="width: 700px;"></div>
+				 <div id="displaycsv" style="margin-top:10px;overflow:auto;padding:10px;border:0px solid ;"></div>
+				<input type="hidden" name="lat" id="lat" value="0"/>
+				<input type="hidden" name="lng" id="lng" value="0"/>
+				</td></tr>
 
-				</tr>
 
 				<tr class="gray_02">
-				<td colspan="2" align="center" style="padding-left: 300px;"><input type="button" name="back" value="Back" onclick="javascript: divopen(2)" class="submit" style="width:80px; height:30px; cursor:pointer;" />
-				<input type="button" name="next" value="Next" onclick="javascript: divopen(4)" class="submit" style="width:80px; height:30px; cursor:pointer;" />
+				<td colspan="2" align="center" style="padding-left: 300px;"><input type="button" name="back" value="Back" onClick="javascript: divopen(2)" class="submit" style="width:80px; height:30px; cursor:pointer;" />
+				<input type="button" name="next" value="Next" onClick="javascript: divopen(4)" class="submit" style="width:80px; height:30px; cursor:pointer;" />
 				</tr>
 
 				</table>
@@ -1059,12 +1174,19 @@ $_SESSION["session_temp"] =uniqid();
 
 				</fieldset>
 				<!-- </form> -->
+				<br /><br />
+				<div style="padding-left:250px;">
+				<input type="button" name="back" value="Back" onClick="javascript: divopen(3)" class="submit" style="width:80px; height:30px; cursor:pointer;" />
+				<input type="submit" name="submit" id="submit" value="Submit" class="submit" style="width:80px; height:30px; cursor:pointer;" /></div>
+				
+				</form>
 				<script>
 				calculatedeal();
 				</script>
 
 				<fieldset class="fieldset">
-				<legend>Add Picture</legend>
+				<legend>Add Picture <a href="javascript: void(0);" class="tips" original-title="Please add  348X307px dimention picture."><img src="images/question.png" width="12" height="12" vspace="0" align="middle" ></a></legend>
+
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 				<td>
@@ -1097,6 +1219,7 @@ $_SESSION["session_temp"] =uniqid();
 				<div class="fileupload-progressbar"></div>
 				</div>
 				</div>
+
 				<script id="template-upload" type="text/x-jquery-tmpl">
 				<tr class="template-upload{{if error}} ui-state-error{{/if}}">
 				<td class="preview"></td>
@@ -1158,8 +1281,8 @@ $_SESSION["session_temp"] =uniqid();
 				</td>
 				</tr>
 				</script>
-				<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-				<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
+				<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+				<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>-->
 				<script src="//ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 				<script src="<?php echo SITE_URL?>siteadmin/js/uploader/jquery.iframe-transport.js"></script>
 				<script src="<?php echo SITE_URL?>siteadmin/js/uploader/jquery.fileupload.js"></script>
@@ -1170,8 +1293,10 @@ $_SESSION["session_temp"] =uniqid();
 
 				</div>
 
-				<br /><br />
-				<div style="padding-left:250px;"><input type="submit" name="submit" id="submit" value="Submit" class="submit" style="width:80px; height:30px; cursor:pointer;" /></div>
+				<!--<br /><br />
+				<div style="padding-left:250px;">
+				<input type="button" name="back" value="Back" onClick="javascript: divopen(3)" class="submit" style="width:80px; height:30px; cursor:pointer;" />
+				<input type="submit" name="submit" id="submit" value="Submit" class="submit" style="width:80px; height:30px; cursor:pointer;" /></div>-->
 				</td>
 				</tr>
 				</table>
@@ -1179,7 +1304,7 @@ $_SESSION["session_temp"] =uniqid();
 				</fieldset>
 
 				</div>
-			</form>
+			<!--</form>-->
 
 		</div>
 
@@ -1604,7 +1729,7 @@ $_SESSION["session_temp"] =uniqid();
 								<td><?php echo $mmUser[email]; ?></td>
 								<td><?php echo $mmUser[phone]; ?></td>
 								<td><?php echo date("d M Y",strtotime($mmUser[date_added])); ?></td>
-								<td><a href="<?php echo SITE_URL; ?>merchant_home.php?req=rem&mmuid=<?php echo $mmUser[mid]; ?>" onclick="return confirm('Are you sure to delete the user?');"><img alt="" src="images/cross.png"> Delete</a></td>
+								<td><a href="<?php echo SITE_URL; ?>merchant_home.php?req=rem&mmuid=<?php echo $mmUser[mid]; ?>" onClick="return confirm('Are you sure to delete the user?');"><img alt="" src="images/cross.png"> Delete</a></td>
 							</tr>
 
 					<?php } ?>
@@ -1625,7 +1750,7 @@ $_SESSION["session_temp"] =uniqid();
 					// mid 	muser_id 	location_id 	job_title 	 date_added
 
 						//$user_id=intval($_REQUEST['id']);
-
+						//print_r($_POST);exit;
 						$data['employee_name']=$_POST['employee_name'];
 						if(isset($_POST['cpassword'])){
 						$data['password']=base64_encode($_POST['cpassword']);
@@ -1646,7 +1771,8 @@ $_SESSION["session_temp"] =uniqid();
 						$data['business_type']=$_POST['business_type'];
 						$data['paypal_id']=$_POST['paypal_email'];
 						$data['status']='merchant_maintainer';
-
+						$data['place_lat'] = $_POST['lat'];
+						$data['place_lng'] = $_POST['lng'];
 
 						/*
 						 * $data['work_zipcode']=$_POST['work_zipcode'];
@@ -1852,7 +1978,7 @@ $_SESSION["session_temp"] =uniqid();
 
 
 											  <dl>
-												<input type="submit" name="submitUser" id="submitUser" onclick="return validate()" value="Submit" class="submit" style="margin-left: 170px;"/>
+												<input type="submit" name="submitUser" id="submitUser" onClick="return validate()" value="Submit" class="submit" style="margin-left: 170px;"/>
 												<input type="reset" name="reset" id="resetUser" value="Reset" class="submit" style="margin-left: 10px;"/>
 												 </dl>
 											</fieldset>

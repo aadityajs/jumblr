@@ -8,9 +8,9 @@
 <div class="curmid_bg">
 <div style="width: 230px; margin: 5px auto; float: none;">
 
-<div style="width: 220px; margin: 0 auto; float: right;"><p class="text11">Recomend Jumblr to your friends and you will receive:<br> <b>&pound;5.00 </b>for every Recommendation!</p></div>
+<div style="width: 220px; margin: 0 auto; float: right;"><p class="text11">Recomend Jumblr to your friends and you will receive:<br> <b><?php  echo getSettings(currency_symbol);?>5.00 </b>for every Recommendation!</p></div>
 <div class="clear"></div>
-<div class="price_bg">Your account: &pound;<?php if (get_credits($_SESSION['user_id']) == '') { echo "0.00";} else { echo number_format(get_credits($_SESSION['user_id']),2);} ?></div>
+<div class="price_bg">Your account: <?php  echo getSettings(currency_symbol);?><?php if (get_credits($_SESSION['user_id']) == '') { echo "0.00";} else { echo number_format(get_credits($_SESSION['user_id']),2);} ?></div>
 <center class="recomend_btn"><a id="various2" href="#inline1" class="recomend_btn"><!--<img src="images/recommend_btn.png" width="140px" height="28" class="recomend_btn">-->recommend_btn</a></center>
 </div>
 <?php include '../recommendation_popup.php';?>
@@ -201,7 +201,7 @@ return false;
                                     <div id="gotqa2" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">You can always find  all of your deals that you bought by clicking on &ldquo;My Account&rdquo; then select &ldquo;My  Vouchers&rdquo; from the option list in the top right corner (if you&rsquo;re logged in),  or by <a href="<?php echo SITE_URL; ?>customer-login.php">click</a> here.</span></div>
 
                                     <li id="gotqq3">How do I get credit for my referral work?</li>
-                                    <div id="gotqa3" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">We’ll put &pound;5 worth of credit in your account after they (the person you recommended deal to) buy their first deal of more than £15! (This can take up to 48 hours). You can check your account credit by logging in and then go to “Credits”.</span></div>
+                                    <div id="gotqa3" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">We’ll put <?php  echo getSettings(currency_symbol);?>5 worth of credit in your account after they (the person you recommended deal to) buy their first deal of more than £15! (This can take up to 48 hours). You can check your account credit by logging in and then go to “Credits”.</span></div>
 
                                     <li id="gotqq4">What if my voucher deal is about to expire?</li>
                                     <div id="gotqa4" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">We can&rsquo;t do much once your voucher has expired  so we recommend you to use your voucher before it expires otherwise you&rsquo;ve  wasted your money!</span></div>
