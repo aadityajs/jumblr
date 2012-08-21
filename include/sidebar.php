@@ -138,7 +138,7 @@ Custome Services</p>
 <div class="clear"></div>
 <div class="greenmid_bg">
 <div style="width: 212px; margin: 8px 8px; float: none; padding-top: 5px; padding-right: 5px;">
-<span><a href="<?php echo SITE_URL; ?>faq.php" style="padding:0 0 10px 0; margin:0 0 10px 0;"><span style="line-height:25px; color: #292929; text-decoration: underline;">Check out our FAQs</span></a><br />
+<span><!-- <a href="<?php echo SITE_URL; ?>faq.php" style="padding:0 0 10px 0; margin:0 0 10px 0;"><span style="line-height:25px; color: #292929; text-decoration: underline;">Check out our FAQs</span></a> --><br />
 Please note you can retrieve your voucher by logging into your account via Login at the top of the website.<br /><br />
 Whatever the query, well take care of it:</span>
 </div>
@@ -311,8 +311,8 @@ return false;
                                     <li id="gotqq2">Where are my vouchers?</li>
                                     <div id="gotqa2" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">You can always find  all of your deals that you bought by clicking on &ldquo;My Account&rdquo; then select &ldquo;My  Vouchers&rdquo; from the option list in the top right corner (if you&rsquo;re logged in),  or by <a href="<?php echo SITE_URL; ?>customer-login.php">click</a> here.</span></div>
 
-                                    <li id="gotqq3">How do I get credit for my referral work?</li>
-                                    <div id="gotqa3" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">Well put &pound;5 worth of credit in your account after they (the person you recommended deal to) buy their first deal of more than 15! (This can take up to 48 hours). You can check your account credit by logging in and then go to Credits.</span></div>
+                                    <li id="gotqq3">How do I get discount for my referral work?</li>
+                                    <div id="gotqa3" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">Well provide a discount in your account after they (the person you recommended deal to) buy their first deal! (This can take up to 48 hours). You can check your gained discount by logging in and then go to your account section.</span></div>
 
                                     <li id="gotqq4">What if my voucher deal is about to expire?</li>
                                     <div id="gotqa4" style="display: none;  margin-left: 28px;"><span style="font: normal 12px/17px Arial, Helvetica, sans-serif;">We can&rsquo;t do much once your voucher has expired  so we recommend you to use your voucher before it expires otherwise you&rsquo;ve  wasted your money!</span></div>

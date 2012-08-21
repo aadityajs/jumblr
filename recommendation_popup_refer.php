@@ -1,10 +1,10 @@
 <?php
 $sql_count = "SELECT td.deal_id,td.title,td.discounted_price,td.discount,td.savings,img.file FROM ".TABLE_DEALS." td LEFT JOIN ".TABLE_DEAL_IMAGES." img on td.deal_id=img.deal_id WHERE td.deal_end_time>='".date("Y-m-d G:i:s")."'";
-		
-		
+
+
 		$sql_count_res = mysql_query($sql_count);
 	 $sql_count_num = mysql_num_rows($sql_count_res);
-	$i=0;	
+	$i=0;
  while ($ref_deal = mysql_fetch_array($sql_count_res)) {
 
 $curent_recom_deal_id = $ref_deal['deal_id'];
@@ -27,19 +27,19 @@ $curent_recom_deal_id = $ref_deal['deal_id'];
 				<div class="recomm_mid">
 
 		<?php
-		
+
 	//echo $_POST['deal_count'];
-	
+
 	//echo $_POST['RecomendSubmit'].$_POST['deal_count'];
-	
+
 	//echo '+++++++++++++++'.$_POST['RecomendSubmit'.$_POST['deal_count']];
 	//print_r($_POST);
 				if ( $_POST['RecomendSubmit'.$_POST['deal_count']]== "Tell them"){
 		//print_r($_POST);
 				  $recom_deal_id = $_POST['recomdealid'.$_POST['deal_count']];
-				
+
 				 $sql_email_recom = "SELECT * FROM ".TABLE_DEALS." WHERE deal_id = ".$recom_deal_id." LIMIT 0, 1"; //AND deal_end_time LIKE '".date("Y-m-d")."%' LIMIT 0, 4";
-				
+
 				$email_res_recom = mysql_fetch_array(mysql_query($sql_email_recom));
 				$sql_email_image_recom = mysql_fetch_array(mysql_query("SELECT * FROM ".TABLE_DEAL_IMAGES." WHERE deal_id = ".$email_res_recom['deal_id']));
 				//'.UPLOAD_PATH.$email_image_1['file'].'
@@ -98,30 +98,30 @@ $curent_recom_deal_id = $ref_deal['deal_id'];
 										  <tr>
 											<td valign="top" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:15px; font-weight:normal; padding:0 0 0 6px;"><strong>'. $_POST['fmsg'] .'</strong></td>
 										  </tr>
-										  
+
 						';
 
-				
+
 
 					// Recomendation tracker code for calculating Credits
-					
+
 					$r_emails = explode(',',$_POST['femail'.$_POST['deal_count']]);
 					$today = date("Y-m-d");
 					//var_dump($r_emails); r_id 	r_email 	r_user 	r_date
 					foreach ($r_emails as $r_email) {
 						$r_email = trim($r_email);
 						$token = base64_encode($r_email);
-						
+
 						$sql_mail_id = "SELECT * FROM ".TABLE_RECOM_TRACKER." WHERE r_email='".$r_email."'";
 						$chk_mail_res = mysql_query($sql_mail_id);
-						 $count_mail = mysql_num_rows($chk_mail_res); 
+						 $count_mail = mysql_num_rows($chk_mail_res);
 						$template_recom .= '<tr><td valign="top" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:15px; font-weight:normal; padding:0 0 0 6px;"><a href="'.SITE_URL.'customer-login.php?token='.$token.'" style="color:#009CE8;"> Click the link to sign up and get 20% discount on your purchase </a></td></tr>';
 						if($count_mail>0)
 						{
-						
+
 						}
 						else
-						{	
+						{
 						 //$_SESSION['user_id'];
 						 $recom_tracker_sql = "INSERT INTO jumblr_recom_tracker(r_email,r_user,r_date) VALUES ('$r_email','$_SESSION[user_id]','$today')";
 						mysql_query($recom_tracker_sql);
@@ -277,7 +277,7 @@ $curent_recom_deal_id = $ref_deal['deal_id'];
 											<a href="'.SITE_URL.'" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">&copy; Jumblr.com</a>
 											<a href="'.SITE_URL.'page.php?page=Terms and Conditions" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Terms & Conditions</a>
 											<a href="'.SITE_URL.'customer-login.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Join Us</a>
-											
+
 											<a href="'.SITE_URL.'merchant.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Run Deal With Us</a>                   </td>
 										 </tr>
 									 </table>
@@ -291,7 +291,7 @@ $curent_recom_deal_id = $ref_deal['deal_id'];
 						   </tr>
 						   <tr>
 							<td height="10" style="height:10px; line-height:0px;"><img src="'.SITE_URL.'images/reg_newsletter/box1_bottom.png"" width="620" height="10" alt="" /></td>
-							
+
 						  </tr>
 						</table>';
 					//$fmsg = $_POST['fmsg'];
@@ -300,7 +300,7 @@ $curent_recom_deal_id = $ref_deal['deal_id'];
 					$headers .= "From: Jumblr Referral<rewards@Jumblr.com>";
 					$femail = $_POST['femail'.$_POST['deal_count']];
 					$sub = ucwords($user_name)." has invited you to join Jumblr";
-			
+
 						$sql_mail_id = "SELECT * FROM ".TABLE_CREDITS_VAULT." WHERE user_id='".$femail."'";
 						$chk_mail_res = mysql_query($sql_mail_id);
 						$count_mail = mysql_num_rows($chk_mail_res);
@@ -315,8 +315,8 @@ $curent_recom_deal_id = $ref_deal['deal_id'];
 							header('location: '.SITE_URL);
 							exit();
 							}
-						
-							
+
+
 				}
 
 			?>
@@ -334,7 +334,7 @@ $curent_recom_deal_id = $ref_deal['deal_id'];
 	/*if ($_SESSION['current_deal_id']) {
 		$curent_recom_deal_id = $_SESSION['current_deal_id'];
 	}else{
-		
+
 		$curent_recom_deal_id = $ref_deal['deal_id'];
 	}*/
 
@@ -346,7 +346,7 @@ $curent_recom_deal_id = $ref_deal['deal_id'];
 
 		<form action="" name="" method="post" onsubmit="return validateRecom('<?php echo $i?>');">
 		<input type="hidden" name="recomdealid<?php echo $i?>" id="recomdealid<?php echo $i?>" value="<?php if ($_GET['nd'] == "National deals") { echo $today_res['deal_id']; } else { echo $curent_recom_deal_id;} ; ?>">
-		
+
 				<div class="invita_deal">
 				<div><p>Your invitation message:<?php //echo $curent_recom_deal_id;?></p><div class="error_orange10" id="msgErr"></div></div>
 				<div class="clear"></div>
@@ -362,7 +362,7 @@ Your friend.</textarea></div>
 				<div class="massage_right">
 				<div><img src="images/dollar.jpg" alt="" width="168" height="108" /></div>
 				<div>
-				
+
 				</div>
 				</div>
 				</div>
@@ -380,35 +380,35 @@ Your friend.</textarea></div>
 				<div class="massage">
 				<div style="float:left; width: auto; margin: 0 auto;">
 					<input type="text" name="femail<?php echo $i?>" id="femail<?php echo $i?>" value="<?php if ($_SESSION['recomEmails']) echo $_SESSION['recomEmails']; unset($_SESSION['recomEmails']); ?>" class="mailbox"/>
-					
+
 					<input type="hidden" name="deal_count" value="<?php echo $i?>" />
 					<input type="submit" name="RecomendSubmit<?php echo $i?>" class="tellbtn" value="Tell them"/>
 				</div>
-		
+
 				</form></div>
 				</div>
-				
+
 				<div class="clear"><img src="images/spacer.gif" alt="" width="1" height="10" /></div>
 				<div style="border-bottom: 3px solid #7fd7fb;"></div>
 				<div class="clear"></div>
-	
+
 <?php
 
-	
+
 
 
 	?>
 
-				
+
 				<div class="clear"></div>
 
-			
+
 
 				<div class="clear"><img src="images/spacer.gif" alt="" width="1" height="10" /></div>
 				</div>
 				<div class="clear"></div>
 				<!--<div style="border-bottom: 3px solid #7fd7fb;"></div>-->
-			<!--	<div class="recomm_bot"></div>-->
+			<!--	--><div class="recomm_bot"></div>
 				</div>
 
 			<!-- opi -->
@@ -420,19 +420,19 @@ Your friend.</textarea></div>
 
 			<?php //} else { ?>
 
-			
+
 			<?php //} ?>
 		</div>
-	
+
 	</div>
-	
-	
-	
+
+
+
 <?php } ?>
-			
+
 			<script type="text/javascript">
 				function validateRecom(val) {
-				
+
 					//alert('hiiiiiiii');
 					var msg = document.getElementById('fmsg'+val).value;
 					var email_list = document.getElementById('femail'+val).value;
@@ -446,7 +446,7 @@ Your friend.</textarea></div>
 						document.getElementById('emailErr').innerHTML = "Enter enter a valid email address used by your friends e. g. jhohn@hotmail.co.uk";
 						return false;
 					}
-					
+
 
 				}
 
