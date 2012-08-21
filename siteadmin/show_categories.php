@@ -8,74 +8,75 @@ $record = $db->query_first($sql);
 
 ?>
 
-    
+
     <div class="main_content">
-    
-      <?php include("include/top_menu.inc.php");?>                    
-                    
-    <div class="center_content">  
-    
-   		<?php require("include/left_menu.php"); ?>        
-    
-    <div class="right_content">  
-		 
+
+      <?php include("include/top_menu.inc.php");?>
+
+    <div class="center_content">
+
+   		<?php require("include/left_menu.php"); ?>
+
+    <div class="right_content">
+
 					<h2>All Deal Categories</h2>
-					
-					<?php				
+
+					<?php
 					if($_REQUEST['msg']=="1")
-					{				
-					?>		
+					{
+					?>
 						<div class="valid_box">Deal Category  Successfully Added</div>
-							
+
 					    <?php
 						}
 					?>
-					
-					<?php				
+
+					<?php
 					if($_REQUEST['msg']=="2")
-					{				
-					?>		
+					{
+					?>
 						<div class="valid_box">Deal Category Successfully Updated</div>
-							
+
 					    <?php
 						}
 					?>
-					
-					<?php				
+
+					<?php
 					if($_REQUEST['msg']=="3")
-					{				
-					?>		
+					{
+					?>
 						<div class="valid_box">Deal Category Successfully Deleted</div>
-							
+
 					    <?php
 						}
 					?>
-                    
+
 <table width="100%" cellpadding="0" cellspacing="0" border="0" class="rounded_box">
     <thead>
     	<tr>
         	<!--<th></th>-->
             <th>Category Name</th>
+            <th>Category Icon</th>
             <!--<th>Date Added</th>-->
             <th>Edit</th>
             <th>Delete</th>
         </tr>
     </thead>
-        
+
     <tbody>
-	
+
 	<?php
-						
+
 	$items = 10;
 	$page = 1;
-	
+
 	if(isset($_GET['page']) and is_numeric($_GET['page']) and $page = $_GET['page'])
 			$limit = " LIMIT ".(($page-1)*$items).",$items";
 		else
 			$limit = " LIMIT $items";
-			
+
 	$today=date("Y-m-d");
-						
+
 	if($_REQUEST['sort_by']=="mcategory")
 	{
 		$sql=" group by mcategory order by mcategory asc";
@@ -101,10 +102,10 @@ $record = $db->query_first($sql);
 		$where=" where parent_id=0";
 		$target="";
 	}
-	
+
 	$sql="select * from ".TABLE_CATEGORIES." where parent_id=0";
 	$sqlStrAux = "SELECT count(*) as total FROM ".TABLE_CATEGORIES." where parent_id=0";
-	
+
 /*	$sql="select * from ".TABLE_CATEGORIES."$where";
 	$sqlStrAux = "SELECT count(*) as total FROM ".TABLE_CATEGORIES."$where";*/
 
@@ -119,24 +120,25 @@ $record = $db->query_first($sql);
 			$p->currentPage($page);
 			$p->calculate();
 			$p->changeClass("pagination");
-	
+
 			while($row_deals=mysql_fetch_array($query))
 			{
-							
+
 ?>
-	
+
     	<tr>
-        	<!--<td><input type="checkbox" name="" /></td>-->			
+        	<!--<td><input type="checkbox" name="" /></td>-->
             <td><?php echo stripslashes($row_deals['cat_name']);?></td>
+            <td><img alt="" src="../images/category_image/<?php echo stripslashes($row_deals['image']);?>" height="40" width="40"> </td>
             <?php /*?><td><?php echo strftime("%d %b %Y", strtotime($row_deals['date_added'])); ?></td><?php */?>
             <td><a href="add_category.php?mode=edit&id=<?php echo $row_deals[cat_id];?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
             <td><a href="add_category.php?mode=delete&id=<?php echo $row_deals[cat_id];?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" onClick='return confirm("Are you sure to delete this merchant?")' /></a></td>
         </tr>
-        
+
     	 <?php
-			}			
-		?>		
-	
+			}
+		?>
+
 		<?php
 		}
 		else
@@ -144,7 +146,7 @@ $record = $db->query_first($sql);
 			echo "No Data Found";
 		}
 ?>
-        
+
     </tbody>
 </table>
 
@@ -152,7 +154,7 @@ $record = $db->query_first($sql);
 		if($aux['total']>0)
 		{
 	?>
-		 
+
 			 <table width="600" border="0" align="center" cellpadding="0" cellspacing="0" style="padding: 8px 0;">
 			   <tr>
 			   <td><?php $p->show();?></td>
@@ -160,16 +162,16 @@ $record = $db->query_first($sql);
 			 </table>
 	<?php
 		}
-	?>	 
+	?>
 
-		 
+
      </div><!-- end of right content-->
-            
-                    
-  </div>   <!--end of center content -->  
-    
+
+
+  </div>   <!--end of center content -->
+
     <div class="clear"></div>
     </div> <!--end of main content-->
-	
-    	<?php require("include/footer.inc.php"); ?>   
+
+    	<?php require("include/footer.inc.php"); ?>
 

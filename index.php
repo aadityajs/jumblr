@@ -494,12 +494,14 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
                  </div>
                 </div>
                 <div class="todays_deal_right" id="click">
+                <?php  $cat_img_name = get_deal_category_image($today_res['deal_id']) ;?> 
+				
                    <!-- <img src="images/member.png" alt=""> -->
 				<!-- Members circle starts -->
 
 					<div class="circleDiv">
 				    	<div class="innerCircle">
-				        <div class="cat_circle"> <img class="tips" src="images/cat_icon1.png" width="100" height="100" title="<br/>Click to See the Jumblrs!<br/><br/>"/></div>
+				        <div class="cat_circle"> <img class="tips" src="<?php echo $cat_img_name?>" width="100" height="100" title="<br/>Click to See the Jumblrs!<br/><br/>"/></div>
 				        	<?php
 				        		$fbUserCount = 1;
 				        		if ($circleUserCount <= 9) {
@@ -956,7 +958,7 @@ function testSugg() {
 					$lat = reset($map->getLatLng($fomatedAddress));
 					$lng = end($map->getLatLng($fomatedAddress));
 
-					$markers[] = array(0=>$markerUser[0], 1=>$lat, 2=>$lng, 3=>'#FF7B6F', 4=>$markerUser[1], 5=>60, 6=>60, 7=>$address[city].','.$address[state].' '.$address[country]);
+					$markers[] = array(0=>$markerUser[0], 1=>$lat, 2=>$lng, 3=>'#FF7B6F', 4=>$markerUser[1], 5=>50, 6=>50, 7=>$address[city].','.$address[state].' '.$address[country]);
 
 					//array_push($markers, $markerUser);
 
@@ -975,11 +977,12 @@ function testSugg() {
 		);
 		echo '<pre>'.print_r($locations, true).'</pre>';
 		*/
+		
 		foreach ($markers as $i => $location) {
 		    $map->addMarker($location[1], $location[2], array(
 		        'title' => $location[0],
 		        //'icon' => 'http://armdex.com/maps/icon' . ($i + 1) . '.png',
-		        'icon' => 'images/marker_icon.png',
+		        'icon' => $cat_img_name,
 		        'html' => '<div><img src="' . $location[4] . '" width="' . $location[5] . '" height="' . $location[6] . '"align="texttop" />' .  $location[7] . '</div><b>' . $location[0] . '</b>',
 		        'infoCloseOthers' => true,
 		    	'animation' => 'DROP'
@@ -996,7 +999,7 @@ function testSugg() {
 ?>
 </div>
 
-<!-- jumblr deal map start -->
+<!-- jumblr deal map ends -->
 
 <?php } ?>
 
@@ -1094,7 +1097,8 @@ function testSugg() {
 				<!-- Members circle starts -->
 				<div class="circleDiv">
 				<div class="innerCircle">
-				<div class="cat_circle"><img class="tips" src="images/cat_icon1.png" width="100" height="100" title="<br/>Click to See the Jumblrs!<br/><br/>"/></div>
+				 <?php  $cat_img_name = get_deal_category_image($today_row_bot_deals['deal_id']) ;?> 
+				<div class="cat_circle"><img class="tips" src="<?php echo $cat_img_name?>" width="100" height="100" title="<br/>Click to See the Jumblrs!<br/><br/>"/></div>
 					<?php
 						$fbUserCount = 1;
 						if ($circleUserCount <= 9) {

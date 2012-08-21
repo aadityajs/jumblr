@@ -34,7 +34,7 @@ if(isset($_REQUEST['submit']) && $_POST['cat_name'] != '')
 
 	if(file_exists($_FILES['image']['tmp_name'])){
 		$file=$_FILES['image']['name'];
-		move_uploaded_file($_FILES['image']['tmp_name'],"../category_image/".$_FILES['image']['name']);
+		move_uploaded_file($_FILES['image']['tmp_name'],"../images/category_image/".$_FILES['image']['name']);
 		$data['image']=$file;
 
 	}

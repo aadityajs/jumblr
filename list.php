@@ -4,6 +4,8 @@ include 'include/header.php';
 	$deal_cat = $_GET['cat'];
 	$deal_type = $_GET['d'];
 	$search_date = $_GET['srch'];
+
+
 	if (isset($deal_cat)) {
 
 		//sql_today_bot_deals = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city LIMIT 1, 2";
@@ -16,16 +18,16 @@ include 'include/header.php';
 	elseif (isset($search_date)) {
     $dt_srch = $_POST['in_date_srch'];
 	$array_dt = explode(",",$dt_srch);
-	
+
 	for($i=0;$i<count($array_dt);$i++)
 	{
 		 $arr[$i]=date("Y-m-d",strtotime($array_dt[$i]));
-		
+
 	}
-	
+
 		$dt=implode("','",$arr);
-	 
-	
+
+
 		/*$start_time = $_POST['date_srch'];
 		$end_time = $_POST['date_srch1'];
 
@@ -33,7 +35,7 @@ include 'include/header.php';
 		$end_time = date("Y-m-d G:i:s",strtotime($_POST['date_srch1']));*/
 		//echo date("Y-m-d",$_POST['in_date_srch']);
 		$sql_today_bot_deals = "SELECT *  FROM ".TABLE_DEALS." WHERE status >= 1  AND city = $city AND deal_start_time IN ( '$dt ' )   LIMIT 0, 5";
-		//echo 	$sql_today_bot_deals;
+		//echo $sql_today_bot_deals;
 
 	}
 	else {
@@ -106,7 +108,8 @@ include 'include/header.php';
 
 					<div class="circleDiv">
 					<div class="innerCircle">
-					<div class="cat_circle"><img class="tips" src="images/cat_icon1.png" width="100" height="100" title="<br/>Click to See the Jumblrs!<br/><br/>"/></div>
+					<?php  $category_img_name = get_deal_category_image($today_row_bot_deals['deal_id']) ;?>
+					<div class="cat_circle"><img class="tips" src="<?php echo $category_img_name?>" width="100" height="100" title="<br/>Click to See the Jumblrs!<br/><br/>"/></div>
 						<?php
 							$fbUserCount = 1;
 							if ($circleUserCount <= 9) {

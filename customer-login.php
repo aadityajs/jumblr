@@ -3,9 +3,33 @@ include("include/header.php");
 include_once "fbmain.php";
 ?>
 <?php
+	$token=base64_decode($_REQUEST['token']);
+			if($token!='')
+			{
+							$sql_chk_fb_user_mail = "SELECT * FROM ".TABLE_FB_USER." WHERE email = '".$token."'";
+							$chk_fb_user_mail_res = mysql_fetch_array(mysql_query($sql_chk_fb_user_mail));
+							$count_fb_email_user = mysql_num_rows($chk_fb_user_mail_res);
+							if($count_fb_email_user>0)
+							{
+							
+								
+							}
+							else
+							{
+								$sql_insert_vault = "INSERT INTO ".TABLE_CREDITS_VAULT.
+									  "(user_id,date)
+									  VALUES('".$token."','".date('Y-m-d')."')";
+			
+								mysql_query($sql_insert_vault);
+							}
+			}
 	if($_GET["ref"] == 'fb') {
+	
+
 		header("location:".$loginUrl );
 	}
+	
+	
 
 ?>
 <script language="JavaScript" src="js/gen_validatorv4.js" type="text/javascript" xml:space="preserve"></script>
@@ -221,10 +245,14 @@ function ValidateLoginForm () {
 <!-- Login form validator ends -->
 
 
+<?php
 
+
+?>
 
 
 <?php
+
 	$flag = 0;
 	if(strtolower($_SERVER['REQUEST_METHOD']) == 'post' && $_POST['btnRegister'] == "Sign up" )
 	{

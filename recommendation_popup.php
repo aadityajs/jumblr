@@ -74,178 +74,8 @@
 										  <tr>
 											<td valign="top" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:15px; font-weight:normal; padding:0 0 0 6px;"><strong>'. $_POST['fmsg'] .'</strong></td>
 										  </tr>
-										  <tr>
-											<td valign="top" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:15px; font-weight:normal; padding:0 0 0 6px;"> You can learn more about Jumblr in the <a href="'. SITE_URL .'faq.php" style="color:#009CE8;">FAQ section.</a></td>
-										  </tr>
-										  <tr>
-										  <td style="color:#4f4437; font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:11px; font-weight:normal; padding:8px 0 0 6px;">If you purchase this deal within 48 hours of opening a Jumblr account, '.getSettings(currency_symbol).'5 will automatically be credited to your friend\'s Jumblr account, so you can both enjoy great saving! You will hear nothing else from us as a result of this referral. You have not been added to any database and there is no need to ask for removal. <br/>See our <a href="'.SITE_URL.'page.php?page=Privacy Policy" style="font-size: 12px; text-decoration: underline; color:#4f4437;">Privacy Policy</a>.</td>
-										  </tr>
-										  <tr>
-											  <td height="8"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="8" /></td>
-										  </tr>
-										  <tr>
-											<td background="'.SITE_URL.'images/reg_newsletter/box_bg.gif" height="198" valign="top">
-											 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-											 <tr>
-												<td colspan="5" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:24px; font-weight:bold; padding:10px 0 20px 0; text-align:center;">What can Jumblr do for you?</td>
-											 </tr>
-											 <tr>
-											 <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-											  <tr>
-												 <td height="4" colspan="4" style="line-height:0px; height:4px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="4" /></td>
-												 </tr>
-											   <tr>
-												 <td width="3%">&nbsp;</td>
-												 <td width="6%"><img src="'.SITE_URL.'images/reg_newsletter/right_mark.jpg" alt="" width="20" height="19" /></td>
-												 <td style="font-family:Arial, Helvetica, sans-serif; color:#333333; font-size:14px;"><span style="font-size:20px; font-weight: bold;">It\'s great value</span> - you can save up to 90% every purchase make</td>
-												 <td width="4%">&nbsp;</td>
-											   </tr>
-											   <tr>
-												 <td height="4" colspan="4" style="line-height:0px; height:4px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="4" /></td>
-												 </tr>
-											   <tr>
-												 <td width="3%">&nbsp;</td>
-												 <td width="6%"><img src="'.SITE_URL.'images/reg_newsletter/right_mark.jpg" alt="" width="20" height="19" /></td>
-												 <td style="font-family:Arial, Helvetica, sans-serif; color:#333333; font-size:14px;"><span style="font-size:20px; font-weight: bold;">It\'s fun</span> - invite friends to the deal and earn money in return</td>
-												 <td width="4%">&nbsp;</td>
-											   </tr>
-											   <tr>
-												 <td height="4" colspan="4" style="line-height:0px; height:4px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="4" /></td>
-												 </tr>
-											   <tr>
-												 <td width="3%">&nbsp;</td>
-												 <td width="6%"><img src="'.SITE_URL.'images/reg_newsletter/right_mark.jpg" alt="" width="20" height="19" /></td>
-												 <td style="font-family:Arial, Helvetica, sans-serif; color:#333333; font-size:14px;"><span style="font-size:20px; font-weight: bold;">It\'s up-to-date</span> - exciting and fun deals featured every day just for you</td>
-												 <td width="4%">&nbsp;</td>
-											   </tr>
-											   <tr>
-												 <td height="4" colspan="4" style="line-height:0px; height:4px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="4" /></td>
-												 </tr>
-											   <tr>
-												 <td width="3%">&nbsp;</td>
-												 <td width="6%"><img src="'.SITE_URL.'images/reg_newsletter/right_mark.jpg" alt="" width="20" height="19" /></td>
-												 <td style="font-family:Arial, Helvetica, sans-serif; color:#333333; font-size:14px;"><span style="font-size:20px; font-weight: bold;">It\'s nationwide</span> - we operate in most cities in uk</td>
-												 <td width="4%">&nbsp;</td>
-											   </tr>
-											 </table></td>
-											 </tr>
-
-											</table>
-										   </td>
-										  </tr>
-										  <tr>
-											<td valign="top" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:25px; font-weight:bold; padding:10px 0 10px 6px;"><span style="color:#5b8f32;">Todays deal :</span> '. $email_res_recom[title] .'</td>
-										  </tr>
-										  <tr>
-											<td>
-
-											 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-											  <tr>
-												<td width="10" valign="top"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="10" height="1" /></td>
-												<td width="230" height="226" style="height:226px; background-repeat: no-repeat;" valign="top" background="'.SITE_URL.'images/reg_newsletter/p_bg.jpg">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr>
-                            <td height="10"><img src="'.SITE_URL.'images/spacer.gif" alt="" width="1" height="10" /></td>
-                          </tr>
-                          <tr>
-                            <td valign="top" align="center" style="padding:0 0 0 15px; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; text-align:center;">For '. getSettings(currency_symbol). $email_res_recom['discounted_price'].'</td>
-                          </tr>
-<tr>
-                            <td height="10"><img src="'.SITE_URL.'images/spacer.gif" alt="" width="1" height="10" /></td>
-                          </tr>
-
-                          <tr>
-                            <td height="55" valign="top" align="center" style="padding:0 0 0 15px; height:55px; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; text-align:center;"><a href="'.SITE_URL.'index.php?action=view&id='. $email_res_recom[deal_id] .'" style="color:#fff;">View Now !</a></td>
-                          </tr>
-
-                              <tr>
-                               <td height="20" style="line-height:0px; height:20px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="20" /></td>
-                              </tr>
-
-                              <tr>
-                                <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                  <tr>
-                                    <td width="27">&nbsp;</td>
-                                    <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; text-align:center;" width="99" align="center" valign="middle">Discount '.$recom_email_disc.'%</td>
-                                    <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; text-align:center;" width="44%" align="center" valign="middle">Saving '.getSettings(currency_symbol).$recom_email_save.'</td>
-                                  </tr>
-                                </table></td>
-                              </tr>
-<tr>
-                               <td height="30" style="line-height:0px; height:30px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="30" /></td>
-                              </tr>
-                              <tr>
-                                <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-
-                                  <tr>
-                                    <td width="12%">&nbsp;</td>
-                                    <td style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color:#333333; text-align:center" width="88%">This deal is available until
-'.date("d.m.Y H:i",strtotime($email_res_recom[deal_end_time])).'</td>
-                                  </tr>
-                                </table></td>
-                              </tr>
-                         </table>
-				   </td>
-												<td width="30" valign="top"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="30" height="1" /></td>
-												<td width="290" valign="top"><img src="'.UPLOAD_PATH.$sql_email_image_recom[file].'" alt="" width="288" height="224" /></td>
-												<td width="10" valign="top"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="10" height="1" /></td>
-											  </tr>
-											</table>                    </td>
-										  </tr>
-										 </table>
-										</td>
-									  </tr>
-										<tr>
-										 <td valign="top" height="12"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="5" height="12" /></td>
-									   </tr>
-									  <tr>
-										 <td style="text-align:center; padding: 0 0 0 228px;">
-											<table border="0" align="left" cellpadding="0" cellspacing="0">
-											  <tr>
-												<td valign="top" width="10"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="10" height="1" /></td>
-												<td width="65" style="color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:12px; font-weight:bold;">Follow Us:</td>
-												<td valign="top" width="10"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="2" height="1" /></td>
-												<td width="25" valign="top"><img src="'.SITE_URL.'images/reg_newsletter/icon_01.png" alt="" /></td>
-												<td width="9" valign="top"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="2" height="1" /></td>
-												<td width="25" valign="top"><img src="'.SITE_URL.'images/reg_newsletter/icon_02.png" alt="" /></td>
-											  </tr>
-										   </table>
-										</td>
-										</tr>
-										 <tr>
-											 <td valign="top" height="6"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="6" /></td>
-										</tr>
-										<tr>
-										 <td valign="top" height="1" style="height:1px; line-height:0px; border-top:1px solid #7ed7fc;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="1" /></td>
-									   </tr>
-										<tr>
-											 <td valign="top" height="6" style="height:6px; line-height:0px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="6" /></td>
-										   </tr>
-										<tr>
-											<td valign="top" align="center">
-											<a href="'.SITE_URL.'" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">&copy; Jumblr.com</a>
-											<a href="'.SITE_URL.'page.php?page=Terms and Conditions" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Terms & Conditions</a>
-											<a href="'.SITE_URL.'customer-register.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Join Us</a>
-											<a href="'.SITE_URL.'page.php?page=About Jumblr UK" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">About Jumblr</a>
-											<a href="'.SITE_URL.'merchant_business.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Run Deal With Us</a>                   </td>
-										 </tr>
-									 </table>
-								  </td>
-								  </tr>
-								 <tr>
-								 <td height="15" valign="top" style="vertical-align:top; height:15px; line-height:0px;"><img src="'.SITE_URL.'images/reg_newsletter/box2_bottom.png" width="620" height="15" alt="" /></td>
-							 </tr>
-							</table>
-							</td>
-						   </tr>
-						   <tr>
-							<td height="10" style="height:10px; line-height:0px;"><img src="'.SITE_URL.'images/reg_newsletter/box1_bottom.png"" width="620" height="10" alt="" /></td>
-						  </tr>
-						</table>
-
-
-
-					';
+										  
+						';
 
 					/* Old email template
 					 *
@@ -448,22 +278,212 @@
 					//var_dump($r_emails); r_id 	r_email 	r_user 	r_date
 					foreach ($r_emails as $r_email) {
 						$r_email = trim($r_email);
-						$recom_tracker_sql = "INSERT INTO getdeals_recom_tracker VALUES ('','$r_email','$_SESSION[user_id]','$today')";
+						$token = base64_encode($r_email);
+						
+						$sql_mail_id = "SELECT * FROM ".TABLE_RECOM_TRACKER." WHERE r_email='".$r_email."'";
+						$chk_mail_res = mysql_query($sql_mail_id);
+						$count_mail = mysql_num_rows($chk_mail_res);
+							$template_recom .= '<tr><td valign="top" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:15px; font-weight:normal; padding:0 0 0 6px;"><a href="'.SITE_URL.'customer-login.php?token='.$token.'" style="color:#009CE8;"> Click the link to sign up and get 20% discount on your purchase </a></td></tr>';
+						if($count_mail>0)
+						{
+						
+						}
+						else
+						{	
+						$recom_tracker_sql = "INSERT INTO ".TABLE_RECOM_TRACKER." VALUES ('','$r_email','$_SESSION[user_id]','$today')";
 						mysql_query($recom_tracker_sql);
+						}
 					}
 
+					$template_recom .= '<tr>
+										  <td style="color:#4f4437; font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:11px; font-weight:normal; padding:8px 0 0 6px;">If you purchase this deal within 48 hours of opening a Jumblr account,  will get 20% discount automatically on every purchase to your friend\'s Jumblr account, so you can both enjoy great saving! You will hear nothing else from us as a result of this referral. You have not been added to any database and there is no need to ask for removal. <br/>See our <a href="'.SITE_URL.'page.php?page=Privacy Policy" style="font-size: 12px; text-decoration: underline; color:#4f4437;">Privacy Policy</a>.</td>
+										  </tr>
+										  <tr>
+											  <td height="8"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="8" /></td>
+										  </tr>
+										  <tr>
+											<td background="'.SITE_URL.'images/reg_newsletter/box_bg.gif" height="198" valign="top">
+											 <table width="100%" border="0" cellspacing="0" cellpadding="0">
+											 <tr>
+												<td colspan="5" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:17px; font-size:24px; font-weight:bold; padding:10px 0 20px 0; text-align:center;">What can Jumblr do for you?</td>
+											 </tr>
+											 <tr>
+											 <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+											  <tr>
+												 <td height="4" colspan="4" style="line-height:0px; height:4px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="4" /></td>
+												 </tr>
+											   <tr>
+												 <td width="3%">&nbsp;</td>
+												 <td width="6%"><img src="'.SITE_URL.'images/reg_newsletter/right_mark.jpg" alt="" width="20" height="19" /></td>
+												 <td style="font-family:Arial, Helvetica, sans-serif; color:#333333; font-size:14px;"><span style="font-size:20px; font-weight: bold;">It\'s great value</span> - you can save up to 90% every purchase make</td>
+												 <td width="4%">&nbsp;</td>
+											   </tr>
+											   <tr>
+												 <td height="4" colspan="4" style="line-height:0px; height:4px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="4" /></td>
+												 </tr>
+											   <tr>
+												 <td width="3%">&nbsp;</td>
+												 <td width="6%"><img src="'.SITE_URL.'images/reg_newsletter/right_mark.jpg" alt="" width="20" height="19" /></td>
+												 <td style="font-family:Arial, Helvetica, sans-serif; color:#333333; font-size:14px;"><span style="font-size:20px; font-weight: bold;">It\'s fun</span> - invite friends to the deal and earn money in return</td>
+												 <td width="4%">&nbsp;</td>
+											   </tr>
+											   <tr>
+												 <td height="4" colspan="4" style="line-height:0px; height:4px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="4" /></td>
+												 </tr>
+											   <tr>
+												 <td width="3%">&nbsp;</td>
+												 <td width="6%"><img src="'.SITE_URL.'images/reg_newsletter/right_mark.jpg" alt="" width="20" height="19" /></td>
+												 <td style="font-family:Arial, Helvetica, sans-serif; color:#333333; font-size:14px;"><span style="font-size:20px; font-weight: bold;">It\'s up-to-date</span> - exciting and fun deals featured every day just for you</td>
+												 <td width="4%">&nbsp;</td>
+											   </tr>
+											   <tr>
+												 <td height="4" colspan="4" style="line-height:0px; height:4px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="4" /></td>
+												 </tr>
+											   <tr>
+												 <td width="3%">&nbsp;</td>
+												 <td width="6%"><img src="'.SITE_URL.'images/reg_newsletter/right_mark.jpg" alt="" width="20" height="19" /></td>
+												 <td style="font-family:Arial, Helvetica, sans-serif; color:#333333; font-size:14px;"><span style="font-size:20px; font-weight: bold;">It\'s nationwide</span> - we operate in most cities in uk</td>
+												 <td width="4%">&nbsp;</td>
+											   </tr>
+											 </table></td>
+											 </tr>
 
+											</table>
+										   </td>
+										  </tr>
+										  <tr>
+											<td valign="top" style="color:#14131b; font-family:Arial, Helvetica, sans-serif; line-height:26px; font-size:25px; font-weight:bold; padding:10px 0 10px 6px;"><span style="color:#5b8f32;">Todays deal :</span> '. $email_res_recom[title] .'</td>
+										  </tr>
+										  <tr>
+											<td>
+
+											 <table width="100%" border="0" cellspacing="0" cellpadding="0">
+											  <tr>
+												<td width="10" valign="top"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="10" height="1" /></td>
+												<td width="230" height="226" style="height:226px; background-repeat: no-repeat;" valign="top" background="'.SITE_URL.'images/reg_newsletter/p_bg.jpg">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+                            <td height="10"><img src="'.SITE_URL.'images/spacer.gif" alt="" width="1" height="10" /></td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="center" style="padding:0 0 0 15px; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; text-align:center;">For '. getSettings(currency_symbol). $email_res_recom['discounted_price'].'</td>
+                          </tr>
+<tr>
+                            <td height="10"><img src="'.SITE_URL.'images/spacer.gif" alt="" width="1" height="10" /></td>
+                          </tr>
+
+                          <tr>
+                            <td height="55" valign="top" align="center" style="padding:0 0 0 15px; height:55px; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; text-align:center;"><a href="'.SITE_URL.'index.php?action=view&id='. $email_res_recom[deal_id] .'" style="color:#fff;">View Now !</a></td>
+                          </tr>
+
+                              <tr>
+                               <td height="20" style="line-height:0px; height:20px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="20" /></td>
+                              </tr>
+
+                              <tr>
+                                <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td width="27">&nbsp;</td>
+                                    <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; text-align:center;" width="99" align="center" valign="middle">Discount '.$recom_email_disc.'%</td>
+                                    <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; text-align:center;" width="44%" align="center" valign="middle">Saving '.getSettings(currency_symbol).$recom_email_save.'</td>
+                                  </tr>
+                                </table></td>
+                              </tr>
+<tr>
+                               <td height="30" style="line-height:0px; height:30px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="30" /></td>
+                              </tr>
+                              <tr>
+                                <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                                  <tr>
+                                    <td width="12%">&nbsp;</td>
+                                    <td style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color:#333333; text-align:center" width="88%">This deal is available until
+'.date("d.m.Y H:i",strtotime($email_res_recom[deal_end_time])).'</td>
+                                  </tr>
+                                </table></td>
+                              </tr>
+                         </table>
+				   </td>
+												<td width="30" valign="top"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="30" height="1" /></td>
+												<td width="290" valign="top"><img src="'.UPLOAD_PATH.$sql_email_image_recom[file].'" alt="" width="288" height="224" /></td>
+												<td width="10" valign="top"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="10" height="1" /></td>
+											  </tr>
+											</table>                    </td>
+										  </tr>
+										 </table>
+										</td>
+									  </tr>
+										<tr>
+										 <td valign="top" height="12"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="5" height="12" /></td>
+									   </tr>
+									  <tr>
+										 <td style="text-align:center; padding: 0 0 0 228px;">
+											<table border="0" align="left" cellpadding="0" cellspacing="0">
+											  <tr>
+												<td valign="top" width="10"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="10" height="1" /></td>
+												<td width="65" style="color:#000; font-family:Arial, Helvetica, sans-serif; line-height:16px; font-size:12px; font-weight:bold;">Follow Us:</td>
+												<td valign="top" width="10"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="2" height="1" /></td>
+												<td width="25" valign="top"><a href="'.getSettings(fb).'"><img src="'.SITE_URL.'images/reg_newsletter/icon_01.png" alt="" /></a></td>
+												<td width="9" valign="top"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="2" height="1" /></td>
+												<td width="25" valign="top"><a href="'.getSettings(twit).'"><img src="'.SITE_URL.'images/reg_newsletter/icon_02.png" alt="" /></a></td>
+											  </tr>
+										   </table>
+										</td>
+										</tr>
+										 <tr>
+											 <td valign="top" height="6"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="6" /></td>
+										</tr>
+										<tr>
+										 <td valign="top" height="1" style="height:1px; line-height:0px; border-top:1px solid #7ed7fc;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="1" /></td>
+									   </tr>
+										<tr>
+											 <td valign="top" height="6" style="height:6px; line-height:0px;"><img src="'.SITE_URL.'images/reg_newsletter/spacer.gif" alt="" width="1" height="6" /></td>
+										   </tr>
+										<tr>
+											<td valign="top" align="center">
+											<a href="'.SITE_URL.'" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">&copy; Jumblr.com</a>
+											<a href="'.SITE_URL.'page.php?page=Terms and Conditions" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Terms & Conditions</a>
+											<a href="'.SITE_URL.'customer-login.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Join Us</a>
+											
+											<a href="'.SITE_URL.'merchant.php" style="padding:0 4px; color:#5b6cd9; font-family:Arial, Helvetica, sans-serif; line-height:18px; font-size:14px;text-align:center; text-decoration:none;">Run Deal With Us</a>                   </td>
+										 </tr>
+									 </table>
+								  </td>
+								  </tr>
+								 <tr>
+								 <td height="15" valign="top" style="vertical-align:top; height:15px; line-height:0px;"><img src="'.SITE_URL.'images/reg_newsletter/box2_bottom.png" width="620" height="15" alt="" /></td>
+							 </tr>
+							</table>
+							</td>
+						   </tr>
+						   <tr>
+							<td height="10" style="height:10px; line-height:0px;"><img src="'.SITE_URL.'images/reg_newsletter/box1_bottom.png"" width="620" height="10" alt="" /></td>
+							
+						  </tr>
+						</table>';
 					//$fmsg = $_POST['fmsg'];
 					//$headers  = 'MIME-Version: 1.0' . "\r\n";
 					$headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 					$headers .= "From: Jumblr Referral<rewards@Jumblr.com>";
 					$femail = $_POST['femail'];
 					$sub = ucwords($user_name)." has invited you to join Jumblr";
-
-
-					//@mail($femail, $sub, $template_recom, $headers);
-					header('location: '.SITE_URL);
-					exit();
+			
+						$sql_mail_id = "SELECT * FROM ".TABLE_CREDITS_VAULT." WHERE user_id='".$femail."'";
+						$chk_mail_res = mysql_query($sql_mail_id);
+						$count_mail = mysql_num_rows($chk_mail_res);
+						if($count_mail>0)
+						{
+							header('location: '.SITE_URL);
+							exit();
+						}
+						else
+						{
+							@mail($femail, $sub, $template_recom, $headers);
+							header('location: '.SITE_URL);
+							exit();
+							}
+						
+							
 				}
 
 			?>
@@ -751,6 +771,7 @@ Your friend.</textarea></div>
 					//alert ('Hi');
 					var msg = document.getElementById('fmsg').value;
 					var email = document.getElementById('femail').value;
+					
 					if (msg == '') {
 						document.getElementById('msgErr').innerHTML = "Enter message<br><br>";
 						return false;

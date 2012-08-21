@@ -23,10 +23,7 @@ if ($_SERVER['HTTP_HOST'] == 'unifiedinfotech.net') {
 	define('DB_PASS', "unified2010");
 }
 
-
-
-define('PROFILE_IAMGE_PATH',"upload_files/profile_image/");
-
+define('TITLE', "Jumblr.com");
 define('SITE_FB_PROFILE',"http://www.facebook.com/jumblr");
 define('SITE_TWITTER_PROFILE',"http://www.twitter.com/jumblr");
 
@@ -90,6 +87,10 @@ define('TABLE_DEAL_GROUP', "jumblr_deal_group");
 define('TABLE_FB_USER_VIOLATION', "jumblr_fb_user_violation");
 define('TABLE_CONTACTS', "jumblr_contact");
 define('TABLE_CREDITS', "jumblr_credits");
+define('TABLE_RECOM_TRACKER', " jumblr_recom_tracker");
+define('TABLE_CREDITS_VAULT', " jumblr_credits_vault");
+define('TABLE_MULTI_DEALS', "  jumblr_multi_deals");
+
 
 
 require("include/functions.php");

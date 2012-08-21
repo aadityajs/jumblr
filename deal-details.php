@@ -204,8 +204,8 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 
                  </div>
                  <div class="clear"></div>
-                  <div style="margin: 21px 0 0 -60px; width: 270px; font-size: 11px; text-align:left;">
-                 <img src="images/pointer.png" alt="" align="absmiddle"><a href="javascript: void(0);" id="locateDealMap" style="padding: 10px; color:#9a9a9a;">Locate this deal</a>
+                 <div style="margin: 18px 0 0 -60px; width: 270px; font-size: 11px; text-align:left;">
+                 <img src="images/icon1.png" alt="" align="absmiddle"><a href="javascript: void(0);" id="locateDealMap" style="padding: 10px; color:#9a9a9a;">Locate this deal</a>
                  </div>
                 </div>
                 <div class="todays_deal_right" id="click">
@@ -236,7 +236,8 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 
 					<div class="circleDiv">
 					<div class="innerCircle">
-					<div class="cat_circle"><img class="tips" src="images/cat_icon1.png" width="100" height="100" title="<br/>Click to See the Jumblrs!<br/><br/>"/></div>
+					<?php  $category_img_name = get_deal_category_image($today_res['deal_id']) ;?>
+					<div class="cat_circle"><img class="tips" src="<?php echo $category_img_name?>" width="100" height="100" title="<br/>Click to See the Jumblrs!<br/><br/>"/></div>
 						<?php
 							$fbUserCount = 1;
 							if ($circleUserCount <= 9) {
@@ -648,7 +649,8 @@ return false;
 		foreach ($markers as $i => $location) {
 		    $map->addMarker($location[1], $location[2], array(
 		        'title' => $location[0],
-		        'icon' => 'http://armdex.com/maps/icon' . ($i + 1) . '.png',
+		        //'icon' => 'http://armdex.com/maps/icon' . ($i + 1) . '.png',
+		        'icon' => $category_img_name,
 		        'html' => '<div><img src="' . $location[4] . '" width="' . $location[5] . '" height="' . $location[6] . '"align="texttop" />' .  $location[7] . '</div><b>' . $location[0] . '</b>',
 		        'infoCloseOthers' => true,
 		    	'animation' => 'DROP'

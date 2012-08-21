@@ -3,6 +3,11 @@ ob_start();
 session_start();
 date_default_timezone_set('Europe/London');
 require("config.inc.php");
+if (isHandheld() == TRUE) {
+	header('location:'.SITE_URL.'m/');
+} else {
+	//echo 'Pc';
+}
 // Include MapBuilder class.
 require_once 'class/class.MapBuilder.php';
 require("class/Database.class.php");
@@ -355,6 +360,7 @@ $j = jQuery.noConflict(true);
 <script src="http://connect.facebook.net/en_US/all.js"></script>
 <div id="fb-root"></div>
 <script type="text/javascript">
+
 		FB.init
 		(
 			{
@@ -368,6 +374,8 @@ $j = jQuery.noConflict(true);
 		{
 			window.location.reload();
 		});
+
+
 </script>
 
 <?php
@@ -462,7 +470,7 @@ function get_facebook_cookie_new($app_id, $app_secret)
   <div class="header_right">
     <nav>
         <ul>
-            <li><a href="<?php echo SITE_URL; ?>"><span><img src="images/icon_01.png" alt=""></span> <br>Home</a></li>
+          <li><a href="<?php echo SITE_URL; ?>"><span><img src="images/icon_01.png" alt=""></span> <br>Home</a></li>
           <li><a href="javascript: void(0);" id="openDateSearch"><span><img src="images/icon_02.png" alt=""></span> <br>Search</a>
 		  </li>
 
@@ -477,7 +485,7 @@ function get_facebook_cookie_new($app_id, $app_secret)
     <div id="search_date" style="display:none; position: absolute; z-index: 1000; margin: 10px 0 0 90px; height:auto; background-color:#343535; border: 1px solid #575757; width: 274px;">
 		<form name="search_dt" action="<?php echo SITE_URL; ?>list.php?srch=search_date" method="post">
 			<div id="date_srch_cal1"></div>
-			<span style="padding:0 8px; margin: 10px; color:#b6b6b6;">In date </span>
+			<span style="padding:0 8px; margin: 10px; color:#b6b6b6;">On date </span>
 			<input type="text" name="in_date_srch" id="date_srch_cal"  value=""  style="width: 168px; height: 19px; background: #39393a; border: 1px solid #5d5d5d; margin: 10px 9px;" /><br />
 <a href="javascript: void(0);" class="tips" original-title="It searches which deals belongs in these dates.It takes multiple dates."><img src="images/question.png" /></a>
 			<!--<span style="padding:0 8px; margin: 0; color:#b6b6b6;">Start Time</span>
@@ -536,7 +544,7 @@ function get_facebook_cookie_new($app_id, $app_secret)
 
 				<?php
 				}
-				elseif(isset($_SESSION["user_id"]))
+				else if(!isset($_SESSION["user_id"]))
 				{
 				?>
 

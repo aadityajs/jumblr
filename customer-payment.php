@@ -5,6 +5,7 @@ if (!isset($_SESSION['fb_id'])) {
 }
 session_start();
 ob_start();
+//print_r($_SESSION);
 ?>
 <?php
 	if(!isset($_COOKIE["subscribe"]))
@@ -392,6 +393,7 @@ if ($_GET['gift'] == 'gifting') {
 				<div style="width: 100%; height: auto; margin:0;">
 				  <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr style="height: 40px;">
+					 <td style="color:#7fd7fc; font: normal 12px/18px Arial, Helvetica, sans-serif;" width="59%">
 					<?php
 					
 					$chk_fb_sql = "SELECT * FROM ".TABLE_FB_USER." WHERE fb_id  = '".$_SESSION['fb_id']."'";
@@ -403,18 +405,21 @@ if ($_GET['gift'] == 'gifting') {
 					$chk_recom_vault_sql = "SELECT * FROM ".TABLE_CREDITS_VAULT." WHERE user_id  = '$email'";
 					$recom_vault_query = mysql_query($chk_recom_vault_sql);
 					$chk_recom_vault_row = mysql_num_rows($recom_vault_query);
-					if ($chk_recom_vault_row > 0) {
+					//if ($chk_recom_vault_row > 0) {
 
-					?> <td style="color:#7fd7fc; font: normal 12px/18px Arial, Helvetica, sans-serif;" width="59%">
-					 <div id="redeem" style="width: 330px;" class="redemClass">
+					?> <div id="redeem" style="width: 330px;" class="redemClass">
 					 	<p style="padding:0; margin:0 0 0 5px;"><a href="javascript: void(0);">Do you want to use your discount?</a></p>
-					 </div>
+					 </div><?php
+					// }
+					 ?>
 					 <div class="clear"></div>
 
 					 <div id="redeem_div" style="width:330px; padding-top: 1px;  display: none;">
 					 <div style="width:150px; float: left; margin: 5px 0 0 5px;">
-					 
-					 <label>20% discount</label>
+					 <?php
+					  $dis_per=getSettings(discount)*100;
+					 ?>
+					 <label><?php echo $dis_per.'% discount';?></label>
 					 </div>
 					 <?php
 
@@ -424,9 +429,7 @@ if ($_GET['gift'] == 'gifting') {
 					 <div style="float: right; text-align:right; width: 130px; margin-top: 3px;"><input type="submit" class="tellbtn13" name="submit" value="Apply" id="discount" onclick="return change('<?php echo number_format($discount,2) ?>')"/></div><div id="disp" style="display:none">Discount will be deducted from purchase value</div>
 					 </div>
 					
-					 </td> <?php
-					 }
-					 ?>
+					 </td> 
 
                       <td style="font-family:Arial Rounded MT Bold; font-size: 14px; color: #333333; text-align:right; text-align:left; padding-left:10px;" width="65%">Total amount:</td>
                       <td style="font-family:Arial Rounded MT Bold; font-size: 20px; color: #000; text-align:left; padding-left:15px;" width="36%;">
@@ -1282,6 +1285,7 @@ $('input[name="payment_system"]').change(function() {
                         <td colspan="2"><table  id="cc" style="margin: 0 0 0 20px;" width="100%" border="0" cellspacing="0" cellpadding="0">
                           <tr>
                             <td>
+							
                             <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:auto;">
                            <tr>
                             <td width="100%" colspan="2">
@@ -1410,8 +1414,7 @@ $('input[name="payment_system"]').change(function() {
 
 
                             </table>
-
-                            </td>
+						  </td>
                           </tr>
                         </table></td>
                       </tr>
@@ -1427,7 +1430,9 @@ $('input[name="payment_system"]').change(function() {
 
                       	<td colspan="2"><table id="maestro" style="margin: 0 0 0 20px;" width="100%" border="0" cellspacing="0" cellpadding="0">
                           <tr>
-                            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <td>
+							
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
                              	<tr>
                                     <td width="315">CARDHOLDERS FIRST NAME</td>
                                     <td>CARDHOLDERS LAST NAME</td>
@@ -1867,12 +1872,12 @@ xmlhttp.onreadystatechange=function()
 		else
 		{
 			//var total = xmlhttp.responseText;
-			
-			//alert(number(xmlhttp.responseText));
-			document.getElementById("payment_amount").value = xmlhttp.responseText;
-			document.getElementById("total_price").innerHTML='<?php echo getSettings(currency_symbol); ?>'+xmlhttp.responseText;
-			document.getElementById("big_total_price").innerHTML = '<?php echo getSettings(currency_symbol); ?>'+xmlhttp.responseText;
-			document.getElementById("frm_paypal_total_price").value=xmlhttp.responseText;
+			var total = parseFloat(xmlhttp.responseText);
+			//alert(addCommas(total));
+			document.getElementById("payment_amount").value = addCommas(total);
+			document.getElementById("total_price").innerHTML='<?php echo getSettings(currency_symbol); ?>'+addCommas(total);
+			document.getElementById("big_total_price").innerHTML = '<?php echo getSettings(currency_symbol); ?>'+addCommas(total);
+			document.getElementById("frm_paypal_total_price").value=addCommas(total);
 			document.getElementById("frm_paypal_total_qty").value=str;
 		}
 

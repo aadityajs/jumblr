@@ -950,6 +950,7 @@ if(isset($_REQUEST['submit']))
 		//exit;
 
 		if ($data['is_multi'] == 'y') {
+		
 			for($i=0;$i<3;$i++)
 			{
 			$str = '';
@@ -959,8 +960,8 @@ if(isset($_REQUEST['submit']))
 					}
 				}
 
-				$str = substr($str,0,-1);
-				$multiDealSql = "INSERT INTO `getdeals_multi_deals` (
+				 $str = substr($str,0,-1); 
+				$multiDealSql = "INSERT INTO ".TABLE_MULTI_DEALS." (
 				`multi_deal_id` ,
 				`deal_id` ,
 				`multi_deal_item_name` ,

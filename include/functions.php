@@ -80,6 +80,13 @@ return $cat;
 
 }
 
+function get_deal_category_image($deal_id){
+$deal=get_deal_details($deal_id);
+$sql="SELECT * FROM ".TABLE_CATEGORIES." where cat_id='".$deal['deal_cat']."' ";
+$cat_img=mysql_fetch_array(mysql_query($sql));
+ return $cat_img_url = 'images/category_image/'.$cat_img['image'];
+}
+
 function get_store_details($deal_id){
 $sql="SELECT * FROM ".TABLE_DEALS_MERCHANT." JOIN ".TABLE_DEALS." on(".TABLE_DEALS_MERCHANT.".deal_id=".TABLE_DEALS.".deal_id) where 1=1 and  ".TABLE_DEALS_MERCHANT.".deal_id='".$deal_id."'";
 $m_deal=mysql_fetch_array(mysql_query($sql));
@@ -641,13 +648,7 @@ function isHandheld() {
 
 		}
 
-
-
-
-
-
 }
-
 
 
 

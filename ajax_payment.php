@@ -22,16 +22,16 @@ if ($_GET['id'] != "" && $_GET['qty'] != "")  {
 	$is_multi = mysql_fetch_array(mysql_query($sql_is_multi));
 
 	$total_price = $prod_qty * $is_multi['multi_deal_item_price'];
-	$formatted_total_price = sprintf("%01.2f", $total_price);
-	$formatted_total_price = number_format($formatted_total_price, 2);
+	//$formatted_total_price = sprintf("%01.2f", $total_price);
+	$formatted_total_price = $total_price;
 	echo $formatted_total_price;
 	$_SESSION['total_price'] = $formatted_total_price;
 	}
 	else {
 
 	$total_price = $prod_qty * $prod_res['discounted_price'];
-	$formatted_total_price = sprintf("%01.2f", $total_price);
-	$formatted_total_price = number_format($formatted_total_price, 2);
+	//$formatted_total_price = sprintf("%01.2f", $total_price);
+	$formatted_total_price = $total_price;
 	echo $formatted_total_price;
 	$_SESSION['total_price'] = $formatted_total_price;
 	}

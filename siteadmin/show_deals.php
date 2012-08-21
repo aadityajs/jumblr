@@ -151,7 +151,7 @@ if (isset($_REQUEST['status']) && !empty($_REQUEST['status'])) {
 			while($row_deals=mysql_fetch_array($query))
 			{
 			if ($row_deals['is_multi'] == 'y') {
-			$sql_is_multi = "SELECT * FROM getdeals_multi_deals WHERE deal_id = ".$row_deals['deal_id'];
+			$sql_is_multi = "SELECT * FROM ".TABLE_MULTI_DEALS." WHERE deal_id = ".$row_deals['deal_id'];
 			$is_multi = mysql_fetch_array(mysql_query($sql_is_multi));
 	}
 				$showdealcity=mysql_fetch_array(mysql_query("SELECT * FROM ".TABLE_CITIES." WHERE city_id = '$row_deals[city]'"));

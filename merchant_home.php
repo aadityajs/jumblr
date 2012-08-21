@@ -857,6 +857,7 @@ $_SESSION["session_temp"] =uniqid();
 				<td style="padding:5px;">% Off</td>
 				<td style="padding:5px;">Merchant's Take</td>
 				<td style="padding:5px;">Jumblr Fee</td>
+				<td style="padding:5px;">Buyout Price</td>
 				</tr>
 				<?php
 
@@ -873,21 +874,25 @@ $_SESSION["session_temp"] =uniqid();
 				?>
 				<tr style="background-color:#F3F3F3">
 				<input type="hidden" value="<?php echo $row_stores['store_name'];?>" name="storename"  id="storename" />
-				<td class="dealcalctxtbox"><?php echo $currency; ?>
+				<td class="dealcalctxtbox"><?php echo getSettings(currency_symbol); ?>
 				<input type="text" id="retailvalue" name="retailvalue" value="<?php echo $retailvalue?>" class="dealcalcbox"  onkeyup="calculatedeal('retail')" onBlur="calculatedeal('retail')" onKeyPress="return numbersonly(event)" style="height:20px;"/><br /><span id="err_retailvalue"></span></td>
-				<td class="dealcalctxtbox"><?php echo $currency; ?>
+				<td class="dealcalctxtbox"><?php echo getSettings(currency_symbol);  ?>
 				<input type="text" id="customerdisc" name="customerdisc" class="dealcalcbox" style="height:20px;"  value="<?php echo $customerdisc?>" onKeyUp="calculatedeal('customer')" onBlur="calculatedeal('customer')" onKeyPress="return numbersonly(event)" /><span id="err_customerdisc"></span></td>
 				<td style="padding:4px; text-align:center"><input type="text" id="custpercent" value="<?php echo $custpercent?>" name="custpercent" size="2" readonly="" class="dealcalcbox" style="height:20px;">
 				%</td>
-				<td class="dealcalctxtbox"><?php echo $currency; ?>
+				<td class="dealcalctxtbox"><?php echo getSettings(currency_symbol);  ?>
 				<input type="text" id="merchant_take"  name="merchant_take"  size="5"  value="<?php echo $merchant_take?>"  readonly="" class="dealcalcbox" style="height:20px;"/>
 				<input type="hidden" name="merchantpercent" id="mpercent" value="<?php echo $merchantpercent?>" class="dealcalcbox" style="height:20px;"/>
 				<span id="merchantpercent">75</span>%</td>
-				<td style="padding:4px; text-align:center"><?php echo $currency; ?>
+				<td style="padding:4px; text-align:center"><?php echo getSettings(currency_symbol);  ?>
 				<input type="text" value="<?php echo $wakadeal_comission?>" readonly="" id="wakafee"  size="5" class="dealcalcbox" style="height:20px;">
 				&nbsp;&nbsp;&nbsp; <span  id="wakadealpercent"><?php echo $waka_percent?></span>%
 				<input type="hidden" name="wakadealfee" id="wakadealfee" value="<?php echo $wakadeal_comission?>" />
 				<input type="hidden" name="wakapercent" id="wakapercent" value="<?php echo $waka_percent?>" />
+				</td>
+				<td style="padding:4px; text-align:center"><?php echo getSettings(currency_symbol);  ?>
+				<input type="text"  id="buyout" name="buyout"  size="5" class="dealcalcbox" style="height:20px;">
+				
 				</td>
 				</tr>
 				</table></td>

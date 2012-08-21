@@ -2,11 +2,12 @@
 include("include/header.php");
 include("plugin/mpdf/mpdf.php");
 include("fckeditor/fckeditor.php");
+
 session_start();
 $mpdf=new mPDF();
 $user_id = $_SESSION["user_id"];
 
-//isLogin();
+isLogin();
 ?>
 
 <?php
@@ -2456,11 +2457,109 @@ function passMatch() {
 	<!-- 8 ends here  -->
 
 	<!-- 9 refer friends starts here -->
+	<?php
+
+
+		$sql_refer_jmblr = "SELECT td.deal_id,td.title,td.discounted_price,td.discount,td.savings,img.file FROM ".TABLE_DEALS." td LEFT JOIN ".TABLE_DEAL_IMAGES." img on td.deal_id=img.deal_id WHERE td.deal_end_time>='".date("Y-m-d G:i:s")."'";
+
+
+		$refer_jmblr_res = mysql_query($sql_refer_jmblr);
+		$refer_jmblr_num = mysql_num_rows($refer_jmblr_res);
+
+
+	?>
 	<div class="TabbedPanelsContent" id="myaccount_9" style="display: none;">
 		<div class="title">Refer Jumbles</div>
-		<a href="#inline1" id="various4">
-			Invite your friends for your your jumblr. If they signs up and buys a deal successfully they will get <?php echo getSettings(discount); ?>% discount.
-        </a>
+		<?php
+		if($refer_jmblr_num<0)
+		{
+		?>
+		<p>There is no deal by you.</p>
+		<?php
+		}
+		else
+		{
+			$count = 0;
+
+
+		?>
+		<div class="TabbedPanelsContent27" id="myaccount_1">
+         <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+			<th style="width:100px;">Deal No</th>
+			<th style="width:100px;">Deal Images </th>
+			<th style="width:150px;">Deal Title </th>
+
+			<th style="width:100px;">Deal Price </th>
+
+			<th style="width:150px;">Refer Jumblr</th>
+          </tr>
+		  <tr><td>&nbsp;</td></tr>
+		  <tr>
+			<th style="width:100px;border: 1px solid #CCCCCC;"></th>
+			<th style="width:100px;border: 1px solid #CCCCCC;"> </th>
+			<th style="width:150px;border: 1px solid #CCCCCC;"> </th>
+
+			<th style="width:100px;border: 1px solid #CCCCCC;"> </th>
+
+			<th style="width:150px;border: 1px solid #CCCCCC;"></th>
+          </tr>
+		  <tr><td>&nbsp;</td></tr>
+
+		  <?php
+		  while ($orders_row = mysql_fetch_array($refer_jmblr_res)) {
+
+
+			$count++;
+		  ?>
+           <tr >
+             <td style="width:150px;"><?php echo $count; ?></td>
+			 <td style="width:100px;">
+			 <?php
+			 if($orders_row['file'])
+			 {
+			 ?>
+			 <img src="<?php echo UPLOAD_PATH.$orders_row['file']; ?>" height="60" width="60"/>
+			 <?php
+			 }
+			 else
+			 { ?>
+			 <img src="images/no_img2.jpg" class="image0" width="60" height="60">
+			 <?php
+			 }
+			 ?>
+			 </td>
+             <td style="width:100px;"><?php echo $orders_row['title']; ?></td>
+
+			 <td style="width:100px;"><?php echo $cur[2].$orders_row['discounted_price']; ?></td>
+
+
+			<td style="width:100px;"><a href="#refer<?php echo $count; ?>" id="ref_various<?php echo $count; ?>">
+			Invite your friends for your your jumblr. If they signs up and buys <br /> a deal successfully they will get <?php echo getSettings(discount)*100; ?>% discount.
+        </a></td>
+          </tr>
+
+			<tr><td>&nbsp;</td></tr>
+
+
+	   <script type="text/javascript">
+$(document).ready(function() {
+			$("#ref_various<?php echo $count; ?>").fancybox({
+							'titlePosition'		: 'inside',
+							'speedIn':      300,
+							'speedOut':     300,
+							'easingIn':     'swing',
+							'easingOut':    'swing',
+							'hideOnOverlayClick' : false
+						});
+
+			});
+
+</script>
+		<?php } }?> </table></div>
+		<!--<a href="#inline1" id="various4">
+			Invite your friends for your your jumblr. If they signs up and buys a deal successfully they will get <?php echo getSettings(discount)*100; ?>% discount.
+        </a>-->
 		<br/><br/>
 
 	</div>
@@ -2594,7 +2693,7 @@ else
 
 <?php
 include("include/footer.php");
-include 'recommendation_popup.php';
+include 'recommendation_popup_refer.php';
 
 if ($_GET['tab'] == 'subscriptions') {
 	echo '<script type="text/javascript">show_tab(5)</script>';

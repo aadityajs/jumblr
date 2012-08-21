@@ -61,8 +61,9 @@ $("a#locateDealMap").click(function () {
 
 
 
-/* Date search cod
+/* Date search code
  */
+ 
  $("#openDateSearch").click(function () {
 		$("#search_date").slideToggle(300);
 		//var dt = jQuery.noConflict();
@@ -361,6 +362,7 @@ $(document).ready(function() {
 			    'hideOnOverlayClick' : false
 
 			});
+			
 
 
 

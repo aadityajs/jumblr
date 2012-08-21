@@ -1164,19 +1164,22 @@ $email_Template_2 = '<table width="760" border="0" align="center" cellpadding="0
 //var_dump($_POST);		// PayPal IPN return values
 
 
-		$get_credit_fee = mysql_fetch_array(mysql_query("SELECT * FROM ".TABLE_SETTING." WHERE name = 'credit_fee'"));
+		$get_credit_fee = mysql_fetch_array(mysql_query("SELECT * FROM ".TABLE_SETTING." WHERE name = 'discount'"));
 		$credit_fee = $get_credit_fee['value'];
 
-		// Chk buyer if exists in recommendation vault then add 5 pound in credit
+		// Chk buyer if exists in recommendation vault then add 20% in discount
 			$today = date("Y-m-d");
-			$chk_recom_vault_sql = "SELECT * FROM getdeals_credits_vault WHERE user_id  = '$user[email]'";
+			$chk_recom_vault_sql = "SELECT * FROM ".TABLE_CREDITS_VAULT." WHERE user_id  = '$user[email]'";
 			$recom_vault_query = mysql_query($chk_recom_vault_sql);
 			$chk_recom_vault_row = mysql_num_rows($recom_vault_query);
 			if ($chk_recom_vault_row > 0) {
 				while ($recom_vault_data = mysql_fetch_array($recom_vault_query)) {
 					$recom_vault_data['r_email'];
-					$recom_vault_sql = "INSERT INTO getdeals_credits VALUES ('',$_SESSION[user_id],'$credit_fee','$today')";
+					$recom_vault_sql = "INSERT INTO ".TABLE_CREDITS." VALUES ('',$_SESSION[user_id],'$credit_fee','$today')";
 					mysql_query($recom_vault_sql);
+					
+					$del = "DELETE FROM ".TABLE_CREDITS_VAULT." WHERE user_id  = '$user[email]'";
+					mysql_query($del);
 				}	//	end while
 			}	// end if
 }
