@@ -1,0 +1,73 @@
+@import URL('style.css');
+
+/* -------------------Common CSS---------------------- */
+body{
+    margin: 0 auto;
+	color: #333333;
+	font: normal 12px/19px Arial, Helvetica, sans-serif;
+	background: /*url(../images/bodybg.jpg) left top repeat*/ #7fd7fc;
+}
+th, td, div{
+ 	text-align: left;
+	vertical-align: top;		
+}
+h1, h2, h3, h4, h5, h6{
+	padding: 0px;
+	margin: 0px;
+}
+h1{
+    font-size: 1.1em;    
+    color: #ff6600;
+    margin: 15px 0px 5px 0px;
+    padding:0px 0px 0px 8px;    
+}
+h1 span{
+	font-weight: bold;  
+    color: #009900;  
+}
+h1 a, h1 a:visited
+{
+    color: #009900;
+}
+ul, li, ol, li, dl, dt{
+    margin: 0px;
+    padding: 0px;
+}
+ul li, ol li, dl dt{
+    margin: 0px;
+    padding: 0px;
+	list-style-type: none;
+}
+p{
+    margin: 5px 0px;
+    padding: 2px 4px;
+}
+img{
+    border: none;
+	outline: none;
+}
+a{
+    color: #ff6600;
+    text-decoration: none;
+	outline: none;
+}
+a:hover{
+    color: #3c6418;
+    text-decoration: none;
+}
+fieldset{
+    margin: 10px;
+	padding: 5px;
+	border: 1px solid #cccccc;
+}
+fieldset legend{
+    font-weight: bold;
+    color:#cf3f10;
+	margin: 0px;
+	padding: 0 2px;
+}
+select, option, input{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+	border: 1px solid #cccccc;
+}
