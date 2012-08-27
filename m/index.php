@@ -286,8 +286,37 @@ if (($_GET['action'] != "") && ($_GET['id'] != "")) {
 	$action = $_GET['action'];
 	$deal_id = $_GET['id'];
 
-	$sql_today = "SELECT *,DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_id = '".$deal_id."' AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."'  LIMIT 0, 1";
+	//$sql_today = "SELECT *,DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_id = '".$deal_id."' AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."'  LIMIT 0, 1";
+	$sql_test_repeat = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city LIMIT 0, 1";
+	//$sql_today = "SELECT * FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_end_time LIKE '".date("Y-m-d")."%' LIMIT 0, 1";
+	$test_repeat = mysql_fetch_array(mysql_query($sql_test_repeat));
+
+				if (!empty($test_repeat['nowdeal_repeatday'])){
+					$rep_day=explode(",",$test_repeat['nowdeal_repeatday']);
+					$cnt=count($rep_day);
+
+					for($i=0;$i<$cnt;$i++)
+					  {
+									if($rep_day[$i]==date('Y-m-d'))
+									  {
+										  $sql_today = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city  LIMIT 0, 1";
+									 // echo '<br>'.$rep_day[$i];
+									  break;
+									  }
+									    else
+									  {
+									  		 $sql_today = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city  LIMIT 0, 1";
+											break;
+									  }
+					  }
+
+				}
+				else {
+					$sql_today = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city LIMIT 0, 1";
+				}// end repeat empty test
+
 	$today_res = mysql_fetch_array(mysql_query($sql_today));
+
 
 	$sql_todays_buy = "SELECT SUM(qty) FROM ".TABLE_TRANSACTION." WHERE deal_id = ".$today_res['deal_id'];
 	$total_buy = mysql_fetch_array(mysql_query($sql_todays_buy));
@@ -301,7 +330,36 @@ if (($_GET['action'] != "") && ($_GET['id'] != "")) {
 elseif(($_GET['id'] != ''))
 {
 	$deal_id = $_GET['id'];
-	$sql_today = "SELECT *,DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_id = '".$deal_id."' AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."'  LIMIT 0, 1";
+//	$sql_today = "SELECT *,DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_id = '".$deal_id."' AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."'  LIMIT 0, 1";
+
+$sql_test_repeat = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city LIMIT 0, 1";
+	//$sql_today = "SELECT * FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_end_time LIKE '".date("Y-m-d")."%' LIMIT 0, 1";
+	$test_repeat = mysql_fetch_array(mysql_query($sql_test_repeat));
+
+				if (!empty($test_repeat['nowdeal_repeatday'])){
+					$rep_day=explode(",",$test_repeat['nowdeal_repeatday']);
+					$cnt=count($rep_day);
+
+					for($i=0;$i<$cnt;$i++)
+					  {
+									if($rep_day[$i]==date('Y-m-d'))
+									  {
+										  $sql_today = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city  LIMIT 0, 1";
+									 // echo '<br>'.$rep_day[$i];
+									  break;
+									  }
+									    else
+									  {
+									  		 $sql_today = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city  LIMIT 0, 1";
+											break;
+									  }
+					  }
+
+				}
+				else {
+					$sql_today = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city LIMIT 0, 1";
+				}// end repeat empty test
+
 	$today_res = mysql_fetch_array(mysql_query($sql_today));
 
 	$sql_todays_buy = "SELECT SUM(qty) FROM ".TABLE_TRANSACTION." WHERE deal_id = ".$today_res['deal_id'];
@@ -314,8 +372,35 @@ elseif(($_GET['id'] != ''))
 }
 else {
 $city = end(explode("|",$_COOKIE['subscribe']));
-	 $sql_today = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city LIMIT 0, 1";
+
+
+			$sql_test_repeat = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city LIMIT 0, 1";
 	//$sql_today = "SELECT * FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_end_time LIKE '".date("Y-m-d")."%' LIMIT 0, 1";
+	$test_repeat = mysql_fetch_array(mysql_query($sql_test_repeat));
+
+				if (!empty($test_repeat['nowdeal_repeatday'])){
+					$rep_day=explode(",",$test_repeat['nowdeal_repeatday']);
+					$cnt=count($rep_day);
+
+					for($i=0;$i<$cnt;$i++)
+					  {
+									if($rep_day[$i]==date('Y-m-d'))
+									  {
+										  $sql_today = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city  LIMIT 0, 1";
+									 // echo '<br>'.$rep_day[$i];
+									  break;
+									  }
+									  else
+									  {
+									  		 $sql_today = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city  LIMIT 0, 1";
+											break;
+									  }
+					  }
+
+				}
+				else {
+					$sql_today = "SELECT *, DATEDIFF(`deal_end_time`,`deal_start_time`) as date_diff FROM ".TABLE_DEALS." WHERE status >= 1 AND deal_start_time <= '".date("Y-m-d G:i:s")."' AND deal_end_time >= '".date("Y-m-d G:i:s")."' AND city = $city LIMIT 0, 1";
+				}// end repeat empty test
 	$today_res = mysql_fetch_array(mysql_query($sql_today));
 
 	// select multi deal if has
@@ -334,6 +419,9 @@ $city = end(explode("|",$_COOKIE['subscribe']));
 			$sql_todays_image = "SELECT * FROM ".TABLE_DEAL_IMAGES." WHERE deal_id = ".$today_res['deal_id'];
 			$todays_image = mysql_fetch_array(mysql_query($sql_todays_image));
 			$todays_image_count = mysql_num_rows(mysql_query($sql_todays_image));
+
+
+
 			//$todays_image_res = mysql_query($sql_todays_image);
 
 		}
@@ -469,16 +557,78 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 				?>
 
                  <div class="rating">Group rating: <span><?php echo intval($averageGroupRating); ?></span></div>
-                 <div class="timer"><img src="images/clock.png" alt=""><?php echo date("<b>D</b> M j | <b>g:i A</b>", strtotime($today_res['deal_end_time'])); ?></div>
 
-                 <div class="timer" style="padding:7px 0; height:54px;">
+                 <div class="timer1"><!--<img src="images/clock.png" alt="">--><?php //echo date("<b>D</b> M j | <b>g:i A</b>", strtotime($today_res['deal_end_time'])); ?>
+
+
+				<div id="slider2" class="sliderwrapper" >
+
+
+
+					<?php
+					if (!empty($test_repeat['nowdeal_repeatday'])){
+					$rep_day=explode(",",$test_repeat['nowdeal_repeatday']);
+					$cnt=count($rep_day);
+
+
+
+					for($i=0;$i<$cnt;$i++)
+					  { ?>
+					  <div class="contentdiv" style="text-align:center;">
+
+							 <img src="images/clock.png" alt=""><?php echo date("<b>D</b> M j | <b>g:i A</b>", strtotime($rep_day[$i])); ?>
+                        </div>
+
+
+<?php					  }
+					  }
+					  else
+					  { ?>
+					  <img src="images/clock.png" alt=""><?php echo date("<b>D</b> M j | <b>g:i A</b>", strtotime($today_res['deal_end_time'])); ?>
+
+				<?php	  }
+
+					?>
+										<?php
+					if (!empty($test_repeat['nowdeal_repeatday'])){ ?>
+                 <style>
+				 	.contentdiv{
+						 height:42px;
+						 line-height:42px;
+						 font-size:16px;
+					}
+					.contentdiv{ b{
+						height:42px;
+                        line-height:42px;
+					}
+					.contentdiv img{
+						line-height: 42px;
+						vertical-align: middle;
+					}
+				 </style>
+				<div id="paginate-slider2" class="pagination" style="text-align:center; width: 255px; height:26px; z-index:1000;">
+ 				 <a href="#" class="next" style="margin:-3px 15px 0 2px; float:right; height:16px; line-height:16px; background:#797979; color:#fff;" > &raquo; </a>
+                 <a href="#" class="prev" style="margin:-3px 0 0 0; float:right; height:16px; line-height:16px; background:#797979; color:#fff;"> &laquo;</a>
+
+				</div>
+				<?php
+				}
+				?>
+
+
+					</div>
+
+				 </div>
+					
+                 <div class="timer" style="padding:7px 0; height:54px;" align="center">
                  	<?php if ($_GET['action'] == "sold") { ?>
 				   	<div class="tab_button1"></div>
 				   <?php } else { ?>
 					   	<?php if ($today_res['is_multi'] == 'n') { ?>
-					   	<a href="<?php echo SITE_URL; ?>customer-payment.php?item=<?php echo $today_res['deal_id']; ?>">
+					   	<!--<a href="<?php echo SITE_URL; ?>customer-payment.php?item=<?php //echo $today_res['deal_id']; ?>">
 					   		<img src="images/buy_nowbtn.png" alt="">
-					   	</a>
+					   	</a>-->
+						<?php if($total_buy[0] != 0) { ?><a href="<?php echo SITE_URL; ?>customer-payment.php?item=<?php echo $today_res['deal_id']; ?>"><img src="images/buy_nowbtn.png" alt=""></a><?php } else {?><span style=" width: 100px;margin: 0 8px; float: left; padding-top:7px;"><a href="<?php echo SITE_URL; ?>customer-payment.php?item=<?php echo $today_res['deal_id']; ?>"><img src="images/buy_btn.png" alt=""></a></span><span style="margin: 0 4px; float: right; padding-top:7px;"><a class="tips" original-title="In a situation where not one seat has been purchased at an event then the buyout price can be an option and it is set by the person creating the event." href="<?php echo SITE_URL; ?>customer-payment.php?item=<?php echo $today_res['deal_id']; ?>&buyout=all"><img src="images/buy_out.png" alt=""></a></span><?php } ?>
 					   	<?php } else { ?>
 					   	<a id="various4" href="#multi_deal_popup">
 					   		<img src="images/buy_nowbtn.png" alt="">
@@ -488,14 +638,15 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 
 
                  </div>
-                 <div class="clear"></div>
+                 <div class="clear" ></div>
+
                  <div style="margin: 18px 0 0 -60px; width: 270px; font-size: 11px; text-align:left;">
                  <img src="images/icon1.png" alt="" align="absmiddle"><a href="javascript: void(0);" id="locateDealMap" style="padding: 10px; color:#9a9a9a;">Locate this deal</a>
                  </div>
                 </div>
                 <div class="todays_deal_right" id="click">
-                <?php  $cat_img_name = get_deal_category_image($today_res['deal_id']) ;?> 
-				
+                <?php  $cat_img_name = get_deal_category_image($today_res['deal_id']) ;?>
+
                    <!-- <img src="images/member.png" alt=""> -->
 				<!-- Members circle starts -->
 
@@ -711,7 +862,8 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
 				<?php  if ($circleUserCount < 9) { ?>
 					<script type='text/javascript'>
 						$(document).ready(function() {
-							$('div.ca-nav').css({display: 'none'});});
+							//$('div.ca-nav').css({display: 'none'});
+							});
 					</script>
 				<?php }?>
 
@@ -738,8 +890,10 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
                            <img src="images/animal3.png" alt="" height="80" width="80">
                            </div>
                            <div class="point">120</div>
-                        </div>
-                        -->
+                        </div>-->
+
+
+
                         <div class="clear"></div>
 
 <!-- Comment starts -->
@@ -977,7 +1131,7 @@ function testSugg() {
 		);
 		echo '<pre>'.print_r($locations, true).'</pre>';
 		*/
-		
+
 		foreach ($markers as $i => $location) {
 		    $map->addMarker($location[1], $location[2], array(
 		        'title' => $location[0],
@@ -1097,7 +1251,7 @@ function testSugg() {
 				<!-- Members circle starts -->
 				<div class="circleDiv">
 				<div class="innerCircle">
-				 <?php  $cat_img_name = get_deal_category_image($today_row_bot_deals['deal_id']) ;?> 
+				 <?php  $cat_img_name = get_deal_category_image($today_row_bot_deals['deal_id']) ;?>
 				<div class="cat_circle"><img class="tips" src="<?php echo $cat_img_name?>" width="100" height="100" title="<br/>Click to See the Jumblrs!<br/><br/>"/></div>
 					<?php
 						$fbUserCount = 1;
@@ -1192,6 +1346,8 @@ function testSugg() {
                     </div>
                   <div class="rating">Group rating: <span><?php echo intval($averageGroupRating); ?></span></div>
                  <div class="timer"><img src="images/clock.png" alt=""><?php echo date("<b>D</b> M j | <b>g:i A</b>", strtotime($today_row_bot_deals['deal_end_time'])); ?></div>
+				 
+
                  <div class="clear"></div>
                 </div>
                 <div class="clear"></div>
@@ -1229,6 +1385,7 @@ function testSugg() {
 			<?php } ?>
 
             </div>
+
 
 			<script type="text/javascript">
 				$('#ca-container<?php echo $today_row_bot_deals['deal_id']; ?>').contentcarousel();

@@ -48,6 +48,7 @@ foreach(1 as $i);
 	<meta property="og:description" content="description" />
 	<meta property="og:image" content="thumbnail_image" />
 	<meta name="medium" content="image" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
 
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<meta http-equiv="imagestoolbar" content="no" />
@@ -318,6 +319,12 @@ $j = jQuery.noConflict(true);
 	  });
 	  </script>-->
 
+		<!-----------------slider in index page------------------------------------------------->
+	<link rel="stylesheet" type="text/css" href="css/contentslider.css" />
+
+	<script type="text/javascript" src="js/contentslider.js">
+
+	<!-----------------end slider------------------------------------------------->
 		<style type="text/css">
 		  #gallery {
 		   /* padding: 30px;
@@ -441,7 +448,7 @@ function get_facebook_cookie_new($app_id, $app_secret)
           <li><a href="javascript: void(0);" id="openDateSearch"><span><img src="images/icon_02.png" alt=""></span> <br>Search</a>
 		  </li>
 
-          <li><a href="#"><span><img src="images/icon_03.png" alt=""></span> <br>Help</a></li>
+          <li><a href="<?= SITE_URL ?>page.php?page=Why use Jumblr?"><span><img src="images/icon_03.png" alt=""></span> <br>Help</a></li>
           <?php if(isset($_SESSION["user_id"])) { ?>
           <li><a href="<?= SITE_URL ?>customer-account.php"><span><img src="images/icon_04.png" alt=""></span> <br>My Account</a></li>
           <?php } else { ?>

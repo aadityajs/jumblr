@@ -90,6 +90,7 @@ define('TABLE_CREDITS', "jumblr_credits");
 define('TABLE_RECOM_TRACKER', " jumblr_recom_tracker");
 define('TABLE_CREDITS_VAULT', " jumblr_credits_vault");
 define('TABLE_MULTI_DEALS', "  jumblr_multi_deals");
+define('TABLE_DEAL_POPULARITY', "jumblr_deal_popularity");
 
 
 

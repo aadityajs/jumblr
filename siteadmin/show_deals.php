@@ -162,7 +162,7 @@ if (isset($_REQUEST['status']) && !empty($_REQUEST['status'])) {
             <td><?php echo stripslashes($row_deals['title']);?></td>
             <td><?php echo ($row_deals['city'] == -1)? (($row_deals['in_sidebar'] == 'y')? "National deal (SD)" : "National deal (MD)" ) : (($row_deals['in_sidebar'] == 'y')? $showdealcity['city_name']." (SD)" : $showdealcity['city_name']." (MD)" ); ?></td>
             <td><?php if($row_deals['status']=='1'){echo "active";}elseif($row_deals['status']=='2'){echo "Upcoming";}else{echo "Closed";}?></td>
-            <td>&pound;<?php echo ($row_deals['is_multi'] == 'n' ? $row_deals['discounted_price'] : $is_multi['multi_deal_item_price'].' (Multi Deal)'); ?></td>
+            <td><?php echo getSettings(currency_symbol);?><?php echo ($row_deals['is_multi'] == 'n' ? $row_deals['discounted_price'] : $is_multi['multi_deal_item_price'].' (Multi Deal)'); ?></td>
             <td><?php echo date("d/m/Y G:i", strtotime($row_deals['deal_start_time']));?></td>
             <td><?php echo date("d/m/Y G:i", strtotime($row_deals['deal_end_time']));?></td>
 

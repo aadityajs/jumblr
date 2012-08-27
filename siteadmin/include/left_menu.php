@@ -22,7 +22,7 @@
 			<li><a href="show_deals.php">View Deal</a></li>
 
 			<!--<li><a href="add_deal_item.php">Add Deal Item</a></li>-->
-			<li><a href="show_bestdeals.php">National & More Deal</a></li>
+			<!--<li><a href="show_bestdeals.php">National & More Deal</a></li>-->
 			<!--<li><a href="show_previous_deals.php">Previous Deal</a></li> -->
 
 

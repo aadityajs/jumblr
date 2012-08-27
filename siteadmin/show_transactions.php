@@ -113,7 +113,7 @@ if (isset($_REQUEST['status']) && !empty($_REQUEST['status'])) {
             <th>User</th>
             <th>Qty</th>
             <th>Deal</th>
-            <th>Amount (&pound;)</th>
+            <th>Amount (<?php echo getSettings(currency_symbol)?>)</th>
             <th>Date</th>
             <th>Status</th><!--
             <th>Edit</th>
@@ -160,7 +160,7 @@ if (isset($_REQUEST['status']) && !empty($_REQUEST['status'])) {
            <!-- <td><a href="add_deal.php?mode=edit&id=<?php echo $row_deals[deal_id];?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
             <td><a href="add_deal.php?mode=delete&id=<?php echo $row_deals[deal_id];?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" onClick='return confirm("Are you sure to delete this deal?")' /></a></td>
 			-->
-			<td><a href="show_transactions.php?id=<?php echo $row_deals[tran_id];?>">View Items</a></td>
+			<td><a href="show_transactions.php?id=<?php echo $row_deals[deal_id];?>">View Items</a></td>
         </tr>
 
     	 <?php
@@ -194,7 +194,7 @@ if (isset($_REQUEST['status']) && !empty($_REQUEST['status'])) {
 	$deal_id = $_GET['id'];
 	$sql_trn_deal = "SELECT * FROM ".TABLE_DEALS." WHERE deal_id = $deal_id";
 	$trn_deal_details = mysql_fetch_array(mysql_query($sql_trn_deal));
-
+	//print_r($trn_deal_details);
 	$sql_trn_deal_image = "SELECT * FROM ".TABLE_DEAL_IMAGES." WHERE deal_id = ".$deal_id;
 	$trn_deal_image = mysql_fetch_array(mysql_query($sql_trn_deal_image));
 	?>
@@ -296,16 +296,16 @@ div#sold_deal p {
 <div class="clear"></div>
 <div class="left_green2">
 <p style="font: bold 12px/12px Arial,Helvetica,sans-serif;">Value</p>
-<span style="text-align:center;"><?php echo '&pound;'.$trn_deal_details['full_price']; ?></span>
+<span style="text-align:center;"><?php echo getSettings(currency_symbol).$trn_deal_details['full_price']; ?></span>
 </div>
 <div class="left_green2">
-<div id="sold_deal"><p>Price<br/>&pound;<?php echo $trn_deal_details['discounted_price']; ?></p></div>
+<div id="sold_deal"><p>Price<br/><?php echo getSettings(currency_symbol).$trn_deal_details['discounted_price']; ?></p></div>
 <p style="font: bold 12px/12px Arial,Helvetica,sans-serif;">Discount</p>
 <span style="text-align:center;"><?php echo intval($trn_deal_details['discounted_price']*100/$trn_deal_details['full_price']); ?>%</span>
 </div>
 <div class="left_green2">
 <p style="font: bold 12px/12px Arial,Helvetica,sans-serif;">You Save</p>
-<span style="text-align:center;"><?php echo '&pound;'. ($trn_deal_details['full_price'] - $trn_deal_details['discounted_price']); ?></span>
+<span style="text-align:center;"><?php echo getSettings(currency_symbol). ($trn_deal_details['full_price'] - $trn_deal_details['discounted_price']); ?></span>
 </div>
 </div>
 <div class="clear"></div>

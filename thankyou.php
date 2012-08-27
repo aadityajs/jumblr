@@ -588,6 +588,7 @@ if($_POST['payment_system'] == 'cc')
 		$state =urlencode( $_POST['state']);
 		$zip = urlencode($_POST['zip']);
 		$amount = urlencode($_POST['payment_amount']);
+		
 		//$currencyCode=urlencode($_POST['currency']);
 		$currencyCode="GBP";
 		$paymentType=urlencode($_POST['paymentType']);
@@ -632,6 +633,7 @@ if($_POST['payment_system'] == 'cc')
 				$qty = $_POST['item_number'];
 				$payment_gross = $resArray['AMT'];
 				$withdraw_status = 'received';
+				$dt = urlencode($_POST['repeat_date_val']);
 
 				$sql_trnsaction = "INSERT INTO ".TABLE_TRANSACTION." (tran_id,deal_id,transaction_status,amount,qty,transaction_date,user_id,withdraw_status,transaction_id,coupon_code)
 										VALUES(null,'$deal_id','$payment_status','$payment_gross','$qty','$trn_date','$user_id','$withdraw_status','$txn_id','$coupon_code')";
@@ -641,6 +643,10 @@ if($_POST['payment_system'] == 'cc')
 								VALUES (NULL, '$trn_date', '$user_id', '$deal_id', 'In process', '', '$payment_gross', '$qty', '', '', '', '', '$coupon_code');";
 				mysql_query($sql_orders);
 				$payment_flag = 1;
+				
+				$sql_popularity = "INSERT INTO ".TABLE_DEAL_POPULARITY."(pop_id,deal_id,deal_date,fb_id,tran_date)
+								VALUES(NULL,'$deal_id','$dt','$user_id','$trn_date');";
+				mysql_query($sql_popularity);
 
 			}
 
@@ -753,6 +759,8 @@ elseif($_POST['payment_system'] == 'maestro')
 				$qty = $_POST['item_number'];
 				$payment_gross = $resArray['AMT'];
 				$withdraw_status = 'received';
+				$dt = urlencode($_POST['repeat_date_val']);
+
 
 				$sql_trnsaction = "INSERT INTO ".TABLE_TRANSACTION." (tran_id,deal_id,transaction_status,amount,qty,transaction_date,user_id,withdraw_status,transaction_id,coupon_code)
 										VALUES(null,'$deal_id','$payment_status','$payment_gross','$qty','$trn_date','$user_id','$withdraw_status','$txn_id','$coupon_code')";
@@ -762,6 +770,10 @@ elseif($_POST['payment_system'] == 'maestro')
 								VALUES (NULL, '$trn_date', '$user_id', '$deal_id', 'In process', '', '$payment_gross', '$qty', '', '', '', '', '$coupon_code');";
 				mysql_query($sql_orders);
 				$payment_flag = 1;
+				
+				$sql_popularity = "INSERT INTO ".TABLE_DEAL_POPULARITY."(pop_id,deal_id,deal_date,fb_id,tran_date)
+								VALUES(NULL,'$deal_id','$dt','$user_id','$trn_date');";
+				mysql_query($sql_popularity);
 
 			}
 	}
@@ -820,6 +832,9 @@ if (!empty($_POST['custom'])) {
 		$qty = $_POST['item_number'];
 		$payment_gross = $_POST['payment_gross'];
 		$withdraw_status = 'received';
+		
+		$dt = urlencode($_POST['repeat_date_val']);
+
 
 		$sql_trnsaction = "INSERT INTO ".TABLE_TRANSACTION." (tran_id,deal_id,transaction_status,amount,qty,transaction_date,user_id,withdraw_status,transaction_id,coupon_code)
 								VALUES(null,'$deal_id','$payment_status','$payment_gross','$qty','$trn_date','$user_id','$withdraw_status','$txn_id','$coupon_code')";
@@ -829,6 +844,10 @@ if (!empty($_POST['custom'])) {
 								VALUES (NULL, '$trn_date', '$user_id', '$deal_id', 'In process', '', '$payment_gross', '$qty', '', '', '', '', '$coupon_code');";
 		mysql_query($sql_orders);
 		$payment_flag = 1;
+		
+		$sql_popularity = "INSERT INTO ".TABLE_DEAL_POPULARITY."(pop_id,deal_id,deal_date,fb_id,tran_date)
+								VALUES(NULL,'$deal_id','$dt','$user_id','$trn_date');";
+				mysql_query($sql_popularity);
 
 	}
 
@@ -1169,17 +1188,33 @@ $email_Template_2 = '<table width="760" border="0" align="center" cellpadding="0
 
 		// Chk buyer if exists in recommendation vault then add 20% in discount
 			$today = date("Y-m-d");
+			$chk_mail = "SELECT vau.user_id,rec.r_email FROM ".TABLE_CREDITS_VAULT." vau LEFT JOIN ".TABLE_RECOM_TRACKER." rec on vau.user_id=rec.r_email where rec.r_user = '$user[email]'";
+			$vault_query = mysql_query($chk_mail);
+			$vault_row = mysql_num_rows($vault_query);
+			
+			if($vault_row<=4)
+			{
+				$discount=$credit_fee*$vault_row;
+			}
+			else
+			{
+				$discount=0.2;
+				while ($vault_data = mysql_fetch_array($vault_query)) {
+				$del = "DELETE FROM ".TABLE_CREDITS_VAULT." WHERE user_id  = ".$vault_data['user_id'];
+				 mysql_query($del);
+				}
+			}
+			
 			$chk_recom_vault_sql = "SELECT * FROM ".TABLE_CREDITS_VAULT." WHERE user_id  = '$user[email]'";
 			$recom_vault_query = mysql_query($chk_recom_vault_sql);
 			$chk_recom_vault_row = mysql_num_rows($recom_vault_query);
 			if ($chk_recom_vault_row > 0) {
 				while ($recom_vault_data = mysql_fetch_array($recom_vault_query)) {
 					$recom_vault_data['r_email'];
-					$recom_vault_sql = "INSERT INTO ".TABLE_CREDITS." VALUES ('',$_SESSION[user_id],'$credit_fee','$today')";
+					$recom_vault_sql = "INSERT INTO ".TABLE_CREDITS." VALUES ('',$user_id,'$discount','$today')";
 					mysql_query($recom_vault_sql);
 					
-					$del = "DELETE FROM ".TABLE_CREDITS_VAULT." WHERE user_id  = '$user[email]'";
-					mysql_query($del);
+					
 				}	//	end while
 			}	// end if
 }

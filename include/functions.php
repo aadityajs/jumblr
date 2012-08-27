@@ -64,6 +64,12 @@ function get_deal_details($deal_id){
 $deal=mysql_fetch_array(mysql_query("SELECT * FROM ".TABLE_DEALS." where deal_id='$deal_id'"));
 return $deal;
 }
+
+function get_transaction_details($deal_id){
+$trans=mysql_fetch_array(mysql_query("SELECT * FROM ".TABLE_TRANSACTION." where user_id='$_SESSION[fb_id]'"));
+return $trans;
+}
+
 function get_merchant_details($deal_id){
 $sql="SELECT * FROM ".TABLE_DEALS_MERCHANT." JOIN ".TABLE_DEALS." on(".TABLE_DEALS_MERCHANT.".deal_id=".TABLE_DEALS.".deal_id) where 1=1 and  ".TABLE_DEALS_MERCHANT.".deal_id='".$deal_id."'";
 $m_deal=mysql_fetch_array(mysql_query($sql));
@@ -650,6 +656,11 @@ function isHandheld() {
 
 }
 
+function get_past_jumblr($user_id) {
+	$jumble_sql = "SELECT count(distinct(deal_id)) FROM ".TABLE_TRANSACTION." where user_id = ".$_SESSION['fb_id'];
+	$past_jumbls = end(mysql_fetch_array(mysql_query($jumble_sql)));
+	return $past_jumbls;
+}
 
 
 

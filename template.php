@@ -2,6 +2,8 @@
 <?php
 error_reporting(E_ERROR && E_STRICT);
 ?>
+
+
 <?php //include 'tipsy.php';?>
 
 
@@ -27,6 +29,9 @@ $page_res = mysql_fetch_array(mysql_query($sql_page));
 <div class="today_deal">
 
 <h1>You are not Authorised to come here.</h1>
+
+
+
 
 
 <div class="clear"><img src="images/spacer.gif" alt="" width="1" height="40" /></div>

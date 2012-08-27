@@ -34,7 +34,7 @@ $record = $db->query_first($sql);
   	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 
 
-		<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+		<!--  --><script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
 
@@ -49,10 +49,13 @@ $record = $db->query_first($sql);
 
 <link rel="stylesheet" href="../css/lat-long-drag_1.css" type="text/css" media="screen" />
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="../js/lat-long-drag_1.js"></script>	
-<script type="text/javascript" src="../js/lat-long-drag_all.js"></script>	   
+<script type="text/javascript" src="../js/lat-long-drag_1.js"></script>
+<script type="text/javascript" src="../js/lat-long-drag_all.js"></script>
 
-
+<script type="text/javascript" src="../js/jquery.ui.datepicker.js"></script>
+	<!-- loads mdp -->
+	<script type="text/javascript" src="../js/jquery-ui.multidatespicker.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/pepper-ginder-custom.css">
 <script type="text/javascript">
 
 

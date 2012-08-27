@@ -58,6 +58,7 @@ foreach(1 as $i);
 	<link href="css/getdeals_style.css" rel="stylesheet" type="text/css" />
 	<link href="css/jumblr_style.css" rel="stylesheet" type="text/css" />
 
+
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/base/jquery-ui.css" id="theme">
 				<link rel="stylesheet" href="<?php echo SITE_URL?>siteadmin/js/uploader/jquery.fileupload-ui.css">
 
@@ -119,6 +120,22 @@ foreach(1 as $i);
 	<script type="text/javascript" src="js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>-->
 	<script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 	<link rel="stylesheet" type="text/css" href="js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+
+
+	<!-----------------slider in index page------------------------------------------------->
+	<link rel="stylesheet" type="text/css" href="css/contentslider.css" />
+
+	<script type="text/javascript" src="js/contentslider.js">
+
+	<!-----------------end slider------------------------------------------------->
+
+/***********************************************
+* Featured Content Slider- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for this script and 100s more
+***********************************************/
+
+</script>
 
 
 <!--
@@ -364,7 +381,7 @@ $j = jQuery.noConflict(true);
 		FB.init
 		(
 			{
-				appId: '192309027517422',
+				appId: '256669324448487',
 				status: true,
 				cookie: true, xfbml: true
 			}
@@ -374,6 +391,12 @@ $j = jQuery.noConflict(true);
 		{
 			window.location.reload();
 		});
+
+		function FacebookInviteFriends()
+		{
+		FB.ui({ method: 'apprequests',
+		   message: 'Invite Friends to Jumblr!'});
+		}
 
 
 </script>
@@ -474,7 +497,7 @@ function get_facebook_cookie_new($app_id, $app_secret)
           <li><a href="javascript: void(0);" id="openDateSearch"><span><img src="images/icon_02.png" alt=""></span> <br>Search</a>
 		  </li>
 
-          <li><a href="#"><span><img src="images/icon_03.png" alt=""></span> <br>Help</a></li>
+          <li><a href="<?= SITE_URL ?>page.php?page=Why use Jumblr?"><span><img src="images/icon_03.png" alt=""></span> <br>Help</a></li>
           <?php if(isset($_SESSION["user_id"])) { ?>
           <li><a href="<?= SITE_URL ?>customer-account.php"><span><img src="images/icon_04.png" alt=""></span> <br>My Account</a></li>
           <?php } else { ?>
@@ -690,6 +713,7 @@ You have been subscribed to receive daily deals alert.</h6>
 	}
 ?>
  <div class="clear"></div>
+
 <div>
 	<a href="<?php echo SITE_URL; ?>list.php?d=user-generated"  class="generated <?php echo ($_GET[d] == 'user-generated' ? 'here' : ''); ?>">User Generated</a>
 	<a href="<?php echo SITE_URL; ?>list.php?d=business-generated"  class="generated <?php echo ($_GET[d] == 'business-generated' ? 'here' : ''); ?>">Business Generated</a>

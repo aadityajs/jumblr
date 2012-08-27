@@ -87,11 +87,12 @@ define('TABLE_DEAL_GROUP', "jumblr_deal_group");
 define('TABLE_FB_USER_VIOLATION', "jumblr_fb_user_violation");
 define('TABLE_CONTACTS', "jumblr_contact");
 define('TABLE_CREDITS', "jumblr_credits");
-define('TABLE_RECOM_TRACKER', " jumblr_recom_tracker");
-define('TABLE_CREDITS_VAULT', " jumblr_credits_vault");
-define('TABLE_MULTI_DEALS', "  jumblr_multi_deals");
+define('TABLE_RECOM_TRACKER', "jumblr_recom_tracker");
+define('TABLE_CREDITS_VAULT', "jumblr_credits_vault");
+define('TABLE_MULTI_DEALS', "jumblr_multi_deals");
+define('TABLE_DEAL_POPULARITY', "jumblr_deal_popularity");
 
 
-
+ 
 require("include/functions.php");
 ?>

@@ -184,16 +184,79 @@ $_SESSION['current_deal_id'] = $today_res['deal_id'];
                         <?php } 	// end deal completed ?>
                     </div>
                   <div class="rating">Group rating: <span>72</span></div>
-                 <div class="timer"><img src="images/clock.png" alt=""><?php echo date("<b>D</b> M j | <b>g:i A</b>", strtotime($today_res['deal_end_time'])); ?></div>
+                 <!--<div class="timer"><img src="images/clock.png" alt=""><?php echo date("<b>D</b> M j | <b>g:i A</b>", strtotime($today_res['deal_end_time'])); ?></div>-->
+				<div class="timer1"><!--<img src="images/clock.png" alt="">--><?php //echo date("<b>D</b> M j | <b>g:i A</b>", strtotime($today_res['deal_end_time'])); ?>
 
+
+				<div id="slider2" class="sliderwrapper" >
+
+
+
+					<?php
+					if (!empty($today_res['nowdeal_repeatday'])){
+					$rep_day=explode(",",$today_res['nowdeal_repeatday']);
+					$cnt=count($rep_day);
+
+
+
+					for($i=0;$i<$cnt;$i++)
+					  { ?>
+					  <div class="contentdiv" style="text-align:center;">
+
+							 <img src="images/clock.png" alt=""><?php echo date("<b>D</b> M j | <b>g:i A</b>", strtotime($rep_day[$i])); ?>
+							  <input type="hidden" name="repeat_day" id="repeat_day<?php echo $i?>" value="<?php echo $rep_day[$i];?>" />
+
+                        </div>
+
+
+<?php					  }
+					  }
+					  else
+					  { ?>
+					  <img src="images/clock.png" alt=""><?php echo date("<b>D</b> M j | <b>g:i A</b>", strtotime($today_res['deal_end_time'])); ?>
+
+				<?php	  }
+
+					?>
+										<?php
+					if (!empty($today_res['nowdeal_repeatday'])){ ?>
+                 <style>
+				 	.contentdiv{
+						 height:42px;
+						 line-height:42px;
+						 font-size:16px;
+					}
+					.contentdiv{ b{
+						height:42px;
+                        line-height:42px;
+					}
+					.contentdiv img{
+						line-height: 42px;
+						vertical-align: middle;
+					}
+				 </style>
+				<div id="paginate-slider2" class="pagination" style="text-align:center; width: 255px; height:26px; z-index:1000;">
+ 				 <a href="#" class="next" style="margin:-3px 15px 0 2px; float:right; height:16px; line-height:16px; background:#797979; color:#fff;"> &raquo; </a>
+                 <a href="#" class="prev" style="margin:-3px 0 0 0; float:right; height:16px; line-height:16px; background:#797979; color:#fff;"> &laquo;</a>
+
+				</div>
+				<?php
+				}
+				?>
+
+
+					</div>
+
+				 </div>
                  <div class="timer" style="padding:7px 0; height:54px;">
                  	<?php if ($_GET['action'] == "sold") { ?>
 				   	<div class="tab_button1"></div>
 				   <?php } else { ?>
 					   	<?php if ($today_res['is_multi'] == 'n') { ?>
-					   	<a href="<?php echo SITE_URL; ?>customer-payment.php?item=<?php echo $today_res['deal_id']; ?>">
-					   		<img src="images/buy_nowbtn.png" alt="">
-					   	</a>
+					   	
+						<?php if($total_buy[0] != 0) { ?><a href="<?php echo SITE_URL; ?>customer-payment.php?item=<?php echo $today_res['deal_id']; ?>"><img src="images/buy_nowbtn.png" alt="" ></a><?php } else {?><span style=" width: 100px;margin: 0 8px; float: left; padding-top:7px; " ><a href="<?php echo SITE_URL; ?>customer-payment.php?item=<?php echo $today_res['deal_id']; ?>" ><img src="images/buy_btn.png" alt="" width="113" height="38" ></a></span><span style="margin: 0 4px; float: right; padding-top:7px; "><a class="tips" original-title="In a situation where not one seat has been purchased at an event then the buyout price can be an option and it is set by the person creating the event." href="<?php echo SITE_URL; ?>customer-payment.php?item=<?php echo $today_res['deal_id']; ?>&buyout=all"><img src="images/buy_out.png" alt="" width="113" height="38"></a></span><?php } ?>
+					   		
+					   	
 					   	<?php } else { ?>
 					   	<a id="various4" href="#multi_deal_popup">
 					   		<img src="images/buy_nowbtn.png" alt="">

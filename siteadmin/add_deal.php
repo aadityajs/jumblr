@@ -1,5 +1,7 @@
+
 <?php
 include("include/header.php");
+
 
 
 $txt = '
@@ -430,7 +432,8 @@ if(isset($_REQUEST['submit']))
 	//2012-02-01 12:59
 	$data['deal_start_time']=date("Y-m-d G:i", strtotime($_POST['deal_start_time']));
 	$data['deal_end_time']=date("Y-m-d G:i", strtotime($_POST['deal_end_time']));
-
+	$data['deal_repeat_time']=$_POST['deal_repeat_time'];
+	
 	$data['coupon_valid_from']=date("d/m/Y", strtotime($_POST['coupon_valid_from']));
 	$data['coupon_valid_until']=date("d/m/Y", strtotime($_POST['coupon_valid_until']));
 
@@ -465,7 +468,7 @@ if(isset($_REQUEST['submit']))
 	$data['item_control_type']=$_POST['item_control_type'];
 	$data['referral_no']=$_POST['referral_no'];
 	$data['referral_value']=$_POST['referral_value'];
-	
+
 	$data['place_lat'] = $_POST['lat'];
 	$data['place_lng'] = $_POST['lng'];
 
@@ -950,7 +953,7 @@ if(isset($_REQUEST['submit']))
 		//exit;
 
 		if ($data['is_multi'] == 'y') {
-		
+
 			for($i=0;$i<3;$i++)
 			{
 			$str = '';
@@ -960,7 +963,7 @@ if(isset($_REQUEST['submit']))
 					}
 				}
 
-				 $str = substr($str,0,-1); 
+				 $str = substr($str,0,-1);
 				$multiDealSql = "INSERT INTO ".TABLE_MULTI_DEALS." (
 				`multi_deal_id` ,
 				`deal_id` ,
@@ -1137,7 +1140,7 @@ $_SESSION["session_temp"] =uniqid();
                         <dd>
                             <select name="city" class="dropdown" id="city" size="1">
 								<option value="">-- Select --</option>
-								<option value="-1" <?php if($row_deals[best_deal]=='y') { echo "selected"; }?>>National Deal</option>
+								<!--<option value="-1" <?php //if($row_deals[best_deal]=='y') { echo "selected"; }?>>National Deal</option>-->
                                 <?php
 
 									echo $sql_city = mysql_query("select * FROM " .TABLE_CITIES." where status = 1 order by city_name asc");
@@ -1153,10 +1156,11 @@ $_SESSION["session_temp"] =uniqid();
                             </select>
                         </dd>
                     </dl>
-	<div style="clear: both;"></div>
+	<div style="clear: both;"></div>	
+	<center><input type="button" id="step1next" value="Next  >>"></center>
+
 	</div>
 	<br>
-	<center><input type="button" id="step1next" value="Next  >>"></center>
 
 	<div id="step2" style="border: 0px solid #4CC7ED; display: none;">
 
@@ -1188,14 +1192,23 @@ $_SESSION["session_temp"] =uniqid();
 						</select>
 						</dd>
                     </dl>
-
-                     <dl>
+					<?php
+					if($row_deals['is_multi']=='y'){
+					$multi_deal_sql="select * from ".TABLE_MULTI_DEALS." WHERE deal_id=".$row_deals['deal_id'];
+					$res=mysql_query($multi_deal_sql);
+					/*while($row = mysql_fetch_array($res))
+					{
+						echo $row['multi_deal_item_name'];echo "<br>";
+					}*/
+					}
+					?>
+                     <!--<dl>
                         <dt><label for="is_multi">Multi Deal:</label></dt>
                         <dd>
                         <label><input type="radio" name="is_multi" value="y" id="isMultiYes">Yes</label>
                         <label><input type="radio" name="is_multi" value="n" id="isMultiNo" checked="checked">No</label>
 						</dd>
-                    </dl>
+                    </dl>-->
 					<div style="clear: both;"></div>
                     <div id="isMultiItemDiv" style="width: auto; height: 400px;">
 	                    <dl>
@@ -1302,6 +1315,22 @@ $_SESSION["session_temp"] =uniqid();
 
                     </dl>
 
+					<dl>
+                        <dt><label for="password">Deal Repeat Time:</label></dt>
+                        <dd><input type="text" name="deal_repeat_time" id="my_date_field_repeat" size="54" value="" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" /><span id="cal2"></span>
+
+								<script type="text/javascript">
+									var rp = jQuery.noConflict();
+									//rp("#my_date_field_repeat").click(function(){
+										rp('#my_date_field_repeat').multiDatesPicker();
+									//	});
+
+								</script>
+
+								</span></dd>
+
+                    </dl>
+
                     <dl>
                         <dt><label for="email">Coupon valid from:</label></dt>
                         <dd><input type="text" name="coupon_valid_from" id="my_date_field3" size="54" value="<?php if(!empty($row_deals[coupon_valid_from])){echo date("d/m/Y",strtotime($row_deals[coupon_valid_from]));}?>" style="border: 1px solid #CCCCCC; height: 25px; background:#ececec;" /><span id="cal1"><!-- <img src="zpcal/themes/icons/calendar1.gif" width="27" height="21" style="cursor:pointer"/> --></span>
@@ -1356,7 +1385,7 @@ $_SESSION["session_temp"] =uniqid();
                     </dl>
 								<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"
 				  type="text/javascript"></script>
-			
+
 				<style type="text/css">
 				  body {
 					font-family: sans-serif;
@@ -1368,7 +1397,7 @@ $_SESSION["session_temp"] =uniqid();
 					margin-top: 0.6em;
 				  }
 				</style>
-			
+
 				<script type="text/javascript">
 				  function initialize() {
 					var mapOptions = {
@@ -1378,17 +1407,17 @@ $_SESSION["session_temp"] =uniqid();
 					};
 					var map = new google.maps.Map(document.getElementById('map_canvas'),
 					  mapOptions);
-			
+
 					var input = document.getElementById('searchTextField');
 					var autocomplete = new google.maps.places.Autocomplete(input);
-			
+
 					autocomplete.bindTo('bounds', map);
-			
+
 					var infowindow = new google.maps.InfoWindow();
 					var marker = new google.maps.Marker({
 					  map: map
 					});
-			
+
 					google.maps.event.addListener(autocomplete, 'place_changed', function() {
 					  infowindow.close();
 					  var place = autocomplete.getPlace();
@@ -1398,7 +1427,7 @@ $_SESSION["session_temp"] =uniqid();
 						map.setCenter(place.geometry.location);
 						map.setZoom(17);  // Why 17? Because it looks good.
 					  }
-			
+
 					  var image = new google.maps.MarkerImage(
 						  place.icon,
 						  new google.maps.Size(71, 71),
@@ -1419,11 +1448,11 @@ $_SESSION["session_temp"] =uniqid();
 									place.address_components[2].short_name || '')
 								  ].join(' ');
 					  }
-			
+
 					  infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
 					  infowindow.open(map, marker);
 					});
-			
+
 					// Sets a listener on a radio button to change the filter type on Places
 					// Autocomplete.
 					function setupClickListener(id, types) {
@@ -1432,7 +1461,7 @@ $_SESSION["session_temp"] =uniqid();
 						autocomplete.setTypes(types);
 					  });
 					}
-			
+
 					setupClickListener('changetype-all', []);
 					setupClickListener('changetype-establishment', ['establishment']);
 					setupClickListener('changetype-geocode', ['geocode']);
@@ -1446,10 +1475,10 @@ $_SESSION["session_temp"] =uniqid();
 						  <input id="searchTextField" name="searchTextField" type="text" size="50">
 						 <!-- <input type="radio" name="type" id="changetype-all" checked="checked">
 						  <label for="changetype-all">All</label>
-					
+
 						  <input type="radio" name="type" id="changetype-establishment">
 						  <label for="changetype-establishment">Establishments</label>
-					
+
 						  <input type="radio" name="type" id="changetype-geocode">
 						  <label for="changetype-geocode">Geocodes</lable>-->
 						</div>

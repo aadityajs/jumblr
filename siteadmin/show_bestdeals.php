@@ -181,7 +181,7 @@ if(isset($_REQUEST['in_sidebar']) && isset($_REQUEST['deal_id']) &&  $_REQUEST['
         	<!--<td><input type="checkbox" name="" /></td>-->
             <td><?php echo stripslashes($row_deals['title']);?></td>
             <td><?php echo ($row_deals[city] == '-1' ? 'National Deal' : stripslashes($show_city['city_name']));?></td>
-            <td>&pound;<?php echo stripslashes($row_deals['full_price']);?></td>
+            <td><?php echo getSettings(currency_symbol).stripslashes($row_deals['full_price']);?></td>
             <td><?php echo $merchant['company_name'];?></td>
 			<td><?php echo $category['cat_name'];?></td>
             <?php if($row_deals['best_deal']=='y'){ ?>

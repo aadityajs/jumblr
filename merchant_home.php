@@ -128,7 +128,7 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=='post' and $_POST["submit"]=='Submit'
 	//$data['discounted_price']=$_POST['discounted_price'];
 	$data['discounted_price']=$_POST['customerdisc'];
 	//$data['wakadeal_comission']=$_POST['wakadealfee'];
-
+	$data['buyout_price'] = $_POST['buyout'];
 
 	$data['custpercent']=$_POST['custpercent'];
 	$data['merchant_take']=$_POST['merchant_take'];
@@ -910,14 +910,14 @@ $_SESSION["session_temp"] =uniqid();
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:0px;">
 				<tr>
 				<td  style="text-align:right; vertical-align:top; width:10px; border:0px; border-bottom:1px solid #fff;"><input type="radio" value="title1" id="title11"   name="title" onClick="this.value=document.getElementById('title1').innerHTML;document.getElementById('title22').checked=false" <?php if(!empty($row_deal['title'])){ echo "checked";}?>  /></td>
-				<td style="border:0px; border-bottom:1px solid #fff;"><span id='title1' ><?php echo $currency; ?>10 for <?php echo $currency; ?>20 at Kates Cars<br />
+				<td style="border:0px; border-bottom:1px solid #fff;"><span id='title1' ><?php echo getSettings(currency_symbol); ?>10 for <?php echo getSettings(currency_symbol); ?>20 at Kates Cars<br />
 				50% off desc test cx sdfsd</span><br />
 				<br />
 				</td>
 				</tr>
 				<tr>
 				<td style="text-align:right; vertical-align:top; width:10px; border:0px;"><input type="radio" value="title2" id="title22"  name="title" onClick="this.value=document.getElementById('title2').innerHTML;document.getElementById('title11').checked=false" <?php if(!empty($row_deal['title2'])){ echo "checked";}?>/></td>
-				<td style="border:0px;"><span id='title2' ><?php echo $currency; ?>10 for <?php echo $currency; ?>20 at Kates Cars<br />
+				<td style="border:0px;"><span id='title2' ><?php echo getSettings(currency_symbol); ?>10 for <?php echo getSettings(currency_symbol); ?>20 at Kates Cars<br />
 				50% off desc test cx sdfsd</span></td>
 				</tr>
 				</table></td>

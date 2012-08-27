@@ -100,6 +100,7 @@
         //Retriving movies those are user like using graph api
         try{
             $likes = $facebook->api("/$user/likes");
+            $frnds = $facebook->api("/$user/friends");
         }
         catch(Exception $o){
             d($o);
@@ -111,10 +112,10 @@
 	        echo '</pre>';
 	    }
 
-        //print_r($likes);
+        //print_r($frnds);
 
    	//echo "===========";
-	//echo '<pre>'.print_r($userInfo,true).'</pre>';
+	//echo '<pre>'.print_r($frnds,true).'</pre>';
 
         	// $userInfo['name'];
         	 $userInfo['id'];
@@ -167,6 +168,17 @@
 
       		 /*
       		  * SELECT page_id,name FROM page WHERE page_id IN (SELECT page_id FROM page_fan WHERE uid=me())
+      		  *
+      		  * Search with letter:
+				SELECT name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1=me() ) AND strpos(lower(name),"a")==0
+
+				Search Birthday:
+				SELECT uid, name,pic_square, birthday_date FROM user WHERE (substr(birthday_date, 0, 2) = "07") AND uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) order by name
+
+				Get user fields by uid:
+				SELECT uid,name,work_history,wall_count,username,movies FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1= me()) AND uid = '570097966' ORDER BY name ASC
+
+      		  *
       		  */
 
       		 // Run fql query

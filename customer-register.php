@@ -24,7 +24,7 @@ include_once "fbmain.php";
       		//echo $fbUser['birthday'];
 
 
-				echo $sql_chk_fb_user = "SELECT * FROM ".TABLE_FB_USER." WHERE email = '".$fbUser['email']."'";
+				$sql_chk_fb_user = "SELECT * FROM ".TABLE_FB_USER." WHERE email = '".$fbUser['email']."'";
 				$chk_fb_user_res = mysql_fetch_array(mysql_query($sql_chk_fb_user));
 				$count_fb_user = mysql_num_rows(mysql_query($sql_chk_fb_user));
 

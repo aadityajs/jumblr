@@ -88,7 +88,7 @@ if(isset($_REQUEST['u_id'])) {
 				<div class="clear"></div>
 
 				<div class="todays_deal_left" style="margin: 10px 0;">
-                <span style="font: bold 14px/18px Arial, Helvetica, sans-serif; width:160px; color:#333333; float: left; margin: 0 auto;">PAST JUMBLRS</span><span style="font: bold 20px/20px Arial, Helvetica, sans-serif; width:160px; color:#0b5d9c; float: right; margin: 0 auto;">26</span>
+                <span style="font: bold 14px/18px Arial, Helvetica, sans-serif; width:160px; color:#333333; float: left; margin: 0 auto;">PAST JUMBLRS</span><span style="font: bold 20px/20px Arial, Helvetica, sans-serif; width:160px; color:#0b5d9c; float: right; margin: 0 auto;"><?php echo get_past_jumblr($_SESSION['fb_id']); ?></span>
                 </div>
 				<div class="clear"></div>
 								<div class="todays_deal_left">

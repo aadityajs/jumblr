@@ -5,7 +5,7 @@ if (!isset($_SESSION['fb_id'])) {
 }
 session_start();
 ob_start();
-//print_r($_SESSION);
+//print_r($_GET);
 ?>
 <?php
 	if(!isset($_COOKIE["subscribe"]))
@@ -154,6 +154,7 @@ if ($_GET['gift'] == 'gifting') {
                   </tr>
                   <tr>
                     <th width="395"><strong>Your Deal</strong></th>
+					 <th width="95" style="border-right:0px;"><strong>Repeat date</strong></th>
                     <th width="95" style="border-right:0px;"><strong>Quantity</strong></th>
                     <th width="41" style="border-left:0px;"><strong></strong></th>
                     <th width="97" style="border-right:0px;"><strong>Price</strong></th>
@@ -195,19 +196,55 @@ if ($_GET['gift'] == 'gifting') {
                     	?>
 
                     </td>
-                    <td>
+					<td><?php
+					
+					if($prod_res['nowdeal_repeatday'])
+					{
+						$rep_day=explode(",",$prod_res['nowdeal_repeatday']);
+						$cnt=count($rep_day);
+					?>
+
+					<div class="styled_select" style="width:100px;">
+					<select style="background: transparent; width: 100px;" name="repeat_date" id="repeat_date" onchange="rep()">
+					<option value="">Select Date</option>
+						<?php for ($i = 0; $i < $cnt; $i++) { ?>
+						<option value="<?php echo $i; ?>"><?php echo ($rep_day[$i]); ?></option>
+						<?php } ?>
+						</select>
+						
+						</div>
+						<?php
+						}
+						
+						?>
+						
+                    </td>
+                    <td><?php
+					
+					if(!$_GET['buyout'])
+					{
+					?>
+
 					<div class="styled_select" style="width:60px;">
-                    	<select style="background: transparent; width: 80px;" name="amount" id="" onchange="ajaxReq(this.value);">
+					<select style="background: transparent; width: 80px;" name="amount" id="" onchange="ajaxReq(this.value);">
 						<?php for ($i = 1; $i <= 30; $i++) { ?>
 						<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 						<?php } ?>
 						</select>
+						
 						</div>
+						<?php
+						}
+						else
+						{ echo $prod_res['max_coupons'];
+						?>
+						
+						<?php } ?>
                     </td>
                      <td>x</td>
                     <td><?php echo getSettings(currency_symbol); ?><?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //number_format($prod_res['discounted_price'], 2); ?></td>
                     <td>=</td>
-                    <td><div id="total_price"><?php echo getSettings(currency_symbol); ?><?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //number_format($prod_res['discounted_price'], 2); ?></div></td>
+                    <td><div id="total_price"><?php echo getSettings(currency_symbol); ?><?php if(!$_GET['buyout']){echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2));}else{ echo $buyout_price=number_format($prod_res['discounted_price']*$prod_res['max_coupons']); } ?></div></td>
                   </tr>
 
                   <!--<tr>
@@ -405,12 +442,12 @@ if ($_GET['gift'] == 'gifting') {
 					$chk_recom_vault_sql = "SELECT * FROM ".TABLE_CREDITS_VAULT." WHERE user_id  = '$email'";
 					$recom_vault_query = mysql_query($chk_recom_vault_sql);
 					$chk_recom_vault_row = mysql_num_rows($recom_vault_query);
-					//if ($chk_recom_vault_row > 0) {
+					if ($chk_recom_vault_row > 0) {
 
 					?> <div id="redeem" style="width: 330px;" class="redemClass">
 					 	<p style="padding:0; margin:0 0 0 5px;"><a href="javascript: void(0);">Do you want to use your discount?</a></p>
 					 </div><?php
-					// }
+					 }
 					 ?>
 					 <div class="clear"></div>
 
@@ -434,7 +471,8 @@ if ($_GET['gift'] == 'gifting') {
                       <td style="font-family:Arial Rounded MT Bold; font-size: 14px; color: #333333; text-align:right; text-align:left; padding-left:10px;" width="65%">Total amount:</td>
                       <td style="font-family:Arial Rounded MT Bold; font-size: 20px; color: #000; text-align:left; padding-left:15px;" width="36%;">
 
-                      	<div id="big_total_price" style="text-align:right; padding-right: 15px;"><?php echo getSettings(currency_symbol); ?><?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //number_format($prod_res['discounted_price'], 2); ?><span></span>
+                      	<div id="big_total_price" style="text-align:right; padding-right: 15px;"><?php echo getSettings(currency_symbol); ?><?php 	if(!$_GET['buyout'])
+					{echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); } else { echo $buyout_price=number_format($prod_res['discounted_price']*$prod_res['max_coupons']); } ?><span></span>
                       	</div>
                     	<?php //echo $_SESSION['total_price']; ?></td>
                     </tr>
@@ -514,7 +552,7 @@ if($flag !=0)
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 	  	<td><form class="skinned-form-controls skinned-form-controls-mac"><table  style="padding-top:15px;" width="100%" border="0" cellspacing="0" cellpadding="0">
-	  		<input type="hidden" maxlength="7" name="payment_amount" id="payment_amount" value="<?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //$prod_res['discounted_price']; ?>">
+	  		<input type="hidden" maxlength="7" name="payment_amount" id="payment_amount" value="<?php echo (!$_GET['buyout'] ? ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)): number_format($prod_res['discounted_price']*$prod_res['max_coupons'], 2));?>">
 			<input type="hidden" name="paymentType" value="Sale" />
 					  <tr>
 					    <!--<td width="6%" align="left" valign="top" style="padding-left:12px;"><input type="radio" id="ccrad" name="payment_system"  value="cc" checked="checked" style="z-index: 1000;"/></td>-->
@@ -544,7 +582,7 @@ if($flag !=0)
 
    <!-- Not Login Payment table starts -->
 <!-- <form action="" name="frmccnotloginpayment" method="post" class="skinned-form-controls skinned-form-controls-mac" onsubmit="javascript: return ValidateCcForm();"> -->
-    <input type="hidden" maxlength="7" name="payment_amount" id="payment_amount" value="<?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //$prod_res['discounted_price']; ?>">
+    <input type="hidden" maxlength="7" name="payment_amount" id="payment_amount" value="<?php echo (!$_GET['buyout'] ? ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)):number_format($prod_res['max_coupons']*$prod_res['discounted_price'],2)); ?>">
 	<input type="hidden" name="paymentType" value="Sale" />
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
@@ -921,10 +959,11 @@ if($flag !=0)
 								$trn_date = date("Y-m-d H:i:s");
             				 ?>
 
-            				<input type="hidden" id="frm_paypal_total_qty" name="item_number" value="1">
-							<input type="hidden" id="frm_paypal_total_price" name="amount" value="<?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //$prod_res['discounted_price']; ?>">
+            				<input type="hidden" id="frm_paypal_total_qty" name="item_number" value="<?php echo !$_GET['buyout']?1:$prod_res['max_coupons'];?>">
+							<input type="hidden" id="frm_paypal_total_price" name="amount" value="<?php echo (!$_GET['buyout']?($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)):number_format($prod_res['max_coupons']*$prod_res['discounted_price'],2)); ?>">
 							<input type="hidden" name="custom" value="<?php echo $user_id.",".$deal_id.",".$trn_date; ?>">
 							<input type="hidden" name="item_name" value="<?php echo $prod_res['title']; ?>">
+							<input type="hidden" name="repeat_date_val" id="repeat_date_val"  value="">
 
                         <input type="submit" name="Submit" value="Buy Now" class="buyu_btn07" style="margin-left:16px;"/>   </td>
                       </tr>
@@ -1218,7 +1257,7 @@ $('input[name="payment_system"]').change(function() {
 
 
 <form class="skinned-form-controls skinned-form-controls-mac" action="thankyou.php" name="frmccloginpayment" method="post" onsubmit="javascript: return ValidateCcForm();">
-	<input type="hidden" maxlength="7" name="payment_amount" id="payment_amount" value="<?php echo($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); // $prod_res['discounted_price']; ?>">
+	<input type="hidden" maxlength="7" name="payment_amount" id="payment_amount" value="<?php echo (!$_GET['buyout']?($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)):number_format($prod_res['discounted_price']*$prod_res['max_coupons'],2)); ?>">
 	<input type="hidden" name="paymentType" value="Sale" />
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
@@ -1609,11 +1648,11 @@ $('input[name="payment_system"]').change(function() {
 								$trn_date = date("Y-m-d H:i:s");
             				 ?>
 
-            				<input type="hidden" id="frm_paypal_total_qty" name="item_number" value="1">
-							<input type="hidden" id="frm_paypal_total_price" name="amount" value="<?php echo ($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)); //$prod_res['discounted_price']; ?>">
+            				<input type="hidden" id="frm_paypal_total_qty" name="item_number" value="<?php echo (!$_GET['buyout']?1:$prod_res['max_coupons']);?>">
+							<input type="hidden" id="frm_paypal_total_price" name="amount" value="<?php echo (!$_GET['buyout']?($prod_res['is_multi'] == 'n' ? number_format($prod_res['discounted_price'], 2) : number_format($is_multi['multi_deal_item_price'], 2)):number_format($prod_res['discounted_price']*$prod_res['max_coupons'],2)); ?>">
 							<input type="hidden" name="custom" value="<?php echo $user_id.",".$deal_id.",".$trn_date; ?>">
 							<input type="hidden" name="item_name" value="<?php echo $prod_res['title']; ?>">
-
+							<input type="hidden" name="repeat_date_val" id="repeat_date_val"  value="">
                         <input type="submit" name="Submit" value="Buy Now" class="buyu_btn07" style="margin-left:16px;"/>   </td>
                       </tr>
                       <tr>
@@ -1911,7 +1950,17 @@ function change(val)
 			document.getElementById("frm_paypal_total_price").value=(val);
 }
 
-
+function rep()
+{
+	var index=document.getElementById("repeat_date").selectedIndex;
+	//alert(dt);
+	//alert("value="+document.getElementById('repeat_date').value);  
+   // alert(document.getElementById('repeat_date').options[index].text);
+   var v=document.getElementById('repeat_date').options[index].text;
+   //alert(v);
+   	document.getElementById("repeat_date_val").value=v ;
+	
+}
 </script>
 
 

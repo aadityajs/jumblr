@@ -4,8 +4,13 @@ include_once "fbmain.php";
 ?>
 <?php
 	$token=base64_decode($_REQUEST['token']);
+	
+	
 			if($token!='')
 			{
+						
+								
+			
 							$sql_chk_fb_user_mail = "SELECT * FROM ".TABLE_FB_USER." WHERE email = '".$token."'";
 							$chk_fb_user_mail_res = mysql_fetch_array(mysql_query($sql_chk_fb_user_mail));
 							$count_fb_email_user = mysql_num_rows($chk_fb_user_mail_res);
@@ -16,6 +21,20 @@ include_once "fbmain.php";
 							}
 							else
 							{
+								
+								$sql="select * from ".TABLE_CREDITS_VAULT;
+								$res=mysql_query($sql);
+								$num=mysql_num_rows($res);
+								if($num>0)
+								{	
+										while ($data = mysql_fetch_array($res)) {
+												 $v_date = $data['date'];
+												$del = "DELETE FROM ".TABLE_CREDITS_VAULT." where DATEDIFF('".date("Y-m-d")."','".$v_date."')>=2";
+												mysql_query($del);
+										}
+								}
+			
+								
 								$sql_insert_vault = "INSERT INTO ".TABLE_CREDITS_VAULT.
 									  "(user_id,date)
 									  VALUES('".$token."','".date('Y-m-d')."')";

@@ -300,7 +300,7 @@ if($aux['total']>0){
 			<?php }?>
 
 			<!-- <td><a href="add_user.php?mode=edit&id=<?php echo $row_deals[fb_id];?>"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td> -->
-            <td><a href="add_user.php?mode=delete&id=<?php echo $row_deals[fb_id];?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" onClick='return confirm("Are you sure to delete this user?")' /></a></td>
+            <td><a href="add_user.php?mode=delete&id=<?php echo $row_deals[fb_id];?>" class="ask"><img src="images/trash.png" alt="" title="" border="0" onClick='return confirm("Are you sure to delete this user?");' /></a></td>
         </tr>
 
     	 <?php

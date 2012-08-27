@@ -1848,6 +1848,7 @@ function passMatch() {
 					$data[is_multi] = 'n';
 					$data[place_lat] = $_POST['lat'];
 					$data[place_lng] = $_POST['lng'];
+					$data[buyout_price] = $_POST['buyout'];
 					//$data[] = $_POST[store_id];
 					//$data[] = $_POST[submit];
 					//echo '<pre>'.print_r($data, true).'</pre>';
@@ -1925,6 +1926,8 @@ function passMatch() {
 				<td style="padding:5px;">% Off</td>
 				<td style="padding:5px;">Merchant's Take</td>
 				<td style="padding:5px;">Jumblr Fee</td>
+				<td style="padding:5px;">Buyout Price</td>
+
 				</tr>
 				<?php
 
@@ -1941,22 +1944,27 @@ function passMatch() {
 				?>
 				<tr style="background-color:#F3F3F3">
 				<input type="hidden" value="<?php echo $row_stores['store_name'];?>" name="storename"  id="storename" />
-				<td class="dealcalctxtbox"><?php echo $currency; ?>
+				<td class="dealcalctxtbox"><?php echo getSettings(currency_symbol); ?>
 				<input type="text" id="retailvalue" name="retailvalue" value="<?php echo $retailvalue?>" class="dealcalcbox"  onkeyup="calculatedeal('retail')" onBlur="calculatedeal('retail')" onKeyPress="return numbersonly(event)" style="height:20px;"/><br /><span id="err_retailvalue"></span></td>
-				<td class="dealcalctxtbox"><?php echo $currency; ?>
+				<td class="dealcalctxtbox"><?php echo getSettings(currency_symbol); ?>
 				<input type="text" id="customerdisc" name="customerdisc" class="dealcalcbox" style="height:20px;"  value="<?php echo $customerdisc?>" onKeyUp="calculatedeal('customer')" onBlur="calculatedeal('customer')" onKeyPress="return numbersonly(event)" /><span id="err_customerdisc"></span></td>
 				<td style="padding:4px; text-align:center"><input type="text" id="custpercent" value="<?php echo $custpercent?>" name="custpercent" size="2" readonly="" class="dealcalcbox" style="height:20px;">
 				%</td>
-				<td class="dealcalctxtbox"><?php echo $currency; ?>
+				<td class="dealcalctxtbox"><?php echo getSettings(currency_symbol); ?>
 				<input type="text" id="merchant_take"  name="merchant_take"  size="5"  value="<?php echo $merchant_take?>"  readonly="" class="dealcalcbox" style="height:20px;"/>
 				<input type="hidden" name="merchantpercent" id="mpercent" value="<?php echo $merchantpercent?>" class="dealcalcbox" style="height:20px;"/>
 				<span id="merchantpercent">75</span>%</td>
-				<td style="padding:4px; text-align:center"><?php echo $currency; ?>
+				<td style="padding:4px; text-align:center"><?php echo getSettings(currency_symbol); ?>
 				<input type="text" value="<?php echo $wakadeal_comission?>" readonly="" id="wakafee"  size="5" class="dealcalcbox" style="height:20px;">
 				&nbsp;&nbsp;&nbsp; <span  id="wakadealpercent"><?php echo $waka_percent?></span>%
 				<input type="hidden" name="wakadealfee" id="wakadealfee" value="<?php echo $wakadeal_comission?>" />
 				<input type="hidden" name="wakapercent" id="wakapercent" value="<?php echo $waka_percent?>" />
 				</td>
+				<td style="padding:4px; text-align:center"><?php echo getSettings(currency_symbol);  ?>
+				<input type="text"  id="buyout" name="buyout"  size="5" class="dealcalcbox" style="height:20px;">
+
+				</td>
+
 				</tr>
 				</table></td>
 				</tr>
@@ -1972,13 +1980,13 @@ function passMatch() {
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:0px;">
 				<tr>
 				<td  style="text-align:right; vertical-align:top; width:10px; border:0px; border-bottom:1px solid #fff;"><input type="radio" value="title1" id="title11"   name="title" onClick="this.value=document.getElementById('title1').innerHTML;document.getElementById('title22').checked=false" <?php if(!empty($row_deal['title'])){ echo "checked";}?>  /></td>
-				<td style="border:0px; border-bottom:1px solid #fff;"><span id='title1' ><?php echo $currency; ?>10 for <?php echo $currency; ?>20 at Kates Cars<br />50% off desc test cx sdfsd</span><br />
+				<td style="border:0px; border-bottom:1px solid #fff;"><span id='title1' ><?php echo getSettings(currency_symbol); ?>10 for <?php echo getSettings(currency_symbol); ?>20 at Kates Cars<br />50% off desc test cx sdfsd</span><br />
 				<br />
 				</td>
 				</tr>
 				<tr>
 				<td style="text-align:right; vertical-align:top; width:10px; border:0px;"><input type="radio" value="title2" id="title22"  name="title" onClick="this.value=document.getElementById('title2').innerHTML;document.getElementById('title11').checked=false" <?php if(!empty($row_deal['title2'])){ echo "checked";}?>/></td>
-				<td style="border:0px;"><span id='title2' ><?php echo $currency; ?>10 for <?php echo $currency; ?>20 at Kates Cars<br />
+				<td style="border:0px;"><span id='title2' ><?php echo getSettings(currency_symbol); ?>10 for <?php echo getSettings(currency_symbol); ?>20 at Kates Cars<br />
 				50% off desc test cx sdfsd</span></td>
 				</tr>
 				</table></td>
@@ -2534,17 +2542,21 @@ function passMatch() {
 			 <td style="width:100px;"><?php echo $cur[2].$orders_row['discounted_price']; ?></td>
 
 
-			<td style="width:100px;"><a href="#refer<?php echo $count; ?>" id="ref_various<?php echo $count; ?>">
-			Invite your friends for your your jumblr. If they signs up and buys <br /> a deal successfully they will get <?php echo getSettings(discount)*100; ?>% discount.
-        </a></td>
+			<td style="width:100px;"><!--<a href="#refer<?php //echo $count; ?>" id="ref_various<?php //echo $count; ?>">
+			Invite your friends for your your jumblr. If they signs up and buys <br /> a deal successfully they will get <?php //echo getSettings(discount)*100; ?>% discount.
+        </a>-->
+		 <a href='javascript: void(0);' onclick="FacebookInviteFriends();"><img src="images/facebook.png" align="top" /> Invite Facebook Friends</a>
+
+		</td>
           </tr>
 
 			<tr><td>&nbsp;</td></tr>
 
 
 	   <script type="text/javascript">
-$(document).ready(function() {
-			$("#ref_various<?php echo $count; ?>").fancybox({
+
+/*$(document).ready(function() {
+			$("#ref_various<?php //echo $count; ?>").fancybox({
 							'titlePosition'		: 'inside',
 							'speedIn':      300,
 							'speedOut':     300,
@@ -2553,7 +2565,7 @@ $(document).ready(function() {
 							'hideOnOverlayClick' : false
 						});
 
-			});
+			});*/
 
 </script>
 		<?php } }?> </table></div>
@@ -2693,7 +2705,7 @@ else
 
 <?php
 include("include/footer.php");
-include 'recommendation_popup_refer.php';
+//include 'recommendation_popup_refer.php';
 
 if ($_GET['tab'] == 'subscriptions') {
 	echo '<script type="text/javascript">show_tab(5)</script>';

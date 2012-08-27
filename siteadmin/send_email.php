@@ -24,6 +24,8 @@ $admin_id=intval($_SESSION['admin_id']);
 $sql = "SELECT admin_name FROM `".TABLE_ADMIN."`  WHERE admin_id='$admin_id'";
 $record = $db->query_first($sql);
 
+
+
 $userids=unserialize($_SESSION['ids']);
 foreach($userids as $uid){
 $q=mysql_fetch_object(mysql_query("SELECT * from ".TABLE_MERCHANTS." where mid='$uid'"));
